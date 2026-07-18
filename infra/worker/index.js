@@ -346,6 +346,7 @@ const PANEL_HTML = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Teich</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b1116'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%232a6e8f' stroke-width='2.5' opacity='.5'/%3E%3Ccircle cx='32' cy='32' r='13' fill='none' stroke='%233fa7c9' stroke-width='2.5' opacity='.75'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%233ddc84'/%3E%3C/svg%3E">
 <style>
   :root { color-scheme: dark; }
   body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
