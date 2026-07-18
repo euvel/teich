@@ -34,7 +34,12 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-REF_F = HERE / "substrate_reference.json"
+# two substrate definitions: native dispatch (certified founder machine) and
+# conservative dispatch (ATEN_CPU_CAPABILITY=default — the cross-platform candidate);
+# the verdict is always against the reference for the mode actually running
+_CONSERVATIVE = os.environ.get("ATEN_CPU_CAPABILITY") == "default"
+REF_F = HERE / ("substrate_reference_conservative.json" if _CONSERVATIVE
+                else "substrate_reference.json")
 
 import torch  # noqa: E402
 
