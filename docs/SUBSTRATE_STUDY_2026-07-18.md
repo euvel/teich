@@ -62,6 +62,15 @@ bit-identity on a canonical 5000-tick synthetic replay. No tolerance.
   Modal's masked CPU as Ice Lake Xeon. Substrate class map complete:
   **Zen (laptop + EPYC 7763) / Kaggle Xeon / Ice Lake Xeon.**
 
+## First live wake (2026-07-18 19:07Z, run 29657157230)
+
+Both branches of gate-on-boot exercised on the very first daily-wake run:
+an **AMD EPYC 9V74 (Zen4)** draw PASSED all three gates — extending the
+certified class across THREE Zen generations (Zen2 laptop / Zen3 EPYC 7763 /
+Zen4 EPYC 9V74) — leased, replayed +117 ticks, committed n_ticks=37343.
+The parallel draw (Intel Xeon Platinum 8573C, Emerald Rapids — a fourth
+Intel model, also non-member) failed the gate and declined the wake lawfully.
+
 ## Outcome: no substrate amendment needed
 
 Options A–D are all moot. The existing single-substrate law stands, and the
