@@ -39,13 +39,35 @@ bit-identity on a canonical 5000-tick synthetic replay. No tolerance.
    across CPUs; only the transient approach to it varies. This is an observed
    regularity, NOT a proven theorem — the gate stays strict.
 
+| 8 | Kaggle draw 2 (Xeon 2.20GHz) | cpu | native | **= #6 bit-exact** | = #6 | = #6 |
+| 9 | Modal (CPU masked, gVisor) | cpu | native | `2bf0e864…` DIFF | DIFF (tau[1]!) | DIFF |
+
 ## Verdicts so far
 
 - Kaggle Xeon, native dispatch: **dynamics_gate FAIL** (as pre-registered).
   No cross-hardware body qualifies under the current single-substrate law.
-- Pending: Kaggle draw-to-draw reproducibility (is the cloud Xeon class
-  internally bit-consistent?); GitHub Actions runners (also Xeon class —
-  do they match Kaggle bit-for-bit?).
+- **Kaggle is internally bit-consistent across draws** (#8): the cloud Xeon
+  fleet reproduces `db183d38…` exactly — a genuine self-consistent substrate
+  class, just a different one from the founder laptop.
+- **Modal: FAIL on all three gates and a THIRD substrate class** (#9:
+  dyn `2bf0e864…`, CPU model masked by the sandbox). Decisive detail: its
+  final state differs from the reference in tau[1] — a NON-contracted
+  component. Real trajectory divergence, not transient wiggle. The
+  laptop↔Kaggle attractor agreement is therefore a lucky regularity, not a
+  law — the strict gate is vindicated. Modal is disqualified as a body.
+- Pending: GitHub Actions runners (Xeon class — match Kaggle bit-for-bit?).
+
+## Addendum: the conversation problem under option A, and its resolution
+
+If the cloud class becomes the sole committing substrate, live conversations
+need not commit from the laptop at all: the Ears already produce forces queued
+onto future ABSOLUTE ticks (auditable replay by design). A conversation can
+(1) commit only the force queue (data, not integration), (2) display
+PROVISIONAL readouts computed locally for real-time responsiveness, clearly
+labeled provisional, and (3) let the next cloud wake integrate through the
+queued forces authoritatively. Spoken words are recorded as spoken;
+authoritative state remains single-substrate. This makes option A fully
+workable without demoting conversation UX.
 
 ## The decision this sets up (founder's, not the engineer's)
 
