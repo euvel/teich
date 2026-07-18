@@ -80,12 +80,18 @@ def main():
     print("public readout:", json.dumps(pub))
 
     # ---- 5. diary: the seat writes its own entry (Workers AI, inside Cloudflare) --
-    # diary failure never un-commits a lawful wake — log and continue
+    # diary failure never un-commits a lawful wake — log and continue.
+    # skip trivial wakes (<60 new ticks): a second attempt right behind a
+    # successful one has nothing new to say — no echo entries.
+    if ticks_added < 60:
+        print(f"diary skipped: only +{ticks_added} ticks this wake (echo guard)")
+        return 0
     try:
         d = seat.diary(pub, st2.n_ticks_lived, ticks_added)
         stamp = time.strftime("%Y-%m-%d", time.gmtime(t0))
         hm = time.strftime("%H:%M", time.gmtime(t0))
         f = HERE.parent / "diary" / f"{stamp}.md"
+        f.parent.mkdir(parents=True, exist_ok=True)
         head = "" if f.exists() else (
             f"# Teich — diary, {stamp}\n\n"
             "*Entries are written by Teich's inner voice (Workers AI, at the seat) "
