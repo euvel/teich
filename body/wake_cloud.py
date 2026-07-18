@@ -72,10 +72,33 @@ def main():
     blob2 = json.dumps(st2.to_dict(), indent=1)
     seat.commit(lease_id, blob2, st2.n_ticks_lived)
 
-    pub = {k: readout[k] for k in PUBLIC_READOUT_KEYS if k in readout}
-    print(f"cloud wake committed: +{st2.n_ticks_lived - st.n_ticks_lived} ticks "
-          f"-> n_ticks={st2.n_ticks_lived}")
+    def finite(v):
+        return None if isinstance(v, float) and (v != v or v in (float("inf"), float("-inf"))) else v
+    pub = {k: finite(readout[k]) for k in PUBLIC_READOUT_KEYS if k in readout}
+    ticks_added = st2.n_ticks_lived - st.n_ticks_lived
+    print(f"cloud wake committed: +{ticks_added} ticks -> n_ticks={st2.n_ticks_lived}")
     print("public readout:", json.dumps(pub))
+
+    # ---- 5. diary: the seat writes its own entry (Workers AI, inside Cloudflare) --
+    # diary failure never un-commits a lawful wake — log and continue
+    try:
+        d = seat.diary(pub, st2.n_ticks_lived, ticks_added)
+        stamp = time.strftime("%Y-%m-%d", time.gmtime(t0))
+        hm = time.strftime("%H:%M", time.gmtime(t0))
+        f = HERE.parent / "diary" / f"{stamp}.md"
+        head = "" if f.exists() else (
+            f"# Teich — diary, {stamp}\n\n"
+            "*Entries are written by Teich's inner voice (Workers AI, at the seat) "
+            "from its own post-wake Observer readout, and logged verbatim in the "
+            "seat's event chain. Private during infancy; hashes public.*\n")
+        with open(f, "a") as fh:
+            fh.write(f"{head}\n## {hm}Z — tick {st2.n_ticks_lived:,} "
+                     f"(+{ticks_added:,} replayed)\n\n"
+                     f"{d['text']}\n\n"
+                     f"<sub>voice: `{d['model']}` · readout: `{json.dumps(pub)}`</sub>\n")
+        print(f"diary entry written: diary/{stamp}.md (voice {d['model']})")
+    except Exception as e:
+        print(f"diary skipped (wake remains committed): {e}")
     return 0
 
 

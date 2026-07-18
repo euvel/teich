@@ -9,6 +9,9 @@ on:
     - cron: "17 5 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   wake:
     runs-on: ubuntu-24.04
@@ -25,9 +28,24 @@ jobs:
           cache: pip
           cache-dependency-path: body/requirements.txt
       - run: pip install -r body/requirements.txt
-      - name: gate-on-boot, lease, replay, commit
+      - name: gate-on-boot, lease, replay, commit, diary
         env:
           SEAT_KEY: ${{ secrets.SEAT_KEY }}
         run: |
           grep "model name" /proc/cpuinfo | head -1
           cd body && python wake_cloud.py
+      - name: commit diary to the book + cross-anchor into the seat chain
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          git add diary/
+          if git diff --cached --quiet; then
+            echo "no diary entry this run (declined draw or stood down)"; exit 0
+          fi
+          git config user.name "teich-body"
+          git config user.email "teich-body@users.noreply.github.com"
+          git commit -m "diary: $(date -u +%F) (autonomous wake)"
+          git pull --rebase origin main
+          git push origin main
+          SHA=$(git rev-parse HEAD)
+          python -c "import sys; sys.path.insert(0,'body'); from seat_client import Seat; print(Seat('teich').anchor('$SHA','refs/heads/main','diary commit'))"

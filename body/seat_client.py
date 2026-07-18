@@ -88,3 +88,12 @@ class Seat:
 
     def drill_destroy(self):
         return _call(self.name, "drill-destroy", {})
+
+    def diary(self, readout: dict, n_ticks: int, ticks_added: int, model: str | None = None):
+        body = {"readout": readout, "n_ticks": n_ticks, "ticks_added": ticks_added}
+        if model:
+            body["model"] = model
+        return _call(self.name, "diary", body)
+
+    def anchor(self, git_sha: str, ref: str = "", note: str = ""):
+        return _call(self.name, "anchor", {"git_sha": git_sha, "ref": ref, "note": note})
