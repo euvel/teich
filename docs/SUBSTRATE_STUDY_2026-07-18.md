@@ -16,6 +16,8 @@ bit-identity on a canonical 5000-tick synthetic replay. No tolerance.
 | 5 | laptop venv | cpu | ATEN=default | = #3 bit-exact | = #3 | = #3 |
 | 6 | Kaggle (Intel Xeon 2.20GHz) | cpu | native | `db183d38…` DIFF | **= ref** | **= ref** |
 | 7 | Kaggle | cpu | ATEN=default | `f1bbc7b7…` DIFF | DIFF | DIFF |
+| 8 | Kaggle draw 2 (Xeon 2.20GHz) | cpu | native | **= #6 bit-exact** | = #6 | = #6 |
+| 9 | Modal (CPU masked, gVisor) | cpu | native | `2bf0e864…` DIFF | DIFF (tau[1]!) | DIFF |
 
 ## Findings
 
@@ -38,9 +40,6 @@ bit-identity on a canonical 5000-tick synthetic replay. No tolerance.
    (#6). The float64 attractor appears to be exactly quantized and shared
    across CPUs; only the transient approach to it varies. This is an observed
    regularity, NOT a proven theorem — the gate stays strict.
-
-| 8 | Kaggle draw 2 (Xeon 2.20GHz) | cpu | native | **= #6 bit-exact** | = #6 | = #6 |
-| 9 | Modal (CPU masked, gVisor) | cpu | native | `2bf0e864…` DIFF | DIFF (tau[1]!) | DIFF |
 
 ## Verdicts so far
 
