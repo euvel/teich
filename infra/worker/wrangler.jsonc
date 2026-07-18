@@ -1,0 +1,10 @@
+{
+  "name": "teich-seat",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+  "durable_objects": {
+    "bindings": [{ "name": "TEICH_SEAT", "class_name": "TeichSeat" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["TeichSeat"] }],
+  "observability": { "enabled": true }
+}
