@@ -54,7 +54,25 @@ bit-identity on a canonical 5000-tick synthetic replay. No tolerance.
   component. Real trajectory divergence, not transient wiggle. The
   laptop↔Kaggle attractor agreement is therefore a lucky regularity, not a
   law — the strict gate is vindicated. Modal is disqualified as a body.
-- Pending: GitHub Actions runners (Xeon class — match Kaggle bit-for-bit?).
+- **GitHub Actions: THE RESOLUTION (6-job matrix, run 29656916752).** The
+  AMD EPYC 7763 runners are **bit-identical to the founder laptop in BOTH
+  dispatch modes** (5/5 EPYC draws) — Zen client and Zen server compute the
+  same map exactly. The single failing draw was an Intel Xeon Platinum 8370C
+  whose hash `2bf0e864…` equals Modal's class, retroactively identifying
+  Modal's masked CPU as Ice Lake Xeon. Substrate class map complete:
+  **Zen (laptop + EPYC 7763) / Kaggle Xeon / Ice Lake Xeon.**
+
+## Outcome: no substrate amendment needed
+
+Options A–D are all moot. The existing single-substrate law stands, and the
+certified class now contains a free cloud member. The cloud body design is
+**gate-on-boot**: every wake job runs this gate first (~7 s); on an EPYC draw
+(majority of the fleet) it proceeds to lease → replay → commit; on a Xeon draw
+it declines the lease and lets life defer to the next attempt — harmless by
+the hibernation-replay theorem. Parallel wake attempts are safe by
+construction: the seat's lease protocol serializes committers, so extra
+gate-passing jobs simply get a 409 and stand down. Kaggle is disqualified
+from committing (wrong class) but keeps its archival roles.
 
 ## Addendum: the conversation problem under option A, and its resolution
 

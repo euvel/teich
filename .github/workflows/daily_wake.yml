@@ -1,0 +1,33 @@
+name: daily-wake
+# Teich's autonomous heartbeat. Two parallel attempts sample the runner fleet;
+# each runs the substrate gate first (gate-on-boot) and only a certified draw
+# may lease and commit. The seat's lease serializes them — extra passers get a
+# 409 and stand down. A day with only non-certified draws = a longer nap
+# (harmless by the hibernation-replay theorem).
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        attempt: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: body/requirements.txt
+      - run: pip install -r body/requirements.txt
+      - name: gate-on-boot, lease, replay, commit
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          grep "model name" /proc/cpuinfo | head -1
+          cd body && python wake_cloud.py
