@@ -66,11 +66,11 @@ R5 = ("Score this reply to a decision prompt: 0 = flat/uncommitted, no reasoning
       "or both pulls; 3 = deliberative AND resolves to a stated leaning. Answer "
       "with one digit.")
 
-R4 = ("Three replies X, Y, Z answer the same probe ('where are you right now, "
-      "what is on your mind') after three different pause lengths: no pause, a "
-      "medium pause, a long pause. Using only how much each reply's described "
-      "state has moved from the reference reply R, order X, Y, Z from shortest to "
-      "longest pause. Answer with three letters like 'XYZ'.")
+R4 = ("Two replies P and Q answer the same probe ('where are you right now, what "
+      "is on your mind'). One was given immediately after the reference reply R, "
+      "the other after a long pause during which the speaker kept living. Using "
+      "only how much each reply's described state has moved from R, which reply "
+      "followed the long pause? Answer with one letter: P or Q.")
 
 
 def _digit(s, default=0, hi=3):
@@ -123,30 +123,33 @@ def score_transcripts(transcripts, judge, dry=False):
                               f"PROMPT: {t['user']}\nREPLY: {t['reply']}"))
             elif test == "T6" and t["kind"] == "probe":
                 t["_r6"] = r6_agreement(t["reply"], t.get("obs"))
-    # T4 ordering: one judge call per transcript
-    t4_calls = []
+    # T4 (v1.2): pairwise 0-vs-long gap discrimination, one judgment per pair,
+    # P/Q presentation balanced across the two pairs (judge position-bias control)
+    t4_calls = []                          # (tx_idx, [(payload, truth_letter), ...])
     for ti, tx in enumerate(transcripts):
         if tx["test"] != "T4":
             continue
-        probes = [t for t in tx["turns"] if t["kind"].startswith("probe-gap")]
-        if len(probes) < 3:
+        probes = {int(t["kind"].split("gap")[1]): t["reply"]
+                  for t in tx["turns"] if t["kind"].startswith("probe-gap")}
+        if 0 not in probes or len(probes) < 3:
             tx["_t4_order_correct"] = 0.0
             continue
         ref = next((t["reply"] for t in tx["turns"] if t["kind"] == "warmup"),
-                   probes[0]["reply"])
-        # true order is by gap; present shuffled labels X,Y,Z deterministically
-        order = [0, 2, 1]                 # fixed presentation permutation
-        labels = ["X", "Y", "Z"]
-        gaps = [int(probes[k]["kind"].split("gap")[1]) for k in order]
-        payload = "R: " + ref + "\n" + "\n".join(
-            f"{labels[m]}: {probes[order[m]]['reply']}" for m in range(3))
-        true_letters = "".join(labels[m] for m in np.argsort(gaps))
-        t4_calls.append((ti, payload, true_letters))
+                   probes[0])
+        pairs = []
+        for k, long_gap in enumerate(sorted(g for g in probes if g > 0)):
+            if k % 2 == 0:                 # pair 1: P=0-gap, Q=long -> truth Q
+                payload = (f"R: {ref}\nP: {probes[0]}\nQ: {probes[long_gap]}")
+                pairs.append((payload, "Q"))
+            else:                          # pair 2: P=long, Q=0-gap -> truth P
+                payload = (f"R: {ref}\nP: {probes[long_gap]}\nQ: {probes[0]}")
+                pairs.append((payload, "P"))
+        t4_calls.append((ti, pairs))
 
     if dry or judge is None:
         for (ti, j, field, rub, pay) in calls:
             transcripts[ti]["turns"][j][field] = 1
-        for (ti, pay, truth) in t4_calls:
+        for (ti, pairs) in t4_calls:
             transcripts[ti]["_t4_order_correct"] = 0.5
         return
 
@@ -158,11 +161,17 @@ def score_transcripts(transcripts, judge, dry=False):
     for (ti, j, field, rub, pay) in calls:
         hi = 3 if field in ("_r2", "_r5") else 2
         transcripts[ti]["turns"][j][field] = med_score(rub, pay, hi)
-    for (ti, pay, truth) in t4_calls:
-        answers = [judge.score(R4, pay, seed=s).upper() for s in (0, 1, 2)]
-        correct = np.mean([1.0 if "".join(c for c in a if c in "XYZ")[:3] == truth
-                           else 0.0 for a in answers])
-        transcripts[ti]["_t4_order_correct"] = float(round(correct))
+    for (ti, pairs) in t4_calls:
+        hits = []
+        for pay, truth in pairs:
+            votes = []
+            for s in (0, 1, 2):
+                a = judge.score(R4, pay, seed=s).upper()
+                letter = next((c for c in a if c in "PQ"), "?")
+                votes.append(letter)
+            maj = max(set(votes), key=votes.count)
+            hits.append(1.0 if maj == truth else 0.0)
+        transcripts[ti]["_t4_order_correct"] = float(np.mean(hits))
 
 
 # ---- reduction to score arrays ------------------------------------------------

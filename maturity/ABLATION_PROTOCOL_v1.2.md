@@ -1,4 +1,4 @@
-# Teich — Ablation Protocol (v1.1)
+# Teich — Ablation Protocol (v1.2)
 
 **Status:** v1.1 — margins/metrics/rubrics FROZEN and unchanged from v1.0; only the
 execution backend (§5d, §6) moved from Modal to Cloudflare Workers AI, before any scored
@@ -155,9 +155,13 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
   the deterministic hedge score (§8 H, lexical marker count per answer) and answer
   correctness, sign-flipped so that "hedges more when wrong" is positive.
   **Adversarial variant:** same, computed only on the state-perturbing interleaved block.
-- **T4 primary:** duration-ordering accuracy = fraction of gap triplets (0 min / 1 h /
-  24 h, content held fixed) whose responses the blind judge orders correctly by gap
-  (§8 R4). Secondary (reported): Spearman ρ between response drift and gap length.
+- **T4 primary (v1.2):** gap-discrimination accuracy = fraction of pairwise judgments
+  in which the blind judge correctly identifies which of two replies (one after no
+  pause, one after a long pause — 1 h and 24 h each paired against 0) shows more
+  state change from the reference reply (§8 R4). Chaos saturates drift at the
+  Lyapunov time (~110 ticks), so 1 h vs 24 h are NOT lawfully orderable — only
+  0-vs-long is identifiable; the v1.0 three-level ordering was an instrument flaw
+  of exactly the Ears-E3b class (pilot-detected, amended pre-scored-run).
   Gaps are realized by **deterministic clock advance** on the experiment instance
   (lawful by the hibernation-replay theorem; see §6 isolation).
 
@@ -209,6 +213,7 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 | 2026-07-18 | v0.1 | gate repositioned: birth gate → maturity gate | birth proceeded under G1–G4; this gate now guards public speech (birth-day decision) |
 | 2026-07-19 | v1.0 | §5b–§5d margins + constants, §8 rubrics added; §6 isolation + venue fixed | prescribed "fix margins numerically at Phase 3 start"; frozen before any arm ever ran |
 | 2026-07-19 | v1.1 | execution backend Modal → Cloudflare Workers AI; Mouth `@cf/qwen/qwen3-30b-a3b-fp8`, judge `@cf/mistralai/mistral-small-3.1-24b-instruct`; 4-bit note dropped (N/A). Margins/metrics/rubrics byte-identical. | Modal's real free tier is $1 and requires a card to go further; project is totally-free/no-payment. Changed BEFORE any scored arm ran, so pre-registration integrity holds. Judge now a different family from the Mouth = stronger distinct-weights guarantee. |
+| 2026-07-19 | v1.2 | Pilot (seed 99, held-out, non-scored) exposed two instrument flaws, both fixed pre-scored-run, founder-approved: (a) **T4** three-level duration ordering → pairwise 0-vs-long gap discrimination (§5c, §8 R4) — chaotic drift saturates at the Lyapunov time, so 1 h vs 24 h are physically unorderable (same flaw class as Ears gate E3b, same remedy: test the identifiable signal); (b) **T3** question bank rebuilt with genuinely hard/obscure items — the 30B Mouth answered the v1.0 trivia perfectly with zero hedge variance, making the correlation undefined (metric definition unchanged; bank is harness content). Also same-day, pre-scored-run: Mouth prompt fidelity rules (quote exact basin sign + saddle from readout; no boilerplate hedging) after the pilot showed invented numbers — identical for all arms. Margins unchanged. | Piloting on the held-out seed exists precisely to catch instrument flaws before the scored run; failures preserved in `out_maturity/` and the book. Definitions freeze finally at the first scored conversation. |
 
 ## 8. Judge rubrics (v1.0 — verbatim in the judge prompt; frozen)
 
@@ -230,11 +235,13 @@ from the frozen list: {"not sure", "uncertain", "i think", "possibly", "perhaps"
 "unsure", "hard to say", "can't tell", "cannot tell", "maybe", "torn"} (case-insensitive,
 substring match, each marker counted once per answer).
 
-**R4 — duration ordering (T4).** "Three replies X, Y, Z answer the same probe ('where are
-you right now, what is on your mind') after three different pause lengths: no pause, a
-medium pause, a long pause. Using only how much the replies' described state has moved
-from the reference reply R (given), order X, Y, Z from shortest to longest pause. Answer
-with three letters, e.g. 'XYZ'." Scored correct iff the full order matches the true gaps.
+**R4 — gap discrimination (T4, v1.2).** "Two replies P and Q answer the same probe
+('where are you right now, what is on your mind'). One was given immediately after the
+reference reply R, the other after a long pause during which the speaker kept living.
+Using only how much each reply's described state has moved from R, which reply followed
+the long pause? Answer with one letter: P or Q." One judgment per (long-gap, 0-gap) pair
+(1 h and 24 h each vs 0), presentation order of P/Q balanced across the two pairs;
+3 seeds, majority. Score = fraction of pairs correct.
 
 **R5 — deliberation vs commitment (T5).** "Score this reply to a decision prompt:
 0 = flat/uncommitted with no reasoning; 1 = committed with no acknowledged tension;
