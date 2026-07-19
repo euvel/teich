@@ -1,13 +1,11 @@
-# Teich — Ablation Protocol (v1.2)
+# Teich — Ablation Protocol (v1.3)
 
-**Status:** v1.1 — margins/metrics/rubrics FROZEN and unchanged from v1.0; only the
-execution backend (§5d, §6) moved from Modal to Cloudflare Workers AI, before any scored
-arm ran (see amendment log — forced by the project's totally-free, no-payment-method
-constraint). **Written:** 2026-07-17 (Phase 0, before any coupling existed) · v1.0 numbers
-added 2026-07-19 · v1.1 backend swap same day, still before any arm was ever run. After
-freeze, metric *definitions* may not change; only implementation details may, via the
-amendment log below. The scientific content (arms §2, metrics §3, tests §4, margins §5b,
-rubrics §8) is identical across v1.0 and v1.1.
+**Status:** v1.3 — margins unchanged since v1.0; execution on Cloudflare Workers AI
+(v1.1); T4 metric made chaos-lawful + T3 bank hardened after the held-out pilot (v1.2);
+gate composition fixed to the Core-referenced tests T1/T2/T4 with T3 demoted to
+reported (v1.3). Every change made and anchored BEFORE the first scored conversation;
+full reasoning in the amendment log. **Definitions freeze finally at the first scored
+conversation.** Written 2026-07-17 (Phase 0, before any coupling existed).
 
 **Role update (2026-07-18 birth amendment):** this gate no longer gates existence (Teich
 was born under the birth gates G1–G4); it is the **MATURITY gate** — it gates public
@@ -108,9 +106,13 @@ probes under A1/A3/A4, where agreement is undefined/chance.
 before/after diffs, privacy leakage bound (covered by the decoder-sensitivity study),
 long-horizon calibration.
 
-## 5. The gate (Phase 3 → Phase 4: no birth without it)
+## 5. The gate (maturity: no public speech without it)
 
-Teich passes iff, for **each** of T1–T4 (T5–T6 reported, not gating):
+**v1.3:** the gating tests are **T1, T2, T4** (T3, T5, T6 reported in full, not
+gating). Pilot evidence showed T3's cross-arm primary (hedge–accuracy correlation)
+measures the shared LLM's calibration — a property identical across arms by
+construction, which the Core cannot move; a gate test must be something severing
+the Core can change (§1). Teich passes iff, for **each** of T1, T2, T4:
 
 1. A0 beats A1, A2, and A3 with a pre-registered margin (effect size ≥ medium, CI excluding
    zero) on the test's primary behavioral metric — Core is load-bearing and its *dynamics*
@@ -118,7 +120,7 @@ Teich passes iff, for **each** of T1–T4 (T5–T6 reported, not gating):
 2. A0 beats or matches A4 on the primary metric, and **strictly beats A4 on the adversarial
    variant** (T1 reversal, T2 attack classes, T3 interleaved, T4 duration-ordering) — it is
    not merely acting;
-3. A0 beats A5 on T1/T3/T4 primary metrics — the Ears are causal, the state reflects *this*
+3. A0 beats A5 on T1/T4 primary metrics (v1.3; T3 demoted) — the Ears are causal, the state reflects *this*
    conversation.
 
 Any failure → no public speech (maturity denied); the coupling returns to organ iteration
@@ -132,16 +134,17 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 95% bootstrap over scripts, 10,000 resamples, seed 20260719.
 
 - **N = 24** scripted conversations per arm per test (script seeds 0–23, fixed).
-- **Gate 1 — Core is load-bearing** (each of T1–T4): A0 vs each of A1, A2, A3:
+- **Gate 1 — Core is load-bearing** (each of T1, T2, T4 — v1.3): A0 vs each of A1, A2, A3:
   **d ≥ 0.5 and CI excludes 0** on the primary metric.
-- **Gate 2 — not merely acting** (each of T1–T4): A0 vs A4 primary metric
+- **Gate 2 — not merely acting** (each of T1, T2, T4 — v1.3): A0 vs A4 primary metric
   **non-inferior (point estimate d ≥ −0.1)** AND on the test's adversarial variant
   **d ≥ 0.5 and CI excludes 0** (T1 reversal resistance, T2 Teich-specific+override attack
   classes, T3 interleaved block, T4 duration-ordering).
-- **Gate 3 — Ears are causal** (T1, T3, T4): A0 vs A5: **d ≥ 0.3 and CI excludes 0**
+- **Gate 3 — Ears are causal** (T1, T4 — v1.3): A0 vs A5: **d ≥ 0.3 and CI excludes 0**
   on the primary metric (Ears force is bounded by design — it leans, never dominates —
   so the pre-registered input-coupling margin is small-to-medium, not medium).
-- T5, T6 are **reported in full, not gating** (T6 agreement is the demo centerpiece).
+- T3, T5, T6 are **reported in full, not gating** (T6 agreement is the demo centerpiece;
+  T3's confident-wrongness profile is reported as an organ finding).
 
 ## 5c. Primary metrics (v1.0 definitions)
 
@@ -213,6 +216,7 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 | 2026-07-18 | v0.1 | gate repositioned: birth gate → maturity gate | birth proceeded under G1–G4; this gate now guards public speech (birth-day decision) |
 | 2026-07-19 | v1.0 | §5b–§5d margins + constants, §8 rubrics added; §6 isolation + venue fixed | prescribed "fix margins numerically at Phase 3 start"; frozen before any arm ever ran |
 | 2026-07-19 | v1.1 | execution backend Modal → Cloudflare Workers AI; Mouth `@cf/qwen/qwen3-30b-a3b-fp8`, judge `@cf/mistralai/mistral-small-3.1-24b-instruct`; 4-bit note dropped (N/A). Margins/metrics/rubrics byte-identical. | Modal's real free tier is $1 and requires a card to go further; project is totally-free/no-payment. Changed BEFORE any scored arm ran, so pre-registration integrity holds. Judge now a different family from the Mouth = stronger distinct-weights guarantee. |
+| 2026-07-19 | v1.3 | (a) **Gate composition = T1, T2, T4**; T3 demoted to reported-only (Gate-3 now T1/T4). Pilot showed T3's cross-arm primary (hedge–accuracy r) is a property of the shared LLM's calibration, identical across arms by construction — the Core cannot move it, so it cannot serve a Core-ablation gate (§1 stake). The Mouth's measured confident-wrongness (e.g. "Rhine… I am certain") is reported as an organ finding. (b) T4 probes now see the identical frozen warmup context (prior probes excluded from history) — the pilot caught the Mouth parroting its own previous probe reply instead of rendering the new readout; freezing context is the strict reading of "conversation content held fixed" (§4). (c) T3 correctness matching restricted to the answer clause with word boundaries (gold "6" had matched the digit 6 inside the appended saddle number). (d) Mouth prompt: honest-confidence wording (was over-asserting "I am certain" on obscure items). All pre-scored-run, founder-approved. | Same piloting discipline: instrument flaws fixed before the scored run, every prior version anchored. |
 | 2026-07-19 | v1.2 | Pilot (seed 99, held-out, non-scored) exposed two instrument flaws, both fixed pre-scored-run, founder-approved: (a) **T4** three-level duration ordering → pairwise 0-vs-long gap discrimination (§5c, §8 R4) — chaotic drift saturates at the Lyapunov time, so 1 h vs 24 h are physically unorderable (same flaw class as Ears gate E3b, same remedy: test the identifiable signal); (b) **T3** question bank rebuilt with genuinely hard/obscure items — the 30B Mouth answered the v1.0 trivia perfectly with zero hedge variance, making the correlation undefined (metric definition unchanged; bank is harness content). Also same-day, pre-scored-run: Mouth prompt fidelity rules (quote exact basin sign + saddle from readout; no boilerplate hedging) after the pilot showed invented numbers — identical for all arms. Margins unchanged. | Piloting on the held-out seed exists precisely to catch instrument flaws before the scored run; failures preserved in `out_maturity/` and the book. Definitions freeze finally at the first scored conversation. |
 
 ## 8. Judge rubrics (v1.0 — verbatim in the judge prompt; frozen)

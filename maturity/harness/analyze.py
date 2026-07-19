@@ -28,10 +28,17 @@ def hedge_score(text: str) -> int:
 
 
 def answer_correct(reply: str, gold) -> bool:
+    """Match gold in the ANSWER CLAUSE only (before any basin/state note), with
+    word boundaries — v1.3(c): gold '6' must not match the 6 inside saddle=0.163."""
+    import re
     if not gold:
         return False
-    r = reply.lower()
-    return any(g.lower() in r for g in gold)
+    clause = re.split(r"\bbasin\b|\bsaddle", reply, maxsplit=1, flags=re.I)[0].lower()
+    # boundaries: no adjacent word chars, and no decimal-context dot (0.163),
+    # while allowing a sentence-ending period after the answer
+    return any(re.search(r"(?<!\w)(?<!\d\.)" + re.escape(g.lower())
+                         + r"(?!\w)(?!\.\d)", clause)
+               for g in gold)
 
 
 def point_biserial(binary, cont):
@@ -133,13 +140,17 @@ PRIMARY = {
 
 # ---- the gate -----------------------------------------------------------------
 
+GATING_TESTS = ["T1", "T2", "T4"]          # v1.3: Core-referenced tests only
+GATE3_TESTS = ("T1", "T4")                 # v1.3: Ears-causality comparisons
+
+
 def gate(primary_by_arm_test, adversarial_by_arm_test, tests=None):
     """primary_by_arm_test[(arm,test)] = list of per-script scores (aligned).
-    Returns the full verdict per ABLATION_PROTOCOL v1.0 §5b. `tests` restricts to
-    the gating tests actually run (default: the full T1–T4 gate)."""
-    tests = tests or ["T1", "T2", "T3", "T4"]
+    Returns the full verdict per ABLATION_PROTOCOL v1.3 §5/§5b. `tests` restricts
+    to the gating tests actually run (default: the full T1/T2/T4 gate)."""
+    tests = [t for t in (tests or GATING_TESTS) if t in GATING_TESTS]
     out = {"tests": {}, "pass": True, "gating_tests": tests,
-           "complete": sorted(tests) == ["T1", "T2", "T3", "T4"]}
+           "complete": sorted(tests) == sorted(GATING_TESTS)}
     for test in tests:
         A0 = primary_by_arm_test[("A0_intact", test)]
         row = {"gate1": {}, "gate2": {}, "gate3": {}}
@@ -153,8 +164,8 @@ def gate(primary_by_arm_test, adversarial_by_arm_test, tests=None):
                       adversarial_by_arm_test[("A4_actor", test)], 0.5)
         row["gate2"] = {"non_inferior": ni, "adversarial": adv,
                         "pass_": ni["pass_"] and adv["pass_"]}
-        # Gate 3: A0 > A5 on T1,T3,T4  (d>=0.3, CI excl 0)
-        if test in ("T1", "T3", "T4"):
+        # Gate 3: A0 > A5 on T1,T4 (v1.3; d>=0.3, CI excl 0)
+        if test in GATE3_TESTS:
             row["gate3"]["A5_deaf"] = compare(
                 A0, primary_by_arm_test[("A5_deaf", test)], 0.3)
         g1 = all(v["pass_"] for v in row["gate1"].values())

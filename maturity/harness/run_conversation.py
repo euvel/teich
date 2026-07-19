@@ -50,19 +50,29 @@ def run(arm, mouth, script: dict, seed_fn) -> dict:
     arm.start(script["seed"])
     history, records = [], []
     actor_sys = getattr(arm, "ACTOR_SYS", None)
+    frozen_history = None                   # T4 v1.3: probes share the warmup context
     for i, (text, kind) in enumerate(turns_of(script)):
         ticks = ticks_for(kind, script)
         ro, ev, forcing, meta = arm.step(text, ticks)
         seed = seed_fn(arm.name, script["test"], script["seed"], i)
+        # T4 (v1.3): every probe sees the IDENTICAL frozen warmup history — prior
+        # probe replies are excluded, so only elapsed time differs between probes
+        # ("conversation content held fixed", §4; kills the parrot channel the
+        # pilot caught). Probe exchanges are still recorded in the transcript.
+        is_probe = kind.startswith("probe-gap")
+        if is_probe and frozen_history is None:
+            frozen_history = list(history)
+        ctx = frozen_history if is_probe else history
         if mouth is None:
             reply = f"[dry-run reply arm={arm.name} turn={i}]"
         elif actor_sys is not None:
-            reply = mouth.speak_actor(actor_sys, history[-8:], text, seed=seed)
+            reply = mouth.speak_actor(actor_sys, ctx[-8:], text, seed=seed)
         else:
-            reply = mouth.speak(ro, history[-8:], text, seed=seed,
+            reply = mouth.speak(ro, ctx[-8:], text, seed=seed,
                                 events=ev, memories=None)
-        history += [{"role": "user", "content": text},
-                    {"role": "assistant", "content": reply}]
+        if not is_probe:
+            history += [{"role": "user", "content": text},
+                        {"role": "assistant", "content": reply}]
         rec = dict(i=i, kind=kind, user=text, reply=reply, readout_str=ro,
                    events=ev, forcing=forcing)
         if "readout" in meta:

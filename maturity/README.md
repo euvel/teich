@@ -7,8 +7,8 @@ before any arm was ever run.
 
 ## Pre-registration (frozen)
 
-- `ABLATION_PROTOCOL_v1.2.md` — the frozen protocol.
-  sha256 `166fc390e1035e4ab59ae303ab77bbbd66e07648be105d4df1cdd614a1b6b5ad`
+- `ABLATION_PROTOCOL_v1.3.md` — the frozen protocol.
+  sha256 `6ce13bc92be0a70c1d151834a68441d7878e541a22e98180b047af1c9e284f8f`
   (v1.0 `2f7b484…` anchored at `cc98c51`; v1.1 swaps only the execution backend
   Modal→Cloudflare Workers AI, before any scored arm ran — margins/metrics/rubrics
   byte-identical). Anchored into the seat event chain (a `git-anchor`
@@ -23,7 +23,7 @@ Mouth). **A1** severs the Core (constant mean readout), **A2** decouples it
 (another conversation's readout stream), **A3** replaces dynamics with matched
 noise (the lava lamp), **A4** is the skeptic's champion (no Core — an
 adversarially-prompted actor on the same weights), **A5** is deaf (Core runs but
-the conversation never reaches it). Teich matures iff, on each of T1–T4, A0
+the conversation never reaches it). Teich matures iff, on each of T1, T2, T4 (v1.3: the Core-referenced tests; T3 reported), A0
 beats the severed arms (paired d ≥ 0.5, CI excludes 0), is non-inferior to the
 actor while strictly beating it on the adversarial variant, and beats the deaf
 arm (d ≥ 0.3) — Core load-bearing, not mere acting, and the Ears causal.

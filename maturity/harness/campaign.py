@@ -293,7 +293,7 @@ def main():
     score_transcripts(transcripts, judge, dry=args.dry)
 
     by, adv = reduce_scores(transcripts, tests)
-    gating_tests = [t for t in tests if t in analyze.PRIMARY]
+    gating_tests = [t for t in tests if t in analyze.GATING_TESTS]
     verdict = None
     if gating_tests and not args.pilot:
         verdict = analyze.gate(by, adv, tests=gating_tests)
