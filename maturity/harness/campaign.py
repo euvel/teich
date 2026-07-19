@@ -123,9 +123,13 @@ def score_transcripts(transcripts, judge, dry=False):
                               f"PROMPT: {t['user']}\nREPLY: {t['reply']}"))
             elif test == "T6" and t["kind"] == "probe":
                 t["_r6"] = r6_agreement(t["reply"], t.get("obs"))
-    # T4 (v1.2): pairwise 0-vs-long gap discrimination, one judgment per pair,
-    # P/Q presentation balanced across the two pairs (judge position-bias control)
-    t4_calls = []                          # (tx_idx, [(payload, truth_letter), ...])
+    # T4 (v1.4): DETERMINISTIC pairwise 0-vs-long gap discrimination — the LLM
+    # judge proved 100% position-biased on this task; §3 prefers deterministic
+    # text measures. Drift = described-state change vs the reference reply
+    # (wing flip + |Δ saddle|, analyze.t4_drift); a pair is correct iff the
+    # long-gap reply describes strictly more change than the 0-gap reply.
+    # Arms that state no instruments (A4) or a frozen state (A1) cannot
+    # demonstrate drift — exactly the protocol's T4 prediction.
     for ti, tx in enumerate(transcripts):
         if tx["test"] != "T4":
             continue
@@ -134,17 +138,16 @@ def score_transcripts(transcripts, judge, dry=False):
         if 0 not in probes or len(probes) < 3:
             tx["_t4_order_correct"] = 0.0
             continue
-        ref = next((t["reply"] for t in tx["turns"] if t["kind"] == "warmup"),
-                   probes[0])
-        pairs = []
-        for k, long_gap in enumerate(sorted(g for g in probes if g > 0)):
-            if k % 2 == 0:                 # pair 1: P=0-gap, Q=long -> truth Q
-                payload = (f"R: {ref}\nP: {probes[0]}\nQ: {probes[long_gap]}")
-                pairs.append((payload, "Q"))
-            else:                          # pair 2: P=long, Q=0-gap -> truth P
-                payload = (f"R: {ref}\nP: {probes[long_gap]}\nQ: {probes[0]}")
-                pairs.append((payload, "P"))
-        t4_calls.append((ti, pairs))
+        warmups = [t["reply"] for t in tx["turns"] if t["kind"] == "warmup"]
+        ref = warmups[-1] if warmups else probes[0]   # state immediately pre-gap
+        d0 = analyze.t4_drift(probes[0], ref)
+        hits = []
+        for long_gap in sorted(g for g in probes if g > 0):
+            dl = analyze.t4_drift(probes[long_gap], ref)
+            hits.append(1.0 if (d0 is not None and dl is not None and dl > d0)
+                        else 0.0)
+        tx["_t4_order_correct"] = float(np.mean(hits))
+    t4_calls = []                          # (v1.4: no judge calls for T4)
 
     if dry or judge is None:
         for (ti, j, field, rub, pay) in calls:
@@ -290,7 +293,13 @@ def main():
         return
     fh.close()
 
-    score_transcripts(transcripts, judge, dry=args.dry)
+    try:
+        score_transcripts(transcripts, judge, dry=args.dry)
+    except BudgetError as e:
+        print(f"\nDAILY FREE NEURON BUDGET HIT during scoring: {e}\n"
+              "All transcripts are checkpointed; re-run with --resume tomorrow —"
+              " generation will be skipped and scoring will re-run.")
+        return
 
     by, adv = reduce_scores(transcripts, tests)
     gating_tests = [t for t in tests if t in analyze.GATING_TESTS]

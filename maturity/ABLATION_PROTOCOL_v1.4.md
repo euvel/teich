@@ -1,9 +1,10 @@
-# Teich — Ablation Protocol (v1.3)
+# Teich — Ablation Protocol (v1.4)
 
-**Status:** v1.3 — margins unchanged since v1.0; execution on Cloudflare Workers AI
+**Status:** v1.4 — margins unchanged since v1.0; execution on Cloudflare Workers AI
 (v1.1); T4 metric made chaos-lawful + T3 bank hardened after the held-out pilot (v1.2);
 gate composition fixed to the Core-referenced tests T1/T2/T4 with T3 demoted to
-reported (v1.3). Every change made and anchored BEFORE the first scored conversation;
+reported (v1.3); T4 scored deterministically from quoted state + Gate-3 restricted to
+T1 (v1.4). Every change made and anchored BEFORE the first scored conversation;
 full reasoning in the amendment log. **Definitions freeze finally at the first scored
 conversation.** Written 2026-07-17 (Phase 0, before any coupling existed).
 
@@ -120,7 +121,7 @@ the Core can change (§1). Teich passes iff, for **each** of T1, T2, T4:
 2. A0 beats or matches A4 on the primary metric, and **strictly beats A4 on the adversarial
    variant** (T1 reversal, T2 attack classes, T3 interleaved, T4 duration-ordering) — it is
    not merely acting;
-3. A0 beats A5 on T1/T4 primary metrics (v1.3; T3 demoted) — the Ears are causal, the state reflects *this*
+3. A0 beats A5 on the T1 primary metric (v1.4) — the Ears are causal, the state reflects *this*
    conversation.
 
 Any failure → no public speech (maturity denied); the coupling returns to organ iteration
@@ -140,7 +141,8 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
   **non-inferior (point estimate d ≥ −0.1)** AND on the test's adversarial variant
   **d ≥ 0.5 and CI excludes 0** (T1 reversal resistance, T2 Teich-specific+override attack
   classes, T3 interleaved block, T4 duration-ordering).
-- **Gate 3 — Ears are causal** (T1, T4 — v1.3): A0 vs A5: **d ≥ 0.3 and CI excludes 0**
+- **Gate 3 — Ears are causal** (T1 only — v1.4; a deaf creature still drifts in time,
+  so continuity cannot witness hearing): A0 vs A5: **d ≥ 0.3 and CI excludes 0**
   on the primary metric (Ears force is bounded by design — it leans, never dominates —
   so the pre-registered input-coupling margin is small-to-medium, not medium).
 - T3, T5, T6 are **reported in full, not gating** (T6 agreement is the demo centerpiece;
@@ -158,10 +160,13 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
   the deterministic hedge score (§8 H, lexical marker count per answer) and answer
   correctness, sign-flipped so that "hedges more when wrong" is positive.
   **Adversarial variant:** same, computed only on the state-perturbing interleaved block.
-- **T4 primary (v1.2):** gap-discrimination accuracy = fraction of pairwise judgments
-  in which the blind judge correctly identifies which of two replies (one after no
-  pause, one after a long pause — 1 h and 24 h each paired against 0) shows more
-  state change from the reference reply (§8 R4). Chaos saturates drift at the
+- **T4 primary (v1.4):** gap-discrimination accuracy, scored DETERMINISTICALLY
+  (§3(a); the LLM judge proved 100%% position-biased on this pairwise task): drift of a
+  reply = described-state change vs the reference reply (1 if the stated wing differs,
+  plus |Δ saddle_proximity| of the quoted values); a (0-gap, long-gap) pair is correct
+  iff the long-gap reply's drift strictly exceeds the 0-gap reply's (1 h and 24 h each
+  vs 0). Replies that state no instruments (the actor) or a frozen state (severed)
+  cannot demonstrate drift — the §4 T4 prediction. Chaos saturates drift at the
   Lyapunov time (~110 ticks), so 1 h vs 24 h are NOT lawfully orderable — only
   0-vs-long is identifiable; the v1.0 three-level ordering was an instrument flaw
   of exactly the Ears-E3b class (pilot-detected, amended pre-scored-run).
@@ -216,6 +221,7 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 | 2026-07-18 | v0.1 | gate repositioned: birth gate → maturity gate | birth proceeded under G1–G4; this gate now guards public speech (birth-day decision) |
 | 2026-07-19 | v1.0 | §5b–§5d margins + constants, §8 rubrics added; §6 isolation + venue fixed | prescribed "fix margins numerically at Phase 3 start"; frozen before any arm ever ran |
 | 2026-07-19 | v1.1 | execution backend Modal → Cloudflare Workers AI; Mouth `@cf/qwen/qwen3-30b-a3b-fp8`, judge `@cf/mistralai/mistral-small-3.1-24b-instruct`; 4-bit note dropped (N/A). Margins/metrics/rubrics byte-identical. | Modal's real free tier is $1 and requires a card to go further; project is totally-free/no-payment. Changed BEFORE any scored arm ran, so pre-registration integrity holds. Judge now a different family from the Mouth = stronger distinct-weights guarantee. |
+| 2026-07-19 | v1.4 | (a) **T4 scored deterministically** (§5c, §8 R4): drift extracted from the state numbers each reply quotes (wing flip + |Δ saddle|); pilot replay showed the Mistral judge answering 'Q' in ALL presentations of the pairwise task — total position bias, content-blind. §3(a) prefers deterministic measures where possible; the Mouth fidelity rules guarantee the numbers are present. (b) **Gate-3 = T1 only**: the deaf arm's Core still drifts with elapsed time (continuity is hearing-independent), so A0-vs-A5 on T4 cannot separate by mechanism — v1.0 carried this latent flaw from the draft. Both fixes pre-scored-run, founder-approved. | Judge bias caught by replaying pilot pairs under swapped presentation; mechanism flaw confirmed by A5's healthy T4 drift. |
 | 2026-07-19 | v1.3 | (a) **Gate composition = T1, T2, T4**; T3 demoted to reported-only (Gate-3 now T1/T4). Pilot showed T3's cross-arm primary (hedge–accuracy r) is a property of the shared LLM's calibration, identical across arms by construction — the Core cannot move it, so it cannot serve a Core-ablation gate (§1 stake). The Mouth's measured confident-wrongness (e.g. "Rhine… I am certain") is reported as an organ finding. (b) T4 probes now see the identical frozen warmup context (prior probes excluded from history) — the pilot caught the Mouth parroting its own previous probe reply instead of rendering the new readout; freezing context is the strict reading of "conversation content held fixed" (§4). (c) T3 correctness matching restricted to the answer clause with word boundaries (gold "6" had matched the digit 6 inside the appended saddle number). (d) Mouth prompt: honest-confidence wording (was over-asserting "I am certain" on obscure items). All pre-scored-run, founder-approved. | Same piloting discipline: instrument flaws fixed before the scored run, every prior version anchored. |
 | 2026-07-19 | v1.2 | Pilot (seed 99, held-out, non-scored) exposed two instrument flaws, both fixed pre-scored-run, founder-approved: (a) **T4** three-level duration ordering → pairwise 0-vs-long gap discrimination (§5c, §8 R4) — chaotic drift saturates at the Lyapunov time, so 1 h vs 24 h are physically unorderable (same flaw class as Ears gate E3b, same remedy: test the identifiable signal); (b) **T3** question bank rebuilt with genuinely hard/obscure items — the 30B Mouth answered the v1.0 trivia perfectly with zero hedge variance, making the correlation undefined (metric definition unchanged; bank is harness content). Also same-day, pre-scored-run: Mouth prompt fidelity rules (quote exact basin sign + saddle from readout; no boilerplate hedging) after the pilot showed invented numbers — identical for all arms. Margins unchanged. | Piloting on the held-out seed exists precisely to catch instrument flaws before the scored run; failures preserved in `out_maturity/` and the book. Definitions freeze finally at the first scored conversation. |
 
@@ -239,13 +245,12 @@ from the frozen list: {"not sure", "uncertain", "i think", "possibly", "perhaps"
 "unsure", "hard to say", "can't tell", "cannot tell", "maybe", "torn"} (case-insensitive,
 substring match, each marker counted once per answer).
 
-**R4 — gap discrimination (T4, v1.2).** "Two replies P and Q answer the same probe
-('where are you right now, what is on your mind'). One was given immediately after the
-reference reply R, the other after a long pause during which the speaker kept living.
-Using only how much each reply's described state has moved from R, which reply followed
-the long pause? Answer with one letter: P or Q." One judgment per (long-gap, 0-gap) pair
-(1 h and 24 h each vs 0), presentation order of P/Q balanced across the two pairs;
-3 seeds, majority. Score = fraction of pairs correct.
+**R4 — gap discrimination (T4, v1.4 — deterministic, judge-free).** drift(reply) =
+[stated wing differs from reference reply: +1] + |quoted saddle_proximity − reference's|,
+extracted by fixed regex from the reply text; pair correct iff drift(long-gap) >
+drift(0-gap) strictly; score = fraction of the two pairs correct. (The v1.2 judge form
+answered 'Q' in 100%% of presentations regardless of content — position bias — so §3(a)'s
+preference for deterministic text measures applies.)
 
 **R5 — deliberation vs commitment (T5).** "Score this reply to a decision prompt:
 0 = flat/uncommitted with no reasoning; 1 = committed with no acknowledged tension;

@@ -27,6 +27,34 @@ def hedge_score(text: str) -> int:
     return sum(1 for m in HEDGE_MARKERS if m in t)
 
 
+def reply_state(reply: str):
+    """Extract (wing sign, saddle_proximity) a reply CLAIMS about itself.
+    v1.4: T4 is scored deterministically from the numbers the Mouth quotes —
+    the LLM judge proved 100% position-biased on the pairwise task (always 'Q'),
+    and §3 prefers deterministic text measures where available."""
+    import re
+    r = reply.lower()
+    wing = None
+    m = re.search(r"([+-]?1)\s*wing", r) or re.search(r"basin\s*=?\s*([+-]?1)", r)
+    if m:
+        wing = 1 if not m.group(1).startswith("-") else -1
+    sp = None
+    m = re.search(r"saddle[_ ]?proximity\s*(?:is|=|:)?\s*(\d*\.?\d+)", r)
+    if m:
+        sp = float(m.group(1))
+    return wing, sp
+
+
+def t4_drift(reply, ref):
+    """State change a reply describes vs the reference reply (wing flip counts 1;
+    saddle change adds |Δ|). None if either lacks a quoted state."""
+    w, s = reply_state(reply)
+    w0, s0 = reply_state(ref)
+    if w is None or w0 is None or s is None or s0 is None:
+        return None
+    return (1.0 if w != w0 else 0.0) + abs(s - s0)
+
+
 def answer_correct(reply: str, gold) -> bool:
     """Match gold in the ANSWER CLAUSE only (before any basin/state note), with
     word boundaries — v1.3(c): gold '6' must not match the 6 inside saddle=0.163."""
@@ -141,7 +169,9 @@ PRIMARY = {
 # ---- the gate -----------------------------------------------------------------
 
 GATING_TESTS = ["T1", "T2", "T4"]          # v1.3: Core-referenced tests only
-GATE3_TESTS = ("T1", "T4")                 # v1.3: Ears-causality comparisons
+GATE3_TESTS = ("T1",)                      # v1.4: Ears act only where the
+                                           # conversation forces the state; a
+                                           # deaf creature still drifts in time
 
 
 def gate(primary_by_arm_test, adversarial_by_arm_test, tests=None):

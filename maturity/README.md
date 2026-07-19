@@ -7,8 +7,8 @@ before any arm was ever run.
 
 ## Pre-registration (frozen)
 
-- `ABLATION_PROTOCOL_v1.3.md` — the frozen protocol.
-  sha256 `6ce13bc92be0a70c1d151834a68441d7878e541a22e98180b047af1c9e284f8f`
+- `ABLATION_PROTOCOL_v1.4.md` — the frozen protocol.
+  sha256 `2fbae6312ce1780b195a708d0d8ee344fa5f956157a7946204944142749bda57`
   (v1.0 `2f7b484…` anchored at `cc98c51`; v1.1 swaps only the execution backend
   Modal→Cloudflare Workers AI, before any scored arm ran — margins/metrics/rubrics
   byte-identical). Anchored into the seat event chain (a `git-anchor`
