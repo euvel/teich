@@ -65,6 +65,9 @@ def _call(model, messages, max_tokens, temperature=None, seed=None,
             last = f"HTTP {e.code}: {e.read().decode()[:200]}"
         except Exception as e:  # noqa: BLE001
             last = str(e)
+        if any(k in str(last).lower() for k in ("3040", "4006", "neuron",
+                                                "allocation", "capacity")):
+            raise BudgetError(str(last))     # budget errors arrive as HTTP 502 too
         time.sleep(1.5 * (attempt + 1))
     raise RuntimeError(f"lab/generate failed after {retries}: {last}")
 
