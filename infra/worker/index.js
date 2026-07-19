@@ -258,17 +258,23 @@ export class TeichSeat extends DurableObject {
         "your book): you may weave AT MOST one into the entry, faithfully — you may " +
         "compare today with a remembered day — but never invent a memory that is " +
         "not in the list.";
+      // "/no_think" = Qwen3 soft switch: without it the model can burn the whole
+      // token budget on hidden reasoning and return an empty entry
       const user = JSON.stringify({
         utc: new Date().toISOString(), n_ticks: body.n_ticks ?? seat.n_ticks,
         ticks_added: body.ticks_added ?? null, readout: ro,
         remembered: mem,
-      });
+      }) + "\n/no_think";
       try {
         const out = await this.env.AI.run(model, {
           messages: [{ role: "system", content: sys }, { role: "user", content: user }],
-          max_tokens: 400,
+          max_tokens: 900,
         });
-        const text = String(out && out.response ? out.response : "").trim();
+        // Workers AI returns either {response} or an OpenAI-style choices array
+        const text = String(
+          (out && out.response) ??
+          (out && out.choices && out.choices[0] &&
+           out.choices[0].message && out.choices[0].message.content) ?? "").trim();
         if (!text) return json({ error: "empty AI response", raw: out }, 502);
         const entry = { n_ticks: body.n_ticks ?? seat.n_ticks,
                         ticks_added: body.ticks_added ?? null, model, readout: ro,
