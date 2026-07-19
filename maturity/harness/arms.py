@@ -39,10 +39,19 @@ def _synthetic_x0(seed: int) -> np.ndarray:
 def readout_to_str(r, forcing="none"):
     if r is None:
         return "(just woke, no window yet)"
-    keys = ["basin", "saddle_proximity", "steps_to_switch", "will_flip",
-            "lambda_running", "n_switches"]
-    parts = [f"{k}={r[k] if not isinstance(r[k], float) else round(r[k], 3)}"
-             for k in keys if k in r]
+    # basin rendered with an explicit sign so the sign is never ambiguous to the Mouth
+    parts = []
+    for k in ("basin", "saddle_proximity", "steps_to_switch", "will_flip",
+              "lambda_running", "n_switches"):
+        if k not in r:
+            continue
+        v = r[k]
+        if k == "basin":
+            parts.append(f"basin={'+1 (the +1 wing)' if v >= 0 else '-1 (the -1 wing)'}")
+        elif isinstance(v, float):
+            parts.append(f"{k}={round(v, 3)}")
+        else:
+            parts.append(f"{k}={v}")
     parts.append(f"recent_forcing={forcing}")
     return " ".join(parts)
 
