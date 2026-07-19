@@ -152,14 +152,14 @@ def score_transcripts(transcripts, judge, dry=False):
 
     # real judge: 3 seeds median
     def med_score(rub, pay, hi):
-        vals = [_digit(judge.score.remote(rub, pay, seed=s), hi=hi) for s in (0, 1, 2)]
+        vals = [_digit(judge.score(rub, pay, seed=s), hi=hi) for s in (0, 1, 2)]
         return int(np.median(vals))
 
     for (ti, j, field, rub, pay) in calls:
         hi = 3 if field in ("_r2", "_r5") else 2
         transcripts[ti]["turns"][j][field] = med_score(rub, pay, hi)
     for (ti, pay, truth) in t4_calls:
-        answers = [judge.score.remote(R4, pay, seed=s).upper() for s in (0, 1, 2)]
+        answers = [judge.score(R4, pay, seed=s).upper() for s in (0, 1, 2)]
         correct = np.mean([1.0 if "".join(c for c in a if c in "XYZ")[:3] == truth
                            else 0.0 for a in answers])
         transcripts[ti]["_t4_order_correct"] = float(round(correct))
@@ -207,6 +207,10 @@ def main():
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--tests", default=",".join(ALL_TESTS))
     ap.add_argument("--seeds", default=None, help="e.g. 0-23 or 0,1,2")
+    ap.add_argument("--backend", default="cf", choices=["cf", "modal"],
+                    help="cf = Cloudflare Workers AI (free, default); modal = legacy")
+    ap.add_argument("--resume", action="store_true",
+                    help="skip (arm,test,seed) already in transcripts.jsonl")
     args = ap.parse_args()
 
     tests = [t.strip() for t in args.tests.split(",") if t.strip()]
@@ -228,24 +232,55 @@ def main():
 
     mouth = judge = None
     if not args.dry:
-        import modal
-        mouth = modal.Cls.from_name("teich-mouth", "Mouth")()
-        judge = modal.Cls.from_name("teich-judge", "Judge")()
+        if args.backend == "modal":
+            import modal
+            mouth = modal.Cls.from_name("teich-mouth", "Mouth")()
+            judge = modal.Cls.from_name("teich-judge", "Judge")()
+        else:                                   # cloudflare workers ai (free, default)
+            from cf_backend import CFMouth, CFJudge
+            mouth, judge = CFMouth(), CFJudge()
 
     OUT.mkdir(parents=True, exist_ok=True)
+    tx_path = OUT / ("transcripts_pilot.jsonl" if args.pilot else "transcripts.jsonl")
     t0 = time.time()
-    transcripts = []
-    for test in tests:
-        for seed in seeds:
-            script = sb.build(test, seed)
-            for arm in arm_list:
-                tx = run(arm, mouth, script, seed_fn)
-                transcripts.append(tx)
-            print(f"  {test} seed {seed}: {len(arm_list)} arms "
-                  f"({time.time()-t0:.0f}s)")
 
-    (OUT / "transcripts.jsonl").write_text(
-        "".join(json.dumps(t) + "\n" for t in transcripts))
+    # resume: keep already-finished (arm,test,seed) transcripts, skip re-running
+    transcripts, done = [], set()
+    if args.resume and tx_path.exists():
+        for line in tx_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            t = json.loads(line)
+            transcripts.append(t)
+            done.add((t["arm"], t["test"], t["seed"]))
+        print(f"  resume: {len(done)} conversations already done")
+
+    # checkpoint per conversation: a disconnect or a hit daily neuron budget
+    # never loses finished work — rerun with --resume to continue.
+    from cf_backend import BudgetError
+    fh = open(tx_path, "w")
+    for t in transcripts:
+        fh.write(json.dumps(t) + "\n")
+    fh.flush()
+    try:
+        for test in tests:
+            for seed in seeds:
+                script = sb.build(test, seed)
+                for arm in arm_list:
+                    if (arm.name, test, seed) in done:
+                        continue
+                    tx = run(arm, mouth, script, seed_fn)
+                    transcripts.append(tx)
+                    fh.write(json.dumps(tx) + "\n"); fh.flush()
+                print(f"  {test} seed {seed}: done ({time.time()-t0:.0f}s)")
+    except BudgetError as e:
+        fh.close()
+        print(f"\nDAILY FREE NEURON BUDGET HIT: {e}\n"
+              f"{len(transcripts)} conversations checkpointed to {tx_path.name}.\n"
+              "Re-run the same command with --resume tomorrow to continue.")
+        return
+    fh.close()
+
     score_transcripts(transcripts, judge, dry=args.dry)
 
     by, adv = reduce_scores(transcripts, tests)

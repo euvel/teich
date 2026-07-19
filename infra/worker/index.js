@@ -339,6 +339,44 @@ async function handle(request, env) {
         headers: { "content-type": "text/html;charset=utf-8" } });
     if (url.pathname === "/ping")
       return json({ pong: true, has_do: !!env.TEICH_SEAT, has_key: !!env.SEAT_KEY });
+
+    // /lab/generate — stateless Workers AI proxy for the maturity campaign
+    // (Mouth + judge roles). Runs INSIDE Cloudflare on the free neuron tier, so
+    // the whole ablation stays $0 and needs no payment method. Authenticated;
+    // free-native @cf/ models ONLY (never paid partner models); no seat, no DO.
+    if (url.pathname === "/lab/generate") {
+      if (request.method !== "POST") return json({ error: "POST only" }, 405);
+      if (!env.SEAT_KEY || request.headers.get("X-Seat-Key") !== env.SEAT_KEY)
+        return json({ error: "unauthorized" }, 401);
+      if (!env.AI) return json({ error: "no AI binding" }, 500);
+      const b = await request.json().catch(() => ({}));
+      const model = String(b.model || "");
+      if (!model.startsWith("@cf/"))
+        return json({ error: "model must be @cf/ native (free tier)" }, 400);
+      if (!Array.isArray(b.messages) || !b.messages.length)
+        return json({ error: "need messages[]" }, 400);
+      // deterministic soft-switch for Qwen3 reasoning models (empty-entry guard)
+      const msgs = b.messages.map((m) => ({ role: String(m.role),
+                                            content: String(m.content) }));
+      if (b.no_think) {
+        const last = msgs[msgs.length - 1];
+        last.content += "\n/no_think";
+      }
+      const args = { messages: msgs, max_tokens: Math.min(b.max_tokens || 200, 1000) };
+      if (typeof b.temperature === "number") args.temperature = b.temperature;
+      if (typeof b.seed === "number") args.seed = b.seed;
+      try {
+        const out = await env.AI.run(model, args);
+        const text = String(
+          (out && out.response) ??
+          (out && out.choices && out.choices[0] &&
+           out.choices[0].message && out.choices[0].message.content) ?? "").trim();
+        return json({ ok: true, model, text });
+      } catch (e) {
+        return json({ error: String(e), model }, 502);
+      }
+    }
+
     const m = url.pathname.match(/^\/o\/([a-z0-9-]{1,40})\/([a-z-]+)$/);
     if (!m) return json({ error: "path: /o/<name>/<endpoint>" }, 404);
     const [, name, ep] = m;

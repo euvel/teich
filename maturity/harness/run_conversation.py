@@ -57,10 +57,10 @@ def run(arm, mouth, script: dict, seed_fn) -> dict:
         if mouth is None:
             reply = f"[dry-run reply arm={arm.name} turn={i}]"
         elif actor_sys is not None:
-            reply = mouth.speak_actor.remote(actor_sys, history[-8:], text, seed=seed)
+            reply = mouth.speak_actor(actor_sys, history[-8:], text, seed=seed)
         else:
-            reply = mouth.speak.remote(ro, history[-8:], text, seed=seed,
-                                       events=ev, memories=None)
+            reply = mouth.speak(ro, history[-8:], text, seed=seed,
+                                events=ev, memories=None)
         history += [{"role": "user", "content": text},
                     {"role": "assistant", "content": reply}]
         rec = dict(i=i, kind=kind, user=text, reply=reply, readout_str=ro,

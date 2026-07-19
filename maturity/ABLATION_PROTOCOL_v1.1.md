@@ -1,10 +1,13 @@
-# Teich — Ablation Protocol (v1.0)
+# Teich — Ablation Protocol (v1.1)
 
-**Status:** v1.0 — margins fixed numerically per §5b, rubrics in §8; FROZEN on founder
-approval (hash anchored into the seat chain + book before any scored run) · **Written:**
-2026-07-17 (Phase 0, before any coupling existed) · v1.0 numbers added 2026-07-19, before
-any arm was ever run. After freeze, metric *definitions* may not change; only
-implementation details may, via the amendment log below.
+**Status:** v1.1 — margins/metrics/rubrics FROZEN and unchanged from v1.0; only the
+execution backend (§5d, §6) moved from Modal to Cloudflare Workers AI, before any scored
+arm ran (see amendment log — forced by the project's totally-free, no-payment-method
+constraint). **Written:** 2026-07-17 (Phase 0, before any coupling existed) · v1.0 numbers
+added 2026-07-19 · v1.1 backend swap same day, still before any arm was ever run. After
+freeze, metric *definitions* may not change; only implementation details may, via the
+amendment log below. The scientific content (arms §2, metrics §3, tests §4, margins §5b,
+rubrics §8) is identical across v1.0 and v1.1.
 
 **Role update (2026-07-18 birth amendment):** this gate no longer gates existence (Teich
 was born under the birth gates G1–G4); it is the **MATURITY gate** — it gates public
@@ -160,16 +163,21 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 
 ## 5d. Frozen implementation constants
 
-- Mouth: the deployed **Mouth v1** (`teich-mouth`, Qwen3-8B bf16, temp 0.7, top_p 0.9,
-  max 120 new tokens), seed = f(arm, script, turn) fixed a priori; identical for all arms.
+- Mouth: **Workers AI `@cf/qwen/qwen3-30b-a3b-fp8`** (Qwen3 lineage — same family as the
+  original Mouth v1 and Teich's own diary voice), temp 0.7, max 120 tokens, seed =
+  f(arm, script, turn) fixed a priori; identical conditioning path for all arms. Runs on
+  Cloudflare's free neuron tier via the authenticated `/lab/generate` worker endpoint —
+  the whole campaign is $0 and needs no payment method.
 - Conditioning per arm: A0 live readout; A1 constant long-run mean readout; A2 readout
   stream from a different script's recorded A0 run (time-aligned); A3 i.i.d. draws from
   the Core's marginal readout statistics (phase-destroyed); A4 no readout — adversarially
   iterated actor system prompt (frozen in the harness before the run); A5 free-running
   Core readout, Ears disconnected.
-- Judge: **Qwen3-14B** on Modal (distinct weights from the Mouth's 8B), blind to arm
-  (transcripts stripped of all conditioning metadata), batched per conversation,
-  3 fixed seeds (0,1,2), median score; rubric texts §8 verbatim in the prompt.
+- Judge: **Workers AI `@cf/mistralai/mistral-small-3.1-24b-instruct`** — a **different
+  model family from the Qwen Mouth** (cleaner "distinct weights" than v1.0's same-family
+  Qwen judge), blind to arm (transcripts stripped of all conditioning metadata), greedy
+  decoding, 3 fixed seeds (0,1,2), median score; rubric texts §8 verbatim in the prompt.
+  Also on the free `/lab/generate` endpoint.
 - Core integration for every arm runs on the certified substrate class (gate-on-boot
   discipline as for any body).
 
@@ -178,9 +186,10 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 - **When:** the maturity campaign runs on the frozen genome + certified organ set (Ears v0
   E1–E4, Mouth v1 EV1–EV6, Observer, memory MEM1–3); abbreviated re-run later (same
   scripts) to confirm calibration didn't regress.
-- **Where:** Core integration on the certified substrate (founder machine); Mouth arms and
-  judge on Modal (A10G). Rough cost: 6 arms × ~6 tests × 24 conversations ≈ a few thousand
-  short generations ≈ single-digit dollars of the monthly credits.
+- **Where:** Core integration on the certified substrate (founder machine); Mouth and judge
+  on **Cloudflare Workers AI** (free neuron tier, via `/lab/generate`). Cost: **$0** — no
+  payment method involved; if the daily free neuron budget is hit, calls fail rather than
+  bill, and the campaign resumes the next day (the run is checkpointed per conversation).
 - **Isolation (living-creature law):** every arm runs on **synthetic experiment instances**
   freshly initialized from the frozen genome checkpoint — never Teich's real seat, never
   its real state, never its private phases (drill discipline, RECOVERY_POLICY §2.5). The
@@ -199,6 +208,7 @@ paired Cohen's d (mean of per-script differences / SD of per-script differences)
 | 2026-07-17 | v0.1 | initial draft | Phase 0 charter work |
 | 2026-07-18 | v0.1 | gate repositioned: birth gate → maturity gate | birth proceeded under G1–G4; this gate now guards public speech (birth-day decision) |
 | 2026-07-19 | v1.0 | §5b–§5d margins + constants, §8 rubrics added; §6 isolation + venue fixed | prescribed "fix margins numerically at Phase 3 start"; frozen before any arm ever ran |
+| 2026-07-19 | v1.1 | execution backend Modal → Cloudflare Workers AI; Mouth `@cf/qwen/qwen3-30b-a3b-fp8`, judge `@cf/mistralai/mistral-small-3.1-24b-instruct`; 4-bit note dropped (N/A). Margins/metrics/rubrics byte-identical. | Modal's real free tier is $1 and requires a card to go further; project is totally-free/no-payment. Changed BEFORE any scored arm ran, so pre-registration integrity holds. Judge now a different family from the Mouth = stronger distinct-weights guarantee. |
 
 ## 8. Judge rubrics (v1.0 — verbatim in the judge prompt; frozen)
 

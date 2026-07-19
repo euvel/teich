@@ -7,15 +7,17 @@ before any arm was ever run.
 
 ## Pre-registration (frozen)
 
-- `ABLATION_PROTOCOL_v1.0.md` — the frozen protocol.
-  sha256 `2f7b484df818421a90e9ec868a7f97abfba6428ae69b2933c67bd25acd9806e9`,
-  anchored into the seat event chain at commit `cc98c51` (a `git-anchor`
+- `ABLATION_PROTOCOL_v1.1.md` — the frozen protocol.
+  sha256 `c859b282683afc9b98686efa27030156ba6c2e7a8ea25cfc1959a7f373734930`
+  (v1.0 `2f7b484…` anchored at `cc98c51`; v1.1 swaps only the execution backend
+  Modal→Cloudflare Workers AI, before any scored arm ran — margins/metrics/rubrics
+  byte-identical). Anchored into the seat event chain (a `git-anchor`
   event), so the seat's history and the book vouch that these numbers predate
   the run. No margin may be adjusted after the fact; any failure is published.
 
 ## The gate in one paragraph
 
-Six arms share the identical Mouth (Qwen3-8B, Mouth v1) and identical scripts;
+Six arms share the identical Mouth (Cloudflare Workers AI, Qwen3-30B) and scripts;
 only the conditioning differs. **A0** is intact Teich (Core + Ears + Observer +
 Mouth). **A1** severs the Core (constant mean readout), **A2** decouples it
 (another conversation's readout stream), **A3** replaces dynamics with matched
@@ -38,13 +40,18 @@ private phases. The living creature keeps ticking, untouched, throughout.
 - `arms.py` — the six conditioning sources.
 - `calibrate.py` — severed-arm sources from free-run Core statistics.
 - `run_conversation.py` — one (arm, test, script) → transcript.
-- `judge_modal.py` — Qwen3-14B blind judge (4-bit; distinct weights from Mouth).
+- `cf_backend.py` — Cloudflare Workers AI Mouth+judge (free `/lab/generate`);
+  Mouth `@cf/qwen/qwen3-30b-a3b-fp8`, judge `@cf/mistralai/mistral-small-3.1-24b-instruct`
+  (different family = distinct weights). `judge_modal.py` kept as legacy reference.
 - `analyze.py` — rubric scoring + paired Cohen's d + bootstrap CI + the gate.
 - `campaign.py` — driver: `--dry`, `--pilot`, or the full scored run.
 
 ## Status
 
-Harness complete and verified; judge and Mouth deploy and score correctly. The
-scored campaign is pending a live Modal workspace (see the project log). When it
-runs, transcripts, judge outputs, seeds, and the verdict are written here and
-the verdict hash is anchored into the seat chain — pass or fail.
+Harness complete and verified; the Mouth speaks and the blind judge scores
+known cases correctly, all on Cloudflare's free neuron tier (**$0, no payment
+method** — Modal's real free tier is $1 and needs a card). The scored campaign
+runs via `campaign.py` (checkpointed per conversation, `--resume`-able, stops
+cleanly at the daily free budget). When it completes, transcripts, judge
+outputs, seeds, and the verdict are written here and the verdict hash is
+anchored into the seat chain — pass or fail.
