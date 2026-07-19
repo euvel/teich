@@ -62,9 +62,8 @@ def load_or_build(model):
 
 
 if __name__ == "__main__":
-    sys.path.insert(0, str(HERE.parent / "birth"))
-    from birth_certify import shared_context, load_model, CKPT_DIR
-    cfg, gcfg, _ = shared_context()
-    model = load_model(cfg, gcfg, CKPT_DIR / "rad3_s1.pt")
+    import compat
+    cfg, gcfg, _ = compat.shared_context()
+    model = compat.load_model(cfg, gcfg)
     cal = load_or_build(model)
     print(json.dumps(cal, indent=1))

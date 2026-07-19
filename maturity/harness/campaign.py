@@ -26,8 +26,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-sys.path.insert(0, str(HERE.parent / "birth"))
-sys.path.insert(0, str(HERE.parent / "phase3_mouth"))
+import compat  # noqa: E402  (dual-layout path setup)
 
 import numpy as np  # noqa: E402
 
@@ -42,7 +41,10 @@ ALL_TESTS = ["T1", "T2", "T3", "T4", "T5", "T6"]
 
 
 def seed_fn(arm, test, script_seed, turn):
-    return abs(hash((arm, test, script_seed, turn))) % 100000
+    # stable across processes (hash() is salted per process; md5 is not)
+    import hashlib
+    key = f"{arm}|{test}|{script_seed}|{turn}".encode()
+    return int(hashlib.md5(key).hexdigest()[:8], 16) % 100000
 
 
 # ---- rubric texts (from ABLATION_PROTOCOL v1.0 §8) ----------------------------
@@ -236,9 +238,8 @@ def main():
     else:
         seeds = list(range(sb.N_SCRIPTS))
 
-    from birth_certify import shared_context, load_model, CKPT_DIR
-    cfg, gcfg, _ = shared_context()
-    model = load_model(cfg, gcfg, CKPT_DIR / "rad3_s1.pt")
+    cfg, gcfg, _ = compat.shared_context()
+    model = compat.load_model(cfg, gcfg)
     cal = load_or_build(model)
     arm_list = build_arms(model, cal)
 

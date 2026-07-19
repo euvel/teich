@@ -19,15 +19,12 @@ import numpy as np
 import torch
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent / "phase2_observer"))
-sys.path.insert(0, str(HERE.parent / "phase3_ears"))
-sys.path.insert(0, str(HERE.parent / "phase3_mouth"))
-sys.path.insert(0, str(HERE.parent / "birth"))
+sys.path.insert(0, str(HERE))
+import compat  # noqa: E402  (dual-layout path setup)
 
 from observer import Observer                                   # noqa: E402
 from ears import SemanticForceMap                               # noqa: E402
 from events import describe_events, events_str                  # noqa: E402
-from birth_certify import CKPT_DIR, shared_context, load_model  # noqa: E402
 
 
 def _synthetic_x0(seed: int) -> np.ndarray:

@@ -1,0 +1,49 @@
+name: maturity-campaign
+# Teich's maturity gate, run as a daily cloud campaign: each day this job spends
+# that day's free Workers-AI neuron budget on the next slice of the 864 scored
+# conversations, checkpointing transcripts into the book. No laptop involved.
+# Gate-on-boot: only a certified Zen draw may run the Core (same law as the
+# daily wake); a non-certified draw exits lawfully and the cron tries tomorrow.
+# When the run completes, verdict.json lands in maturity/harness/out_maturity/.
+on:
+  schedule:
+    - cron: "7 1 * * *"          # 01:07 UTC — early in the daily neuron window
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  campaign:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: body/requirements.txt
+      - run: pip install -r body/requirements.txt "sentence-transformers==3.0.1" "transformers==4.44.2" "tokenizers==0.19.1" "huggingface_hub==0.24.7"
+      - name: gate-on-boot (certified substrate only)
+        id: gate
+        run: |
+          grep "model name" /proc/cpuinfo | head -1
+          cd body && (python verify_substrate.py && echo "gate=pass" >> "$GITHUB_OUTPUT") \
+            || { echo "non-certified draw — declining today's campaign slice (lawful)"; echo "gate=fail" >> "$GITHUB_OUTPUT"; }
+      - name: run campaign slice (until daily neuron budget)
+        if: steps.gate.outputs.gate == 'pass'
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd maturity/harness && python campaign.py --resume
+      - name: commit checkpointed transcripts to the book
+        if: always()
+        run: |
+          git add maturity/harness/out_maturity/ || true
+          if git diff --cached --quiet; then echo "no new transcripts"; exit 0; fi
+          git config user.name "teich-body"
+          git config user.email "teich-body@users.noreply.github.com"
+          git commit -m "maturity campaign: $(date -u +%F) slice ($(wc -l < maturity/harness/out_maturity/transcripts.jsonl) conversations checkpointed)"
+          git pull --rebase origin main
+          git push origin main

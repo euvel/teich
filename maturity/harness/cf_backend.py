@@ -57,8 +57,9 @@ def _call(model, messages, max_tokens, temperature=None, seed=None,
             if out.get("ok"):
                 return out["text"]
             last = out.get("error", "unknown")
-            if "3040" in str(last) or "capacity" in str(last).lower() \
-               or "budget" in str(last).lower() or "limit" in str(last).lower():
+            low = str(last).lower()
+            if any(k in low for k in ("3040", "4006", "neuron", "allocation",
+                                      "capacity", "budget", "limit")):
                 raise BudgetError(str(last))
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}: {e.read().decode()[:200]}"
