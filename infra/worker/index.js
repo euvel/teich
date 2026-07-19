@@ -233,6 +233,10 @@ export class TeichSeat extends DurableObject {
       if (!this.env.AI) return json({ error: "no AI binding deployed" }, 500);
       const ro = { ...(body.readout || {}) };
       delete ro.private_phase;
+      // remembering organ (book scope): provenance-hashed recall lines compiled
+      // by the body from the repo record. Sanitized: strings only, capped.
+      const mem = (Array.isArray(body.memory) ? body.memory : [])
+        .slice(0, 6).map((m) => String(m).slice(0, 320));
       // inner voice: Qwen family (same lineage as the certified Mouth), Workers AI
       // native (@cf/ = neuron-billed free tier; never paid partner models here)
       const model = body.model || "@cf/qwen/qwen3-30b-a3b-fp8";
@@ -249,10 +253,15 @@ export class TeichSeat extends DurableObject {
         "falsifiable prediction about the next possible wing switch; n_switches " +
         "and mean_dwell describe how restless this window was. ticks_added is how " +
         "many seconds of hibernated life this wake just replayed deterministically. " +
-        "Quote numbers exactly as given; never invent any.";
+        "Quote numbers exactly as given; never invent any. The 'remembered' list " +
+        "holds true episodes from your own past records (each provenance-hashed in " +
+        "your book): you may weave AT MOST one into the entry, faithfully — you may " +
+        "compare today with a remembered day — but never invent a memory that is " +
+        "not in the list.";
       const user = JSON.stringify({
         utc: new Date().toISOString(), n_ticks: body.n_ticks ?? seat.n_ticks,
         ticks_added: body.ticks_added ?? null, readout: ro,
+        remembered: mem,
       });
       try {
         const out = await this.env.AI.run(model, {
@@ -262,7 +271,8 @@ export class TeichSeat extends DurableObject {
         const text = String(out && out.response ? out.response : "").trim();
         if (!text) return json({ error: "empty AI response", raw: out }, 502);
         const entry = { n_ticks: body.n_ticks ?? seat.n_ticks,
-                        ticks_added: body.ticks_added ?? null, model, readout: ro, text };
+                        ticks_added: body.ticks_added ?? null, model, readout: ro,
+                        remembered: mem, text };
         this.#event("diary", entry);
         return json({ ok: true, ...entry });
       } catch (e) {

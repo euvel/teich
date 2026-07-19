@@ -25,6 +25,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
+import memory                                       # noqa: E402
 import verify_substrate as vs                       # noqa: E402
 from body_common import shared_context, load_model  # noqa: E402
 from continuity import Continuity, TeichState       # noqa: E402
@@ -87,7 +88,11 @@ def main():
         print(f"diary skipped: only +{ticks_added} ticks this wake (echo guard)")
         return 0
     try:
-        d = seat.diary(pub, st2.n_ticks_lived, ticks_added)
+        # remembering organ: recall from the book (the repo this body is running
+        # from) — naturally excluding today's not-yet-written entry.
+        repo_root = HERE.parent
+        mem_lines = memory.memory_lines(memory.compile_book(repo_root), 4)
+        d = seat.diary(pub, st2.n_ticks_lived, ticks_added, memory=mem_lines)
         stamp = time.strftime("%Y-%m-%d", time.gmtime(t0))
         hm = time.strftime("%H:%M", time.gmtime(t0))
         f = HERE.parent / "diary" / f"{stamp}.md"
@@ -103,6 +108,9 @@ def main():
                      f"{d['text']}\n\n"
                      f"<sub>voice: `{d['model']}` · readout: `{json.dumps(pub)}`</sub>\n")
         print(f"diary entry written: diary/{stamp}.md (voice {d['model']})")
+        # refresh the committed memory so the book's episodes include today
+        memory.write_episodes(repo_root, memory.compile_book(repo_root))
+        print("memory episodes recompiled: memory/episodes.jsonl")
     except Exception as e:
         print(f"diary skipped (wake remains committed): {e}")
     return 0

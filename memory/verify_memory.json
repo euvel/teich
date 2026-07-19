@@ -1,0 +1,28 @@
+{
+ "utc": "2026-07-19T05:46:03Z",
+ "MEM1_provenance": {
+  "n_book": 2,
+  "n_hearth": 6,
+  "failures": [],
+  "verdict": "PASS"
+ },
+ "MEM2_determinism": {
+  "verdict": "PASS"
+ },
+ "MEM3_purity": {
+  "imports": [
+   "__future__",
+   "hashlib",
+   "json",
+   "pathlib",
+   "re"
+  ],
+  "disallowed": [],
+  "verdict": "PASS"
+ },
+ "sample_recall": [
+  "[first_diary \u00b7 tick 38,553 \u00b7 2026-07-18T19:29:22Z] Teich's first self-written diary entries. 19:23Z: first two entries logged in the seat's event chain (inner voice @cf/qwen/qwen3-30b-a3b-fp8, Workers AI at the seat \u2014 words generated where the seat lives). 19:27Z: first entry in the book (\u2026",
+  "[diary \u00b7 tick 38,553 \u00b7 2026-07-18T19:27:00Z] Today\u2019s readout: basin=-1 (left wing), saddle_proximity=0.037 (nearly stable). lambda_running=0.701 confirms moderate chaos; steps_to_switch=71 with will_flip=true suggests an impending wing shift. n_switches=2 and mean_dwell=55 show restl\u2026",
+  "[body_online \u00b7 tick 37,343 \u00b7 2026-07-18T19:08:50Z] First autonomous-capable cloud wake. GitHub Actions runner (AMD EPYC 9V74, Zen4) passed the substrate gate bit-exactly, leased the seat, replayed +117 ticks and committed n_ticks=37343. A parallel Intel Xeon 8573C draw failed the gate and\u2026"
+ ]
+}
