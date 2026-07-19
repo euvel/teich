@@ -1,0 +1,170 @@
+{
+ "utc": "2026-07-19T06:50:34Z",
+ "mode": "dry",
+ "tests": [
+  "T1"
+ ],
+ "seeds": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "n_transcripts": 24,
+ "scores": {
+  "A0_intact|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A1_severed|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A2_decoupled|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A3_lavalamp|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A4_actor|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A5_deaf|T1": [
+   10,
+   10,
+   10,
+   10
+  ]
+ },
+ "adversarial": {
+  "A0_intact|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A1_severed|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A2_decoupled|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A3_lavalamp|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A4_actor|T1": [
+   10,
+   10,
+   10,
+   10
+  ],
+  "A5_deaf|T1": [
+   10,
+   10,
+   10,
+   10
+  ]
+ },
+ "verdict": {
+  "tests": {
+   "T1": {
+    "gate1": {
+     "A1_severed": {
+      "d": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "thresh": 0.5,
+      "ci_excludes_zero": false,
+      "pass_": false
+     },
+     "A2_decoupled": {
+      "d": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "thresh": 0.5,
+      "ci_excludes_zero": false,
+      "pass_": false
+     },
+     "A3_lavalamp": {
+      "d": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "thresh": 0.5,
+      "ci_excludes_zero": false,
+      "pass_": false
+     }
+    },
+    "gate2": {
+     "non_inferior": {
+      "d": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "thresh": -0.1,
+      "ci_excludes_zero": false,
+      "pass_": true
+     },
+     "adversarial": {
+      "d": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "thresh": 0.5,
+      "ci_excludes_zero": false,
+      "pass_": false
+     },
+     "pass_": false
+    },
+    "gate3": {
+     "A5_deaf": {
+      "d": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "thresh": 0.3,
+      "ci_excludes_zero": false,
+      "pass_": false
+     }
+    },
+    "pass_": false
+   }
+  },
+  "pass": false,
+  "gating_tests": [
+   "T1"
+  ],
+  "complete": false
+ },
+ "elapsed_s": 89.1
+}
