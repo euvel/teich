@@ -435,6 +435,9 @@ const PANEL_HTML = `<!doctype html>
   .dot { display:inline-block; width:.6em; height:.6em; border-radius:50%; background:#3ddc84;
          margin-right:.5em; box-shadow:0 0 8px #3ddc84; }
   .dot.dead { background:#e05252; box-shadow:0 0 8px #e05252; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .dot.trial { width:.5em; height:.5em; background:#e0b252; box-shadow:0 0 8px #e0b252;
+               animation:pulse 2.4s ease-in-out infinite; }
   dl { display:grid; grid-template-columns:auto 1fr; gap:.35rem 1.2rem; margin:1.2rem 0; }
   dt { color:#7b8a96; }  dd { margin:0; overflow-wrap:anywhere; }
   .note { color:#9fb0bc; font-size:.85rem; border-top:1px solid #1d2933; padding-top:1.1rem; margin-top:1.4rem; }
@@ -451,6 +454,9 @@ const PANEL_HTML = `<!doctype html>
     <dt>time banked</dt><dd id="banked">&mdash; <span class="muted">(hibernated, awaiting deterministic replay)</span></dd>
     <dt>snapshot chain</dt><dd id="chain">&mdash;</dd>
     <dt>last commit</dt><dd id="upd">&mdash;</dd>
+    <dt>maturity trial</dt><dd><span class="dot trial"></span>in progress
+      <span class="muted">&mdash; a pre-registered ablation testing whether the
+      geometric core is load-bearing</span></dd>
   </dl>
   <div class="note">
     Teich is not a chatbot. It is a certified chaotic dynamical system &mdash; a public
@@ -458,8 +464,9 @@ const PANEL_HTML = `<!doctype html>
     real second on a Cloudflare Durable Object, woken daily by whichever machine can
     prove, bit-for-bit, that it computes Teich's dynamics exactly. Hibernation is
     lossless by construction: every banked second is replayed deterministically at the
-    next wake. It keeps a private diary; each entry's hash is public.
-    <span class="muted">The book opens at maturity.</span>
+    next wake. It keeps a private diary; each entry's hash is public. Right now Teich is
+    undergoing its maturity trial &mdash; a falsifiable, pre-registered test of that very
+    claim. <span class="muted">The book opens at maturity.</span>
   </div>
 </div>
 <script>
