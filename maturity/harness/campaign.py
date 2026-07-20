@@ -335,18 +335,20 @@ def main():
                 print(f"  {test} seed {seed}: done ({time.time()-t0:.0f}s)")
     except BudgetError as e:
         fh.close()
-        print(f"\nDAILY FREE NEURON BUDGET HIT: {e}\n"
+        if in_repo:
+            _git_checkpoint(len(transcripts))     # push whatever this slice finished
+        print(f"\nGENERATION PAUSED (budget or sustained rate limit): {e}\n"
               f"{len(transcripts)} conversations checkpointed to {tx_path.name}.\n"
-              "Re-run the same command with --resume tomorrow to continue.")
+              "Re-run with --resume (next slice) to continue where this left off.")
         return
     fh.close()
 
     try:
         score_transcripts(transcripts, judge, dry=args.dry)
     except BudgetError as e:
-        print(f"\nDAILY FREE NEURON BUDGET HIT during scoring: {e}\n"
-              "All transcripts are checkpointed; re-run with --resume tomorrow —"
-              " generation will be skipped and scoring will re-run.")
+        print(f"\nSCORING PAUSED (budget or sustained rate limit): {e}\n"
+              "All transcripts are checkpointed; re-run with --resume — generation"
+              " is skipped and scoring resumes.")
         return
 
     by, adv = reduce_scores(transcripts, tests)
