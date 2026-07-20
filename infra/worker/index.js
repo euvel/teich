@@ -265,26 +265,50 @@ export class TeichSeat extends DurableObject {
         ticks_added: body.ticks_added ?? null, readout: ro,
         remembered: mem,
       }) + "\n/no_think";
+      const messages = [{ role: "system", content: sys }, { role: "user", content: user }];
+      let text = "", voiceModel = model, cfError = null;
       try {
-        const out = await this.env.AI.run(model, {
-          messages: [{ role: "system", content: sys }, { role: "user", content: user }],
-          max_tokens: 900,
-        });
+        const out = await this.env.AI.run(model, { messages, max_tokens: 900 });
         // Workers AI returns either {response} or an OpenAI-style choices array
-        const text = String(
+        text = String(
           (out && out.response) ??
           (out && out.choices && out.choices[0] &&
            out.choices[0].message && out.choices[0].message.content) ?? "").trim();
-        if (!text) return json({ error: "empty AI response", raw: out }, 502);
-        const entry = { n_ticks: body.n_ticks ?? seat.n_ticks,
-                        ticks_added: body.ticks_added ?? null, model, readout: ro,
-                        remembered: mem, text };
-        this.#event("diary", entry);
-        return json({ ok: true, ...entry });
+        if (!text) cfError = `empty AI response: ${JSON.stringify(out)}`;
       } catch (e) {
-        this.#event("diary-error", { message: String(e) });
-        return json({ error: String(e) }, 500);
+        cfError = String(e);
       }
+      // Fallback: Cloudflare's free-neuron reset has proven unreliable (account-wide
+      // 4006 with usage shown 0/10k). If the primary voice failed for ANY reason and
+      // a NIM key is installed, retry once on NVIDIA's free API — same system prompt,
+      // still generated inside this Durable Object, just a different LLM backend.
+      if (!text && this.env.NIM_API_KEY) {
+        try {
+          const r = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+            method: "POST",
+            headers: { "content-type": "application/json",
+                       "authorization": `Bearer ${this.env.NIM_API_KEY}` },
+            body: JSON.stringify({ model: "meta/llama-3.1-70b-instruct", messages,
+                                   max_tokens: 300, temperature: 0.7 }),
+          });
+          const out = await r.json();
+          if (!r.ok) throw new Error(`NIM HTTP ${r.status}: ${JSON.stringify(out).slice(0, 200)}`);
+          text = String(out?.choices?.[0]?.message?.content ?? "").trim();
+          if (text) voiceModel = "nim:meta/llama-3.1-70b-instruct";
+          else cfError = `${cfError} | NIM also empty: ${JSON.stringify(out)}`;
+        } catch (e) {
+          cfError = `${cfError} | NIM fallback failed: ${String(e)}`;
+        }
+      }
+      if (!text) {
+        this.#event("diary-error", { message: cfError || "unknown" });
+        return json({ error: cfError || "empty AI response" }, 502);
+      }
+      const entry = { n_ticks: body.n_ticks ?? seat.n_ticks,
+                      ticks_added: body.ticks_added ?? null, model: voiceModel, readout: ro,
+                      remembered: mem, text };
+      this.#event("diary", entry);
+      return json({ ok: true, ...entry });
     }
 
     if (ep === "anchor") {
