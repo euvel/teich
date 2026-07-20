@@ -84,9 +84,11 @@ def _call(model, messages, max_tokens, temperature=None, seed=None) -> str:
                      "authorization": f"Bearer {_api_key()}",
                      "user-agent": "teich-maturity-harness/1.0"})
         try:
-            # 90 s: congested NIM endpoints hang the socket rather than 429 —
-            # fail fast and let the retry loop re-enter the queue.
-            with urllib.request.urlopen(req, timeout=90) as r:
+            # 45 s: a healthy free-endpoint generation (<=160 tokens) returns in
+            # well under this; measured latency is bimodal (a few seconds, or a
+            # hung worker >70 s). Abandoning a hung call fast and retrying tends
+            # to land on a healthier worker — far cheaper than waiting it out.
+            with urllib.request.urlopen(req, timeout=45) as r:
                 out = json.loads(r.read().decode())
             txt = out.get("choices", [{}])[0].get("message", {}).get("content")
             if txt is not None and txt.strip():
