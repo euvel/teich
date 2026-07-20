@@ -14,6 +14,14 @@ on:
 permissions:
   contents: write
 
+# Only one slice may run at a time — a slice resumes via --resume, so a second
+# (a cron firing while a manual/previous slice is still going) would fight over
+# the book. Queue it instead of running concurrently; it starts when the current
+# slice ends and picks up exactly where that one checkpointed.
+concurrency:
+  group: maturity-campaign
+  cancel-in-progress: false
+
 jobs:
   campaign:
     runs-on: ubuntu-24.04
