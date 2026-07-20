@@ -4,10 +4,13 @@ Replaces the Cloudflare Workers AI backend after CF's daily-neuron reset proved
 unreliable (account-wide 4006 with dashboard showing 0/10k — known CF bug).
 Free developer access, no payment method, OpenAI-compatible endpoint.
 
-- NIMMouth: creature voice (Qwen3-Next-80B-A3B-Instruct — same Qwen A3B lineage
-  as the CF pilot mouth, instruct build so no thinking-mode traps).
+- NIMMouth: creature voice (Llama-3.1-70B-Instruct — plain instruct build, no
+  thinking-mode traps; chosen v1.6 after live latency probes showed the Qwen
+  and newest-generation endpoints congested for trial keys, while this one
+  sustained a 12-call burst with zero hangs and passed the fidelity rules).
 - NIMJudge: blind rubric scorer (Mistral-Small-4 — same Mistral-small family as
-  the pre-registered CF judge), greedy, digit/letter out.
+  the pre-registered CF judge; a different family from the Llama Mouth),
+  greedy, digit/letter out.
 
 The SYSTEM PROMPTS ARE IMPORTED UNCHANGED from cf_backend (frozen instrument
 text); only transport + model checkpoints differ. Rate limits (~40 RPM) are
@@ -27,7 +30,7 @@ from cf_backend import BudgetError, MOUTH_SYS, JUDGE_SYS  # frozen instrument te
 
 ENDPOINT = os.environ.get(
     "NIM_URL", "https://integrate.api.nvidia.com/v1/chat/completions")
-MOUTH_MODEL = "qwen/qwen3-next-80b-a3b-instruct"
+MOUTH_MODEL = "meta/llama-3.1-70b-instruct"
 JUDGE_MODEL = "mistralai/mistral-small-4-119b-2603"
 
 _BUDGET_KEYWORDS = ("credit", "quota", "payment", "exhaust", "subscription",
@@ -57,7 +60,9 @@ def _call(model, messages, max_tokens, temperature=None, seed=None,
                      "authorization": f"Bearer {_api_key()}",
                      "user-agent": "teich-maturity-harness/1.0"})
         try:
-            with urllib.request.urlopen(req, timeout=180) as r:
+            # 90 s: congested NIM endpoints hang the socket rather than 429 —
+            # fail fast and let the retry loop re-enter the queue.
+            with urllib.request.urlopen(req, timeout=90) as r:
                 out = json.loads(r.read().decode())
             txt = out.get("choices", [{}])[0].get("message", {}).get("content")
             if txt is not None:

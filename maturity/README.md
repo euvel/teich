@@ -7,8 +7,12 @@ before any arm was ever run.
 
 ## Pre-registration (frozen)
 
-- `ABLATION_PROTOCOL_v1.5.md` — the frozen protocol.
-  sha256 `8214753961aaa5d395eda1d1f0ce1a96138843ea338a25b752bac4abad9f03c6`
+- `ABLATION_PROTOCOL_v1.6.md` — the frozen protocol.
+  sha256 `912dacc35d4c7a45d736f6784be4f64499d93de483f9d4e400d25c77446bc858`
+  (v1.5 `8214753…` anchored at `173a21a`; v1.6 corrects only the NIM Mouth
+  checkpoint to `meta/llama-3.1-70b-instruct` — the v1.5 Qwen endpoint hung
+  trial-key sockets and could not finish one pilot conversation; no scored
+  conversation had run under v1.5.)
   (v1.0 `2f7b484…` anchored at `cc98c51`; v1.4
   `2fbae63…` anchored at `b886de7`; v1.5 swaps only the execution backend
   Cloudflare→NVIDIA NIM after CF's account-wide 4006 reset failure — margins,
@@ -21,7 +25,7 @@ before any arm was ever run.
 
 ## The gate in one paragraph
 
-Six arms share the identical Mouth (NVIDIA NIM, Qwen3-Next-80B-A3B-Instruct) and scripts;
+Six arms share the identical Mouth (NVIDIA NIM, Llama-3.1-70B-Instruct) and scripts;
 only the conditioning differs. **A0** is intact Teich (Core + Ears + Observer +
 Mouth). **A1** severs the Core (constant mean readout), **A2** decouples it
 (another conversation's readout stream), **A3** replaces dynamics with matched
@@ -45,7 +49,7 @@ private phases. The living creature keeps ticking, untouched, throughout.
 - `calibrate.py` — severed-arm sources from free-run Core statistics.
 - `run_conversation.py` — one (arm, test, script) → transcript.
 - `nim_backend.py` — NVIDIA NIM Mouth+judge (free developer API, v1.5);
-  Mouth `qwen/qwen3-next-80b-a3b-instruct`, judge `mistralai/mistral-small-4-119b-2603`
+  Mouth `meta/llama-3.1-70b-instruct`, judge `mistralai/mistral-small-4-119b-2603`
   (different family = distinct weights); system prompts imported unchanged from
   `cf_backend.py`, which remains the fallback backend. `judge_modal.py` legacy.
 - `analyze.py` — rubric scoring + paired Cohen's d + bootstrap CI + the gate.
