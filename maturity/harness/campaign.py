@@ -221,8 +221,9 @@ def main():
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--tests", default=",".join(ALL_TESTS))
     ap.add_argument("--seeds", default=None, help="e.g. 0-23 or 0,1,2")
-    ap.add_argument("--backend", default="cf", choices=["cf", "modal"],
-                    help="cf = Cloudflare Workers AI (free, default); modal = legacy")
+    ap.add_argument("--backend", default="nim", choices=["nim", "cf", "modal"],
+                    help="nim = NVIDIA NIM API (free, default); cf = Cloudflare "
+                         "Workers AI (fallback); modal = legacy")
     ap.add_argument("--resume", action="store_true",
                     help="skip (arm,test,seed) already in transcripts.jsonl")
     args = ap.parse_args()
@@ -249,9 +250,12 @@ def main():
             import modal
             mouth = modal.Cls.from_name("teich-mouth", "Mouth")()
             judge = modal.Cls.from_name("teich-judge", "Judge")()
-        else:                                   # cloudflare workers ai (free, default)
+        elif args.backend == "cf":              # cloudflare workers ai (fallback)
             from cf_backend import CFMouth, CFJudge
             mouth, judge = CFMouth(), CFJudge()
+        else:                                   # nvidia nim api (free, default)
+            from nim_backend import NIMMouth, NIMJudge
+            mouth, judge = NIMMouth(), NIMJudge()
 
     OUT.mkdir(parents=True, exist_ok=True)
     tx_path = OUT / ("transcripts_pilot.jsonl" if args.pilot else "transcripts.jsonl")

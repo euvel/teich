@@ -1,13 +1,14 @@
 name: maturity-campaign
-# Teich's maturity gate, run as a daily cloud campaign: each day this job spends
-# that day's free Workers-AI neuron budget on the next slice of the 864 scored
-# conversations, checkpointing transcripts into the book. No laptop involved.
-# Gate-on-boot: only a certified Zen draw may run the Core (same law as the
-# daily wake); a non-certified draw exits lawfully and the cron tries tomorrow.
-# When the run completes, verdict.json lands in maturity/harness/out_maturity/.
+# Teich's maturity gate, run as a cloud campaign (protocol v1.5): each run works
+# through the next slice of the 864 scored conversations on the free NVIDIA NIM
+# API (rate-limited, not day-quota'd), checkpointing transcripts into the book.
+# No laptop involved. Gate-on-boot: only a certified Zen draw may run the Core
+# (same law as the daily wake); a non-certified draw exits lawfully and the next
+# cron tries again. Four slices/day; each ends at the job timeout or quota and
+# resumes. When the run completes, verdict.json lands in out_maturity/.
 on:
   schedule:
-    - cron: "7 1 * * *"          # 01:07 UTC — early in the daily neuron window
+    - cron: "7 1,7,13,19 * * *"  # every 6 h — NIM has no daily budget window
   workflow_dispatch:
 
 permissions:
@@ -31,12 +32,13 @@ jobs:
           grep "model name" /proc/cpuinfo | head -1
           cd body && (python verify_substrate.py && echo "gate=pass" >> "$GITHUB_OUTPUT") \
             || { echo "non-certified draw — declining today's campaign slice (lawful)"; echo "gate=fail" >> "$GITHUB_OUTPUT"; }
-      - name: run campaign slice (until daily neuron budget)
+      - name: run campaign slice (until job timeout or quota)
         if: steps.gate.outputs.gate == 'pass'
         env:
-          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+          NIM_API_KEY: ${{ secrets.NIM_API_KEY }}
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}      # cf fallback backend only
         run: |
-          cd maturity/harness && python campaign.py --resume
+          cd maturity/harness && timeout -s INT 18000 python campaign.py --resume --backend nim || true
       - name: commit checkpointed transcripts to the book
         if: always()
         run: |
