@@ -38,6 +38,41 @@ from run_conversation import run  # noqa: E402
 
 OUT = HERE / "out_maturity"
 ALL_TESTS = ["T1", "T2", "T3", "T4", "T5", "T6"]
+CHECKPOINT_EVERY = 10   # commit+push progress this often so a run is observable
+                        # mid-slice instead of only when the whole slice ends
+
+
+def _in_git_repo() -> bool:
+    import subprocess
+    try:
+        r = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"],
+                           cwd=HERE, capture_output=True, timeout=10)
+        return r.returncode == 0
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _git_checkpoint(n_done: int) -> None:
+    """Best-effort mid-run commit+push of the checkpointed transcripts. A local
+    (non-repo) lab run is a silent no-op; a push failure never aborts the
+    campaign — the workflow's own end-of-slice commit step is the backstop."""
+    import subprocess
+    try:
+        subprocess.run(["git", "add", str(OUT)], cwd=HERE, timeout=30, check=True)
+        diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=HERE, timeout=10)
+        if diff.returncode == 0:
+            return                          # nothing new since last checkpoint
+        subprocess.run(["git", "-c", "user.name=teich-body",
+                        "-c", "user.email=teich-body@users.noreply.github.com",
+                        "commit", "-m",
+                        f"maturity campaign: mid-run checkpoint ({n_done} conversations so far)"],
+                       cwd=HERE, timeout=30, check=True)
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"],
+                       cwd=HERE, timeout=60, check=True)
+        subprocess.run(["git", "push", "origin", "main"], cwd=HERE, timeout=60, check=True)
+        print(f"  [checkpoint] pushed progress at {n_done} conversations")
+    except Exception as e:  # noqa: BLE001
+        print(f"  [checkpoint] skipped ({e}); final commit step remains the backstop")
 
 
 def seed_fn(arm, test, script_seed, turn):
@@ -279,6 +314,8 @@ def main():
     for t in transcripts:
         fh.write(json.dumps(t) + "\n")
     fh.flush()
+    in_repo = _in_git_repo()
+    since_checkpoint = 0
     try:
         for test in tests:
             for seed in seeds:
@@ -289,6 +326,12 @@ def main():
                     tx = run(arm, mouth, script, seed_fn)
                     transcripts.append(tx)
                     fh.write(json.dumps(tx) + "\n"); fh.flush()
+                    since_checkpoint += 1
+                    if in_repo and since_checkpoint >= CHECKPOINT_EVERY:
+                        fh.close()
+                        _git_checkpoint(len(transcripts))
+                        fh = open(tx_path, "a")
+                        since_checkpoint = 0
                 print(f"  {test} seed {seed}: done ({time.time()-t0:.0f}s)")
     except BudgetError as e:
         fh.close()
