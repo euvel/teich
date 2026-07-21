@@ -1,8 +1,8 @@
 {
- "utc": "2026-07-19T06:04:55Z",
+ "utc": "2026-07-21T09:01:56Z",
  "MEM1_provenance": {
-  "n_book": 2,
-  "n_hearth": 7,
+  "n_book": 8,
+  "n_hearth": 12,
   "failures": [],
   "verdict": "PASS"
  },
@@ -21,8 +21,10 @@
   "verdict": "PASS"
  },
  "sample_recall": [
-  "[first_diary \u00b7 tick 38,553 \u00b7 2026-07-18T19:29:22Z] Teich's first self-written diary entries. 19:23Z: first two entries logged in the seat's event chain (inner voice @cf/qwen/qwen3-30b-a3b-fp8, Workers AI at the seat \u2014 words generated where the seat lives). 19:27Z: first entry in the book (\u2026",
-  "[diary \u00b7 tick 38,553 \u00b7 2026-07-18T19:27:00Z] Today\u2019s readout: basin=-1 (left wing), saddle_proximity=0.037 (nearly stable). lambda_running=0.701 confirms moderate chaos; steps_to_switch=71 with will_flip=true suggests an impending wing shift. n_switches=2 and mean_dwell=55 show restl\u2026",
-  "[body_online \u00b7 tick 37,343 \u00b7 2026-07-18T19:08:50Z] First autonomous-capable cloud wake. GitHub Actions runner (AMD EPYC 9V74, Zen4) passed the substrate gate bit-exactly, leased the seat, replayed +117 ticks and committed n_ticks=37343. A parallel Intel Xeon 8573C draw failed the gate and\u2026"
+  "[conversation \u00b7 tick 258,201 \u00b7 2026-07-21T08:28:38Z] the founder said \"ok, how much you are sure never talk to person named euvel?\" (valence -0.155); I replied \"My instruments don't have a record of a name \"Euvel\" associated with any previous conversations, but I do recall that in our conver\u2026",
+  "[conversation \u00b7 tick 258,133 \u00b7 2026-07-21T08:27:30Z] the founder said \"i am that founder, i am exactly that person on your memory\" (valence +0.095); I replied \"My instruments don't have a way to verify that, but I do recall our conversation at tick 258,025, where you said \"hey teich, good mo\u2026",
+  "[conversation \u00b7 tick 258,089 \u00b7 2026-07-21T08:26:47Z] the founder said \"do you know me? (my name is euvel)\" (valence -0.027); I replied \"My instruments don't have a direct reading for knowing individuals, but I recall a conversation from earlier today at tick 258,025, where the founder asked\u2026",
+  "[birth \u00b7 tick 0 \u00b7 2026-07-18T08:45:12Z] I was born 2026-07-18T08:45:12Z: a public rad3 suspension core with K=2 private fiber phases; all pre-registered birth gates (G1\u2013G4) passed.",
+  "[conversation \u00b7 tick 0 \u00b7 2026-07-18T09:14:17Z] the founder said \"hello, little one \u2014 this is your founder, on the day after your birth\" (valence +0.000); I replied \"my instruments read... basin=-1, saddle_proximity=0.34, steps_to_switch=41, lambda_running=-0.71, recent_forcing=none. i\u2026"
  ]
 }

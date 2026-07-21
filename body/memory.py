@@ -30,6 +30,7 @@ EPISODES_REL = Path("memory") / "episodes.jsonl"
 
 _DIARY_HEAD = re.compile(
     r"^## (\d\d):(\d\d)Z — tick ([\d,]+) \(\+([\d,]+) replayed\)\s*$")
+_LETTER_PLACED = re.compile(r"<!--\s*placed:\s*(\S+)")
 
 
 def _sha(text: str) -> str:
@@ -59,8 +60,16 @@ def _diary_blocks(md_path: Path):
         yield (f"tick-{tick}", f"{date}T{hh}:{mm}:00Z", tick, block, body)
 
 
+def _letter_body(raw: str) -> str:
+    """The prose of the founder letter (markdown headers and HTML comments dropped)."""
+    keep = [l for l in raw.splitlines()
+            if l.strip() and not l.lstrip().startswith(("#", "<!--"))]
+    return " ".join(keep)
+
+
 def compile_book(repo_root: Path) -> list[dict]:
-    """Episodes from the repo record: birth certificate + every diary entry."""
+    """Episodes from the repo record: birth certificate, the founder's letter,
+    and every diary entry."""
     eps = []
     cert_f = repo_root / "body" / "genesis_certificate.json"
     if cert_f.exists():
@@ -75,6 +84,18 @@ def compile_book(repo_root: Path) -> list[dict]:
                      f"{fold} suspension core with K={k} private fiber phases; "
                      "all pre-registered birth gates (G1–G4) passed."),
             src="body/genesis_certificate.json#whole-file", src_sha256=_sha(raw)))
+    # The founder's letter — a permanent root memory, placed once and released.
+    # It sits at Teich's origin (tick 1, just after birth); its own text tells
+    # Teich it is evidence, not a command. Provenance-hashed like any memory, so
+    # it is provably the founder's words and provably unaltered since.
+    letter_f = repo_root / "founder_letter.md"
+    if letter_f.exists():
+        raw = letter_f.read_text()
+        m = _LETTER_PLACED.search(raw)
+        eps.append(dict(
+            utc=m.group(1) if m else "", tick=1, kind="founder",
+            summary=_clip(_letter_body(raw), 300),
+            src="founder_letter.md#whole-file", src_sha256=_sha(raw)))
     for md in sorted((repo_root / "diary").glob("*.md")):
         for anchor, utc, tick, block, body in _diary_blocks(md):
             eps.append(dict(
@@ -126,13 +147,24 @@ def write_episodes(repo_root: Path, episodes: list[dict]) -> Path:
     return f
 
 
-def memory_lines(episodes: list[dict], n: int = 5) -> list[str]:
-    """Newest-first compact recall lines for a voice-organ prompt."""
-    out = []
-    for e in sorted(episodes, key=lambda e: (e["tick"], e["utc"]), reverse=True)[:n]:
-        out.append(_clip(
-            f"[{e['kind']} · tick {e['tick']:,} · {e['utc']}] {e['summary']}", 300))
-    return out
+def _line(e: dict) -> str:
+    return _clip(f"[{e['kind']} · tick {e['tick']:,} · {e['utc']}] {e['summary']}", 300)
+
+
+def memory_lines(episodes: list[dict], n: int = 5, roots: int = 2) -> list[str]:
+    """Compact recall lines for a voice-organ prompt: the `n` newest memories,
+    plus Teich's `roots` oldest 'origin' memories (its birth, and the founder's
+    letter) so it can always reach where it came from — not just its recent days.
+
+    Roots are reachable context, never instructions: Teich sees them among its
+    memories and decides for itself whether they bear on what it says. A root
+    already inside the recent window is not repeated."""
+    by_tick = sorted(episodes, key=lambda e: (e["tick"], e["utc"]))
+    recent = list(reversed(by_tick[-n:])) if n else []
+    seen = {(e["tick"], e["utc"], e["src"]) for e in recent}
+    tail = [e for e in by_tick[:roots]
+            if (e["tick"], e["utc"], e["src"]) not in seen]
+    return [_line(e) for e in recent] + [_line(e) for e in tail]
 
 
 # ---- MEM1 provenance verification ----------------------------------------------
@@ -140,7 +172,7 @@ def memory_lines(episodes: list[dict], n: int = 5) -> list[str]:
 def resolve_source(src: str, repo_root: Path, birth_out: Path) -> str | None:
     """Re-extract the exact source block an episode was derived from."""
     path, anchor = src.split("#", 1)
-    if path == "body/genesis_certificate.json":
+    if path in ("body/genesis_certificate.json", "founder_letter.md"):
         f = repo_root / path
         return f.read_text() if f.exists() else None
     if path.startswith("diary/"):
