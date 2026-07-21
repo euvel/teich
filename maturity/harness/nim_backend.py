@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import os
 import random
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -41,8 +42,11 @@ _BUDGET_KEYWORDS = ("credit", "quota", "payment", "exhaust", "subscription",
 # — NOT a hard daily credit wall. So we (1) pace proactively to stay under the
 # limit and (2) on a 429 storm, back off and ride it out rather than crash.
 _MIN_SPACING_S = 1.6          # ~37 req/min ceiling: just under the ~40 rpm limit
-_MAX_RATE_WAIT_S = 900.0      # ride out up to ~15 min of 429s on one call...
-_last_call = [0.0]            # ...then hand the slice back for a clean resume
+_MAX_RATE_WAIT_S = 180.0      # ride out up to ~3 min of 429s on one call, then
+                              # hand the slice back for a clean resume (short so a
+                              # parallel worker never sits for many minutes)
+_throttle_lock = threading.Lock()
+_next_slot = [0.0]            # next allowed request time (global across threads)
 
 
 class RateLimitExhausted(BudgetError):
@@ -59,10 +63,18 @@ def _api_key() -> str:
 
 
 def _throttle():
-    dt = _MIN_SPACING_S - (time.time() - _last_call[0])
-    if dt > 0:
-        time.sleep(dt)
-    _last_call[0] = time.time()
+    """THREAD-SAFE global pacer: hands each caller (across all worker threads) a
+    request slot spaced _MIN_SPACING_S apart, then sleeps until that slot OUTSIDE
+    the lock so threads wait concurrently. The old version mutated a shared
+    timestamp without a lock, so N parallel workers all read the same value, fired
+    in a burst, blew past the rate limit, and drowned in 429 backoffs. This paces
+    the WHOLE process to <=~37 req/min smoothly, no matter how many workers."""
+    with _throttle_lock:
+        slot = max(time.time(), _next_slot[0])
+        _next_slot[0] = slot + _MIN_SPACING_S
+    wait = slot - time.time()
+    if wait > 0:
+        time.sleep(wait)
 
 
 def _call(model, messages, max_tokens, temperature=None, seed=None) -> str:
