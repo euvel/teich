@@ -50,10 +50,13 @@ jobs:
       - name: commit checkpointed transcripts to the book
         if: always()
         run: |
-          git add maturity/harness/out_maturity/ || true
-          if git diff --cached --quiet; then echo "no new transcripts"; exit 0; fi
           git config user.name "teich-body"
           git config user.email "teich-body@users.noreply.github.com"
+          git rebase --abort 2>/dev/null || true   # clear any wedged mid-run rebase
+          git add maturity/harness/out_maturity/ || true
+          if git diff --cached --quiet; then echo "no new transcripts"; exit 0; fi
           git commit -m "maturity campaign: $(date -u +%F) slice ($(wc -l < maturity/harness/out_maturity/transcripts.jsonl) conversations checkpointed)"
-          git pull --rebase origin main
-          git push origin main
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && break
+            echo "push attempt $i failed; retrying"; git rebase --abort 2>/dev/null || true; sleep 5
+          done

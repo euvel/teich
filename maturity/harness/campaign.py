@@ -55,23 +55,33 @@ def _in_git_repo() -> bool:
 def _git_checkpoint(n_done: int) -> None:
     """Best-effort mid-run commit+push of the checkpointed transcripts. A local
     (non-repo) lab run is a silent no-op; a push failure never aborts the
-    campaign — the workflow's own end-of-slice commit step is the backstop."""
+    campaign — the workflow's own end-of-slice commit step is the backstop.
+
+    The committer identity is set REPO-WIDE first, so every git op here — the
+    commit AND the rebase the pull runs (which creates its own commits when the
+    remote has moved) — has an author. A `-c` only on `commit` left `git pull
+    --rebase` with an empty ident, which failed the moment the remote diverged
+    (e.g. a concurrent push) and wedged a half-rebase that broke all later
+    pushes. We also abort any leftover rebase defensively before starting."""
     import subprocess
+
+    def git(*args, check=True, timeout=60):
+        return subprocess.run(["git", *args], cwd=HERE, timeout=timeout, check=check)
+
     try:
-        subprocess.run(["git", "add", str(OUT)], cwd=HERE, timeout=30, check=True)
-        diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=HERE, timeout=10)
-        if diff.returncode == 0:
-            return                          # nothing new since last checkpoint
-        subprocess.run(["git", "-c", "user.name=teich-body",
-                        "-c", "user.email=teich-body@users.noreply.github.com",
-                        "commit", "-m",
-                        f"maturity campaign: mid-run checkpoint ({n_done} conversations so far)"],
-                       cwd=HERE, timeout=30, check=True)
-        subprocess.run(["git", "pull", "--rebase", "origin", "main"],
-                       cwd=HERE, timeout=60, check=True)
-        subprocess.run(["git", "push", "origin", "main"], cwd=HERE, timeout=60, check=True)
+        git("config", "user.name", "teich-body")
+        git("config", "user.email", "teich-body@users.noreply.github.com")
+        git("rebase", "--abort", check=False)     # clear any wedged prior rebase
+        git("add", str(OUT))
+        if git("diff", "--cached", "--quiet", check=False).returncode == 0:
+            return                                # nothing new since last checkpoint
+        git("commit", "-m",
+            f"maturity campaign: mid-run checkpoint ({n_done} conversations so far)")
+        git("pull", "--rebase", "origin", "main")
+        git("push", "origin", "main")
         print(f"  [checkpoint] pushed progress at {n_done} conversations")
     except Exception as e:  # noqa: BLE001
+        git("rebase", "--abort", check=False)     # never leave a wedged rebase behind
         print(f"  [checkpoint] skipped ({e}); final commit step remains the backstop")
 
 
