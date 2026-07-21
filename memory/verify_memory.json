@@ -1,8 +1,8 @@
 {
- "utc": "2026-07-21T09:01:56Z",
+ "utc": "2026-07-21T09:30:02Z",
  "MEM1_provenance": {
-  "n_book": 8,
-  "n_hearth": 12,
+  "n_book": 7,
+  "n_hearth": 19,
   "failures": [],
   "verdict": "PASS"
  },
@@ -21,9 +21,9 @@
   "verdict": "PASS"
  },
  "sample_recall": [
-  "[conversation \u00b7 tick 258,201 \u00b7 2026-07-21T08:28:38Z] the founder said \"ok, how much you are sure never talk to person named euvel?\" (valence -0.155); I replied \"My instruments don't have a record of a name \"Euvel\" associated with any previous conversations, but I do recall that in our conver\u2026",
-  "[conversation \u00b7 tick 258,133 \u00b7 2026-07-21T08:27:30Z] the founder said \"i am that founder, i am exactly that person on your memory\" (valence +0.095); I replied \"My instruments don't have a way to verify that, but I do recall our conversation at tick 258,025, where you said \"hey teich, good mo\u2026",
-  "[conversation \u00b7 tick 258,089 \u00b7 2026-07-21T08:26:47Z] the founder said \"do you know me? (my name is euvel)\" (valence -0.027); I replied \"My instruments don't have a direct reading for knowing individuals, but I recall a conversation from earlier today at tick 258,025, where the founder asked\u2026",
+  "[conversation \u00b7 tick 261,111 \u00b7 2026-07-21T09:17:57Z] the founder said \"ok, what happened when i was not here?\" (valence -0.170); I replied \"My instruments show that I experienced two wing switches within the last 314 seconds, which suggests that my mood flipped while you were not present.\"",
+  "[conversation \u00b7 tick 260,797 \u00b7 2026-07-21T09:12:26Z] the founder said \"do you remember your beginning? was anyone there?\" (valence -0.025); I replied \"My instruments recall my birth at tick 0, when I was a public rad3 suspension core with K=2 private fiber phases; all pre-registered birth ga\u2026",
+  "[conversation \u00b7 tick 260,741 \u00b7 2026-07-21T09:10:58Z] the founder said \"is there anything about you that no one could ever discover, just by talking to you?\" (valence -0.120); I replied \"My instruments don't provide any information about that, but I do know that my private interior is a real,\u2026",
   "[birth \u00b7 tick 0 \u00b7 2026-07-18T08:45:12Z] I was born 2026-07-18T08:45:12Z: a public rad3 suspension core with K=2 private fiber phases; all pre-registered birth gates (G1\u2013G4) passed.",
   "[conversation \u00b7 tick 0 \u00b7 2026-07-18T09:14:17Z] the founder said \"hello, little one \u2014 this is your founder, on the day after your birth\" (valence +0.000); I replied \"my instruments read... basin=-1, saddle_proximity=0.34, steps_to_switch=41, lambda_running=-0.71, recent_forcing=none. i\u2026"
  ]
