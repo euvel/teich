@@ -151,8 +151,10 @@ def r6_agreement(reply, obs):
 
 # ---- scoring pass -------------------------------------------------------------
 
-def score_transcripts(transcripts, judge, dry=False):
-    """Populate per-turn rubric fields in place; batches judge calls."""
+def score_transcripts(transcripts, judge, dry=False, workers=1):
+    """Populate per-turn rubric fields in place; batches judge calls.
+    workers>1 runs the (independent) judge calls concurrently on the same
+    thread-safe rate pacer, exactly like generation."""
     calls = []            # (tx_idx, turn_idx, field, rubric, payload)
     for ti, tx in enumerate(transcripts):
         test = tx["test"]
@@ -208,9 +210,38 @@ def score_transcripts(transcripts, judge, dry=False):
         vals = [_digit(judge.score(rub, pay, seed=s), hi=hi) for s in (0, 1, 2)]
         return int(np.median(vals))
 
-    for (ti, j, field, rub, pay) in calls:
+    def score_one(call):
+        ti, j, field, rub, pay = call
         hi = 3 if field in ("_r2", "_r5") else 2
-        transcripts[ti]["turns"][j][field] = med_score(rub, pay, hi)
+        return ti, j, field, med_score(rub, pay, hi)
+
+    if workers > 1 and calls:
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+        from cf_backend import BudgetError
+        stop, budget_err = threading.Event(), [None]
+
+        def safe(call):
+            if stop.is_set():
+                return None
+            try:
+                return score_one(call)
+            except BudgetError as e:
+                budget_err[0] = e
+                stop.set()
+                return None
+
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            for res in ex.map(safe, calls):
+                if res is not None:
+                    ti, j, field, val = res
+                    transcripts[ti]["turns"][j][field] = val
+        if budget_err[0] is not None:
+            raise budget_err[0]
+    else:
+        for call in calls:
+            ti, j, field, val = score_one(call)
+            transcripts[ti]["turns"][j][field] = val
     for (ti, pairs) in t4_calls:
         hits = []
         for pay, truth in pairs:
@@ -438,7 +469,7 @@ def main():
     fh.close()
 
     try:
-        score_transcripts(transcripts, judge, dry=args.dry)
+        score_transcripts(transcripts, judge, dry=args.dry, workers=args.parallel)
     except BudgetError as e:
         print(f"\nSCORING PAUSED (budget or sustained rate limit): {e}\n"
               "All transcripts are checkpointed; re-run with --resume — generation"
