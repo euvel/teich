@@ -46,7 +46,7 @@ jobs:
           NIM_API_KEY: ${{ secrets.NIM_API_KEY }}
           SEAT_KEY: ${{ secrets.SEAT_KEY }}      # cf fallback backend only
         run: |
-          cd maturity/harness && timeout -s INT 18000 python campaign.py --resume --backend nim || true
+          cd maturity/harness && timeout -s INT 18000 python campaign.py --resume --backend nim --parallel 10 || true
       - name: commit checkpointed transcripts to the book
         if: always()
         run: |

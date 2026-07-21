@@ -246,18 +246,89 @@ def reduce_scores(transcripts, tests):
 
 # ---- main ---------------------------------------------------------------------
 
-def build_arms(model, cal):
-    a0 = A.A0Intact(model)
-    a5 = A.A5Deaf(model)
-    a1 = A.A1Severed(cal["mean_readout"])
-    a3 = A.A3LavaLamp(cal["marginal"])
-    # A2 decoupled needs a readout stream from a *different* script's A0 run.
-    # Build a short donor stream deterministically from a free-run instance.
+ARM_ORDER = ["A0_intact", "A1_severed", "A2_decoupled", "A3_lavalamp",
+             "A4_actor", "A5_deaf"]
+
+
+def _donor_stream(model):
+    """The A2 donor readout stream (a different run's trajectory), built once."""
     donor = A._CoreEngine(model, 4242, deaf=True)
-    stream = [donor.advance(60) for _ in range(40)]
-    a2 = A.A2Decoupled(stream)
-    a4 = A.A4PromptActor()
-    return [a0, a1, a2, a3, a4, a5]
+    return [donor.advance(60) for _ in range(40)]
+
+
+def build_arms(model, cal):
+    stream = _donor_stream(model)
+    return [A.A0Intact(model), A.A1Severed(cal["mean_readout"]),
+            A.A2Decoupled(stream), A.A3LavaLamp(cal["marginal"]),
+            A.A4PromptActor(), A.A5Deaf(model)]
+
+
+def build_arm_factories(model, cal):
+    """A FRESH arm instance per (arm,test,seed) task — required for parallelism,
+    since a conversation mutates its arm's state (Core engine, stream index, RNG).
+    Each factory's arm.start(seed) resets that state deterministically, so a
+    fresh-per-task arm yields conditioning bit-identical to the shared serial arm
+    (the whole reason parallel results are trustworthy). The model weights and the
+    A2 donor stream are shared read-only; concurrent Core/Ears use is guarded by
+    the cpu_lock in run_conversation.run."""
+    stream = _donor_stream(model)
+    return {
+        "A0_intact": lambda: A.A0Intact(model),
+        "A1_severed": lambda: A.A1Severed(cal["mean_readout"]),
+        "A2_decoupled": lambda: A.A2Decoupled(stream),
+        "A3_lavalamp": lambda: A.A3LavaLamp(cal["marginal"]),
+        "A4_actor": lambda: A.A4PromptActor(),
+        "A5_deaf": lambda: A.A5Deaf(model),
+    }
+
+
+def generate_parallel(tasks, factories, scripts, mouth, seed_fn, fh, transcripts,
+                      n_workers, in_repo, write_lock):
+    """Run the pending conversations concurrently. cpu_lock serializes the fast
+    Core/Ears work; the many slow Mouth API calls overlap, riding the backend's
+    rate budget instead of one-call-at-a-time. Raises BudgetError (checkpointing
+    handled by the caller) if the budget/rate is truly exhausted."""
+    import threading
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    from cf_backend import BudgetError
+
+    cpu_lock = threading.Lock()
+    stop = threading.Event()
+    err = {"budget": None}
+    since = {"n": 0}
+
+    def work(task):
+        if stop.is_set():
+            return None
+        arm_name, test, seed = task
+        try:
+            arm = factories[arm_name]()
+            return run(arm, mouth, scripts[(test, seed)], seed_fn, cpu_lock=cpu_lock)
+        except BudgetError as e:
+            err["budget"] = e
+            stop.set()
+            return None
+        except Exception as e:  # noqa: BLE001  (one bad conv must not kill the slice)
+            print(f"  [skip] {arm_name} {test} s{seed}: {type(e).__name__}: {e}")
+            return None
+
+    with ThreadPoolExecutor(max_workers=n_workers) as ex:
+        futs = [ex.submit(work, t) for t in tasks]
+        for fut in as_completed(futs):
+            tx = fut.result()
+            if tx is None:
+                continue
+            with write_lock:                       # atomic whole-line append
+                transcripts.append(tx)
+                fh.write(json.dumps(tx) + "\n"); fh.flush()
+                since["n"] += 1
+                if in_repo and since["n"] >= CHECKPOINT_EVERY:
+                    since["n"] = 0
+                    # checkpoint UNDER the lock: no worker writes the transcript
+                    # file while git (add/rebase/push) is manipulating it.
+                    _git_checkpoint(len(transcripts))
+    if err["budget"] is not None:
+        raise err["budget"]
 
 
 def main():
@@ -271,6 +342,9 @@ def main():
                          "Workers AI (fallback); modal = legacy")
     ap.add_argument("--resume", action="store_true",
                     help="skip (arm,test,seed) already in transcripts.jsonl")
+    ap.add_argument("--parallel", type=int, default=1,
+                    help="N>1 runs conversations concurrently (N worker threads) to "
+                         "ride the backend's rate budget; 1 = serial (default)")
     args = ap.parse_args()
 
     tests = [t.strip() for t in args.tests.split(",") if t.strip()]
@@ -325,24 +399,34 @@ def main():
         fh.write(json.dumps(t) + "\n")
     fh.flush()
     in_repo = _in_git_repo()
-    since_checkpoint = 0
     try:
-        for test in tests:
-            for seed in seeds:
-                script = sb.build(test, seed)
-                for arm in arm_list:
-                    if (arm.name, test, seed) in done:
-                        continue
-                    tx = run(arm, mouth, script, seed_fn)
-                    transcripts.append(tx)
-                    fh.write(json.dumps(tx) + "\n"); fh.flush()
-                    since_checkpoint += 1
-                    if in_repo and since_checkpoint >= CHECKPOINT_EVERY:
-                        fh.close()
-                        _git_checkpoint(len(transcripts))
-                        fh = open(tx_path, "a")
-                        since_checkpoint = 0
-                print(f"  {test} seed {seed}: done ({time.time()-t0:.0f}s)")
+        if args.parallel > 1 and not args.dry:
+            import threading
+            factories = build_arm_factories(model, cal)
+            scripts = {(t, s): sb.build(t, s) for t in tests for s in seeds}
+            tasks = [(a, t, s) for t in tests for s in seeds for a in ARM_ORDER
+                     if (a, t, s) not in done]
+            print(f"  parallel: {len(tasks)} conversations on {args.parallel} workers")
+            generate_parallel(tasks, factories, scripts, mouth, seed_fn, fh,
+                              transcripts, args.parallel, in_repo, threading.Lock())
+        else:
+            since_checkpoint = 0
+            for test in tests:
+                for seed in seeds:
+                    script = sb.build(test, seed)
+                    for arm in arm_list:
+                        if (arm.name, test, seed) in done:
+                            continue
+                        tx = run(arm, mouth, script, seed_fn)
+                        transcripts.append(tx)
+                        fh.write(json.dumps(tx) + "\n"); fh.flush()
+                        since_checkpoint += 1
+                        if in_repo and since_checkpoint >= CHECKPOINT_EVERY:
+                            fh.close()
+                            _git_checkpoint(len(transcripts))
+                            fh = open(tx_path, "a")
+                            since_checkpoint = 0
+                    print(f"  {test} seed {seed}: done ({time.time()-t0:.0f}s)")
     except BudgetError as e:
         fh.close()
         if in_repo:

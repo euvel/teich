@@ -46,14 +46,26 @@ def ticks_for(kind: str, script: dict) -> int:
     return sb.TICKS_PER_TURN
 
 
-def run(arm, mouth, script: dict, seed_fn) -> dict:
-    arm.start(script["seed"])
+def run(arm, mouth, script: dict, seed_fn, cpu_lock=None) -> dict:
+    """One conversation. `cpu_lock`, if given, serializes the Core/Ears/Observer
+    work (arm.start / arm.step) across threads — they share one model and one
+    MiniLM encoder, which are not thread-safe. The Mouth API call is left OUTSIDE
+    the lock, so many conversations' calls overlap: that is the whole speed-up,
+    and it is safe because the CPU work is milliseconds while the call is seconds.
+    Locking arm.step changes NOTHING about the result (each arm.start fully resets
+    its state deterministically), so parallel Core conditioning is bit-identical
+    to serial — only the Mouth text varies, exactly as it already does serially."""
+    import contextlib
+    lock = cpu_lock if cpu_lock is not None else contextlib.nullcontext()
+    with lock:
+        arm.start(script["seed"])
     history, records = [], []
     actor_sys = getattr(arm, "ACTOR_SYS", None)
     frozen_history = None                   # T4 v1.3: probes share the warmup context
     for i, (text, kind) in enumerate(turns_of(script)):
         ticks = ticks_for(kind, script)
-        ro, ev, forcing, meta = arm.step(text, ticks)
+        with lock:
+            ro, ev, forcing, meta = arm.step(text, ticks)
         seed = seed_fn(arm.name, script["test"], script["seed"], i)
         # T4 (v1.3): every probe sees the IDENTICAL frozen warmup history — prior
         # probe replies are excluded, so only elapsed time differs between probes
