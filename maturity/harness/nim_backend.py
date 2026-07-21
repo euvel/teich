@@ -41,16 +41,14 @@ _BUDGET_KEYWORDS = ("credit", "quota", "payment", "exhaust", "subscription",
 # NVIDIA's free tier is rate-limited (~40 req/min), shared and traffic-dependent
 # — NOT a hard daily credit wall. So we (1) pace proactively to stay under the
 # limit and (2) on a 429 storm, back off and ride it out rather than crash.
-_MIN_SPACING_S = 1.6          # floor: ~37 req/min when NIM is generous
-_MAX_SPACING_S = 8.0          # ceiling: ~7 req/min when NIM is very tight
-_MAX_RATE_WAIT_S = 300.0      # ride out up to ~5 min of 429s on one call, then
+_MIN_SPACING_S = 1.6          # ~37 req/min: just under the ~40 rpm limit. Fixed:
+                              # an earlier adaptive (AIMD) version backed off too
+                              # hard and recovered too slowly, crawling at ~12/hr,
+                              # while this fixed pace delivered ~110/hr bursts.
+_MAX_RATE_WAIT_S = 180.0      # ride out up to ~3 min of 429s on one call, then
                               # hand the slice back for a clean resume
 _throttle_lock = threading.Lock()
 _next_slot = [0.0]            # next allowed request time (global across threads)
-_spacing = [_MIN_SPACING_S]   # ADAPTIVE global spacing (AIMD): grows on a 429,
-                              # eases back on success — auto-matches NIM's shared,
-                              # fluctuating limit so a slice rides the REAL rate
-                              # instead of exhausting on a fixed guess.
 
 
 class RateLimitExhausted(BudgetError):
@@ -75,21 +73,10 @@ def _throttle():
     the WHOLE process to <=~37 req/min smoothly, no matter how many workers."""
     with _throttle_lock:
         slot = max(time.time(), _next_slot[0])
-        _next_slot[0] = slot + _spacing[0]
+        _next_slot[0] = slot + _MIN_SPACING_S
     wait = slot - time.time()
     if wait > 0:
         time.sleep(wait)
-
-
-def _rate_adapt(hit_429: bool):
-    """AIMD on the global spacing: a 429 backs it off hard (×1.5, up to the
-    ceiling); a success eases it toward the floor (×0.97). Over a slice this
-    converges the whole process onto NIM's actually-available rate."""
-    with _throttle_lock:
-        if hit_429:
-            _spacing[0] = min(_MAX_SPACING_S, _spacing[0] * 1.5)
-        else:
-            _spacing[0] = max(_MIN_SPACING_S, _spacing[0] * 0.97)
 
 
 def _call(model, messages, max_tokens, temperature=None, seed=None) -> str:
@@ -119,7 +106,6 @@ def _call(model, messages, max_tokens, temperature=None, seed=None) -> str:
                 out = json.loads(r.read().decode())
             txt = out.get("choices", [{}])[0].get("message", {}).get("content")
             if txt is not None and txt.strip():
-                _rate_adapt(False)                # success: ease the pace back up
                 return txt.strip()
             last = f"empty choices: {json.dumps(out)[:200]}"
             soft_fails += 1
@@ -130,7 +116,6 @@ def _call(model, messages, max_tokens, temperature=None, seed=None) -> str:
             if e.code in (401, 402, 403) or any(k in low for k in _BUDGET_KEYWORDS):
                 raise BudgetError(last)
             if e.code == 429:                     # rate limit — ride it out
-                _rate_adapt(True)                 # back the global pace off hard
                 base = float(e.headers.get("Retry-After") or 0) \
                     or min(60.0, 5.0 * (2 ** min(rate_attempts, 4)))
                 wait = base + random.uniform(0, 2.0)

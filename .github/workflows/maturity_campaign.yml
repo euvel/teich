@@ -40,13 +40,20 @@ jobs:
           grep "model name" /proc/cpuinfo | head -1
           cd body && (python verify_substrate.py && echo "gate=pass" >> "$GITHUB_OUTPUT") \
             || { echo "non-certified draw — declining today's campaign slice (lawful)"; echo "gate=fail" >> "$GITHUB_OUTPUT"; }
-      - name: run campaign slice (until job timeout or quota)
+      - name: run campaign slice (retry across rate-exhaustion cycles)
         if: steps.gate.outputs.gate == 'pass'
         env:
           NIM_API_KEY: ${{ secrets.NIM_API_KEY }}
           SEAT_KEY: ${{ secrets.SEAT_KEY }}      # cf fallback backend only
         run: |
-          cd maturity/harness && timeout -s INT 18000 python campaign.py --resume --backend nim --parallel 16 || true
+          cd maturity/harness
+          END=$(( $(date +%s) + 18000 ))   # ~5h of productive retries within the job cap
+          while [ $(date +%s) -lt $END ]; do
+            python campaign.py --resume --backend nim --parallel 16 || true
+            if [ -f out_maturity/verdict.json ]; then echo "VERDICT REACHED"; break; fi
+            echo "segment ended (rate-exhaustion or timeout); pausing before resume"
+            sleep 90
+          done
       - name: commit checkpointed transcripts to the book
         if: always()
         run: |
