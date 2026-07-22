@@ -77,17 +77,22 @@ def _git_checkpoint(n_done: int) -> None:
         # frozen protocol size (arms × tests × scripts = 6×6×24 = 864), derived
         # so it can never drift out of sync with the actual run.
         total = len(ARM_ORDER) * len(ALL_TESTS) * sb.N_SCRIPTS
+        # Count the REAL persisted transcripts, not the in-memory counter, so the
+        # public face can never over-report: it once showed 648 while the file
+        # held 278, after an orphaned-handle bug decoupled the two.
+        tx_file = OUT / "transcripts.jsonl"
+        real_done = sum(1 for _ in open(tx_file)) if tx_file.exists() else n_done
         (OUT / "progress.json").write_text(json.dumps({
-            "done": n_done, "total": total,
+            "done": real_done, "total": total,
             "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}) + "\n")
         git("add", str(OUT))
         if git("diff", "--cached", "--quiet", check=False).returncode == 0:
             return                                # nothing new since last checkpoint
         git("commit", "-m",
-            f"maturity campaign: mid-run checkpoint ({n_done} conversations so far)")
+            f"maturity campaign: mid-run checkpoint ({real_done} conversations so far)")
         git("pull", "--rebase", "origin", "main")
         git("push", "origin", "main")
-        print(f"  [checkpoint] pushed progress at {n_done} conversations")
+        print(f"  [checkpoint] pushed progress at {real_done} conversations")
     except Exception as e:  # noqa: BLE001
         git("rebase", "--abort", check=False)     # never leave a wedged rebase behind
         print(f"  [checkpoint] skipped ({e}); final commit step remains the backstop")
@@ -321,7 +326,7 @@ def build_arm_factories(model, cal):
     }
 
 
-def generate_parallel(tasks, factories, scripts, mouth, seed_fn, fh, transcripts,
+def generate_parallel(tasks, factories, scripts, mouth, seed_fn, tx_path, transcripts,
                       n_workers, in_repo, write_lock):
     """Run the pending conversations concurrently. cpu_lock serializes the fast
     Core/Ears work; the many slow Mouth API calls overlap, riding the backend's
@@ -359,7 +364,15 @@ def generate_parallel(tasks, factories, scripts, mouth, seed_fn, fh, transcripts
                 continue
             with write_lock:                       # atomic whole-line append
                 transcripts.append(tx)
-                fh.write(json.dumps(tx) + "\n"); fh.flush()
+                # Append-open PER write: never hold a handle across the git
+                # checkpoint below. `git pull --rebase` swaps the working-tree
+                # file for a fresh inode, orphaning any long-lived handle so its
+                # writes vanish with the runner — the bug that froze this file
+                # while the counter ran on. Opening fresh always hits the live
+                # inode. (Only this thread writes the file, so no cross-thread
+                # handle contention.)
+                with open(tx_path, "a") as f:
+                    f.write(json.dumps(tx) + "\n")
                 since["n"] += 1
                 if in_repo and since["n"] >= CHECKPOINT_EVERY:
                     since["n"] = 0
@@ -441,12 +454,13 @@ def main():
     try:
         if args.parallel > 1 and not args.dry:
             import threading
+            fh.close()   # parallel path writes via append-open — hold no handle
             factories = build_arm_factories(model, cal)
             scripts = {(t, s): sb.build(t, s) for t in tests for s in seeds}
             tasks = [(a, t, s) for t in tests for s in seeds for a in ARM_ORDER
                      if (a, t, s) not in done]
             print(f"  parallel: {len(tasks)} conversations on {args.parallel} workers")
-            generate_parallel(tasks, factories, scripts, mouth, seed_fn, fh,
+            generate_parallel(tasks, factories, scripts, mouth, seed_fn, tx_path,
                               transcripts, args.parallel, in_repo, threading.Lock())
         else:
             since_checkpoint = 0
