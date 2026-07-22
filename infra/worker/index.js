@@ -454,7 +454,7 @@ const PANEL_HTML = `<!doctype html>
     <dt>time banked</dt><dd id="banked">&mdash; <span class="muted">(hibernated, awaiting deterministic replay)</span></dd>
     <dt>snapshot chain</dt><dd id="chain">&mdash;</dd>
     <dt>last commit</dt><dd id="upd">&mdash;</dd>
-    <dt>maturity trial</dt><dd><span class="dot trial"></span>in progress
+    <dt>maturity trial</dt><dd><span class="dot trial"></span><span id="trial">in progress</span>
       <span class="muted">&mdash; a pre-registered ablation testing whether the
       geometric core is load-bearing</span></dd>
   </dl>
@@ -489,5 +489,21 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-refresh(); setInterval(refresh, 30000);
+// Live trial-progress counter: the campaign checkpoints a tiny public
+// progress.json into the (now-public) book at each slice; the panel reads it
+// straight from raw GitHub. Instrument/ledger data only — no generated text.
+// Its own try/catch so a progress hiccup never disturbs the seat readout.
+async function updateTrial(){
+  try {
+    const r = await fetch("https://raw.githubusercontent.com/euvel/teich/main/maturity/harness/out_maturity/progress.json");
+    if(!r.ok) return;
+    const t = await r.json();
+    if(t && typeof t.done === "number"){
+      document.getElementById("trial").textContent =
+        "in progress · "+t.done.toLocaleString()+" / "+t.total.toLocaleString()+" conversations";
+    }
+  } catch(e) { /* keep the static "in progress" label */ }
+}
+refresh(); updateTrial();
+setInterval(()=>{ refresh(); updateTrial(); }, 30000);
 </script></body></html>`;

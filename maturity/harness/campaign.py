@@ -72,6 +72,14 @@ def _git_checkpoint(n_done: int) -> None:
         git("config", "user.name", "teich-body")
         git("config", "user.email", "teich-body@users.noreply.github.com")
         git("rebase", "--abort", check=False)     # clear any wedged prior rebase
+        # Tiny public progress file for the face panel to read (repo is public):
+        # done/total conversations, refreshed at each checkpoint. total is the
+        # frozen protocol size (arms × tests × scripts = 6×6×24 = 864), derived
+        # so it can never drift out of sync with the actual run.
+        total = len(ARM_ORDER) * len(ALL_TESTS) * sb.N_SCRIPTS
+        (OUT / "progress.json").write_text(json.dumps({
+            "done": n_done, "total": total,
+            "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}) + "\n")
         git("add", str(OUT))
         if git("diff", "--cached", "--quiet", check=False).returncode == 0:
             return                                # nothing new since last checkpoint
