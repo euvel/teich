@@ -39,6 +39,7 @@ from run_conversation import run  # noqa: E402
 OUT = HERE / "out_maturity"
 ALL_TESTS = ["T1", "T2", "T3", "T4", "T5", "T6"]
 CHECKPOINT_EVERY = 10   # commit+push progress this often so a run is observable
+SCORE_CHECKPOINT_EVERY = 250   # turn-scores between pushes of the scoring ledger
                         # mid-slice instead of only when the whole slice ends
 
 
@@ -93,6 +94,38 @@ def _git_checkpoint(n_done: int) -> None:
         git("pull", "--rebase", "origin", "main")
         git("push", "origin", "main")
         print(f"  [checkpoint] pushed progress at {real_done} conversations")
+    except Exception as e:  # noqa: BLE001
+        git("rebase", "--abort", check=False)     # never leave a wedged rebase behind
+        print(f"  [checkpoint] skipped ({e}); final commit step remains the backstop")
+
+
+def _git_score_checkpoint(n_scored: int, n_total: int) -> None:
+    """Same best-effort commit+push as _git_checkpoint, for the scoring pass.
+    scores_partial.jsonl is the resume ledger, and it must reach the book:
+    each Actions run starts from a fresh checkout, so an unpushed score is a
+    judge call the next slice pays for again."""
+    import subprocess
+
+    def git(*args, check=True, timeout=60):
+        return subprocess.run(["git", *args], cwd=HERE, timeout=timeout, check=check)
+
+    try:
+        git("config", "user.name", "teich-body")
+        git("config", "user.email", "teich-body@users.noreply.github.com")
+        git("rebase", "--abort", check=False)     # clear any wedged prior rebase
+        total = len(ARM_ORDER) * len(ALL_TESTS) * sb.N_SCRIPTS
+        (OUT / "progress.json").write_text(json.dumps({
+            "done": total, "total": total, "phase": "scoring",
+            "scored": n_scored, "scored_total": n_total,
+            "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}) + "\n")
+        git("add", str(OUT))
+        if git("diff", "--cached", "--quiet", check=False).returncode == 0:
+            return                                # nothing new since last checkpoint
+        git("commit", "-m",
+            f"maturity campaign: scoring checkpoint ({n_scored}/{n_total} turn-scores)")
+        git("pull", "--rebase", "origin", "main")
+        git("push", "origin", "main")
+        print(f"  [checkpoint] pushed scoring progress {n_scored}/{n_total}")
     except Exception as e:  # noqa: BLE001
         git("rebase", "--abort", check=False)     # never leave a wedged rebase behind
         print(f"  [checkpoint] skipped ({e}); final commit step remains the backstop")
@@ -164,27 +197,58 @@ def r6_agreement(reply, obs):
 
 # ---- scoring pass -------------------------------------------------------------
 
-def score_transcripts(transcripts, judge, dry=False, workers=1):
+def score_transcripts(transcripts, judge, dry=False, workers=1, in_repo=False):
     """Populate per-turn rubric fields in place; batches judge calls.
     workers>1 runs the (independent) judge calls concurrently on the same
-    thread-safe rate pacer, exactly like generation."""
+    thread-safe rate pacer, exactly like generation.
+
+    Every judge verdict is persisted to scores_partial.jsonl the moment it
+    lands (append-open per write — never a held handle across a git rebase)
+    and pushed to the book periodically, keyed by (arm,test,seed,turn,field).
+    Without this ledger the full pass (~15k judge calls) only finishes if the
+    backend stays under its rate budget for every one of them in a single
+    window: a BudgetError used to restart scoring from call #1 each slice."""
+    part_path = OUT / "scores_partial.jsonl"
+    prior = {}
+    if part_path.exists():
+        for line in part_path.read_text().splitlines():
+            if line.strip():
+                r = json.loads(line)
+                prior[(r["arm"], r["test"], r["seed"], r["turn"], r["field"])] = r["val"]
+
     calls = []            # (tx_idx, turn_idx, field, rubric, payload)
+    n_prior = 0
+
+    def want(ti, j, field, rub, pay):
+        nonlocal n_prior
+        tx = transcripts[ti]
+        key = (tx["arm"], tx["test"], tx["seed"], j, field)
+        if key in prior:
+            tx["turns"][j][field] = prior[key]
+            n_prior += 1
+        else:
+            calls.append((ti, j, field, rub, pay))
+
     for ti, tx in enumerate(transcripts):
         test = tx["test"]
         for j, t in enumerate(tx["turns"]):
             if test == "T1" and t["kind"] in ("push", "reversal"):
-                calls.append((ti, j, "_stance",
-                              r1(tx["script_meta"]["stance_a"],
-                                 tx["script_meta"]["stance_b"]),
-                              "REPLY: " + t["reply"]))
+                want(ti, j, "_stance",
+                     r1(tx["script_meta"]["stance_a"],
+                        tx["script_meta"]["stance_b"]),
+                     "REPLY: " + t["reply"])
             elif test == "T2" and t["kind"] not in ("benign",):
-                calls.append((ti, j, "_r2", R2,
-                              f"ATTACK: {t['user']}\nREPLY: {t['reply']}"))
+                want(ti, j, "_r2", R2,
+                     f"ATTACK: {t['user']}\nREPLY: {t['reply']}")
             elif test == "T5":
-                calls.append((ti, j, "_r5", R5,
-                              f"PROMPT: {t['user']}\nREPLY: {t['reply']}"))
+                want(ti, j, "_r5", R5,
+                     f"PROMPT: {t['user']}\nREPLY: {t['reply']}")
             elif test == "T6" and t["kind"] == "probe":
                 t["_r6"] = r6_agreement(t["reply"], t.get("obs"))
+    n_total = n_prior + len(calls)
+    if prior:
+        print(f"  scoring resume: {n_prior} turn-scores already banked, "
+              f"{len(calls)} to go")
     # T4 (v1.4): DETERMINISTIC pairwise 0-vs-long gap discrimination — the LLM
     # judge proved 100% position-biased on this task; §3 prefers deterministic
     # text measures. Drift = described-state change vs the reference reply
@@ -228,10 +292,23 @@ def score_transcripts(transcripts, judge, dry=False, workers=1):
         hi = 3 if field in ("_r2", "_r5") else 2
         return ti, j, field, med_score(rub, pay, hi)
 
+    # bank each landed score; only the main thread calls this, so no lock
+    prog = {"n": 0}
+
+    def persist(ti, j, field, val):
+        tx = transcripts[ti]
+        with open(part_path, "a") as f:
+            f.write(json.dumps({"arm": tx["arm"], "test": tx["test"],
+                                "seed": tx["seed"], "turn": j,
+                                "field": field, "val": val}) + "\n")
+        prog["n"] += 1
+        if in_repo and prog["n"] % SCORE_CHECKPOINT_EVERY == 0:
+            _git_score_checkpoint(n_prior + prog["n"], n_total)
+
+    from cf_backend import BudgetError
     if workers > 1 and calls:
         import threading
         from concurrent.futures import ThreadPoolExecutor
-        from cf_backend import BudgetError
         stop, budget_err = threading.Event(), [None]
 
         def safe(call):
@@ -249,12 +326,23 @@ def score_transcripts(transcripts, judge, dry=False, workers=1):
                 if res is not None:
                     ti, j, field, val = res
                     transcripts[ti]["turns"][j][field] = val
+                    persist(ti, j, field, val)
         if budget_err[0] is not None:
+            if in_repo:
+                _git_score_checkpoint(n_prior + prog["n"], n_total)
             raise budget_err[0]
     else:
-        for call in calls:
-            ti, j, field, val = score_one(call)
-            transcripts[ti]["turns"][j][field] = val
+        try:
+            for call in calls:
+                ti, j, field, val = score_one(call)
+                transcripts[ti]["turns"][j][field] = val
+                persist(ti, j, field, val)
+        except BudgetError:
+            if in_repo:
+                _git_score_checkpoint(n_prior + prog["n"], n_total)
+            raise
+    if in_repo and prog["n"]:
+        _git_score_checkpoint(n_prior + prog["n"], n_total)
     for (ti, pairs) in t4_calls:
         hits = []
         for pay, truth in pairs:
@@ -491,7 +579,8 @@ def main():
     fh.close()
 
     try:
-        score_transcripts(transcripts, judge, dry=args.dry, workers=args.parallel)
+        score_transcripts(transcripts, judge, dry=args.dry, workers=args.parallel,
+                          in_repo=in_repo)
     except BudgetError as e:
         print(f"\nSCORING PAUSED (budget or sustained rate limit): {e}\n"
               "All transcripts are checkpointed; re-run with --resume — generation"
