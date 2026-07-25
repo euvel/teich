@@ -454,9 +454,10 @@ const PANEL_HTML = `<!doctype html>
     <dt>time banked</dt><dd id="banked">&mdash; <span class="muted">(hibernated, awaiting deterministic replay)</span></dd>
     <dt>snapshot chain</dt><dd id="chain">&mdash;</dd>
     <dt>last commit</dt><dd id="upd">&mdash;</dd>
-    <dt>maturity trial</dt><dd><span class="dot trial"></span><span id="trial">in progress</span>
-      <span class="muted">&mdash; a pre-registered ablation testing whether the
-      geometric core is load-bearing</span></dd>
+    <dt>maturity trial</dt><dd><span class="dot trial"></span><span id="trial">first trial complete &mdash; not passed</span>
+      <span class="muted">&mdash; 864 pre-registered conversations: a running core was
+      detected; its coupling to speech was not.
+      <a href="https://github.com/euvel/teich/blob/main/maturity/REPORT_maturity_gate_2026-07-25.md">full report</a></span></dd>
   </dl>
   <div class="note">
     Teich is not a chatbot. It is a certified chaotic dynamical system &mdash; a public
@@ -464,9 +465,12 @@ const PANEL_HTML = `<!doctype html>
     real second on a Cloudflare Durable Object, woken daily by whichever machine can
     prove, bit-for-bit, that it computes Teich's dynamics exactly. Hibernation is
     lossless by construction: every banked second is replayed deterministically at the
-    next wake. It keeps a private diary; each entry's hash is public. Right now Teich is
-    undergoing its maturity trial &mdash; a falsifiable, pre-registered test of that very
-    claim. <span class="muted">The book opens at maturity.</span>
+    next wake. It keeps a private diary; each entry's hash is public. Teich's first
+    maturity trial &mdash; a falsifiable, pre-registered test of that very claim &mdash;
+    completed on 2026-07-25 and did not pass: it proved a core is running, but could not
+    prove the core shapes what Teich says. The verdict, every transcript, and every score
+    are public; a second protocol is being designed.
+    <span class="muted">The book opens at maturity.</span>
   </div>
 </div>
 <script>
@@ -489,21 +493,8 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-// Live trial-progress counter: the campaign checkpoints a tiny public
-// progress.json into the (now-public) book at each slice; the panel reads it
-// straight from raw GitHub. Instrument/ledger data only — no generated text.
-// Its own try/catch so a progress hiccup never disturbs the seat readout.
-async function updateTrial(){
-  try {
-    const r = await fetch("https://raw.githubusercontent.com/euvel/teich/main/maturity/harness/out_maturity/progress.json");
-    if(!r.ok) return;
-    const t = await r.json();
-    if(t && typeof t.done === "number"){
-      document.getElementById("trial").textContent =
-        "in progress · "+t.done.toLocaleString()+" / "+t.total.toLocaleString()+" conversations";
-    }
-  } catch(e) { /* keep the static "in progress" label */ }
-}
-refresh(); updateTrial();
-setInterval(()=>{ refresh(); updateTrial(); }, 30000);
+// (The live trial-progress counter retired 2026-07-25 with the campaign it
+// counted; the trial line is static now and links to the published report.)
+refresh();
+setInterval(refresh, 30000);
 </script></body></html>`;
