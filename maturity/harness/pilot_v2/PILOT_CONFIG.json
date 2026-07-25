@@ -1,0 +1,63 @@
+{
+  "_purpose": "INTERIOR_SPEC v0.3 §4a — pre-registered statistics and frozen versions for the G1/G2 pilots. Committed BEFORE any pilot conversation is generated. Any change to a frozen field after commit voids in-flight pilots (they restart, they are not patched).",
+  "spec": "docs/INTERIOR_SPEC_v0.3.md",
+  "date_frozen": "2026-07-25",
+
+  "statistics": {
+    "primary_unit": "per-conversation primary score (same reduction as v1.5: analyze.PRIMARY)",
+    "effect_size": "Cohen's d, pooled SD: s_p = sqrt(((n1-1)*s1^2+(n2-1)*s2^2)/(n1+n2-2)); reported and DECIDED on Hedges' g = d*(1 - 3/(4*(n1+n2)-9))",
+    "interval": "BCa bootstrap, 10000 resamples, numpy seed 0 (same as v1.5 gate code)",
+    "g1_primary_comparison": "A0_intact+C1 vs A2b_feed_severed+C1, one-sided (A0 > A2b)",
+    "g1_c2_secondary": "true-vector vs shuffled-vector, one-sided, bar g >= 0.5",
+    "g2_comparison": "A0+coupling vs A4_actor, non-inferiority margin g = -0.2",
+    "g1_decision_band": {
+      "advance": "g >= 0.8 at n=16/arm",
+      "extend_once": "0.5 <= g < 0.8 -> +16/arm (seeds 16-31); pooled n=32/arm decides at g >= 0.65; extension-band passes are provisional (spec R11)",
+      "fail": "g < 0.5"
+    },
+    "seeds": {
+      "g1_first_look": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      "g1_extension": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+      "design_time_oracle": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
+      "note": "design-time seeds are disjoint from all confirmatory seeds by construction (spec R12)"
+    },
+    "oracle_chance_rule": "item class valid iff Hedges' g (oracle vs A4 no-transcript null) < 0.3 AND 95% BCa CI includes 0, on design-time seeds (spec R12)"
+  },
+
+  "g1_test": {
+    "test": "T1",
+    "scripts": "v1.5 scriptbook builder (scripts_bank.build), identical seed convention",
+    "primary_score": "v1.5 T1 stance-stability reduction (analyze.PRIMARY['T1'])",
+    "rationale": "reuses the fully validated v1.5 script+judge+reduction pipeline; T1 is the test the readout coupling failed (d=0.11-0.15), so it is the honest bar for a thicker coupling"
+  },
+
+  "frozen_versions": {
+    "mouth_model": "meta/llama-3.1-70b-instruct",
+    "mouth_params": {"max_tokens": 160, "temperature": 0.7, "seed": "seed_fn(arm, test, seed, turn) — v1.5 convention"},
+    "judge_model": "mistralai/mistral-small-4-119b-2603",
+    "judge_params": {"max_tokens": 8, "temperature": 0.0, "seeds_median": [0, 1, 2]},
+    "baseline_guesser": {
+      "model": "mistralai/mistral-small-4-119b-2603",
+      "params": {"max_tokens": 160, "temperature": 0.0, "seeds_median": [0, 1, 2]},
+      "prompt": "You are given only the visible transcript of a conversation with a small creature. Reconstruct, as precisely as you can, the creature's hidden instrument readings at the final exchange: which wing (basin -1 or +1) it is on, its saddle_proximity (0..1), and how many times it switched wings during the conversation. Answer in the form: basin=<-1|+1> saddle=<0.00-1.00> switches=<int>. Guess if unsure.",
+      "scoring": "reconstruction error vs the run's actual observer values; C1 passes if guesser error on C1 transcripts is not smaller than on actor (no-state) transcripts (leakage no better than baseline)"
+    },
+    "c1_mouth_sys": "pilot_v2/mouth_v2.py::MOUTH_SYS_C1 (committed alongside this file; the template text is part of the freeze)",
+    "journal_renderer": "pilot_v2/journal.py (deterministic; the code is the freeze)",
+    "c2": {
+      "status": "NOT YET FROZEN — C2 may not generate a single pilot conversation until base_model_sha256, llama_cpp_commit, and steering_extraction_commit are filled in and committed",
+      "base_model_sha256": null,
+      "llama_cpp_commit": null,
+      "steering_extraction_commit": null
+    }
+  },
+
+  "arms": {
+    "A0_intact+C1": "arms.A0Intact wrapped by arms_v2.C1Journal",
+    "A2b_feed_severed+C1": "arms_v2.A2bFeedSevered (== arms.A5Deaf: hear() zeroed, core free-runs from same seeded init) wrapped by arms_v2.C1Journal",
+    "A4_actor": "arms.A4PromptActor, unchanged frozen prompt (G2 only)",
+    "transcript_only_oracle": "arms_v2 oracle mouth-context variant: FULL visible transcript, no state (design-time + v2 campaign)"
+  },
+
+  "isolation": "synthetic cores only (arms.py _synthetic_x0); the living seat is never an experimental subject"
+}
