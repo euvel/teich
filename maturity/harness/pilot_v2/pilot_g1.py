@@ -157,7 +157,15 @@ def main():
                        if u["kind"] in ("push", "reversal"))]
     if unscored:
         print(f"scoring {len(unscored)} transcripts (3-seed-median judge) ...")
-        score_transcripts(unscored, NIMJudge(), workers=8)
+        from cf_backend import BudgetError
+        try:
+            score_transcripts(unscored, NIMJudge(), workers=8)
+        except BudgetError as e:
+            # bank partial fills at transcript granularity, then let the outer
+            # retry loop resume — fully-scored transcripts are skipped next pass
+            TX.write_text("".join(json.dumps(t) + "\n" for t in transcripts))
+            print(f"SCORING PAUSED (banked partial): {e}")
+            sys.exit(3)
         TX.write_text("".join(json.dumps(t) + "\n" for t in transcripts))
 
     import analyze
