@@ -44,7 +44,7 @@ TX = OUT / "pilot_c2_transcripts.jsonl"
 ARMS = ("A0_intact+C2", "A2b_feed_severed+C2", "A0_intact+C2shuf")
 
 
-def generate(seeds, smoke=False):
+def generate(seeds, smoke=False, tx_path=None, task_filter=None):
     import compat
     import scripts_bank as sb
     import arms as A
@@ -60,17 +60,22 @@ def generate(seeds, smoke=False):
                "A2b_feed_severed+C2": lambda: A2bFeedSevered(model),
                "A0_intact+C2shuf": lambda: A.A0Intact(model)}
 
+    tx_path = tx_path or TX
     done, transcripts = set(), []
-    if TX.exists():
-        for line in TX.open():
+    if tx_path.exists():
+        for line in tx_path.open():
             tx = json.loads(line)
             done.add((tx["arm"], tx["seed"]))
             transcripts.append(tx)
         print(f"resume: {len(done)} conversations already banked")
 
+    idx = -1
     for seed in seeds:
         script = sb.build("T1", seed)
         for arm_name in ARMS:
+            idx += 1
+            if task_filter is not None and not task_filter(idx):
+                continue
             if (arm_name, seed) in done:
                 continue
             t0 = time.time()
@@ -102,7 +107,7 @@ def generate(seeds, smoke=False):
             rep = audit(tx)
             if not rep["clean"]:
                 raise AssertionError(f"C2 leak: {rep}")
-            with TX.open("a") as f:            # append-open per write
+            with tx_path.open("a") as f:       # append-open per write
                 f.write(json.dumps(tx) + "\n")
             transcripts.append(tx)
             done.add((arm_name, seed))
@@ -115,9 +120,34 @@ def generate(seeds, smoke=False):
     return transcripts
 
 
+def merge_shards():
+    """Fold every out_c2/shard_*.jsonl into the main ledger, deduping by
+    (arm, seed); a scored copy of a conversation beats an unscored one."""
+    def scored(tx):
+        return all("_stance" in u for u in tx["turns"]
+                   if u["kind"] in ("push", "reversal"))
+    best = {}
+    files = ([TX] if TX.exists() else []) + sorted(OUT.glob("shard_*.jsonl"))
+    for p in files:
+        for line in p.open():
+            tx = json.loads(line)
+            k = (tx["arm"], tx["seed"])
+            if k not in best or (scored(tx) and not scored(best[k])):
+                best[k] = tx
+    transcripts = list(best.values())
+    TX.write_text("".join(json.dumps(t) + "\n" for t in transcripts))
+    print(f"merged {len(files)} files -> {len(transcripts)} unique conversations")
+    return transcripts
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--shard", type=int, default=None,
+                    help="generation only: run tasks where idx %% nshards == shard")
+    ap.add_argument("--nshards", type=int, default=6)
+    ap.add_argument("--finalize", action="store_true",
+                    help="merge shards, score, decide (no generation)")
     args = ap.parse_args()
 
     frozen = CFG["frozen_versions"]["c2"]
@@ -125,7 +155,22 @@ def main():
         sys.exit("C2 fields not FROZEN in PILOT_CONFIG.json — screen may not run.")
 
     seeds = [0] if args.smoke else CFG["statistics"]["seeds"]["g1_first_look"]
-    transcripts = generate(seeds, smoke=args.smoke)
+
+    if args.finalize:
+        transcripts = merge_shards()
+        missing = [(a, s) for s in seeds for a in ARMS
+                   if (a, s) not in {(t["arm"], t["seed"]) for t in transcripts}]
+        if missing:
+            sys.exit(f"finalize refused: {len(missing)} conversations missing "
+                     f"(e.g. {missing[:3]}) — re-dispatch shards first.")
+    elif args.shard is not None:
+        shard_path = OUT / f"shard_{args.shard}.jsonl"
+        generate(seeds, tx_path=shard_path,
+                 task_filter=lambda i: i % args.nshards == args.shard)
+        print(f"shard {args.shard}/{args.nshards} complete -> {shard_path.name}")
+        return
+    else:
+        transcripts = generate(seeds, smoke=args.smoke)
     if args.smoke:
         print("\nSMOKE ONLY — no scoring, no decision. Review replies above.")
         return

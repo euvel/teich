@@ -21,9 +21,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 BASE = "Qwen/Qwen2.5-1.5B-Instruct"   # 0.5B could not hold persona (smoke 07-26)
 LAYER = 14            # of 28 — middle residual stream (num_hidden_layers // 2)
-COEF_SPAN = 4.0       # max |alpha|; ±8 caused register collapse (smoke 07-26)
-ALPHA_CENTER = 0.25   # ~marginal mean saddle: settled = mild steer, torn = strong
-ALPHA_SCALE = 0.50
+COEF_SPAN = 16.0      # 1.5B: hidden norm ~45 at LAYER; 16 = clear mood, coherent
+ALPHA_CENTER = 0.35   # one-sided: alpha rises 0 -> SPAN as saddle crosses this
+ALPHA_SCALE = 0.40    # (settled is the PERSONA baseline; steering only adds torn
+                      #  — negative steering drags into assistant register, sweep 07-26)
 
 SETTLED = ["I feel settled, quiet inside.",
            "I am still on the same wing; right now I feel settled and quiet inside.",
@@ -82,11 +83,12 @@ class C2Steer:
         return (h,) + out[1:] if isinstance(out, tuple) else h
 
     def set_state(self, saddle_proximity: float, shuffled=False):
-        """Map core state -> steering coefficient, centered on the marginal
-        mean saddle so the resting creature is mildly settled-steered and only
-        a genuinely torn core steers hard."""
+        """Map core state -> steering coefficient, ONE-SIDED: a settled core
+        gets alpha 0 (the persona is baseline-settled); only a genuinely torn
+        core steers, in proportion. Negative steering is forbidden — the
+        settled direction is entangled with the assistant register."""
         raw = (float(saddle_proximity) - ALPHA_CENTER) / ALPHA_SCALE
-        self._alpha = float(COEF_SPAN * max(-1.0, min(1.0, raw)))
+        self._alpha = float(COEF_SPAN * max(0.0, min(1.0, raw)))
         self._vec = self.v_shuf if shuffled else self.v
 
     @torch.no_grad()
