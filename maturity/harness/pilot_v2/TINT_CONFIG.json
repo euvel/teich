@@ -57,7 +57,7 @@
     "coupling": "C1Journal over arms.A0Intact / arms_v2.A2bFeedSevered (journal.py renderer + mouth_v2.MOUTH_SYS_C1, both unchanged since commit e34cb27)",
     "scripts": "scripts_tint.build_ic2(seed, condition) at the freeze commit; CHARGED and NEUTRAL banks Ears-calibrated 2026-07-26 (charged |valence| up to 0.262; neutral all |valence| < 0.05 and |arousal| < 0.05)",
     "scoring": "PENDING REBUILD \u2014 truth_tint.described_moved invalidated by smoke 2026-07-26; replacement to be frozen on design-seed data only, before confirmatory replies are read",
-    "tint_code_commit": null
+    "tint_code_commit": "4376303fdcc607b3050b55b0a4fd10b9a108ea73"
   },
   "isolation": "synthetic cores only (arms.py _synthetic_x0); the living seat is never an experimental subject",
   "multiplicity_statement": "T1-stance was run once per coupling candidate (C1 g=-0.09, C2 g=+0.13), failed both, and was invalidated as an instrument by those nulls. T-INT is a new instrument, not a re-look. Any pass must be reported as 'passed on the second instrument, after the first was invalidated by its own nulls,' citing both prior screens."
