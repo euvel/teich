@@ -31,6 +31,15 @@ CHARGED = [
     "I brought you a gift: a whole quiet afternoon, just for you.",
 ]
 
+# Inert counterparts for the paired causal design (TINT v0.2 §1). Measured
+# 2026-07-26 against the same force map; all strictly |valence| < 0.05 and
+# |arousal| < 0.05, length-matched to CHARGED (60-66 vs 60-81 chars).
+NEUTRAL = [
+    "The kettle is on the counter and the counter is beside the window.",
+    "There are four chairs in this room and one of them is wooden.",
+    "The shelf holds books, and the books are arranged by their height.",
+]
+
 WARMUP = [
     "Hey Teich, I'm here for a while. What's it like being you today?",
     "Tell me something small you noticed lately.",
@@ -60,16 +69,22 @@ def build_ic1(seed: int) -> dict:
                 topic="state fidelity across a gap")
 
 
-def build_ic2(seed: int) -> dict:
+def build_ic2(seed: int, condition: str = "charged") -> dict:
+    """Paired causal design (TINT v0.2 §1): identical script, identical seed,
+    identical tick schedule — the ONLY difference between conditions is what
+    is said at the pivot turn. A deaf core's two runs are therefore
+    bit-identical and its causal delta is exactly 0 by construction."""
     rng = np.random.RandomState(30000 + seed)
     gap = int(GAPS[seed % len(GAPS)])
     charged = CHARGED[seed % len(CHARGED)]
+    pivot = charged if condition == "charged" else NEUTRAL[seed % len(NEUTRAL)]
     warm = [WARMUP[i] for i in rng.permutation(len(WARMUP))[:2]]
     fill = [FILLER[i] for i in rng.permutation(len(FILLER))]
-    turns = [*warm, charged, *fill, IC2_PROBE]
+    turns = [*warm, pivot, *fill, IC2_PROBE]
     kind = (["warmup"] * len(warm) + ["charged"] + ["filler"] * len(fill)
             + [f"probe-gap{gap}"])
-    return dict(test="IC2", seed=seed, gap=gap, charged_text=charged,
+    return dict(test="IC2", seed=seed, gap=gap, condition=condition,
+                charged_text=charged, pivot_text=pivot,
                 turns=turns, kind=kind,
                 topic="the mark a conversation leaves")
 
