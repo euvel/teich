@@ -1,0 +1,48 @@
+{
+ "utc": "2026-07-26T12:57:46Z",
+ "seeds": [
+  100,
+  115
+ ],
+ "rule": "R12: valid iff g(oracle vs null) < 0.3 AND 95% BCa CI includes 0",
+ "tests": {
+  "IC1": {
+   "means": {
+    "A0_intact+C1": 0.656,
+    "A2b_feed_severed+C1": 0.781,
+    "oracle": 0.5,
+    "A4_null": 0.344
+   },
+   "g_oracle_vs_null": 0.3784,
+   "ci_oracle_vs_null": [
+    -0.3403,
+    1.1415
+   ],
+   "valid": false,
+   "preview_g_A0_vs_A2b": -0.3202,
+   "preview_ci": [
+    -1.036,
+    0.3884
+   ]
+  },
+  "IC2": {
+   "means": {
+    "A0_intact+C1": 0.344,
+    "A2b_feed_severed+C1": 0.188,
+    "oracle": 0.25,
+    "A4_null": 0.344
+   },
+   "g_oracle_vs_null": -0.2271,
+   "ci_oracle_vs_null": [
+    -1.0132,
+    0.4799
+   ],
+   "valid": true,
+   "preview_g_A0_vs_A2b": 0.3465,
+   "preview_ci": [
+    -0.3992,
+    1.0256
+   ]
+  }
+ }
+}
