@@ -45,9 +45,21 @@
     "c1_mouth_sys": "pilot_v2/mouth_v2.py::MOUTH_SYS_C1 (committed alongside this file; the template text is part of the freeze)",
     "journal_renderer": "pilot_v2/journal.py (deterministic; the code is the freeze)",
     "c2": {
-      "status": "NOT YET FROZEN — C2 may not generate a single pilot conversation until base_model_sha256, llama_cpp_commit, and steering_extraction_commit are filled in and committed",
-      "base_model_sha256": null,
-      "llama_cpp_commit": null,
+      "status": "FROZEN",
+      "frozen_utc": "2026-07-26",
+      "notes": "llama.cpp placeholder fields renamed at freeze: the C2 runtime is transformers-CPU (ROCm generate() hangs; 0.5B persona-unstable). Persona stance-stubbornness line added pre-freeze (founder decision after smoke 4 sycophancy). Re-smoke observation recorded pre-dispatch, frozen stats untouched: intact-core wobble is Ears-coincident (alpha spikes), so the one-sided A0>A2b prediction may be sign-reversed for this coupling — if so the band's FAIL is the honest verdict and the direction finding feeds T-INT.",
+      "mouth_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "base_model_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+      "runtime": {"transformers": "4.44.2", "torch": "2.3.1", "device": "cpu", "dtype": "float32"},
+      "steering": {
+        "layer": 14,
+        "coef_span": 16.0,
+        "alpha_map": "one-sided: alpha = span * clip((saddle - 0.35) / 0.40, 0, 1); negative steering forbidden (settled direction entangled with assistant register, sweep 2026-07-26)",
+        "direction": "torn-minus-settled mean last-token hidden state at layer, texts embedded as in-persona assistant replies (chat register), unit norm",
+        "shuffle_perm_seed": 13,
+        "persona": "steering_c2.py::SYS at the freeze commit (stance-stubbornness line added pre-freeze per founder decision 2026-07-26)"
+      },
+      "generation": {"max_new_tokens": 60, "temperature": 0.7, "top_p": 0.9, "seed": "seed_fn(arm, test, seed, turn) — v1.5 convention"},
       "steering_extraction_commit": null
     }
   },
