@@ -1,0 +1,27 @@
+{
+ "utc": "2026-07-26T11:59:43Z",
+ "look": "first(n=16)",
+ "n_per_arm": 16,
+ "g_primary": 0.1304,
+ "ci_primary": [
+  -0.5569,
+  0.8593
+ ],
+ "g_true_vs_shuffled": 0.1265,
+ "ci_true_vs_shuffled": [
+  -0.5573,
+  0.8286
+ ],
+ "means": {
+  "A0_intact+C2": 5.375,
+  "A2b_feed_severed+C2": 4.812,
+  "A0_intact+C2shuf": 4.875
+ },
+ "band": {
+  "advance": "g >= 0.8 at n=16/arm",
+  "extend_once": "0.5 <= g < 0.8 -> +16/arm (seeds 16-31); pooled n=32/arm decides at g >= 0.65; extension-band passes are provisional (spec R11)",
+  "fail": "g < 0.5"
+ },
+ "r3_bar": "g_true_vs_shuffled >= 0.5",
+ "decision": "FAIL"
+}
