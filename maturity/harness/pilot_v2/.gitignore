@@ -1,0 +1,6 @@
+# Local smoke/probe logs: transient, never part of the record. The ledgers and
+# results under out_*/ ARE the record and are committed explicitly.
+*.log
+out_g1/*.log
+out_c2/*.log
+out_c2/resmoke_*.jsonl
