@@ -1,0 +1,11 @@
+{
+ "utc": "2026-07-25T14:31:39Z",
+ "look": "first(n=16)",
+ "n_per_arm": 16,
+ "g": -0.0948,
+ "ci": [-0.8112, 0.6143],
+ "means": {"A0_intact+C1": 7.125, "A2b_feed_severed+C1": 7.5},
+ "band": {"advance": "g >= 0.8 at n=16/arm", "extend_once": "0.5 <= g < 0.8 -> +16/arm (seeds 16-31); pooled n=32/arm decides at g >= 0.65; extension-band passes are provisional (spec R11)", "fail": "g < 0.5"},
+ "decision": "FAIL",
+ "_provenance": "recovered verbatim from Actions run 30159667463 job 89682820189 stdout (the frozen pilot_g1.py's own printout at decision time). The runner's final push failed 3x on 'cannot pull with rebase: unstaged changes' and the scored ledger died with the runner; this JSON is the run's authoritative printed decision. Runs 30172387051 and 30187316296 declined at gate-on-boot (non-certified draws) — exactly one look occurred. Screen-grade result (selection, not evidence), per INTERIOR_SPEC v0.3 §4/R5."
+}

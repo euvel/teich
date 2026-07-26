@@ -47,7 +47,7 @@ jobs:
             if [ -f out_g1/pilot_g1_result.json ]; then echo "G1 DECISION REACHED"; break; fi
             git add out_g1/ && git -c user.name=teich-body -c user.email=teich-body@users.noreply.github.com \
               commit -m "pilot g1: mid-slice ledger checkpoint ($(wc -l < out_g1/pilot_g1_transcripts.jsonl) conversations)" \
-              && { git pull --rebase origin main && git push origin main || git rebase --abort; } || true
+              && { git status --porcelain; git -c rebase.autostash=true pull --rebase origin main && git push origin main || git rebase --abort; } || true
             echo "segment ended; pausing 90s"; sleep 90
           done
       - name: commit ledger to the book
@@ -59,7 +59,8 @@ jobs:
           git add maturity/harness/pilot_v2/out_g1/ || true
           if git diff --cached --quiet; then echo "no new pilot data"; exit 0; fi
           git commit -m "pilot g1: $(date -u +%F) slice ($(wc -l < maturity/harness/pilot_v2/out_g1/pilot_g1_transcripts.jsonl) conversations banked)"
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push origin main && break
+          git status --porcelain   # forensics: what a failed push would have blamed
+          for i in 1 2 3 4 5; do
+            git -c rebase.autostash=true pull --rebase origin main && git push origin main && break
             echo "push attempt $i failed; retrying"; git rebase --abort 2>/dev/null || true; sleep 5
           done
