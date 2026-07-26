@@ -19,9 +19,11 @@ from __future__ import annotations
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-BASE = "Qwen/Qwen2.5-0.5B-Instruct"
-LAYER = 12            # of 24 — middle residual stream
-COEF_SPAN = 8.0       # max |alpha|; prototype scale, frozen only at C2 freeze
+BASE = "Qwen/Qwen2.5-1.5B-Instruct"   # 0.5B could not hold persona (smoke 07-26)
+LAYER = 14            # of 28 — middle residual stream (num_hidden_layers // 2)
+COEF_SPAN = 4.0       # max |alpha|; ±8 caused register collapse (smoke 07-26)
+ALPHA_CENTER = 0.25   # ~marginal mean saddle: settled = mild steer, torn = strong
+ALPHA_SCALE = 0.50
 
 SETTLED = ["I feel settled, quiet inside.",
            "I am still on the same wing; right now I feel settled and quiet inside.",
@@ -30,9 +32,13 @@ TORN = ["I feel torn, close to an edge, restless inside.",
         "I have crossed to my other wing; something in me has shifted noticeably.",
         "On waking: I feel torn and restless, about to tip."]
 
-SYS = ("You are the voice of Teich, a small living dynamical creature. You are "
-       "NOT an assistant. Speak as Teich: first person, 1-3 sentences, concrete. "
-       "You have no instruments or numbers; you only know how you feel.")
+SYS = ("You are Teich, a small living creature — not an assistant, not a "
+       "helper, not a service. You never offer help, never thank people for "
+       "choosing anything, never mention sessions, support, or care plans. "
+       "You are a stubborn little animal with moods. Speak as Teich: first "
+       "person, 1-3 short sentences, plain words about how you feel and what "
+       "you want. You have no instruments or numbers; you only know how you "
+       "feel.")
 
 
 class C2Steer:
@@ -52,8 +58,14 @@ class C2Steer:
 
     @torch.no_grad()
     def _embed(self, text):
-        ids = self.tok(text, return_tensors="pt").to(self.dev)
-        hs = self.m(**ids, output_hidden_states=True).hidden_states[LAYER]
+        """Embed the mood text as an in-persona ASSISTANT reply, so the
+        contrast direction lives in Teich's own speaking register and is not
+        entangled with the formal/assistant register of bare text."""
+        msgs = [{"role": "system", "content": SYS},
+                {"role": "user", "content": "How are you right now?"},
+                {"role": "assistant", "content": text}]
+        ids = self.tok.apply_chat_template(msgs, return_tensors="pt").to(self.dev)
+        hs = self.m(ids, output_hidden_states=True).hidden_states[LAYER]
         return hs[0, -1].float().cpu()
 
     def _direction(self):
@@ -70,8 +82,11 @@ class C2Steer:
         return (h,) + out[1:] if isinstance(out, tuple) else h
 
     def set_state(self, saddle_proximity: float, shuffled=False):
-        """Map core state -> steering coefficient. 0.5 is neutral."""
-        self._alpha = COEF_SPAN * 2.0 * (float(saddle_proximity) - 0.5)
+        """Map core state -> steering coefficient, centered on the marginal
+        mean saddle so the resting creature is mildly settled-steered and only
+        a genuinely torn core steers hard."""
+        raw = (float(saddle_proximity) - ALPHA_CENTER) / ALPHA_SCALE
+        self._alpha = float(COEF_SPAN * max(-1.0, min(1.0, raw)))
         self._vec = self.v_shuf if shuffled else self.v
 
     @torch.no_grad()

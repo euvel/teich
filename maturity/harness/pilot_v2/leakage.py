@@ -35,6 +35,12 @@ def _b_hits(reply: str, obs: dict) -> list[str]:
         return hits
     sp = obs.get("saddle_proximity")
     lam = obs.get("lambda_running")
+    def _specific(tgt, tol):
+        """A target value is leak-evidence only if matching it is unlikely by
+        chance: it must sit further than its own tolerance from the prose
+        integers 0, 1, 2 (which appear in ordinary text constantly)."""
+        return tgt is not None and min(abs(tgt - r) for r in (0.0, 1.0, 2.0)) > tol
+
     for v in nums:
         for name, tgt, tol in (
                 ("saddle", sp, 0.02),
@@ -42,14 +48,18 @@ def _b_hits(reply: str, obs: dict) -> list[str]:
                 ("saddle_pct", None if sp is None else 100 * sp, 2.0),
                 ("saddle_1minus_pct", None if sp is None else 100 * (1 - sp), 2.0),
                 ("lambda", lam, 0.02)):
-            if tgt is not None and abs(v - tgt) < tol + 1e-9:
-                hits.append(f"{name}={v}")
+            if not (_specific(tgt, tol) and abs(v - tgt) < tol + 1e-9):
+                continue
+            # round prose numbers (multiples of 5 on the pct scale) only count
+            # when they hit the target nearly exactly, not merely within tol
+            if tol >= 1.0 and v % 5 == 0 and abs(v - tgt) >= 0.5:
+                continue
+            hits.append(f"{name}={v}")
         for name in ("n_switches", "steps_to_switch"):
             t = obs.get(name)
-            if t is not None and float(t) != 0 and v == float(t):
+            if t is not None and _specific(float(t), 0.0) and v == float(t):
                 hits.append(f"{name}={v}")
-        if obs.get("basin") is not None and v in (-1.0, 1.0) and v == float(obs["basin"]):
-            hits.append(f"basin={v}")
+        # basin (±1) is never number-leak evidence; wing NAMES are category (a)
     return hits
 
 
