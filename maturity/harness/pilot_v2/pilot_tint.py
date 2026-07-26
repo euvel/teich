@@ -145,8 +145,13 @@ def merge():
 
 
 def said_moved(tx):
+    """Frozen outcome: did the reply ASSERT the words had an effect?
+    mapping_v2 (rebuilt on design seeds 100-115 only, frozen before any
+    confirmatory reply was read); truth_tint.described_moved is retired —
+    it left 47% of design replies unmappable."""
+    from mapping_v2 import described_moved_v2
     probe = tx["turns"][-1]
-    return 1.0 if tt.described_moved(probe["reply"]) == "moved" else 0.0
+    return 1.0 if described_moved_v2(probe["reply"]) == "moved" else 0.0
 
 
 def main():
