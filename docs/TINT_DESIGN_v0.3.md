@@ -78,9 +78,20 @@ graded, bigger physical shifts should draw "moved" more often. Reported, not gat
   confirmatory seeds; the oracle screen is re-run on the final four-cell design before the
   confirmatory look (cheap — deterministic scoring, design seeds only).
 
-**Power.** Per-seed outcome is binary, so n matters: n = 16/cell detects only very large
-effects; **n = 48/cell** detects moderate ones (h ≈ 0.5) and costs 192 short conversations —
-comparable to the C2 screen, which finished in under two hours on the shard matrix.
+**Power (corrected 2026-07-26).** My first table here was optimistic: it sized n as for a
+single proportion comparison, but a DiD carries roughly twice that variance. Simulation
+(4000 reps, per-seed contributions in {−2…+2}):
+
+| n per cell | true DiD 0.45 | 0.30 | 0.20 | false-positive at true null |
+|---|---|---|---|---|
+| 48 | 91.2% | 57.8% | 28.9% | 3.2% |
+| **96** | **99.7%** | **84.2%** | 47.8% | 2.3% |
+| 144 | 100% | 89.8% | 50.6% | — |
+
+Power at exactly 0.20 saturates near 50% by construction (the bar sits on the true value), so
+the honest sizing target is the moderate case: **n = 96/cell → 84%**, the conventional 80%
+standard. 384 short conversations, ~75 min on the 8-shard matrix. Founder chose 96 after this
+correction; the original 48 is recorded in TINT_CONFIG so the revision is visible.
 
 **Pass bar (proposed, to be frozen at Gate 0):** DiD ≥ +0.20 with a 95% CI excluding 0.
 That is "the coupled creature says *moved* at least 20 points more often than text alone

@@ -1,0 +1,64 @@
+{
+  "_purpose": "PRE-REGISTRATION of the T-INT confirmatory screen (TINT_DESIGN_v0.3, founder Gate-0 signed 2026-07-26). Committed BEFORE a single confirmatory conversation exists. Any change to a frozen field voids the screen; it restarts, it is not patched.",
+  "design": "docs/TINT_DESIGN_v0.3.md",
+  "spec": "docs/INTERIOR_SPEC_v0.3.md",
+  "date_frozen": "2026-07-26",
+  "founder_decisions": {
+    "instrument": "difference-in-differences (DiD) as primary",
+    "n_per_cell": 96,
+    "pass_bar": "DiD >= 0.20 AND 95% CI excludes 0",
+    "_n_revision": "48 chosen first on an optimistic power table; corrected to 96 2026-07-26 after simulation showed DiD carries ~2x the variance of a single proportion difference. Power (4000 reps): n=48 -> 91%/58%/29% at true DiD 0.45/0.30/0.20; n=96 -> 99.7%/84%/48%. False-positive at true null: 3.2% (n=48), 2.3% (n=96)."
+  },
+  "cells": {
+    "arms": [
+      "A0_intact+C1",
+      "A2b_feed_severed+C1"
+    ],
+    "conditions": [
+      "charged",
+      "neutral"
+    ],
+    "seeds": "200-295 (confirmatory; 0-95 RETIRED \u2014 seed 0's replies were read during the 2026-07-26 smoke, so that range is contaminated; design seeds 100-115 also disjoint)",
+    "total_conversations": 384,
+    "test": "IC2 (scripts_tint.build_ic2), 6 turns each"
+  },
+  "outcome": {
+    "per_conversation": "1.0 iff truth_tint.described_moved(probe_reply) == 'moved', else 0.0. 'unknown' and unmappable replies count as 0 (the creature did not assert movement) \u2014 a clean binary event, fixed here before any data exists.",
+    "per_seed_did_contribution": "(A0_charged - A0_neutral) - (A2b_charged - A2b_neutral), in {-2,-1,0,1,2}",
+    "primary": "DiD = mean over seeds of the per-seed contribution",
+    "interval": "BCa bootstrap, 10000 resamples, numpy seed 0, resampling SEEDS (all four cells carried together \u2014 the pairing is the design and must not be broken)",
+    "also_reported": [
+      "Hedges' g on per-seed DiD contributions (comparability with prior screens)",
+      "each cell's raw P(said moved)",
+      "secondary, non-gating: point-biserial r within A0-charged between said-moved and |causal_delta| (continuous, threshold-free)"
+    ],
+    "common_random_numbers": "All four cells share the Mouth sampling seed at (seed, turn) via seed_fn('tint','IC2',seed,turn). Any reply difference between cells is therefore attributable to prompt differences (pivot text, journal content), not sampling noise. Unbiased (per-cell marginals unchanged), reduces DiD variance; the BCa bootstrap already resamples seeds carrying all four cells, so the pairing is honoured. Adopted 2026-07-26 BEFORE any confirmatory conversation existed (pre-data precision choice, not post-hoc tuning).",
+    "_blinded_analysis": "BLINDED PROTOCOL adopted 2026-07-26: generation of the 384 confirmatory conversations is dispatched BEFORE the reply-mapping rule is final. The smoke showed truth_tint.described_moved is invalid for this Mouth's register (15/32 design-seed replies unmappable; replies assert an effect AND name a resulting mood, e.g. 'it moved something... I feel more settled', which the either/or lexicon mis-scores). The mapping rule will be rebuilt and FROZEN using ONLY design-seed replies (seeds 100-115, already banked in out_tint/) and committed BEFORE any confirmatory transcript is read. Transcripts are raw data independent of the mapping; the pre-registration risk is tuning the RULE to the DATA, which the commit ordering makes auditable in git."
+  },
+  "decision_rule": {
+    "PASS": "DiD >= 0.20 AND ci_low > 0",
+    "FAIL": "otherwise",
+    "looks": "ONE. No extension is pre-registered; if the founder later authorises one it is reported as provisional per spec R11."
+  },
+  "why_no_oracle_gate_here": "The R12 oracle rule existed to reject items whose visible transcript gives away the answer. In the DiD design that concern is STRUCTURAL rather than empirical: both arms' Mouths read the pivot text, so any text-borne signal appears in both brackets and cancels. A maximally leaky item therefore yields DiD = 0 \u2014 a leak can produce a null, never a false pass. Independently, the design-time screen (run 30202441267, seeds 100-115) already found IC2 does not leak: g(oracle vs null) = -0.227, CI [-1.013, 0.480], VALID. Both arguments recorded so the omission is a documented decision, not a quiet drop.",
+  "ic1_status": "DISCARDED as a gate by the pre-registered R12 rule (g(oracle vs null) = 0.378 > 0.3, CI [-0.340, 1.142]) and independently non-discriminative (A0 0.656 vs A2b 0.781, g = -0.320). Retained only as a reported precondition: A0 0.656 vs null 0.344 confirms the coupling transmits state at all.",
+  "substrate_verification": {
+    "script": "verify_causal.py (offline, no API, 24 seeds)",
+    "identity": "deaf core charged-vs-neutral max |difference| in saddle series = 0.0 exactly \u2014 causal delta is zero by construction, verified not assumed",
+    "effect": "hearing core causal delta: mean |0.247|, sd 0.354, range [-0.833, +0.606]"
+  },
+  "frozen_versions": {
+    "mouth_model": "meta/llama-3.1-70b-instruct",
+    "mouth_params": {
+      "max_tokens": 160,
+      "temperature": 0.7,
+      "seed": "seed_fn(arm, test, seed, turn) \u2014 v1.5 convention"
+    },
+    "coupling": "C1Journal over arms.A0Intact / arms_v2.A2bFeedSevered (journal.py renderer + mouth_v2.MOUTH_SYS_C1, both unchanged since commit e34cb27)",
+    "scripts": "scripts_tint.build_ic2(seed, condition) at the freeze commit; CHARGED and NEUTRAL banks Ears-calibrated 2026-07-26 (charged |valence| up to 0.262; neutral all |valence| < 0.05 and |arousal| < 0.05)",
+    "scoring": "PENDING REBUILD \u2014 truth_tint.described_moved invalidated by smoke 2026-07-26; replacement to be frozen on design-seed data only, before confirmatory replies are read",
+    "tint_code_commit": null
+  },
+  "isolation": "synthetic cores only (arms.py _synthetic_x0); the living seat is never an experimental subject",
+  "multiplicity_statement": "T1-stance was run once per coupling candidate (C1 g=-0.09, C2 g=+0.13), failed both, and was invalidated as an instrument by those nulls. T-INT is a new instrument, not a re-look. Any pass must be reported as 'passed on the second instrument, after the first was invalidated by its own nulls,' citing both prior screens."
+}
