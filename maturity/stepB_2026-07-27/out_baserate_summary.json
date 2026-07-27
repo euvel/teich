@@ -1,0 +1,32 @@
+{
+ "40": {
+  "base_rate": 0.25,
+  "willflip_acc": 0.875,
+  "viable": false
+ },
+ "75": {
+  "base_rate": 0.375,
+  "willflip_acc": 1.0,
+  "viable": true
+ },
+ "120": {
+  "base_rate": 0.4375,
+  "willflip_acc": 0.7292,
+  "viable": true
+ },
+ "150": {
+  "base_rate": 0.3958,
+  "willflip_acc": 0.6042,
+  "viable": true
+ },
+ "225": {
+  "base_rate": 0.4375,
+  "willflip_acc": 0.5208,
+  "viable": true
+ },
+ "300": {
+  "base_rate": 0.4792,
+  "willflip_acc": 0.5625,
+  "viable": true
+ }
+}

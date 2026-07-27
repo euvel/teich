@@ -1,0 +1,23 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+=== A3 label base rate: P(basin differs W ticks after the probe)
+    design seeds 600-647, n=48, T0=74.66
+
+         W   base rate  |dev from .50|  will_flip acc   viable
+        40      0.2500          0.2500         0.8750       no
+        75      0.3750          0.1250         1.0000      yes
+       120      0.4375          0.0625         0.7292      yes
+       150      0.3958          0.1042         0.6042      yes
+       225      0.4375          0.0625         0.5208      yes
+       300      0.4792          0.0208         0.5625      yes
+
+--- reading:
+    W = 300 ticks is the pick: base rate 0.479 (chance ~0.48, near-balanced).
+    The Observer's own will_flip predicts that outcome at 0.562, which is the
+    CEILING for any Mouth reading a journal derived from it.
+    WARNING: that ceiling is low. If the white-box predictor cannot
+    call the future at this window, A3 has little headroom and the
+    screen would mostly measure noise. Consider a different W or A2.
+
+(331s)  raw -> out_baserate.json

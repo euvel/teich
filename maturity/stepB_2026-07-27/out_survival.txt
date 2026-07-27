@@ -1,0 +1,42 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+selftest OK: ProbeEngine == _CoreEngine at zero dose (basin 1, lobe 0.199844)
+
+doses (BETA=0.25 x natural spread, spread over 120 ticks):
+    tau0_earsdose      tau[0]  total +1.21140
+    tau0_expanding     tau[0]  total +0.10290
+    tau1_neutral       tau[1]  total +0.14446
+    tau3_weak          tau[3]  total +0.00269
+    ell1_contracting   ell[1]  total +0.00466
+  tau0_earsdose: 48 pairs done (426s)
+  tau0_expanding: 48 pairs done (853s)
+  tau1_neutral: 48 pairs done (1289s)
+  tau3_weak: 48 pairs done (1712s)
+  ell1_contracting: 48 pairs done (2134s)
+
+=== survival: discriminability  D = 2|AUC - 0.5|   [0 = sign destroyed]
+    direction                saddle   lobe_coord        basin   n_switches  steps_to_sw
+    tau0_earsdose           0.146-       0.375+*      0.146+       0.146-       0.000+ 
+    tau0_expanding          0.042-       0.083-       0.062+       0.188+       0.000+ 
+    tau1_neutral            0.021-       0.042+       0.042+       0.125-*      1.000-*
+    tau3_weak               0.000+       0.000+       0.000+       0.000+       0.000+ 
+    ell1_contracting        0.000+       0.000+       0.000+       0.000+       0.000+ 
+    (sign = direction of the AUC; * = 95% bootstrap CI excludes 0.5)
+
+=== survival vs gap  (D, channel: saddle(unshuttered) / steps_to_switch)
+    direction                        300t               900t              1800t
+    tau0_earsdose         0.375 /   0.000    0.125 /   0.000    0.188 /   0.000
+    tau0_expanding        0.312 /   0.000    0.250 /   0.000    0.188 /   0.000
+    tau1_neutral          0.062 /   1.000    0.000 /   1.000    0.125 /   1.000
+    tau3_weak             0.000 /   0.000    0.000 /   0.000    0.000 /   0.000
+    ell1_contracting      0.000 /   0.000    0.000 /   0.000    0.000 /   0.000
+
+--- reading:
+    A direction SURVIVES if its AUC is reliably above 0.5: the probe, after
+    the gap, still reveals which way it was pushed. tau0 rows reproduce the
+    known null. If tau1_neutral survives while the others do not, the
+    neutral (flow) direction is the only place an input can leave a mark
+    that keeps its identity -- and ears.py has never used it.
+
+(2136s)  raw -> out_survival.json

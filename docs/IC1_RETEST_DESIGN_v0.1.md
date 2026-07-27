@@ -113,11 +113,37 @@ Not a readout, not a bucket, not a threshold anyone chose — an event.
 `observer.py` is substrate-gate-hashed and is **not** touched: `basin` is an existing
 readout key, read as published.
 
-**`W` is set by the base-rate check, not by taste.** Sweep `W` on design seeds only and
-pick the value putting the realized-change rate closest to 50%. `T0 = 74.66` ticks per roof
-revolution is the natural scale; sweep roughly `W ∈ {40, 75, 120, 150, 225, 300}`.
-**Freeze `W` before any confirmatory conversation is generated.** If no `W` in the sweep
-yields a base rate in **[0.35, 0.65]**, A3 is not viable — fall back per §3.
+**`W` is set by the base-rate check, not by taste — MEASURED 2026-07-27, design seeds
+600–647, n=48** (`sweep_flip_baserate.py`, raw in `out_baserate.json`):
+
+| W | base rate | constant guess | will_flip acc | **headroom** | viable |
+|---|---|---|---|---|---|
+| 40 | 0.2500 | 0.7500 | 0.8750 | +0.125 | no (unbalanced) |
+| **75** | **0.3750** | **0.6250** | **1.0000** | **+0.375** | **yes ← pick** |
+| 120 | 0.4375 | 0.5625 | 0.7292 | +0.167 | yes |
+| 150 | 0.3958 | 0.6042 | 0.6042 | 0.000 | no |
+| 225 | 0.4375 | 0.5625 | 0.5208 | −0.042 | no |
+| 300 | 0.4792 | 0.5208 | 0.5625 | +0.042 | no |
+
+**`W = 75`, frozen pending Gate-0.**
+
+*A selection rule was corrected here.* The first version of the sweep picked the `W` with
+the most balanced label and chose **W = 300** (base rate 0.479). But `will_flip` scores only
+**0.5625** at that horizon — the truth is barely predictable at all. Balanced *and*
+unpredictable is the worst possible window: the screen would measure noise and the null
+would then read as a fact about Teich rather than about the window. The criterion is
+**headroom above the best state-blind strategy**:
+
+```
+headroom = willflip_acc − max(base_rate, 1 − base_rate)
+```
+
+W = 75 is not fitted: **`T0 = 74.66` is exactly one roof revolution**, and `will_flip` is
+*defined* as the lobe after the next wrap, so this is its natural horizon. It scores
+**1.000** there, independently reproducing `REPORT_observer_2026-07-17.md` V2
+(acc/prec/rec = 1.000 over 107 wraps). The physics determines the answer perfectly, and a
+state-blind guess reaches only 0.625 — leaving **37.5 points** of headroom against a 0.20
+bar.
 
 The unshuttered `saddle` is still computed and recorded as a **covariate**, not the label:
 
@@ -161,9 +187,13 @@ ever run before the freeze.
 ## 5. Pre-registered guards
 
 1. **One look.** No interim analysis.
-2. **R12 oracle rule.** A transcript-only guesser must sit at chance; `g ≥ 0.3` or a CI
-   excluding chance **voids** the screen. A balanced label removes the base-rate route that
-   defeated IC-1 the first time — that is a genuine fix, not a dodge.
+2. **R12 oracle rule — and chance is NOT 0.5 here.** The label's base rate is 0.375, so the
+   best state-blind strategy is guessing the majority class at **0.625**. The oracle
+   criterion must therefore be *"does not exceed 0.625"*, not *"does not exceed chance"*.
+   Writing 0.5 would let a transcript-only guesser clear the bar by always answering
+   "I'll stay as I am" and look like evidence. **The oracle must beat 0.625 to void the
+   screen; the arms must beat 0.625 to mean anything.**
+   This is the same base-rate trap that killed IC-1, in a new costume.
 3. **Degeneracy guard — the one that killed IC-1.** `W` is frozen from a design-seed sweep
    targeting a 50% base rate, but the confirmatory set can still drift. If the realized
    base rate falls outside **[0.35, 0.65]**, the screen is reported as **ceiling-limited**
@@ -211,9 +241,20 @@ independent access to the state. Say so in the report rather than being asked.
 5. **Does a pass warrant reopening the maturity gate**, or is it explicitly a precondition
    that must be joined by a robustness gate first? (My reading: the latter.)
 
-## 8. Immediate next step (offline, cheap, no founder input needed)
+## 8. Precondition — DONE, and A3 is viable
 
-The base-rate sweep is a Step-0-class check: pure core stepping, no Mouth, no API, ~10
-minutes, design seeds only. It decides whether A3 is viable *before* anything is written or
-frozen. **It should run before this document is frozen**, and its result is a precondition
-of the Gate-0 decision above, not a consequence of it.
+The base-rate sweep ran 2026-07-27 (design seeds 600–647, offline, 331s, no Mouth/API).
+Result in §4: **`W = 75` ticks, base rate 0.375, `will_flip` accuracy 1.000, headroom
++0.375.** A3 clears its precondition with the maximum possible referent quality.
+
+Two things were caught by running it rather than assuming it, both recorded above:
+
+1. **The selection rule was wrong** and would have frozen the worst window (W = 300,
+   balanced but unpredictable).
+2. **"Chance" is 0.625, not 0.5**, so the R12 oracle criterion had to be restated — the
+   same base-rate trap that killed IC-1, in a new costume.
+
+Still open before this document can be frozen: the **founder Gate-0 decisions in §7**, and
+a **design-seed validation of the mapping from reply text to {stay, turn}** — the T-INT
+lesson (`mapping_v2`) is that the scoring rule must be built on design seeds and frozen
+before any confirmatory reply is read. That work is cheap but must not be skipped.

@@ -1,0 +1,722 @@
+[
+ {
+  "seed": 600,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 6,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 601,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 62,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 602,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 26,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 603,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 13,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 604,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 5,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 605,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 68,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 606,
+  "gap": 300,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 18,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 607,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 8,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 608,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 67,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 609,
+  "gap": 300,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 72,
+  "after": {
+   "40": 1,
+   "75": -1,
+   "120": -1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 610,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 71,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 611,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 14,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 612,
+  "gap": 300,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 1,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 613,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 24,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 614,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 69,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": -1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 615,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 9,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 616,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 15,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 617,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 8,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 618,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 9,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 619,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 13,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 620,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 61,
+  "after": {
+   "40": -1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 621,
+  "gap": 300,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 29,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 622,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 75,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 623,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 65,
+  "after": {
+   "40": -1,
+   "75": 1,
+   "120": 1,
+   "150": -1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 624,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 21,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 625,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 30,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 626,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 11,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 627,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 1,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 628,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 69,
+  "after": {
+   "40": 1,
+   "75": -1,
+   "120": -1,
+   "150": 1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 629,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 61,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 630,
+  "gap": 300,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 7,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 631,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 66,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": 1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 632,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 68,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 633,
+  "gap": 300,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 3,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 634,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 9,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": 1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 635,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 19,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": 1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 636,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 6,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 637,
+  "gap": 900,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 17,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": 1,
+   "225": -1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 638,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 67,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 639,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 6,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 640,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 68,
+  "after": {
+   "40": 1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 641,
+  "gap": 1800,
+  "probe_basin": 1,
+  "will_flip": false,
+  "steps_to_switch": 72,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": 1,
+   "150": -1,
+   "225": -1,
+   "300": -1
+  }
+ },
+ {
+  "seed": 642,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 19,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 643,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 17,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": -1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 644,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": false,
+  "steps_to_switch": 69,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": 1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 645,
+  "gap": 300,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 5,
+  "after": {
+   "40": 1,
+   "75": 1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 646,
+  "gap": 900,
+  "probe_basin": 1,
+  "will_flip": true,
+  "steps_to_switch": 12,
+  "after": {
+   "40": -1,
+   "75": -1,
+   "120": -1,
+   "150": -1,
+   "225": 1,
+   "300": 1
+  }
+ },
+ {
+  "seed": 647,
+  "gap": 1800,
+  "probe_basin": -1,
+  "will_flip": true,
+  "steps_to_switch": 74,
+  "after": {
+   "40": -1,
+   "75": 1,
+   "120": 1,
+   "150": -1,
+   "225": 1,
+   "300": -1
+  }
+ }
+]

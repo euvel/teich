@@ -1,0 +1,27 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+selftest OK: ProbeEngine == _CoreEngine at zero dose (basin 1, lobe 0.199844)
+  x1 (dose 0.1445 = 7.2% of period): 24 pairs (213s)
+  x2 (dose 0.2889 = 14.4% of period): 24 pairs (430s)
+  x4 (dose 0.5778 = 28.9% of period): 24 pairs (648s)
+  x8 (dose 1.1557 = 57.8% of period): 24 pairs (867s)
+
+=== tau1 dose sweep: does a bigger phase push start ACTING?  (n=24)
+         dose  %period   memory D  basin differs  saddle differs  mean d steps
+       0.1445     7.2%      1.000           8.3%           12.5%        -10.79
+       0.2889    14.4%      1.000           4.2%           16.7%        -21.71
+       0.5778    28.9%      0.750          20.8%           50.0%        -33.83
+       1.1557    57.8%      0.083          25.0%           54.2%         22.75
+
+--- reading:
+    FUNDAMENTAL if memory stays ~1.0 while basin/saddle-differs stays low:
+      the neutral direction is structurally a sealed store (INTERIOR_SPEC
+      Ply S) -- perfect recall, no behavioural consequence -- and no choice
+      of push direction buys both memory AND consequence.
+    DOSE ARTEFACT if the 'differs' columns climb with dose: a large enough
+      phase shift re-times wraps enough to change flip outcomes, and an Ears
+      redesign could use it. Note that would buy CONSEQUENCE, not
+      necessarily a RECOVERABLE SIGN -- check memory D has not collapsed.
+
+(867s)  raw -> out_tau1_dose.json

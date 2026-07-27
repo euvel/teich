@@ -1,0 +1,34 @@
+{
+ "1": {
+  "dose": 0.14446,
+  "memory_D": 1.0,
+  "basin_differs": 0.0833,
+  "saddle_differs": 0.125,
+  "mean_d_steps": -10.792,
+  "n": 24
+ },
+ "2": {
+  "dose": 0.28892,
+  "memory_D": 1.0,
+  "basin_differs": 0.0417,
+  "saddle_differs": 0.1667,
+  "mean_d_steps": -21.708,
+  "n": 24
+ },
+ "4": {
+  "dose": 0.57784,
+  "memory_D": 0.75,
+  "basin_differs": 0.2083,
+  "saddle_differs": 0.5,
+  "mean_d_steps": -33.833,
+  "n": 24
+ },
+ "8": {
+  "dose": 1.15568,
+  "memory_D": 0.0833,
+  "basin_differs": 0.25,
+  "saddle_differs": 0.5417,
+  "mean_d_steps": 22.75,
+  "n": 24
+ }
+}
