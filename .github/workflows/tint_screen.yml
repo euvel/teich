@@ -34,6 +34,15 @@ jobs:
           cache: pip
           cache-dependency-path: body/requirements.txt
       - run: pip install -r body/requirements.txt "sentence-transformers==3.0.1" "transformers==4.44.2" "tokenizers==0.19.1" "huggingface_hub==0.24.7"
+      # Cache the Ears encoder: 8 runners fetching it simultaneously earned a
+      # HuggingFace 429 on 2026-07-26 and cost shard 7 its entire slice.
+      - name: cache the MiniLM Ears encoder
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2
+          key: minilm-l6-v2-v1
+      - name: stagger shard start (spread HF + NIM boot bursts)
+        run: sleep $(( ${{ matrix.k }} * 25 ))
       - name: gate-on-boot (certified substrate only)
         id: gate
         run: |
@@ -47,10 +56,13 @@ jobs:
         run: |
           cd maturity/harness/pilot_v2
           if [ -f out_tint_screen/tint_screen_result.json ]; then echo "decision exists — one look only"; exit 0; fi
-          END=$(( $(date +%s) + 16000 ))
+          # ONE worker per shard: 8 shards = 8 concurrent NIM calls total.
+          # 2026-07-26 ran 4 workers/shard (32 concurrent) on one API key and
+          # NIM 429'd continuously — 66 of 384 conversations in 4.5 hours.
+          END=$(( $(date +%s) + 17000 ))
           while [ $(date +%s) -lt $END ]; do
             python3 -u pilot_tint.py --shard ${{ matrix.k }} --nshards 8 && break
-            echo "segment ended (rate exhaustion); pausing 90s"; sleep 90
+            echo "segment ended (rate exhaustion); backing off 240s"; sleep 240
           done
       - name: commit shard ledger
         if: always()

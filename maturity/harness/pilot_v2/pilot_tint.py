@@ -72,12 +72,15 @@ def generate(tasks, tx_path, workers=1):
     mk = {"A0_intact+C1": lambda: C1Journal(A.A0Intact(model)),
           "A2b_feed_severed+C1": lambda: C1Journal(A2bFeedSevered(model))}
 
+    # Resume from EVERY banked shard, not just this one: a conversation
+    # already generated anywhere is never paid for twice, and the partition
+    # can be changed between dispatches without orphaning work.
     done = set()
-    if tx_path.exists():
-        for line in tx_path.open():
+    for p in sorted(OUT.glob("shard_*.jsonl")) + ([TX] if TX.exists() else []):
+        for line in p.open():
             t = json.loads(line)
             done.add((t["arm"], t["condition"], t["seed"]))
-        print(f"resume: {len(done)} banked")
+    print(f"resume: {len(done)} conversations already banked (all shards)")
 
     import threading
     from concurrent.futures import ThreadPoolExecutor
@@ -175,7 +178,7 @@ def main():
 
     if args.shard is not None:
         tasks = [t for i, t in enumerate(cells()) if i % args.nshards == args.shard]
-        generate(tasks, OUT / f"shard_{args.shard}.jsonl", workers=4)
+        generate(tasks, OUT / f"shard_{args.shard}.jsonl", workers=1)
         print(f"shard {args.shard}/{args.nshards} complete ({len(tasks)} tasks)")
         return
 
