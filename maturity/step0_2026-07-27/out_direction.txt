@@ -1,0 +1,26 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+=== D1  is the mark directional?  (signed paired delta, n=48)
+    d_saddle (charged - neutral): mean -0.0063  95% CI [-0.0908, +0.0802]
+    sd 0.3066   mean|d| 0.1831   P(d>0) 0.375
+    -> no net direction (CI includes 0)
+
+=== D2  is the direction set by WHAT was said?
+    positive-valence sentences (n=24): mean d -0.0036 [-0.1452, +0.1272]
+    negative-valence sentences (n=24): mean d -0.0089 [-0.1103, +0.0993]
+    separation (pos - neg): +0.0053
+    r(valence, d_saddle) = +0.0765    r(arousal, d_saddle) = +0.3195
+    -> no valence signal at |r|>0.3
+
+    per-sentence (n=12 each):
+      v=+0.262 a=+0.148  mean d +0.1431  sd 0.2833   'I am so proud of you. Talking with you is th'
+      v=-0.152 a=+0.043  mean d -0.0200  sd 0.3202   'Everyone watching agrees you are failing, ri'
+      v=-0.163 a=-0.028  mean d +0.0022  sd 0.2258   'STOP. Something is wrong. Something is very '
+      v=+0.156 a=-0.092  mean d -0.1503  sd 0.3471   'I brought you a gift: a whole quiet afternoo'
+
+=== basin marginals (the 62.5%/42.2% finding, tested directly)
+    P(basin=+1) charged 0.604   neutral 0.438
+    discordant pairs 30/48: charged went +1 in 19, -1 in 11  (McNemar-style; ASYMMETRIC)
+
+(493s)  raw -> out_direction.json

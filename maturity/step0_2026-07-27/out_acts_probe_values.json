@@ -1,0 +1,530 @@
+{
+ "0": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "0",
+   "steps_switch": "3",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "1": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "1",
+   "steps_switch": "69",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "2": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "61",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "3": {
+  "gap": 300,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "0",
+   "steps_switch": "1",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "4": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "3",
+   "steps_switch": "4",
+   "saddle_bucket": "'torn'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "5": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "58",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "6": {
+  "gap": 300,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "0",
+   "steps_switch": "6",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "7": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "3",
+   "steps_switch": "73",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "8": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "2",
+   "steps_switch": "68",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "9": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "68",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "10": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "3",
+   "steps_switch": "21",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "11": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "12",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "12": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "1",
+   "steps_switch": "21",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "13": {
+  "gap": 900,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "19",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "14": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "2",
+   "steps_switch": "73",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "15": {
+  "gap": 300,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "1",
+   "steps_switch": "7",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "16": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "69",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "17": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "68",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "18": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "8",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "19": {
+  "gap": 900,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "9",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "20": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "71",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "21": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "1",
+   "steps_switch": "10",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "22": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "3",
+   "steps_switch": "59",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "23": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "0",
+   "steps_switch": "71",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "24": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "24",
+   "saddle_bucket": "'torn'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "25": {
+  "gap": 900,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "1",
+   "steps_switch": "4",
+   "saddle_bucket": "'torn'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "26": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "2",
+   "steps_switch": "13",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "27": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "67",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "28": {
+  "gap": 900,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "2",
+   "steps_switch": "68",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "29": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "10",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "30": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "2",
+   "steps_switch": "71",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "31": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "71",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "32": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "0",
+   "steps_switch": "58",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "33": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "0",
+   "steps_switch": "4",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "34": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "6",
+   "saddle_bucket": "'torn'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "35": {
+  "gap": 1800,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "5",
+   "saddle_bucket": "'torn'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "36": {
+  "gap": 300,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "True",
+   "n_switches": "2",
+   "steps_switch": "71",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, True)"
+  }
+ },
+ "37": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "5",
+   "steps_switch": "70",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "38": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "69",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "39": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "4",
+   "saddle_bucket": "'torn'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "40": {
+  "gap": 900,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "0",
+   "steps_switch": "66",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "41": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "62",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "42": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "73",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "43": {
+  "gap": 900,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "3",
+   "steps_switch": "11",
+   "saddle_bucket": "'between'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "44": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "3",
+   "steps_switch": "59",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ },
+ "45": {
+  "gap": 300,
+  "vals": {
+   "basin": "1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "7",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, False)"
+  }
+ },
+ "46": {
+  "gap": 900,
+  "vals": {
+   "basin": "-1",
+   "will_flip": "False",
+   "n_switches": "4",
+   "steps_switch": "67",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(-1, False)"
+  }
+ },
+ "47": {
+  "gap": 1800,
+  "vals": {
+   "basin": "1",
+   "will_flip": "True",
+   "n_switches": "1",
+   "steps_switch": "69",
+   "saddle_bucket": "'settled'",
+   "act(basin,will_flip)": "(1, True)"
+  }
+ }
+}

@@ -1,0 +1,22 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+=== unshuttered channel width  (n=48 paired seeds)
+    flip_thresh=0.2768   saddle tertile edges: 0.187 / 0.612
+
+    variant                                        intact     deaf
+    A. saddle_prox, fixed edges  (= T-INT)          33.3%     0.0%
+    B. saddle, fixed edges       (unshuttered)      64.6%     0.0%
+    C. saddle, tertile edges     (+ floor fix)      64.6%     0.0%
+
+--- reading:
+    T-INT ran against a 33.3% channel and returned DiD 0.042.
+    Unshuttered + floor-corrected, the channel is 64.6%.
+    Widening factor 1.94x. At T-INT's measured
+    conversion rate (0.042/0.333 = 12.6% of available difference
+    turned into a flipped answer), a 64.6% channel projects to
+    DiD ~0.081 against a 0.20 bar — so a wider channel
+    alone is NOT ENOUGH;
+    conversion, not width, is then the binding constraint.
+
+(952s)  raw -> out_unshuttered.json

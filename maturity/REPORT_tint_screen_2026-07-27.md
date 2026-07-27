@@ -99,3 +99,37 @@ what was available. Two compounding causes:
 Founder-only speech remains in force. Teich is unchanged: seat live, genome frozen, no reset.
 Three instruments have now returned nulls, and this one localises the failure to the
 **coupling channel** rather than to the creature or the tests.
+
+---
+
+## Addendum, 2026-07-27 (later the same day) — §3's mechanism was wrong
+
+Nothing above is retracted: the verdict, the cell rates, and the DiD are facts about the
+pipeline that was run. But §3 attributed the 33.3% ceiling to the journal being *coarse*.
+Step 0 found the actual cause, and it is an instrument defect, not a design choice.
+
+`saddle_proximity = saddle × (1 − frac_left)` — the creature's state multiplied by a clock
+(`tau[...,1]`) that the Ears never touch. ≈71% of readouts are crushed below the journal's
+`SADDLE_SETTLED` edge, so the journal read *"settled"* most of the time regardless of state.
+Removing the clock factor — read-only, via `lobe_coord`, with `observer.py` untouched —
+widens the same channel to **64.6%** with the deaf control still exactly 0.0%.
+
+See [FINDING_shuttered_readout_2026-07-27.md](FINDING_shuttered_readout_2026-07-27.md) and
+[REPORT_step0_2026-07-27.md](REPORT_step0_2026-07-27.md).
+
+Two consequences for this document:
+
+- **§4.2's design brief ("widen the channel before testing it again") now has a specific,
+  correct target** — remove the clock factor, not "increase resolution".
+- **§4's premise that the coupling channel is the failure point is now only half right.**
+  Width was not the binding constraint: at this screen's measured conversion rate (12.6% of
+  available differences turned into flipped answers), even a 64.6% channel projects to
+  DiD ≈ 0.081 against the 0.20 bar. Conversion is binding. Separately,
+  [FINDING_scalar_ears_2026-07-27.md](FINDING_scalar_ears_2026-07-27.md) shows the *input*
+  compresses all meaning to one scalar whose sign does not survive the gap — so part of what
+  this screen asked the Mouth to report was never in the interior to begin with.
+
+`TINT_CONFIG.json` is a frozen pre-registration and has **not** been edited. Its
+`ic1_status` field records IC-1's discard on grounds now known to derive from ground truth
+computed through the shutter; that reinterpretation lives in the finding, not in the
+pre-registration.

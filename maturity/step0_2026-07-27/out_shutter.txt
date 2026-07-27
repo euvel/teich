@@ -1,0 +1,20 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+=== shutter check: the (1 - frac_left) gate at the probe, by gap
+       gap   n   gate=1-frac_left   saddle(state)   saddle_prox  % below SETTLED
+       300  16    0.6331 +-0.3903     0.4005         0.2234              56.2%
+       900  16    0.4330 +-0.3890     0.3459         0.2026              75.0%
+      1800  16    0.3147 +-0.3287     0.3289         0.1407              81.2%
+
+--- reading:
+    gap   300: state signal present (0.401) but attenuated x0.633 -> reported 0.254
+    gap   900: state signal present (0.346) but attenuated x0.433 -> reported 0.150
+    gap  1800: state signal present (0.329) but attenuated x0.315 -> reported 0.104
+
+    If the gate collapses at 1800 while `saddle` does not, the
+    saddle_bucket decay (50.0 -> 43.8 -> 6.2%) is a SHUTTERED
+    INSTRUMENT, not a fading mark — and T-INT scored a third of its
+    conversations through it.
+
+(250s)  raw -> out_shutter.json

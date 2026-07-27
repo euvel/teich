@@ -1,0 +1,70 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+=== Q1  reproducible?  (same seed, same script, run twice)
+    OK  basin                  identical in 8/8 repeats
+    OK  will_flip              identical in 8/8 repeats
+    OK  n_switches             identical in 8/8 repeats
+    OK  steps_switch           identical in 8/8 repeats
+    OK  saddle_bucket          identical in 8/8 repeats
+    OK  act(basin,will_flip)   identical in 8/8 repeats
+
+=== Q2/Q3  paired divergence  (48 seeds x 2 conditions x 2 arms)
+
+  --- A0_intact (hearing)
+      channel                  at pivot   later(any)   AT PROBE
+      basin                       25.0%        95.8%      62.5%
+      will_flip                   37.5%        85.4%      52.1%
+      n_switches                  25.0%        97.9%      85.4%
+      steps_switch                 0.0%         0.0%       0.0%
+      saddle_bucket               33.3%        72.9%      33.3%
+      act(basin,will_flip)        54.2%       100.0%      81.2%
+
+  --- A2b_severed (deaf)
+      channel                  at pivot   later(any)   AT PROBE
+      basin                        0.0%         0.0%       0.0%
+      will_flip                    0.0%         0.0%       0.0%
+      n_switches                   0.0%         0.0%       0.0%
+      steps_switch                 0.0%         0.0%       0.0%
+      saddle_bucket                0.0%         0.0%       0.0%
+      act(basin,will_flip)         0.0%         0.0%       0.0%
+
+=== Q4  lavalamp control  (matched marginals, cannot hear)
+      basin                        0.0%  at probe
+      will_flip                    0.0%  at probe
+      n_switches                   0.0%  at probe
+      steps_switch                 0.0%  at probe
+      saddle_bucket                0.0%  at probe
+      act(basin,will_flip)         0.0%  at probe
+
+=== decorrelation reference  (seed s vs seed s+1, both charged)
+      basin                       63.8%  (saturation ceiling)
+      will_flip                   53.2%  (saturation ceiling)
+      n_switches                  78.7%  (saturation ceiling)
+      steps_switch                95.7%  (saturation ceiling)
+      saddle_bucket               44.7%  (saturation ceiling)
+      act(basin,will_flip)        85.1%  (saturation ceiling)
+
+=== gap profile  (A0 paired divergence at the probe, by gap length)
+      channel                     300t      900t     1800t
+      basin                      68.8%     68.8%     50.0%
+      will_flip                  43.8%     56.2%     56.2%
+      n_switches                 81.2%     87.5%     87.5%
+      steps_switch                0.0%      0.0%      0.0%
+      saddle_bucket              50.0%     43.8%      6.2%
+      act(basin,will_flip)       81.2%     81.2%     81.2%
+
+--- reading:
+    n_switches             width at probe =  85.4%   (deaf 0/48, lava 0/48)
+    act(basin,will_flip)   width at probe =  81.2%   (deaf 0/48, lava 0/48)
+    basin                  width at probe =  62.5%   (deaf 0/48, lava 0/48)
+    will_flip              width at probe =  52.1%   (deaf 0/48, lava 0/48)
+    saddle_bucket          width at probe =  33.3%   (deaf 0/48, lava 0/48)
+    steps_switch           width at probe =   0.0%   (deaf 0/48, lava 0/48)
+
+    widest clean channel: n_switches at 85.4%
+    old journal channel (mood bucket) measured 33.3% and the
+    screen built on it returned DiD 0.042 against a 0.20 bar.
+    carry-over check: divergence at the pivot turn 25.0% -> still there at the probe 85.4%
+
+(1010s, 48 seeds)

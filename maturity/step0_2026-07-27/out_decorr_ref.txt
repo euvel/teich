@@ -1,0 +1,13 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+=== decorrelation ceiling, SAME-GAP pairs (s vs s+3), 48 seeds
+    channel                  same-gap   mixed-gap
+    basin                       42.2%       63.8%
+    will_flip                   44.4%       53.2%
+    n_switches                  75.6%       78.7%
+    steps_switch                97.8%       95.7%
+    saddle_bucket               53.3%       44.7%
+    act(basin,will_flip)        60.0%       85.1%
+
+(252s)
