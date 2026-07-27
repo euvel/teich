@@ -100,12 +100,12 @@ jobs:
           cache: pip
           cache-dependency-path: body/requirements.txt
       - run: pip install -r body/requirements.txt "sentence-transformers==3.0.1" "transformers==4.44.2" "tokenizers==0.19.1" "huggingface_hub==0.24.7"
-      - name: refuse to generate before the mapping is frozen
-        run: |
-          test -f maturity/harness/pilot_v2/mapping_a3.py \
-            || { echo "mapping_a3.py absent — confirmatory generation is blocked"; exit 1; }
-          grep -q "FROZEN" maturity/harness/pilot_v2/mapping_a3.py \
-            || { echo "mapping_a3.py not marked FROZEN"; exit 1; }
+      # NOTE: generation is deliberately NOT gated on the mapping. The blinded
+      # protocol requires that no confirmatory reply be READ before the rule is
+      # frozen, and generation reads nothing — finalize is the only reader, and
+      # that is where the interlock lives. Same discipline as the T-INT screen,
+      # where the data sat complete-but-unscored for hours without being looked
+      # at. Gating generation too would only cost wall-clock.
       - name: cache the MiniLM Ears encoder
         uses: actions/cache@v4
         with:
@@ -159,9 +159,19 @@ jobs:
           cache: pip
           cache-dependency-path: body/requirements.txt
       - run: pip install -r body/requirements.txt "sentence-transformers==3.0.1" "transformers==4.44.2" "tokenizers==0.19.1" "huggingface_hub==0.24.7"
-      - name: merge + score (deterministic, no API) + decide
+      # THE BLINDED-PROTOCOL INTERLOCK lives here, on the only job that READS a
+      # confirmatory reply. Scoring cannot start unless the reply->{stay,turn}
+      # rule already exists and is marked FROZEN — i.e. was committed from
+      # design-seed data before anyone could see a confirmatory answer.
+      - name: refuse to score before the mapping is frozen
         run: |
           git pull origin main
+          M=maturity/harness/pilot_v2/mapping_a3.py
+          test -f $M || { echo "mapping_a3.py absent — scoring blocked"; exit 1; }
+          grep -q "FROZEN" $M || { echo "mapping_a3.py not marked FROZEN"; exit 1; }
+          echo "mapping frozen at: $(git log -1 --format=%H%n%ci -- $M)"
+      - name: merge + score (deterministic, no API) + decide
+        run: |
           cd maturity/harness/pilot_v2
           if [ -f out_a3/a3_result.json ]; then echo "decision exists"; exit 0; fi
           python3 -u pilot_a3.py --finalize
