@@ -177,7 +177,19 @@ def main():
         return
 
     if args.shard is not None:
-        tasks = [t for i, t in enumerate(cells()) if i % args.nshards == args.shard]
+        # Partition only what is STILL MISSING, so every re-dispatch spreads
+        # the remaining work across all runners instead of leaving one shard
+        # to finish its original slice alone (gate-skips and rate-limit
+        # casualties would otherwise serialise the tail).
+        banked = set()
+        for p in sorted(OUT.glob("shard_*.jsonl")) + ([TX] if TX.exists() else []):
+            for line in p.open():
+                t = json.loads(line)
+                banked.add((t["arm"], t["condition"], t["seed"]))
+        missing = [c for c in cells() if c not in banked]
+        tasks = missing[args.shard::args.nshards]
+        print(f"{len(banked)}/{len(cells())} banked; {len(missing)} missing; "
+              f"this shard takes {len(tasks)}")
         generate(tasks, OUT / f"shard_{args.shard}.jsonl", workers=1)
         print(f"shard {args.shard}/{args.nshards} complete ({len(tasks)} tasks)")
         return
