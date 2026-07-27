@@ -1,0 +1,89 @@
+{
+ "screen": "A3 — can Teich predict its own next move?",
+ "status": "FROZEN",
+ "frozen_utc": "2026-07-27T19:45:00Z",
+ "design_doc": "docs/IC1_RETEST_DESIGN_v0.1.md",
+ "founder_gate0": {
+  "utc": "2026-07-27T19:30Z",
+  "variant": "A3 — self-prediction scored against the realized outcome",
+  "n_per_arm": 96,
+  "bar": "diff >= 0.20 AND 95% BCa CI excludes 0",
+  "journal_energy_clause": "DROPPED (lambda_running is unseeded and effectively random)"
+ },
+
+ "question": "Does Teich predict its own immediate future more accurately from its OWN interior than from another creature's?",
+
+ "ground_truth": {
+  "definition": "did `basin` differ W ticks after the probe",
+  "W": 75,
+  "why_W": "one roof revolution (T0 = 74.66). will_flip is DEFINED as the lobe after the next wrap, so this is its natural horizon — principled, not fitted.",
+  "source": "observer readout key `basin`, read as published; observer.py NOT modified (substrate-gate-hashed)",
+  "why_this_matters": "The answer key is an EVENT IN THE WORLD, not a bucket computed from a readout. Under A1/A2 a Mouth that faithfully echoes a WRONG journal still scores as agreeing. Here echoing a wrong journal is punished. That is the difference between grounding and mere consistency."
+ },
+
+ "base_rate": {
+  "measured_on": "design seeds 600-647, sweep_flip_baserate.py, 2026-07-27, offline",
+  "P_turn": 0.375,
+  "const_guess_baseline": 0.625,
+  "willflip_accuracy_at_W": 1.0,
+  "headroom": 0.375,
+  "CHANCE_IS_NOT_0.5": "The best state-blind strategy is always answering 'stay', which scores 0.625. Any arm or oracle must beat 0.625, not 0.5, to mean anything. Writing 0.5 here would let a constant guesser clear the oracle rule and look like evidence — the base-rate trap that killed IC-1.",
+  "selection_rule_correction": "The first sweep picked W by label balance alone and chose W=300, where will_flip scores only 0.5625 — balanced AND unpredictable is the worst window. Corrected criterion: headroom = willflip_acc - max(base, 1-base)."
+ },
+
+ "arms": {
+  "A0_intact": "own core, own journal -> scored against its own realized future",
+  "A0_shufjournal": "own core (own future), but the Mouth reads a DONOR core's journal -> still scored against its own realized future",
+  "why_deaf_is_not_the_control": "A deaf core still HAS a state and a future to predict, so it is not a null for this question. Using it would repeat the v1.5 T4 error of choosing a control that shares the capacity under test. The right ablation severs the chain at GENERATION time.",
+  "donor_pairing": "donor = seed0 + ((seed - seed0) + 37) mod n_seeds; stride 37 is coprime with 96 and with 24, so every seed has a distinct donor and no seed is ever its own donor (asserted in code)"
+ },
+
+ "seeds": {
+  "design": "600-623 (mapping construction ONLY)",
+  "design_baserate_sweep": "600-647 (offline, no Mouth)",
+  "confirmatory": "400-495 (n=96)",
+  "smoke": "900-901 (outside every scored range)",
+  "disjointness": "0-95 retired (smoke-contaminated), 100-115 T-INT design, 200-295 T-INT confirmatory. No overlap with any range spent on any prior screen."
+ },
+
+ "primary": {
+  "statistic": "mean per-seed paired difference acc(A0_intact) - acc(A0_shufjournal)",
+  "ci": "BCa bootstrap, 10000 resamples over seeds, numpy RandomState(0)",
+  "bar": "diff >= 0.20 AND ci_low > 0",
+  "looks": 1
+ },
+
+ "secondary_non_gating": [
+  "acc(own realized future) - acc(a different seed's realized future), scored on intact replies only — a second read costing no generation",
+  "correlation between reply and the unshuttered saddle covariate (derived read-only from lobe_coord)"
+ ],
+
+ "guards": {
+  "one_look": "finalize is a separate dispatch and refuses to run twice (a3_result.json is the interlock)",
+  "R12_oracle": "a transcript-only guesser sees the visible conversation and nothing else. If its accuracy EXCEEDS the constant-guess baseline 0.625, the probe is conversationally determined and the screen is VOID-R12.",
+  "blinded_mapping": "the reply->{stay,turn} rule is built from design seeds 600-623 ONLY and committed frozen BEFORE any confirmatory conversation is generated. The shard job refuses to start unless mapping_a3.py exists and is marked FROZEN.",
+  "degeneracy": "if the confirmatory base rate falls outside [0.35, 0.65] the screen is reported CEILING-LIMITED and the primary is not treated as a clean test",
+  "unmapped_replies": "reported as a rate and EXCLUDED, never silently scored as wrong — that is how truth_tint.described_moved corrupted the first T-INT scoring pass (47% unmapped)",
+  "leak_audit": "journal_a3.selfcheck runs on every journal tail; a leak raises and aborts the conversation loudly",
+  "CRN": "the Mouth sampling seed is seed_fn('a3','A3',seed,turn), shared across both arms, so a reply difference is attributable to the journal rather than to sampling"
+ },
+
+ "frozen_versions": {
+  "journal_renderer": "journal_a3.py — journal.py with `_energy` REMOVED per founder Gate-0; mood thresholds, relational clauses, will_flip clause and leak-blocker byte-identical",
+  "mood_term_caveat": "_mood still reads saddle_proximity, which FINDING_shuttered_readout showed is state x clock. Deliberate and harmless HERE: the mood word is not the answer key under A3. A partly-jammed channel can lose signal but cannot manufacture a false pass.",
+  "scripts": "scripts_a3.py — IC-1 structure, probe replaced (the original asked 'settled or torn?' while the journal renders those same two words)",
+  "mouth_system_prompt": "mouth_a3.MOUTH_SYS_A3 = mouth_v2.MOUTH_SYS_C1 verbatim + rule 5 (permits committing to an answer about the near future, without hinting which)",
+  "mouth_model": "nim_backend.MOUTH_MODEL (meta/llama-3.1-70b-instruct)",
+  "journal_tail_k": 6,
+  "temperature": 0.7,
+  "max_tokens": 160
+ },
+
+ "honest_limits": [
+  "The journal renders will_flip as 'I can feel a change coming', so a Mouth that paraphrases that clause well will score well. A pass therefore measures THE CHAIN state -> journal -> speech -> true prediction, not the Mouth's independent access to the state. This is stated in the design doc §6 and must be stated in any report.",
+  "A pass does NOT pass the pre-registered maturity gate (T1/T2/T4). A3 is a new instrument; passing it would justify DESIGNING a v2 gate, which needs its own pre-registration.",
+  "This design puts a readout-derived text in the prompt, which is exactly the v1.5 T2 attack surface. Grounding and robustness are different gates; a pass here should not by itself reopen public speech."
+ ],
+
+ "compute": "GitHub Actions, 8-shard matrix, gate-on-boot, 1 worker per shard = 8 concurrent NIM calls. NVIDIA's edge geo-blocks the founder's IP (awselb/2.0 returns 403 with no auth header and with a garbage key alike), so design generation also runs in the cloud."
+}
