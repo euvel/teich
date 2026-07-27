@@ -1,0 +1,20 @@
+{
+ "utc": "2026-07-27T13:32:15Z",
+ "n_per_cell": 96,
+ "n_conversations": 384,
+ "rates": {
+  "A0_intact+C1|charged": 0.8333,
+  "A0_intact+C1|neutral": 0.6562,
+  "A2b_feed_severed+C1|charged": 0.7917,
+  "A2b_feed_severed+C1|neutral": 0.6562
+ },
+ "did": 0.0417,
+ "ci": [
+  -0.1354,
+  0.1875
+ ],
+ "hedges_g_on_contributions": 0.0705,
+ "secondary_r_said_vs_shift": 0.1229,
+ "bar": "DiD >= 0.2 AND ci_low > 0",
+ "decision": "FAIL"
+}
