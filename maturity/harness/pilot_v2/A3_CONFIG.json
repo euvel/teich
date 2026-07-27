@@ -1,7 +1,19 @@
 {
  "screen": "A3 — can Teich predict its own next move?",
- "status": "FROZEN",
+ "status": "HELD — pre-registration frozen, confirmatory run NOT started",
  "frozen_utc": "2026-07-27T19:45:00Z",
+ "held_utc": "2026-07-27T21:05:00Z",
+
+ "AMENDMENT_1": {
+  "utc": "2026-07-27T21:05Z",
+  "what": "W was calibrated on the WRONG SCRIPT. sweep_flip_baserate.py measured the base rate using `build_ic1`, but A3 runs `build_a3`, whose probe TEXT differs. The probe is heard by the Ears BEFORE the gap is lived, so a different sentence means different forcing, a different trajectory, and a different base rate.",
+  "how_it_surfaced": "The design run's realized truths came back 32 stay / 9 turn = P(turn) 0.22, against the 0.375 the pre-registration claimed. Caught before any confirmatory reply was generated or read.",
+  "recalibration": "sweep_a3_window.py, on build_a3 itself, design seeds 600-623, offline, no Mouth: W=75 gives P(turn) 0.2917, const guess 0.7083, will_flip accuracy 1.0000, headroom 0.2917 — the best of 12 windows. W stays 75; it remains one roof revolution (T0=74.66) and will_flip is still a PERFECT referent there on the A3 script.",
+  "viability_rule_was_over_strict": "The rule demanded label balance in [0.35,0.65] AND headroom >= 0.15, and so rejected every window. Balance was only ever a PROXY for 'a constant guess cannot win'; headroom measures that directly. W=75 fails the proxy and passes the thing the proxy stood for.",
+  "what_this_changes": "Maximum achievable arm difference is 0.29, not 0.375. The founder's bar of 0.20 was chosen as 53% of believed headroom; against corrected headroom it demands 69%.",
+  "OPEN — FOUNDER DECISION, no run until answered": "keep bar 0.20 (69% conversion, pre-registration untouched, but a FAIL becomes ambiguous between 'bar too high' and 'no coupling') vs set bar 0.15 (52% conversion = the standard actually chosen, corrected arithmetic) vs redesign the probe (risks fishing for a friendlier answer key).",
+  "integrity": "No confirmatory seed (400-495) has ever been generated. The one dispatch that started (run 30303524164) was cancelled at 11m before any shard produced a scored reply, and no reply from it was read. Nothing about the blinded protocol is compromised: the reply->{stay,turn} mapping still does not exist, and design replies remain the only replies anyone has seen."
+ },
  "design_doc": "docs/IC1_RETEST_DESIGN_v0.1.md",
  "founder_gate0": {
   "utc": "2026-07-27T19:30Z",
