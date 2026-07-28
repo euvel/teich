@@ -42,7 +42,9 @@ DESIGN_TX = OUT / "a3_design.jsonl"
 ARMS = ("A0_intact", "A0_shufjournal")
 SEEDS = list(range(400, 496))            # confirmatory, n=96 — never run before freeze
 DESIGN_SEEDS = list(range(600, 624))     # mapping construction ONLY
-BAR = 0.20
+BAR = 0.15      # founder decision 2026-07-28 (A3_CONFIG AMENDMENT_2): 52% of the
+                # CORRECTED headroom 0.2917, preserving the standard actually
+                # chosen when headroom was believed to be 0.375.
 
 
 def cells(seeds=None):
@@ -259,6 +261,23 @@ def main():
     o_ok = [1.0 if s == tr else 0.0 for s, tr in o_scored if s is not None]
     oracle_acc = float(np.mean(o_ok)) if o_ok else None
 
+    # MANDATORY SECONDARIES (A3_CONFIG AMENDMENT_2). Reported always, gate
+    # nothing — they exist so the verdict cannot be read misleadingly either way.
+    def arm_stats(arm):
+        pairs = [(said_a3(t["turns"][-1]["reply"]), t["truth"]) for t in txs
+                 if t["arm"] == arm and t["seed"] in used]
+        pairs = [(s, tr) for s, tr in pairs if s is not None]
+        hit = [s == "turn" for s, tr in pairs if tr == "turn"]
+        fa = [s == "turn" for s, tr in pairs if tr == "stay"]
+        sens = float(np.mean(hit)) if hit else float("nan")
+        fpr = float(np.mean(fa)) if fa else float("nan")
+        return dict(n=len(pairs),
+                    P_say_turn=round(float(np.mean([s == "turn" for s, _ in pairs])), 4),
+                    sens=round(sens, 4), fpr=round(fpr, 4),
+                    J=round(sens - fpr, 4))
+
+    sec = {a: arm_stats(a) for a in ARMS}
+    j_diff = sec[ARMS[0]]["J"] - sec[ARMS[1]]["J"]
     ceiling = "OK" if 0.35 <= base <= 0.65 else "CEILING-LIMITED"
     voided = (oracle_acc is not None and oracle_acc > const_guess)
     decision = "PASS" if (diff >= BAR and lo > 0 and not voided) else "FAIL"
@@ -276,7 +295,18 @@ def main():
                oracle_acc=(round(oracle_acc, 4) if oracle_acc is not None else None),
                unmapped=unmapped, label_balance=ceiling,
                bar=f"diff >= {BAR} AND ci_low > 0 AND oracle <= {const_guess:.3f}",
-               decision=decision)
+               decision=decision,
+               secondary_bias_and_discrimination=sec,
+               secondary_J_difference=round(j_diff, 4),
+               secondary_intact_vs_constant_guess=round(
+                   acc(ARMS[0]) - const_guess, 4),
+               interpretation_required=(
+                   "PASS on the arm contrast with acc_intact BELOW "
+                   "const_guess_baseline means: coupling is demonstrated, SKILL "
+                   "IS NOT. Teich would be worse at predicting itself than a "
+                   "fixed answer of 'stay'. Any report must say so plainly."
+                   if acc(ARMS[0]) < const_guess else
+                   "acc_intact is at or above the constant-guess baseline."))
     (OUT / "a3_result.json").write_text(json.dumps(res, indent=1))
     print(json.dumps(res, indent=1))
 

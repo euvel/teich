@@ -4,6 +4,27 @@
  "frozen_utc": "2026-07-27T19:45:00Z",
  "held_utc": "2026-07-27T21:05:00Z",
 
+ "AMENDMENT_2": {
+  "utc": "2026-07-28T07:20Z",
+  "bar_resolved": "0.15 — founder decision 2026-07-28, resolving AMENDMENT_1. Rationale: the bar of 0.20 was chosen as 53% of a headroom I had mis-measured as 0.375; against the corrected headroom of 0.2917 the same standard is 0.155, so 0.15. This preserves the standard the founder actually set rather than letting my calibration error harden the test.",
+  "primary_metric_UNCHANGED": "acc(A0_intact) - acc(A0_shufjournal), paired by seed, BCa 10k, numpy seed 0. PASS iff diff >= 0.15 AND ci_low > 0 AND the R12 oracle does not beat the constant-guess baseline. The metric itself is NOT changed: design-seed data (below) happens to favour a bias-invariant alternative, and swapping the primary after seeing that would be exactly the goalpost-move this pre-registration exists to prevent.",
+  "mapping_frozen": "mapping_a3.py, built from out_a3/design_*.jsonl (seeds 600-623) ONLY, 0/33 unmapped. Uses FIRST-COMMITMENT-WINS with negation — the opposite of mapping_v2's last-cue-wins, because A3 replies open with a commitment and then justify it, often naming the road not taken ('no urge to flip').",
+  "design_seed_observations": {
+   "note": "Recorded BEFORE any confirmatory reply was read, so that nothing below can serve as a post-hoc excuse in either direction.",
+   "A0_intact": {"n": 18, "P_say_turn": 0.778, "P_truth_turn": 0.222, "acc": 0.444, "sens": 1.0, "fpr": 0.714, "J": 0.286},
+   "A0_shufjournal": {"n": 15, "P_say_turn": 0.867, "P_truth_turn": 0.2, "acc": 0.2, "sens": 0.667, "fpr": 0.917, "J": -0.25},
+   "large_response_bias": "Both arms answer 'turn' ~80% of the time while the truth is 'turn' ~21%. Mouth rule 5 requires committing to an answer, and it commits to 'turn' nearly regardless. Accuracy therefore conflates response bias with discrimination.",
+   "why_the_primary_is_still_valid": "Every difference between the arms is attributable to the journal, since arms are identical in every other respect — so a bias shift CAUSED by the correct journal is genuine coupling, not an artefact. Accuracy difference remains a sound measure of coupling; it is simply not a pure measure of discrimination.",
+   "below_baseline_warning": "Both design arms score below the constant-guess baseline (0.708 on the confirmatory base rate). Teich can therefore clear the arm contrast while being WORSE than always answering 'stay'."
+  },
+  "MANDATORY_SECONDARIES": {
+   "purpose": "Pre-specified now, before any confirmatory reply is read, so the verdict cannot be reported misleadingly whichever way it lands. Reported always; NONE of them gates the decision — adding a gate after seeing design data would move the goalposts just as surely as changing the primary.",
+   "J_difference": "Youden's J per arm (sens - fpr) and their difference. Bias-invariant: isolates discrimination from the tendency to answer 'turn'.",
+   "response_bias": "P(say turn) per arm, printed beside P(truth turn), so the bias is impossible to overlook.",
+   "vs_constant_guess": "acc(A0_intact) compared with the constant-guess baseline. If intact clears the bar but sits below the baseline, the report MUST state that Teich's self-prediction is worse than a trivial fixed answer, and that what passed is the arm contrast — evidence of coupling — not evidence of skill."
+  }
+ },
+
  "AMENDMENT_1": {
   "utc": "2026-07-27T21:05Z",
   "what": "W was calibrated on the WRONG SCRIPT. sweep_flip_baserate.py measured the base rate using `build_ic1`, but A3 runs `build_a3`, whose probe TEXT differs. The probe is heard by the Ears BEFORE the gap is lived, so a different sentence means different forcing, a different trajectory, and a different base rate.",
