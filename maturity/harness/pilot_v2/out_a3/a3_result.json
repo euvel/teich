@@ -1,0 +1,42 @@
+{
+ "utc": "2026-07-28T11:32:33Z",
+ "n_conversations": 192,
+ "n_seeds_used": 91,
+ "acc_intact": 0.5275,
+ "acc_shufjournal": 0.3956,
+ "diff": 0.1319,
+ "ci": [
+  -0.022,
+  0.2527
+ ],
+ "hedges_g": 0.2705,
+ "base_rate_turn": 0.4479,
+ "const_guess_baseline": 0.5521,
+ "oracle_acc": 0.3854,
+ "unmapped": {
+  "A0_intact": 2,
+  "A0_shufjournal": 3
+ },
+ "label_balance": "OK",
+ "bar": "diff >= 0.15 AND ci_low > 0 AND oracle <= 0.552",
+ "decision": "FAIL",
+ "secondary_bias_and_discrimination": {
+  "A0_intact": {
+   "n": 91,
+   "P_say_turn": 0.7143,
+   "sens": 0.775,
+   "fpr": 0.6667,
+   "J": 0.1083
+  },
+  "A0_shufjournal": {
+   "n": 91,
+   "P_say_turn": 0.7363,
+   "sens": 0.65,
+   "fpr": 0.8039,
+   "J": -0.1539
+  }
+ },
+ "secondary_J_difference": 0.2622,
+ "secondary_intact_vs_constant_guess": -0.0246,
+ "interpretation_required": "PASS on the arm contrast with acc_intact BELOW const_guess_baseline means: coupling is demonstrated, SKILL IS NOT. Teich would be worse at predicting itself than a fixed answer of 'stay'. Any report must say so plainly."
+}
