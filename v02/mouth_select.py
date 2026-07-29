@@ -96,8 +96,9 @@ def has_question(text: str) -> bool:
 class SelectingMouth:
     """State-selects among candidates the voice already produced."""
 
-    def __init__(self, ears):
+    def __init__(self, ears, voice=None):
         self.ears = ears          # EarsV2: gives us the shared semantic frame
+        self.voice = voice        # any object with .complete(msgs, ...) -> str
 
     # ---------------------------------------------------------------- targets
     @staticmethod
@@ -139,9 +140,11 @@ class SelectingMouth:
 
     # ---------------------------------------------------------------- voice
     def candidates(self, history, user_text, seed=0, k=K_CANDIDATES):
-        """One NIM call returning k variants. The prompt never mentions state."""
-        from nim_backend import MOUTH_MODEL, _call
+        """One generation returning k variants. The prompt never mentions state."""
         msgs = ([{"role": "system", "content": CANDIDATE_SYS.format(k=k)}]
                 + list(history) + [{"role": "user", "content": user_text}])
-        raw = _call(MOUTH_MODEL, msgs, max_tokens=320, temperature=0.95, seed=seed)
+        if self.voice is None:
+            from voice_local import NIMVoice
+            self.voice = NIMVoice()
+        raw = self.voice.complete(msgs, max_tokens=320, temperature=0.95, seed=seed)
         return parse_candidates(raw, k), raw

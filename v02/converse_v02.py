@@ -47,10 +47,10 @@ DEMO_SCRIPT = [
 class Creature:
     """A v0.2 instance wired to ears, voice and selection."""
 
-    def __init__(self, model, seed, ears, donor_state_from=None):
+    def __init__(self, model, seed, ears, donor_state_from=None, voice=None):
         self.e = G.V02Engine(model, seed)
         self.ears = ears
-        self.mouth = SelectingMouth(ears)
+        self.mouth = SelectingMouth(ears, voice=voice)
         # donor arm: a SECOND live creature whose state does the selecting.
         # Both are real and both live; only the wiring between this body and
         # this voice is cut. Deaf/severed would not be a control here — every
@@ -77,7 +77,7 @@ class Creature:
                     candidates=cands, reply=pick["choice"], pick=pick)
 
 
-def run_demo(model, ears, seed=7):
+def run_demo(model, ears, seed=7, voice=None):
     """Banks EVERY turn as it completes and resumes from what is banked.
 
     Without this, a NIM 429 sends the workflow's retry loop back to turn 0 and
@@ -88,7 +88,7 @@ def run_demo(model, ears, seed=7):
     """
     path = OUT / "demo.json"
     rec = json.loads(path.read_text()) if path.exists() else []
-    c = Creature(model, seed, ears)
+    c = Creature(model, seed, ears, voice=voice)
     hist = []
     print(f"\n=== Teich v0.2 — demo conversation (seed {seed})")
     if rec:
@@ -124,7 +124,7 @@ def run_demo(model, ears, seed=7):
     return rec
 
 
-def run_arms(model, ears, seeds, ticks=TICKS_PER_TURN):
+def run_arms(model, ears, seeds, ticks=TICKS_PER_TURN, voice=None):
     """Day-3 check: does the creature's OWN state drive what it says?
 
     intact : its own state selects
@@ -147,7 +147,7 @@ def run_arms(model, ears, seeds, ticks=TICKS_PER_TURN):
     clean.
     """
     from mouth_select import SelectingMouth
-    mouth = SelectingMouth(ears)
+    mouth = SelectingMouth(ears, voice=voice)
 
     pool_path = OUT / "candidate_pool.json"
     if pool_path.exists():
@@ -202,6 +202,8 @@ def main():
     ap.add_argument("--arms", action="store_true")
     ap.add_argument("--seeds", type=int, default=32)
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--voice", choices=["local", "nim"], default="local",
+                    help="local = Qwen2.5-1.5B on CPU, no API, self-contained")
     args = ap.parse_args()
 
     import compat
@@ -209,12 +211,15 @@ def main():
     model = compat.load_model(cfg, gcfg)
     G.selftest_zero(model)
     ears = EarsV2(model)
+    from voice_local import get_voice
+    voice = get_voice(args.voice)
+    print(f"voice: {args.voice}")
 
     if args.demo:
-        run_demo(model, ears, seed=args.seed)
+        run_demo(model, ears, seed=args.seed, voice=voice)
     elif args.arms:
         t0 = time.time()
-        run_arms(model, ears, list(range(args.seeds)))
+        run_arms(model, ears, list(range(args.seeds)), voice=voice)
         print(f"({time.time()-t0:.0f}s) -> out_v02/arms.jsonl")
     else:
         sys.exit("use --demo or --arms")
