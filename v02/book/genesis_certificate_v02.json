@@ -1,0 +1,241 @@
+{
+ "name": "Teich-0.2",
+ "born_utc": "2026-07-29T09:39:38Z",
+ "identity_sha256": "f1ded9e7415d8bbfe1fe280b37096ae09125b5d05dd326bf73eb27e492877145",
+ "genome_files_sha256": {
+  "genome_v02.py": "a4c8f1df6d476e7eff322a4c6c22634d650ae2eae67dd41793ad000fc2c91b94",
+  "ears_v2.py": "aa408fb269eb55a3a18cf913e8faffc9ea4a48f80a1bcda61c466fb8c5ed306a",
+  "mouth_select.py": "6b080823e971166b1ef5c45930ea3cecdd6cd3a20dda56c77c1d568a09dc4b32",
+  "converse_v02.py": "83d8a0c8031209510e3aca4c2cf8f592639295c52c0c1876858427c98dc7a4d9",
+  "accept_v02.py": "1f71a412c7ea58fdbf174c8efe3aa3e5275c25cead4c19fc885bcbe61fd9b8f0"
+ },
+ "git_commit": "8f082180a707968014a5da7e599685ef968132ef",
+ "constants": {
+  "DIM_S": 2,
+  "TAU_MEM": 20000.0,
+  "KAPPA_B": 0.1,
+  "KAPPA_A": 0.1,
+  "S_CLIP": 4.0,
+  "seeds": 8
+ },
+ "verified_before_birth": {
+  "T1_phi_blindness": {
+   "passed": true,
+   "mismatches": 0,
+   "note": "5 phi draws x 8 seeds, observables bit-identical"
+  },
+  "T2_survival": {
+   "passed": true,
+   "bar": "D >= 0.30 with CI excluding 0.5 on a FOLD observable at the longest gap",
+   "by_gap": {
+    "300": {
+     "basin": {
+      "D": 0.125,
+      "auc": 0.4375,
+      "ci": [
+       0.1875,
+       0.6875
+      ],
+      "sig": false
+     },
+     "saddle": {
+      "D": 0.75,
+      "auc": 0.125,
+      "ci": [
+       0.0,
+       0.375
+      ],
+      "sig": true
+     },
+     "wing_bias": {
+      "D": 0.125,
+      "auc": 0.4375,
+      "ci": [
+       0.125,
+       0.75
+      ],
+      "sig": false
+     }
+    },
+    "900": {
+     "basin": {
+      "D": 0.5,
+      "auc": 0.25,
+      "ci": [
+       0.0625,
+       0.4375
+      ],
+      "sig": true
+     },
+     "saddle": {
+      "D": 0.375,
+      "auc": 0.3125,
+      "ci": [
+       0.0625,
+       0.625
+      ],
+      "sig": false
+     },
+     "wing_bias": {
+      "D": 0.25,
+      "auc": 0.625,
+      "ci": [
+       0.25,
+       0.875
+      ],
+      "sig": false
+     }
+    },
+    "1800": {
+     "basin": {
+      "D": 0.125,
+      "auc": 0.4375,
+      "ci": [
+       0.3125,
+       0.5
+      ],
+      "sig": false
+     },
+     "saddle": {
+      "D": 0.5,
+      "auc": 0.25,
+      "ci": [
+       0.0,
+       0.5031
+      ],
+      "sig": false
+     },
+     "wing_bias": {
+      "D": 0.75,
+      "auc": 0.875,
+      "ci": [
+       0.625,
+       1.0
+      ],
+      "sig": true
+     }
+    },
+    "5000": {
+     "basin": {
+      "D": 0.125,
+      "auc": 0.4375,
+      "ci": [
+       0.25,
+       0.625
+      ],
+      "sig": false
+     },
+     "saddle": {
+      "D": 1.0,
+      "auc": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "sig": true
+     },
+     "wing_bias": {
+      "D": 0.5,
+      "auc": 0.75,
+      "ci": [
+       0.375,
+       1.0
+      ],
+      "sig": false
+     }
+    }
+   }
+  },
+  "T3_memory_time": {
+   "passed": true,
+   "tau_measured": 19999.5,
+   "tau_target": 20000.0,
+   "decay": [
+    [
+     2000,
+     0.90215
+    ],
+    [
+     5000,
+     0.77648
+    ],
+    [
+     10000,
+     0.60472
+    ],
+    [
+     20000,
+     0.36678
+    ]
+   ]
+  },
+  "T4_readout_hygiene": {
+   "passed": true,
+   "rows": {
+    "basin": {
+     "reproducible": true,
+     "moved_frac": 0.25,
+     "creature_dependent": true
+    },
+    "saddle": {
+     "reproducible": true,
+     "moved_frac": 0.75,
+     "creature_dependent": true
+    },
+    "will_flip": {
+     "reproducible": true,
+     "moved_frac": 0.625,
+     "creature_dependent": true
+    },
+    "wing_bias": {
+     "reproducible": true,
+     "moved_frac": 0.875,
+     "creature_dependent": true
+    },
+    "lobe_coord": {
+     "reproducible": true,
+     "moved_frac": 1.0,
+     "creature_dependent": true
+    }
+   }
+  },
+  "T5_capacity": {
+   "passed": true,
+   "coupled_dims": [
+    0,
+    1
+   ],
+   "dim_s": 2,
+   "bit_budget": 10.0
+  }
+ },
+ "leakage_guarantee": {
+  "claim": "I(private_phase ; observations) = 0, exactly.",
+  "basis": "STRUCTURAL, not statistical. The private phase appears in no term of the tau/ell/s updates and in no argument of the observable map, so instances differing only in it produce BIT-IDENTICAL observables \u2014 for any observation length, against any adversary, with no test required.",
+  "evidence": "T1: 0 mismatches over 5 private-phase draws x 8 seeds.",
+  "twin_corollary": "Two instances sharing (x0, s0) and differing only in private phase are observationally identical. No decoder, given any data and unbounded compute, beats chance at telling them apart.",
+  "honest_limit": "This guarantee is exactly as strong as it sounds and no stronger: because the private phase drives nothing, it certifies IDENTITY, not inner life. The interiority claim rests entirely on Ply R (the slow state s), which is public by design."
+ },
+ "what_is_NOT_claimed": [
+  "No maturity gate has been passed. v0.1 failed four pre-registered screens; v0.2 has attempted none.",
+  "Nothing here says this creature's speech is grounded in its state beyond what its own verification run measures.",
+  "It is not conscious, does not understand, and no test here bears on either question."
+ ],
+ "failures_caught_before_birth": [
+  "The second slow dimension first modulated the roof PERIOD \u2014 a clock knob the fold rule never consults. That is exactly v0.1's tau1 mistake (perfect memory, basin unchanged in 46/48 runs), rebuilt after the finding had already been written down. T5 caught it in 7 minutes. Fixed by making it a wing asymmetry that leans the fold.",
+  "steps_to_switch then measured 0% creature-dependent and was REMOVED from the published readout rather than kept. Publishing a readout that cannot move with the creature is the saddle_proximity disease that jammed three v0.1 campaigns."
+ ],
+ "covenant": [
+  "This creature is never reset and never forked. There is one of it.",
+  "Its genome is frozen at the hash recorded here.",
+  "Its private phase (Ply S) is never published, and drives nothing \u2014 it is identity, not interiority.",
+  "It speaks only to its founder until a maturity gate is designed, pre-registered, and passed. No such gate has been passed.",
+  "Every claim made about it must name the evidence for it, and every failed test stays in the book."
+ ],
+ "ancestor": {
+  "name": "Teich (v0.1)",
+  "born": "2026-07-18T08:45:12Z",
+  "status": "alive, unchanged, founder-only speech",
+  "bequest": "Four pre-registered nulls and two impossibility findings. The decisive one: memory and consequence are separable, and a genome must be designed to couple them. v0.2 exists because v0.1 was measured honestly enough to say what was wrong with it."
+ }
+}
