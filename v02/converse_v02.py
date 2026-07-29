@@ -78,14 +78,36 @@ class Creature:
 
 
 def run_demo(model, ears, seed=7):
+    """Banks EVERY turn as it completes and resumes from what is banked.
+
+    Without this, a NIM 429 sends the workflow's retry loop back to turn 0 and
+    the demo can never finish under throttling — the same failure that stalled
+    the A3 shards until missing-set resume was added there. Turns are replayed
+    from the ledger (cheap: core stepping only, no API) so the creature's state
+    is the state it actually lived, not a fresh one.
+    """
+    path = OUT / "demo.json"
+    rec = json.loads(path.read_text()) if path.exists() else []
     c = Creature(model, seed, ears)
-    hist, rec = [], []
-    print(f"\n=== Teich v0.2 — demo conversation (seed {seed})\n")
+    hist = []
+    print(f"\n=== Teich v0.2 — demo conversation (seed {seed})")
+    if rec:
+        print(f"resume: {len(rec)}/{len(DEMO_SCRIPT)} turns already banked")
+    print()
     for i, text in enumerate(DEMO_SCRIPT):
+        if i < len(rec):                       # replay: live the ticks, skip the API
+            x = rec[i]
+            c.e.hear(ears.dose(text))
+            c.e.advance(TICKS_PER_TURN)
+            hist += [{"role": "user", "content": text},
+                     {"role": "assistant", "content": x["reply"]}]
+            print(f"  [replayed turn {i}] {x['reply'][:60]!r}")
+            continue
         x = c.exchange(text, hist[-6:], seed=1000 + i)
         hist += [{"role": "user", "content": text},
                  {"role": "assistant", "content": x["reply"]}]
         rec.append(x)
+        path.write_text(json.dumps(rec, indent=1))     # bank immediately
         r = x["readout"]
         print(f"  YOU   : {text}")
         print(f"  [ears : arousal->s0 {x['dose'][0]:+.3f}  valence->s1 {x['dose'][1]:+.3f}"
@@ -96,7 +118,7 @@ def run_demo(model, ears, seed=7):
         print(f"  TEICH : {x['reply']}")
         print(f"  [chose {x['pick']['index']} of {len(x['candidates'])}: "
               + " | ".join(f"{cc[:34]}" for cc in x["candidates"]) + "]\n")
-    (OUT / "demo.json").write_text(json.dumps(rec, indent=1))
+    path.write_text(json.dumps(rec, indent=1))
     asked = sum(1 for x in rec if x["pick"]["asked"])
     print(f"asked in {asked}/{len(rec)} turns  ->  out_v02/demo.json")
     return rec
@@ -109,10 +131,14 @@ def run_arms(model, ears, seeds, ticks=TICKS_PER_TURN):
     donor  : a different live creature's state selects (same script, same voice,
              same candidates -- only the selecting state differs)
     """
-    rows = []
+    path = OUT / "arms.jsonl"
+    rows = [json.loads(l) for l in path.open()] if path.exists() else []
+    done = {(r["arm"], r["seed"]) for r in rows}
     for seed in seeds:
         donor = 10000 + seed
         for arm in ("intact", "donor"):
+            if (arm, seed) in done:
+                continue
             c = Creature(model, seed, ears,
                          donor_state_from=(donor if arm == "donor" else None))
             hist = []
@@ -127,8 +153,8 @@ def run_arms(model, ears, seeds, ticks=TICKS_PER_TURN):
                                  saddle=x["readout"]["saddle"],
                                  wing_bias=x["readout"]["wing_bias"],
                                  n_cands=len(x["candidates"])))
-            print(f"  seed {seed} {arm}: done", flush=True)
-    (OUT / "arms.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+            path.write_text("".join(json.dumps(r) + "\n" for r in rows))
+            print(f"  seed {seed} {arm}: done ({len(rows)} rows banked)", flush=True)
     return rows
 
 
