@@ -1,0 +1,52 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+Integrating Lorenz:   0%|          | 0/12 [00:00<?, ?it/s]Integrating Lorenz:  42%|████▏     | 5/12 [00:00<00:00, 43.06it/s]Integrating Lorenz:  83%|████████▎ | 10/12 [00:00<00:00, 43.36it/s]Integrating Lorenz: 100%|██████████| 12/12 [00:00<00:00, 43.33it/s]
+INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+/home/euvel/.local/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+selftest OK: v0.2 == v0.1 bit-identically at s=0 (lobe_coord -0.035705024669, 400 ticks)
+
+=== T1  phi-blindness  (structural: I(phi;obs) = 0 exactly)
+    5 phi draws x 8 seeds -> mismatches: 0   PASS
+    phi absent from readout dict: PASS
+
+=== T2  survival: is the sign of an input recoverable LATER?
+    (v0.1 scores D ~ 0.04 on fold observables — this is its wall)
+       gap                  basin                 saddle              wing_bias
+       300     0.000                 0.458*                0.125            
+       900     0.125                 0.375*                0.167            
+      1800     0.083                 0.667*                0.417            
+      5000     0.000                 0.917*                0.167            
+    -> PASS (bar: D >= 0.30 + CI excludes 0.5 at gap 5000)
+
+=== T3  memory time (measured, not assumed). target 20000 ticks
+    s after delivery 0.9970; decay t=2000:0.9021, t=5000:0.7765, t=10000:0.6047, t=20000:0.3668
+    tau_measured = 19999 ticks vs target 20000  PASS
+
+=== T4  readout hygiene: reproducible AND creature-dependent
+               readout   reproducible   creature-dep
+                 basin           PASS          58.3%
+                saddle           PASS          91.7%
+             will_flip           PASS          50.0%
+             wing_bias           PASS          95.8%
+            lobe_coord           PASS         100.0%
+
+=== T5  input capacity
+    s[0] alone -> basin     : D = 0.083 
+    s[0] alone -> saddle    : D = 0.667*
+    s[0] alone -> wing_bias : D = 0.417 
+    s[1] alone -> basin     : D = 0.167 
+    s[1] alone -> saddle    : D = 0.208 
+    s[1] alone -> wing_bias : D = 0.667*
+    coupled dims: 2/2   bit budget ~ 10.0 bits   PASS
+
+==============================================================
+  T1  PASS
+  T2  PASS
+  T3  PASS
+  T4  PASS
+  T5  PASS
+  GATE: PASS — candidate may be born
+==============================================================
+(501s) -> accept_v02_result.json
