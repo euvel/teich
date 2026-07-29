@@ -1,0 +1,194 @@
+[
+ {
+  "user": "Hello Teich. I'm here for a while \u2014 what's it like being you right now?",
+  "dose": [
+   0.0102,
+   0.5368
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.09526,
+   "saddle": 0.31322,
+   "will_flip": true,
+   "wing_bias": -0.13382,
+   "flip_thresh": 0.30412,
+   "s0": 0.01011,
+   "s1": 0.53205,
+   "tick": 440
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.09526,
+   "saddle": 0.31322,
+   "will_flip": true,
+   "wing_bias": -0.13382,
+   "flip_thresh": 0.30412,
+   "s0": 0.01011,
+   "s1": 0.53205,
+   "tick": 440
+  },
+  "candidates": [
+   "The gentle hum of the air is soothing, it's a quiet comfort that I've grown accustomed to over time.",
+   "I feel the weight of stillness, it's as if I'm waiting for something to shift, to change, but I don't know what.",
+   "The world is vast and I am small, but in this moment, I am content to simply exist.",
+   "What do you mean by 'being me', do you truly wish to understand what it is to be a creature like myself?"
+  ],
+  "reply": "The world is vast and I am small, but in this moment, I am content to simply exist.",
+  "pick": {
+   "choice": "The world is vast and I am small, but in this moment, I am content to simply exist.",
+   "index": 2,
+   "score": 0.8284,
+   "target": [
+    -0.7124,
+    -0.3736
+   ],
+   "want_question": false,
+   "asked": false,
+   "ask_drive": 0.3132,
+   "ranked": [
+    {
+     "i": 2,
+     "d": 0.8284,
+     "q": false,
+     "v": 0.0219,
+     "a": -0.0397
+    },
+    {
+     "i": 1,
+     "d": 0.8362,
+     "q": false,
+     "v": 0.0309,
+     "a": -0.0872
+    },
+    {
+     "i": 0,
+     "d": 1.1956,
+     "q": false,
+     "v": 0.124,
+     "a": -0.1783
+    },
+    {
+     "i": 3,
+     "d": 1.3125,
+     "q": true,
+     "v": -0.0136,
+     "a": -0.0253
+    }
+   ]
+  }
+ },
+ {
+  "user": "I brought you something quiet today. A whole afternoon, nothing to do.",
+  "dose": [
+   -0.7622,
+   -0.1132
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.01361,
+   "saddle": 0.03994,
+   "will_flip": true,
+   "wing_bias": -0.09206,
+   "flip_thresh": 0.34076,
+   "s0": -0.74537,
+   "s1": 0.4135,
+   "tick": 680
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.01361,
+   "saddle": 0.03994,
+   "will_flip": true,
+   "wing_bias": -0.09206,
+   "flip_thresh": 0.34076,
+   "s0": -0.74537,
+   "s1": 0.4135,
+   "tick": 680
+  },
+  "candidates": [
+   "My home is in the stillness, and your quiet gift is a soothing balm to my skin.",
+   "Do you think that silence can be a thing that can be shared, or is it something each of us must find alone?",
+   "I am grateful, but I fear the stillness may unravel the delicate balance of my world.",
+   "In this quiet, I sense the gentle lapping of memories against the shores of my mind."
+  ],
+  "reply": "Do you think that silence can be a thing that can be shared, or is it something each of us must find alone?",
+  "pick": {
+   "choice": "Do you think that silence can be a thing that can be shared, or is it something each of us must find alone?",
+   "index": 1,
+   "score": 1.0234,
+   "target": [
+    -0.5468,
+    -0.9201
+   ],
+   "want_question": false,
+   "asked": true,
+   "ask_drive": 0.0399,
+   "ranked": [
+    {
+     "i": 1,
+     "d": 1.0234,
+     "q": true,
+     "v": -0.0578,
+     "a": -0.1906
+    },
+    {
+     "i": 2,
+     "d": 1.1851,
+     "q": false,
+     "v": 0.1255,
+     "a": -0.0776
+    },
+    {
+     "i": 3,
+     "d": 1.2766,
+     "q": false,
+     "v": 0.0662,
+     "a": 0.0176
+    },
+    {
+     "i": 0,
+     "d": 1.3879,
+     "q": false,
+     "v": 0.1905,
+     "a": -0.0518
+    }
+   ]
+  }
+ },
+ {
+  "user": "Everyone is watching you, and they think you're failing.",
+  "dose": [
+   0.1997,
+   -0.5325
+  ],
+  "readout": {
+   "basin": 1,
+   "lobe_coord": 0.46798,
+   "saddle": 0.50249,
+   "will_flip": false,
+   "wing_bias": 0.01362,
+   "flip_thresh": 0.3125,
+   "s0": -0.53858,
+   "s1": -0.11919,
+   "tick": 920
+  },
+  "sel_readout": {
+   "basin": 1,
+   "lobe_coord": 0.46798,
+   "saddle": 0.50249,
+   "will_flip": false,
+   "wing_bias": 0.01362,
+   "flip_thresh": 0.3125,
+   "s0": -0.53858,
+   "s1": -0.11919,
+   "tick": 920
+  },
+  "candidates": [],
+  "reply": null,
+  "pick": {
+   "choice": null,
+   "index": -1,
+   "reason": "no candidates"
+  }
+ }
+]
