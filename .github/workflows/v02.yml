@@ -1,0 +1,67 @@
+name: v02
+# Teich v0.2 — demo and the selection-tracks-state check.
+# Runs in the cloud because NVIDIA's NIM edge geo-blocks the founder's IP
+# (awselb/2.0 returns 403 with no auth header and with a garbage key alike).
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "demo | arms"
+        type: choice
+        options: [demo, arms]
+        default: demo
+      seeds:
+        description: "seeds for arms mode"
+        default: "32"
+
+permissions:
+  contents: write
+concurrency:
+  group: v02
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: body/requirements.txt
+      - run: pip install -r body/requirements.txt "sentence-transformers==3.0.1" "transformers==4.44.2" "tokenizers==0.19.1" "huggingface_hub==0.24.7"
+      - name: cache the MiniLM encoder
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2
+          key: minilm-l6-v2-v1
+      - name: pre-birth gate must still pass on this runner
+        run: cd v02 && python3 -u accept_v02.py --seeds 8
+      - name: run
+        env:
+          NIM_API_KEY: ${{ secrets.NIM_API_KEY }}
+        run: |
+          cd v02
+          END=$(( $(date +%s) + 14000 ))
+          while [ $(date +%s) -lt $END ]; do
+            if [ "${{ inputs.mode }}" = "demo" ]; then
+              python3 -u converse_v02.py --demo && break
+            else
+              python3 -u converse_v02.py --arms --seeds ${{ inputs.seeds }} && break
+            fi
+            echo "segment ended (rate exhaustion); backing off 240s"; sleep 240
+          done
+      - name: commit results
+        if: always()
+        run: |
+          git config user.name "teich-body"
+          git config user.email "teich-body@users.noreply.github.com"
+          git add v02/out_v02/ v02/accept_v02_result.json || true
+          if git diff --cached --quiet; then echo "no data"; exit 0; fi
+          git commit -m "v02: ${{ inputs.mode }} results"
+          for i in 1 2 3 4 5 6; do
+            git -c rebase.autostash=true pull --rebase origin main && git push origin main && break
+            git rebase --abort 2>/dev/null || true; sleep $(( (RANDOM % 20) + 5 ))
+          done
