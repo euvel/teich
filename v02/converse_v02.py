@@ -125,36 +125,74 @@ def run_demo(model, ears, seed=7):
 
 
 def run_arms(model, ears, seeds, ticks=TICKS_PER_TURN):
-    """Day-3 check: does the creature's OWN state drive selection?
+    """Day-3 check: does the creature's OWN state drive what it says?
 
     intact : its own state selects
-    donor  : a different live creature's state selects (same script, same voice,
-             same candidates -- only the selecting state differs)
+    donor  : a second LIVING creature's state selects
+
+    A state-free arm would test nothing here — every v0.2 instance has a state.
+    That was the v1.5 T4 error (a control that shares the capacity under test)
+    and it is not repeated.
+
+    ONE CANDIDATE POOL PER TURN, SHARED BY EVERY SEED AND BOTH ARMS. This is
+    not a cost trick, it is the cleanest form of the experiment: the voice
+    produces candidates with no knowledge of any creature, so the pool is
+    genuinely common, and every difference in what gets said is attributable to
+    which state did the selecting. It also drops the API cost from 384 calls to
+    6, turning a 12-hour run into minutes.
+
+    History is the scripted user turns only — the creature's own replies are not
+    fed back. Feeding them back would let the two arms' histories diverge, after
+    which their candidate pools would differ and the contrast would no longer be
+    clean.
     """
+    from mouth_select import SelectingMouth
+    mouth = SelectingMouth(ears)
+
+    pool_path = OUT / "candidate_pool.json"
+    if pool_path.exists():
+        pool = json.loads(pool_path.read_text())
+        print(f"resume: candidate pool already banked ({len(pool)} turns)")
+    else:
+        pool, hist = [], []
+        for i, text in enumerate(DEMO_SCRIPT):
+            cands, _raw = mouth.candidates(hist, text, seed=2000 + i)
+            pool.append(cands)
+            hist = hist + [{"role": "user", "content": text}]
+            pool_path.write_text(json.dumps(pool, indent=1))
+            print(f"  pool turn {i}: {len(cands)} candidates", flush=True)
+    if any(len(c) < 2 for c in pool):
+        sys.exit("candidate pool too thin to select from — re-run")
+
     path = OUT / "arms.jsonl"
     rows = [json.loads(l) for l in path.open()] if path.exists() else []
     done = {(r["arm"], r["seed"]) for r in rows}
+
     for seed in seeds:
-        donor = 10000 + seed
+        donor_seed = 10000 + seed
         for arm in ("intact", "donor"):
             if (arm, seed) in done:
                 continue
-            c = Creature(model, seed, ears,
-                         donor_state_from=(donor if arm == "donor" else None))
-            hist = []
+            body = G.V02Engine(model, seed)                 # lives either way
+            sel = (G.V02Engine(model, donor_seed) if arm == "donor" else body)
             for i, text in enumerate(DEMO_SCRIPT):
-                x = c.exchange(text, hist[-6:], seed=2000 + i)
-                hist += [{"role": "user", "content": text},
-                         {"role": "assistant", "content": x["reply"]}]
+                dose = ears.dose(text)
+                body.hear(dose); ro = body.advance(ticks)
+                if sel is not body:
+                    sel.hear(dose); sro = sel.advance(ticks)
+                else:
+                    sro = ro
+                pick = mouth.select(pool[i], sro)
                 rows.append(dict(arm=arm, seed=seed, turn=i,
-                                 idx=x["pick"]["index"],
-                                 asked=bool(x["pick"]["asked"]),
-                                 ask_drive=x["pick"]["ask_drive"],
-                                 saddle=x["readout"]["saddle"],
-                                 wing_bias=x["readout"]["wing_bias"],
-                                 n_cands=len(x["candidates"])))
+                                 idx=pick["index"], asked=bool(pick["asked"]),
+                                 ask_drive=pick["ask_drive"],
+                                 saddle=round(ro["saddle"], 5),
+                                 wing_bias=round(ro["wing_bias"], 5),
+                                 sel_saddle=round(sro["saddle"], 5),
+                                 sel_wing_bias=round(sro["wing_bias"], 5),
+                                 n_cands=len(pool[i])))
             path.write_text("".join(json.dumps(r) + "\n" for r in rows))
-            print(f"  seed {seed} {arm}: done ({len(rows)} rows banked)", flush=True)
+        print(f"  seed {seed}: both arms done ({len(rows)} rows)", flush=True)
     return rows
 
 
