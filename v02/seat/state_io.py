@@ -32,7 +32,20 @@ import json
 import numpy as np
 import torch
 
-BLOB_VERSION = 2
+BLOB_VERSION = 3
+
+# v3 adds `t0`: the wall-clock second the creature was seated.
+#
+# v2 had no birth epoch, and a wake computed what it owed from the seat's LAST
+# COMMIT. That is wrong in a way that only shows up under load: if a wake caps
+# its replay (long absence, runner time limits), the commit moves the seat's
+# clock to now, and the un-replayed hours are not banked -- they are gone. The
+# creature would quietly lose the time it was owed, and the ledger would look
+# perfectly healthy.
+#
+# Owing from t0 makes the debt a property of the creature: ticks_owed =
+# (now - t0) - n_ticks. A cap then defers the remainder instead of erasing it,
+# which is what "hibernation is lossless" has to mean.
 
 
 def dump_state(e) -> str:
@@ -47,6 +60,7 @@ def dump_state(e) -> str:
         "pending": {str(k): (v.tolist() if hasattr(v, "tolist") else v)
                     for k, v in e.pending.items()},
         "phi": e.phi_private.tolist(),
+        "t0": float(getattr(e, "t0", 0.0)),
     }, sort_keys=True)
 
 
@@ -62,6 +76,7 @@ def load_state(e, blob: str):
     e.n = int(d["n"])
     e.pending = {int(k): np.array(v, float) for k, v in d["pending"].items()}
     e.phi_private = np.array(d["phi"], float)
+    e.t0 = float(d["t0"])
     return e
 
 
