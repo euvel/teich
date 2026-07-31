@@ -92,11 +92,16 @@ lesson v0.2 is built out of.
 
 ---
 
-This repository is **private during Teich's infancy** (founder-only speech until
-a pre-registered maturity gate passes). Opening this book is part of the maturity
-ceremony: at that moment the full commit history becomes publicly verifiable —
-the diary will be shown to have been written when it says it was, one day at a
-time.
+**This book is open.** The full commit history is public and verifiable: the
+diary can be shown to have been written when it says it was, one day at a time,
+and every published figure can be traced to the run artifact and the commit that
+produced it.
+
+Open book is not open speech. **Founder-only speech remains in force** for both
+creatures until a pre-registered maturity gate passes — v0.1's first trial
+(2026-07-25) did not pass, and its own FAIL path was *publish and iterate*, which
+is what this is. What is public is the record. Nothing here lets a stranger talk
+to either creature.
 
 *No file in this repository contains, or has ever contained, either creature's
 private state. The private phases φ never leave the seat unencrypted; this is
