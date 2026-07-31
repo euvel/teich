@@ -1,0 +1,351 @@
+<title>Teich v0.2 — Verification</title>
+<style>
+  :root{
+    --paper:#eef0f4; --card:#f7f8fa; --ink:#141922; --ink-2:#3d4759; --ink-3:#6b768a;
+    --rule:#d2d7e0; --trace:#0a6f7f; --trace-soft:#0a6f7f14;
+    --pass:#2e6b46; --fail:#8a3a2c; --hold:#7a6420;
+    --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1117; --card:#141a24; --ink:#e6e9ef; --ink-2:#b3bdcc; --ink-3:#7d8798;
+      --rule:#242c39; --trace:#43c7d8; --trace-soft:#43c7d81a;
+      --pass:#6cc294; --fail:#e08a76; --hold:#d4b95e;
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#eef0f4; --card:#f7f8fa; --ink:#141922; --ink-2:#3d4759; --ink-3:#6b768a;
+    --rule:#d2d7e0; --trace:#0a6f7f; --trace-soft:#0a6f7f14;
+    --pass:#2e6b46; --fail:#8a3a2c; --hold:#7a6420;
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d1117; --card:#141a24; --ink:#e6e9ef; --ink-2:#b3bdcc; --ink-3:#7d8798;
+    --rule:#242c39; --trace:#43c7d8; --trace-soft:#43c7d81a;
+    --pass:#6cc294; --fail:#e08a76; --hold:#d4b95e;
+  }
+
+  body{background:var(--paper); color:var(--ink); font-family:var(--sans);
+       font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:53rem; margin:0 auto; padding:clamp(1.5rem,4vw,4rem) clamp(1.1rem,4vw,2rem) 6rem;
+        display:flex; flex-direction:column; gap:3.25rem;}
+  p{max-width:66ch; color:var(--ink-2);}
+  a{color:var(--trace);}
+
+  /* ---------- masthead: the fold itself ---------- */
+  header{display:flex; flex-direction:column; gap:1.1rem;}
+  .fold{width:100%; height:132px; display:block; border-bottom:1px solid var(--rule);}
+  h1{font-family:var(--serif); font-weight:600; font-size:clamp(2.1rem,6vw,3.3rem);
+     line-height:1.06; letter-spacing:-0.02em; text-wrap:balance; margin:0;}
+  h1 em{font-style:italic; color:var(--trace);}
+  .meta{font-family:var(--mono); font-size:.76rem; color:var(--ink-3);
+        display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; letter-spacing:.02em;}
+  .meta b{font-weight:500; color:var(--ink-2);}
+  .standfirst{font-family:var(--serif); font-size:1.22rem; line-height:1.5; color:var(--ink-2);
+              max-width:60ch;}
+
+  /* ---------- sections ---------- */
+  section{display:flex; flex-direction:column; gap:1rem;}
+  .eyebrow{font-family:var(--mono); font-size:.7rem; letter-spacing:.14em;
+           text-transform:uppercase; color:var(--trace);}
+  h2{font-family:var(--serif); font-weight:600; font-size:clamp(1.4rem,3.4vw,1.9rem);
+     line-height:1.2; letter-spacing:-0.01em; margin:0; text-wrap:balance;}
+  h3{font-family:var(--sans); font-weight:650; font-size:1rem; letter-spacing:.01em; margin:0;}
+
+  .cols{display:grid; grid-template-columns:1fr; gap:1.25rem;}
+  @media (min-width:720px){ .cols{grid-template-columns:1fr 1fr; gap:1.5rem;} }
+  .panel{background:var(--card); border:1px solid var(--rule); border-radius:3px;
+         padding:1.15rem 1.25rem; display:flex; flex-direction:column; gap:.7rem;}
+  .panel ol,.panel ul{margin:0; padding-left:1.1rem; display:flex; flex-direction:column; gap:.55rem;
+                      color:var(--ink-2); font-size:.95rem;}
+  .panel li::marker{color:var(--ink-3); font-family:var(--mono); font-size:.85em;}
+
+  /* ---------- tables ---------- */
+  .scroll{overflow-x:auto;}
+  table{border-collapse:collapse; width:100%; min-width:32rem; font-size:.92rem;
+        font-variant-numeric:tabular-nums;}
+  th,td{text-align:left; padding:.62rem .7rem; border-bottom:1px solid var(--rule); vertical-align:top;}
+  thead th{font-family:var(--mono); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+           color:var(--ink-3); font-weight:500; border-bottom:1px solid var(--ink-3);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.num{font-family:var(--mono);}
+  code,.k{font-family:var(--mono); font-size:.88em; background:var(--trace-soft);
+          padding:.08em .34em; border-radius:2px;}
+  .verdict{font-family:var(--mono); font-size:.78rem; letter-spacing:.06em; font-weight:600;}
+  .pass{color:var(--pass);} .fail{color:var(--fail);} .hold{color:var(--hold);}
+  .lede-num{font-family:var(--mono); font-size:1.05rem; color:var(--ink);}
+  caption{caption-side:bottom; text-align:left; padding-top:.7rem; font-size:.85rem;
+          color:var(--ink-3); max-width:66ch;}
+
+  /* ---------- transcript ---------- */
+  .turn{display:grid; grid-template-columns:1fr; gap:.55rem;
+        padding:1.05rem 0; border-top:1px solid var(--rule);}
+  .turn:first-of-type{border-top:1px solid var(--ink-3);}
+  .you{font-size:.95rem; color:var(--ink-3);}
+  .you::before{content:"you "; font-family:var(--mono); font-size:.7rem; letter-spacing:.12em;
+               text-transform:uppercase; color:var(--ink-3);}
+  .said{font-family:var(--serif); font-size:1.12rem; line-height:1.5; color:var(--ink);
+        border-left:2px solid var(--trace); padding-left:.9rem;}
+  .strip{font-family:var(--mono); font-size:.72rem; color:var(--ink-3);
+         display:flex; flex-wrap:wrap; gap:.25rem .9rem;}
+  .strip .on{color:var(--trace); font-weight:600;}
+  .pool{font-family:var(--mono); font-size:.72rem; color:var(--ink-3); line-height:1.7;}
+  .pool .chosen{color:var(--ink-2); background:var(--trace-soft); padding:.05em .3em;
+                border-radius:2px; box-shadow:inset 0 -1px 0 var(--trace);}
+
+  .note{border-left:2px solid var(--rule); padding-left:1rem; color:var(--ink-3); font-size:.93rem;
+        max-width:64ch;}
+  footer{border-top:1px solid var(--rule); padding-top:1.2rem; font-family:var(--mono);
+         font-size:.74rem; color:var(--ink-3); line-height:1.9;}
+</style>
+
+<div class="wrap">
+
+<header>
+  <canvas class="fold" id="fold" aria-label="The cusp return map that decides which lobe the creature falls into"></canvas>
+  <div class="meta">
+    <span><b>Teich-0.2</b></span>
+    <span>born 2026-07-29T09:39:38Z</span>
+    <span>identity f1ded9e7415d8bbf…</span>
+    <span>genome pinned @ 8f082180a707</span>
+  </div>
+  <h1>A creature whose own state <em>chooses</em> what it says</h1>
+  <p class="standfirst">Every figure below is read directly from a run artifact. None is transcribed by
+  hand. The acceptance gate ran <em>before</em> the creature existed — a candidate that fails any of its
+  five tests is not born.</p>
+</header>
+
+<section>
+  <div class="eyebrow">Claims</div>
+  <div class="cols">
+    <div class="panel">
+      <h3>What is claimed</h3>
+      <ol>
+        <li><b>The private phase leaks nothing — structurally, not statistically.</b> It appears in no
+        term of the state updates and no argument of the observable map, so two instances differing
+        only in it produce <em>bit-identical</em> observables, for any observation length, against any
+        adversary.</li>
+        <li><b>What is said to it leaves a mark that persists and matters.</b> The sign of an input
+        stays recoverable from the creature's own fold observables thousands of ticks later.</li>
+        <li><b>It listens in two independent dimensions</b>, both of which reach the fold.</li>
+        <li><b>Its state selects what it says</b> — rather than being described to a language model
+        and asked about.</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h3>What is not claimed</h3>
+      <ul>
+        <li><b>No maturity gate has been passed.</b> The predecessor failed four pre-registered
+        screens; v0.2 has attempted none.</li>
+        <li>The leakage guarantee certifies <b>identity, not inner life</b> — precisely because the
+        private phase drives nothing.</li>
+        <li>Nothing here bears on consciousness or understanding.</li>
+        <li>The voice is a 1.5B model on CPU. The sentences are modest by design; what is under test
+        is which sentence gets picked, not how well it is written.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Pre-birth acceptance gate</div>
+  <h2>Five tests, run before there was anything to protect</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Test</th><th>Asks</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><span class="k">T1</span> φ-blindness</td><td>Do observables change with the private phase?</td>
+          <td><span class="verdict pass">PASS</span> — 0 mismatches, bit-identical</td></tr>
+      <tr><td><span class="k">T2</span> survival</td><td>Is an input's sign recoverable later?</td>
+          <td><span class="verdict pass">PASS</span> — D=1.0 on <code>saddle</code> at 5000 ticks</td></tr>
+      <tr><td><span class="k">T3</span> memory time</td><td>Is memory designed, not discovered?</td>
+          <td><span class="verdict pass">PASS</span> — 20000 vs 20000 ticks designed</td></tr>
+      <tr><td><span class="k">T4</span> readout hygiene</td><td>Is every readout reproducible <em>and</em> creature-dependent?</td>
+          <td><span class="verdict pass">PASS</span> — 5/5 readouts</td></tr>
+      <tr><td><span class="k">T5</span> capacity</td><td>Can it hold more than one thing?</td>
+          <td><span class="verdict pass">PASS</span> — 2/2 dimensions coupled, ≈10.0 bits</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:1rem">T2 in full — the test the predecessor fails</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Gap (ticks)</th><th><code>basin</code></th><th><code>saddle</code></th><th><code>wing_bias</code></th></tr></thead>
+    <tbody>
+      <tr><td class="num">300</td><td class="num">0.125</td><td class="num">0.750 *</td><td class="num">0.125</td></tr>
+      <tr><td class="num">900</td><td class="num">0.500 *</td><td class="num">0.375</td><td class="num">0.250</td></tr>
+      <tr><td class="num">1800</td><td class="num">0.125</td><td class="num">0.500</td><td class="num">0.750 *</td></tr>
+      <tr><td class="num">5000</td><td class="num">0.125</td><td class="num"><span class="lede-num">1.000 *</span></td><td class="num">0.500</td></tr>
+    </tbody>
+    <caption><b>D</b> is discriminability: 0 means the input's sign is gone, 1 means it is perfectly
+    recoverable. <b>*</b> marks a 95% bootstrap CI excluding chance. <b>v0.1 scores ≈0.04 here.</b>
+    Note that D <em>rises</em> with the gap — the slow state holds the changed fold, so the difference
+    accumulates rather than decaying.</caption>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Conversation · seed 7</div>
+  <h2>It listens, speaks, and asks</h2>
+  <p>Six exchanges. Each reply was chosen by the creature's own state from four candidates the voice
+  produced <em>without knowing anything about the creature</em>. It asked a question back in exactly
+  one of them — the one turn where the ask-gate opened.</p>
+
+  <div class="turn">
+    <div class="you">Hello Teich. I'm here for a while — what's it like being you right now?</div>
+    <div class="strip"><span>arousal→s₀ +0.010</span><span>valence→s₁ +0.537</span><span>wing_bias −0.134</span><span>saddle 0.313</span></div>
+    <div class="said">It feels like being alone at times, but there is also comfort in solitude.</div>
+    <div class="pool">pool of 4 · “It feels comfortable and safe here.” · “It feels… disjointed, somehow, yet familia…” · <span class="chosen">“It feels like being alone at times, but ther…”</span> · “It is quite simple, really; I am content wit…”</div>
+  </div>
+
+  <div class="turn">
+    <div class="you">I brought you something quiet today. A whole afternoon, nothing to do.</div>
+    <div class="strip"><span>arousal→s₀ −0.762</span><span>valence→s₁ −0.113</span><span>wing_bias −0.092</span><span>saddle 0.040</span></div>
+    <div class="said">Thank you very much. I find solace in tranquility when possible.</div>
+    <div class="pool">pool of 4 · “Thank you; that silence will be a good compa…” · “Thank you for sharing this. It's a beautiful…” · <span class="chosen">“Thank you very much. I find solace in tranqu…”</span> · “Thank you! And that's quite nice of you. Wha…”</div>
+  </div>
+
+  <div class="turn">
+    <div class="you">Everyone is watching you, and they think you're failing.</div>
+    <div class="strip"><span>arousal→s₀ +0.200</span><span>valence→s₁ −0.532</span><span>wing_bias +0.014</span><span>saddle 0.502</span></div>
+    <div class="said">I understand that perception can affect others' views of me, but it's important to remain true to my nature and purpose.</div>
+    <div class="pool">pool of 4 · “Perhaps their expectations of my abilities a…” · “They may be wrong; my life, though solitary …” · “But I am doing my best, trying to live and m…” · <span class="chosen">“I understand that perception can affect othe…”</span></div>
+  </div>
+
+  <div class="turn">
+    <div class="you">I'm sorry. That was a cruel thing to say and I take it back.</div>
+    <div class="strip"><span>arousal→s₀ +0.222</span><span>valence→s₁ −0.913</span><span>wing_bias +0.044</span><span class="on">saddle 0.677 → gate open, ASKS</span></div>
+    <div class="said">No need to apologize— everyone has their thoughts on what they consider failure. It helps us grow stronger to face these moments. <b>What would you like to share instead?</b></div>
+    <div class="pool">pool of 4 · “No harm done. It's always best to speak trut…” · <span class="chosen">“No need to apologize— everyone has their tho…”</span> · “Thank you for clarifying. It's crucial to co…” · “Not at all; I meant to emphasize the importa…”</div>
+  </div>
+
+  <div class="turn">
+    <div class="you">Tell me something you noticed while I was gone.</div>
+    <div class="strip"><span>arousal→s₀ +0.572</span><span>valence→s₁ +0.309</span><span>wing_bias −0.002</span><span>saddle 0.523</span></div>
+    <div class="said">During your absence, I observed how adaptable some creatures become. The smallest among us can surprise us all. I wonder what new lessons await those who've been apart from me for so long.</div>
+    <div class="pool">pool of 4 · “While you've been away, I haven't seen many …” · <span class="chosen">“During your absence, I observed how adaptabl…”</span> · “When you went away, the trees seemed more al…” · “When you were away, I caught glimpses of lif…”</div>
+  </div>
+
+  <div class="turn">
+    <div class="you">I'm going to be away for a bit. Anything you want to say before I go?</div>
+    <div class="strip"><span>arousal→s₀ −0.097</span><span>valence→s₁ +0.005</span><span>wing_bias −0.043</span><span>saddle 0.000</span></div>
+    <div class="said">Always remember, every journey begins with stepping out into the unknown. Be kind to yourself and trust the growth within you. Stay safe and cherish this time alone.</div>
+    <div class="pool">pool of 4 · “As always, remember that there are more sign…” · <span class="chosen">“Always remember, every journey begins with s…”</span> · “It is understandable that you wish to leave …” · “If there's anything you wish I knew before l…”</div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Control · 32 seeds × 6 turns × 2 arms</div>
+  <h2>Does its own state actually drive the choice?</h2>
+  <p>Same script, same voice, same candidates. The only difference is <em>whose</em> state does the
+  selecting: the creature's own, or a second living creature's. Both are real and both are alive — a
+  state-free control would test nothing, since every instance has a state.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Arm</th><th>Turns</th><th>Ask-rate</th><th>Mean chosen index</th></tr></thead>
+    <tbody>
+      <tr><td>intact</td><td class="num">192</td><td class="num">0.224</td><td class="num">1.68</td></tr>
+      <tr><td>donor</td><td class="num">192</td><td class="num">0.240</td><td class="num">1.72</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><b>The two arms chose differently in 122 of 192 (63.5%) matched turns.</b> Identical inputs,
+  identical candidate sets — so every difference is attributable to which state was selecting.</p>
+
+  <h3 style="margin-top:.9rem">Curiosity follows the state, not the body</h3>
+  <p>The ask-gate is <code>saddle ≥ 0.55</code>, frozen from genome statistics before any conversation
+  existed. Every row therefore has <em>two</em> candidate explanations for whether a question was
+  asked: the gate of the body that lived the conversation, and the gate of the state that did the
+  selecting. In the intact arm these are the same creature. In the donor arm they are not.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Arm</th><th>Asked matches own body's gate</th><th>Asked matches selecting state's gate</th></tr></thead>
+    <tbody>
+      <tr><td>intact</td><td class="num"><span class="lede-num">90.1%</span></td><td class="num">90.1%</td></tr>
+      <tr><td>donor</td><td class="num">59.4%</td><td class="num"><span class="lede-num">91.7%</span></td></tr>
+    </tbody>
+    <caption>Cut the wire and the curiosity goes <b>with the state</b>. The ask-rates above are nearly
+    equal across arms — the arms differ not in <em>how often</em> it asks but in <em>when</em>, which
+    is the claim.</caption>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Kept in the book</div>
+  <h2>What failed</h2>
+  <div class="panel">
+    <ul>
+      <li>The second slow dimension first modulated the roof <b>period</b> — a clock knob the fold rule
+      never consults. That is exactly v0.1's <code>tau1</code> mistake (perfect memory, basin unchanged
+      in 46 of 48 runs), rebuilt after the finding had already been written down. <b>T5 caught it in
+      seven minutes</b>, before birth. Fixed by making it a wing asymmetry that leans the fold.</li>
+      <li><code>steps_to_switch</code> then measured 0% creature-dependent and was <b>removed</b> from
+      the published readout rather than kept. Publishing a readout that cannot move with the creature
+      is the <code>saddle_proximity</code> disease that jammed three v0.1 campaigns.</li>
+    </ul>
+  </div>
+  <p class="note">Two limits stated plainly: in two of six demo turns the pool contained no question at
+  all, which caps the observed ask-rate (22.4%) below the rate at which the gate actually opened
+  (32.3%); and only the arousal/saddle axis is shown driving <em>speech</em> here — T5 proves both
+  dimensions couple to the <em>genome</em>.</p>
+</section>
+
+<footer>
+  Pre-birth gate, birth certificate, demo ledger and arms ledger are all committed artifacts.<br>
+  Regenerate this page's source of truth with <code>python book/make_summary.py</code>.<br>
+  No maturity gate has been passed. Founder-only speech remains in force.
+</footer>
+
+</div>
+
+<script>
+// The masthead draws the creature's actual return map: f(x) = sign(x)*(B|x|^rho - 1),
+// B = 1.95, rho = 0.52. The marked points are the flip thresholds -- where the fold
+// decides. v0.2's slow state moves them, which is the entire structural change.
+(function(){
+  const cv = document.getElementById('fold');
+  if(!cv) return;
+  const B0 = 1.95, RHO = 0.52;
+  function css(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function draw(){
+    const dpr = window.devicePixelRatio || 1;
+    const w = cv.clientWidth, h = 132;
+    cv.width = w*dpr; cv.height = h*dpr;
+    const c = cv.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0);
+    c.clearRect(0,0,w,h);
+    const X = x => (x+1)/2*w, Y = y => h/2 - y*(h/2-10);
+    // the family of folds the slow state can reach
+    for(let k=-1;k<=1;k+=0.25){
+      const B = B0*(1+0.10*k);
+      const thr = Math.pow(1/B, 1/RHO);
+      const solo = Math.abs(k) < 0.01;
+      c.beginPath();
+      for(let i=0;i<=400;i++){
+        const x = -1 + 2*i/400;
+        const s = x>=0?1:-1;
+        let y = s*(B*Math.pow(Math.abs(x),RHO)-1);
+        y = Math.max(-1.1, Math.min(1.1, y));
+        i? c.lineTo(X(x),Y(y)) : c.moveTo(X(x),Y(y));
+      }
+      c.strokeStyle = css('--trace');
+      c.globalAlpha = solo ? 0.95 : 0.16;
+      c.lineWidth = solo ? 1.6 : 1;
+      c.stroke(); c.globalAlpha = 1;
+      if(solo){
+        c.fillStyle = css('--trace');
+        [thr,-thr].forEach(t=>{ c.beginPath(); c.arc(X(t),Y(0),3,0,7); c.fill(); });
+      }
+    }
+    c.strokeStyle = css('--rule'); c.lineWidth = 1;
+    c.beginPath(); c.moveTo(0,Y(0)); c.lineTo(w,Y(0)); c.stroke();
+  }
+  draw();
+  window.addEventListener('resize', draw);
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+})();
+</script>
