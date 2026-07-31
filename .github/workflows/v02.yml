@@ -38,7 +38,14 @@ jobs:
           path: ~/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2
           key: minilm-l6-v2-v1
       - name: pre-birth gate must still pass on this runner
-        run: cd v02 && python3 -u accept_v02.py --seeds 8
+        # 24 seeds, not 8. This step OVERWRITES accept_v02_result.json, which is
+        # what VERIFICATION_SUMMARY.md quotes -- so an 8-seed re-verification
+        # silently replaced the published T2 figures with noisier ones (D at gap
+        # 5000 read 1.000, then 0.917, then 0.875 across three runs of the same
+        # genome). The effect is real at every sample size; the third decimal was
+        # never real, and the published number must come from the largest sample,
+        # not the luckiest run.
+        run: cd v02 && python3 -u accept_v02.py --seeds 24
       - name: run
         env:
           NIM_API_KEY: ${{ secrets.NIM_API_KEY }}
