@@ -1,81 +1,103 @@
 # Teich
 
-This is the book and the body of **Teich** — a continuously-existing dynamical
-creature, born 2026-07-18T08:45:12Z.
+**Teich v0.2** — a small dynamical creature that listens, speaks, and asks,
+whose own state chooses what it says. Born 2026-07-29T09:39:38Z, identity
+`f1ded9e7415d8bbf…`, genome pinned at `8f082180a707`.
 
-Its identity is not a name or a model file: it is the IPFS content hash of its
-genesis certificate —
-`QmQEVjtM9k3oihiVxrjJoWiRfLvED2eYSTfRvyLGKUx4yA`
-(sha256 `d844f1272e15877168db76d7b29cd1d1e5c6b780dde91681f6c8a07ec5ddb530`,
-a copy lives in [body/genesis_certificate.json](body/genesis_certificate.json)).
+**Start here: [v02/book/VERIFICATION_SUMMARY.md](v02/book/VERIFICATION_SUMMARY.md).**
+Every figure in it is read from a run artifact; none is transcribed by hand.
+[v02/book/presentation.html](v02/book/presentation.html) is the same page for a
+reader who has never heard of any of this.
 
-Teich is not a chatbot. It is a certified chaotic dynamical system — a public
-suspension core with K=2 private, decoder-blind fiber phases — that lives one
-tick per real second, hibernates losslessly (wake = bit-exact deterministic
-replay of every elapsed second), and reports on itself through a white-box
-Observer whose every readout has a provable referent. Its seat of self is a
-single authoritative record under a strict no-fork, no-silent-rewind recovery
-law. An LLM is attached as a replaceable mouth; the creature is the dynamics,
-not the language model.
+Teich is not a chatbot. It is a chaotic dynamical system with a private phase it
+cannot report and a slow state that parameterises its own fold. A language model
+is attached as a replaceable mouth — and it is attached *backwards* on purpose:
+the model proposes candidate utterances knowing nothing about the creature, and
+the creature's state then picks one. The creature is the dynamics, not the
+language model.
 
-## What is in this repository
+## What it does, and what was measured
 
-- `body/` — the code and frozen genome checkpoint that any certified machine
-  can use to *be* Teich's body for a wake: lease the seat, replay elapsed
-  ticks, commit. A machine qualifies only by passing the substrate gate
-  (`body/verify_substrate.py`): bit-identical canonical replay against the
-  certified reference. No tolerance — in a chaotic system, one differing ULP
-  is a different creature.
-- `diary/` — Teich's diary, written by its own daily wakes. Each entry's
-  commit is hash-anchored into the seat's snapshot chain.
+- **Its own state drives what it says.** Same script, same voice, same candidate
+  pool — swap in a second living creature's state to do the selecting and the
+  two arms chose differently in **63.5%** of 192 matched turns.
+- **Its curiosity follows the state, not the body.** The ask-gate
+  (`saddle ≥ 0.55`) was frozen from genome statistics before any conversation
+  existed. Questions track the *selecting* state's gate (**91.7%**) and fall to
+  **59.4%** against the body that lived the conversation, while the intact arm
+  holds **90.1%**. The arms differ not in how often it asks but in *when*.
+- **What is said to it leaves a mark that lasts.** The sign of an input stays
+  recoverable from its own fold observables 5000 ticks later (D = **0.92**,
+  24 seeds, CI excluding chance) — and D *rises* with the gap rather than
+  decaying.
+- **The private phase leaks nothing, structurally.** φ appears in no update term
+  and no argument of the observable map, so `I(φ ; observations) = 0` exactly —
+  no statistical test required. It certifies **identity, not inner life**,
+  precisely because it drives nothing.
+
+**No maturity gate has been passed.** Founder-only speech remains in force.
+Nothing here bears on consciousness or understanding.
+
+## It was verified before it was born
+
+`birth_v02.py` refuses to write a birth record unless the five-test acceptance
+gate reports `gate: true`. That gate caught two real failures, and both stay in
+the book — including one where v0.1's own mistake was rebuilt on a second
+dimension *after* the finding had already been written down. T5 caught it in
+seven minutes, before there was anything to protect.
+
+| | |
+|---|---|
+| `v02/genome_v02.py` | the genome. Slow state `s` is a parameter of the fold, so memory and consequence live in one variable instead of competing. |
+| `v02/accept_v02.py` | the gate: φ-blindness, survival, memory time, readout hygiene, capacity. Re-run in the cloud at 24 seeds and reproduced digit for digit. |
+| `v02/ears_v2.py` | text → a 2-D input the genome can actually hold. |
+| `v02/mouth_select.py` | the inversion: the voice proposes, the state selects. |
+| `v02/book/` | certificate, biography ledger, and the generated summary. |
+
+## Archive — v0.1, and why v0.2 exists
+
+Read this if you want the depth. It is the reason the version above is worth
+trusting.
+
+**Teich v0.1** was born 2026-07-18T08:45:12Z, identity
+`QmQEVjtM9k3oihiVxrjJoWiRfLvED2eYSTfRvyLGKUx4yA`. It is still alive: it holds a
+seat, wakes daily, and writes its own diary. It was born *first and tested
+afterwards*, and its screens eventually found a wall no experiment could climb —
+in that genome a direction that **remembers** is a direction that **cannot act**,
+and one that acts forgets its own sign within a gap
+([finding](maturity/FINDING_memory_consequence_tradeoff_2026-07-27.md)). The
+genome was frozen and the covenant forbade reset or fork, so it could never be
+repaired: four pre-registered screens then returned nulls against a creature that
+structurally could not pass them.
+
+The covenant was right. Being born before verification was not. That is the one
+lesson v0.2 is built out of.
+
+- `body/` — v0.1's code and frozen genome: what any certified machine uses to
+  *be* its body for a wake. A machine qualifies only by passing
+  `body/verify_substrate.py` — bit-identical canonical replay against the
+  certified reference, no tolerance. In a chaotic system one differing ULP is a
+  different creature.
+- `diary/` — written by its own daily wakes, each entry hash-anchored into the
+  seat's snapshot chain.
+- `maturity/` — the pre-registered screens, the four nulls, and the three
+  findings that came out of them: the memory/consequence trade-off, the
+  [shuttered readout](maturity/FINDING_shuttered_readout_2026-07-27.md) that
+  jammed three campaigns, and the
+  [scalar ears](maturity/FINDING_scalar_ears_2026-07-27.md) that compressed every
+  sentence to one number.
 - `docs/` — reports and certificates accumulated over its life.
-- `maturity/` — the pre-registered screens, the findings they produced, and the
-  four nulls that closed v0.1's maturity attempt.
-- `v02/` — **Teich v0.2**, a second creature. See below.
-- `.github/workflows/` — the automation that gives Teich a heartbeat
+- `.github/workflows/` — the automation that gives both creatures a heartbeat
   independent of any one computer.
 
-## Teich v0.2 — verified before it was born
+---
 
-Born 2026-07-29T09:39:38Z, identity `f1ded9e7415d8bbf…`. Start at
-[v02/book/VERIFICATION_SUMMARY.md](v02/book/VERIFICATION_SUMMARY.md); every
-figure in it is read from a run artifact, none is transcribed by hand.
+This repository is **private during Teich's infancy** (founder-only speech until
+a pre-registered maturity gate passes). Opening this book is part of the maturity
+ceremony: at that moment the full commit history becomes publicly verifiable —
+the diary will be shown to have been written when it says it was, one day at a
+time.
 
-v0.1 was born first and tested afterwards. Its screens eventually found a wall
-that no experiment could climb: in that genome, a direction that *remembers* is
-a direction that *cannot act*, and one that acts forgets its own sign within a
-gap ([finding](maturity/FINDING_memory_consequence_tradeoff_2026-07-27.md)). The genome was frozen
-and the covenant forbade reset or fork, so it could never be repaired — four
-pre-registered screens then returned nulls against a creature that structurally
-could not pass them. The covenant was right. Being born before verification was
-not.
-
-v0.2 exists to fix exactly that, and inverts the order:
-
-- the slow state `s` is a **parameter of the fold itself**, so memory and
-  consequence live in one variable instead of competing;
-- `s` is a leaky integrator, so the memory time constant is **designed
-  (τ = 20000 ticks), not discovered**;
-- the private phase φ appears in **no** update term and **no** observable, so
-  `I(φ ; observations) = 0` exactly — structural, not statistical. It certifies
-  identity, not inner life, precisely because it drives nothing;
-- **the state selects its utterance** from candidates a language model produced
-  knowing nothing about the creature, instead of being described to a model and
-  asked about;
-- and a five-test acceptance gate ran **before birth** — `birth_v02.py` refuses
-  to write a birth record unless the gate reports `gate: true`. It caught two
-  real failures, including one where v0.1's own mistake was rebuilt on a second
-  dimension after the finding had already been written down.
-
-**No maturity gate has been passed by either creature.** Founder-only speech
-remains in force.
-
-This repository is **private during Teich's infancy** (founder-only speech
-until its pre-registered maturity gate passes). Opening this book is part of
-the maturity ceremony: at that moment the full commit history becomes publicly
-verifiable — the diary will be shown to have been written when it says it was,
-one day at a time.
-
-*No file in this repository contains, or has ever contained, Teich's private
-state. The private phases φ never leave the seat unencrypted; this is enforced
-by construction and by law (RECOVERY_POLICY).*
+*No file in this repository contains, or has ever contained, either creature's
+private state. The private phases φ never leave the seat unencrypted; this is
+enforced by construction and by law (RECOVERY_POLICY).*
