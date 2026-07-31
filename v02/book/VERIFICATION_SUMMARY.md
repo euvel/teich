@@ -25,7 +25,7 @@ Run *before* the creature existed. A candidate failing any test is not born.
 | test | asks | result |
 |---|---|---|
 | T1 phi-blindness | do observables change with the private phase? | **PASS** — 0 mismatches, bit-identical |
-| T2 survival | is an input's sign recoverable later? | **PASS** — D=1.0 on `saddle` at 5000 ticks |
+| T2 survival | is an input's sign recoverable later? | **PASS** — D=0.92 on `saddle` at 5000 ticks |
 | T3 memory time | is memory designed, not discovered? | **PASS** — 20000 vs 20000 ticks designed |
 | T4 readout hygiene | is every readout reproducible AND creature-dependent? | **PASS** — 5/5 readouts |
 | T5 capacity | can it hold more than one thing? | **PASS** — 2/2 dimensions coupled, ~10.0 bits |
@@ -36,12 +36,14 @@ Run *before* the creature existed. A candidate failing any test is not born.
 
 | gap (ticks) | `basin` | `saddle` | `wing_bias` |
 |---|---|---|---|
-| 300 | 0.125 | 0.750* | 0.125 |
-| 900 | 0.500* | 0.375 | 0.250 |
-| 1800 | 0.125 | 0.500 | 0.750* |
-| 5000 | 0.125 | 1.000* | 0.500 |
+| 300 | 0.000 | 0.458* | 0.125 |
+| 900 | 0.125 | 0.375* | 0.167 |
+| 1800 | 0.083 | 0.667* | 0.417 |
+| 5000 | 0.000 | 0.917* | 0.167 |
 
 `D` is discriminability: 0 means the input's sign is gone, 1 means it is perfectly recoverable. `*` marks a 95% bootstrap CI excluding chance. **v0.1 scores ≈0.04 here.** Note that D *rises* with the gap — the slow state holds the changed fold, so the difference accumulates rather than decaying.
+
+Measured on **24 seeds** per arm, and reproduced *digit for digit* on an independent cloud runner — the gate is deterministic at fixed sample size. What moves is the sample: an 8-seed run of this same frozen genome returned 1.000 here on one occasion and 0.875 on another. Both pass, both exclude chance, and neither third decimal was real. **Read D to two decimals**, and prefer the largest sample.
 
 ## It listens, speaks, and asks
 

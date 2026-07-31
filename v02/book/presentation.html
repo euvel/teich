@@ -158,7 +158,7 @@
       <tr><td><span class="k">T1</span> φ-blindness</td><td>Do observables change with the private phase?</td>
           <td><span class="verdict pass">PASS</span> — 0 mismatches, bit-identical</td></tr>
       <tr><td><span class="k">T2</span> survival</td><td>Is an input's sign recoverable later?</td>
-          <td><span class="verdict pass">PASS</span> — D=1.0 on <code>saddle</code> at 5000 ticks</td></tr>
+          <td><span class="verdict pass">PASS</span> — D=0.92 on <code>saddle</code> at 5000 ticks</td></tr>
       <tr><td><span class="k">T3</span> memory time</td><td>Is memory designed, not discovered?</td>
           <td><span class="verdict pass">PASS</span> — 20000 vs 20000 ticks designed</td></tr>
       <tr><td><span class="k">T4</span> readout hygiene</td><td>Is every readout reproducible <em>and</em> creature-dependent?</td>
@@ -174,15 +174,20 @@
   <table>
     <thead><tr><th>Gap (ticks)</th><th><code>basin</code></th><th><code>saddle</code></th><th><code>wing_bias</code></th></tr></thead>
     <tbody>
-      <tr><td class="num">300</td><td class="num">0.125</td><td class="num">0.750 *</td><td class="num">0.125</td></tr>
-      <tr><td class="num">900</td><td class="num">0.500 *</td><td class="num">0.375</td><td class="num">0.250</td></tr>
-      <tr><td class="num">1800</td><td class="num">0.125</td><td class="num">0.500</td><td class="num">0.750 *</td></tr>
-      <tr><td class="num">5000</td><td class="num">0.125</td><td class="num"><span class="lede-num">1.000 *</span></td><td class="num">0.500</td></tr>
+      <tr><td class="num">300</td><td class="num">0.00</td><td class="num">0.46 *</td><td class="num">0.13</td></tr>
+      <tr><td class="num">900</td><td class="num">0.13</td><td class="num">0.38 *</td><td class="num">0.17</td></tr>
+      <tr><td class="num">1800</td><td class="num">0.08</td><td class="num">0.67 *</td><td class="num">0.42</td></tr>
+      <tr><td class="num">5000</td><td class="num">0.00</td><td class="num"><span class="lede-num">0.92 *</span></td><td class="num">0.17</td></tr>
     </tbody>
     <caption><b>D</b> is discriminability: 0 means the input's sign is gone, 1 means it is perfectly
     recoverable. <b>*</b> marks a 95% bootstrap CI excluding chance. <b>v0.1 scores ≈0.04 here.</b>
     Note that D <em>rises</em> with the gap — the slow state holds the changed fold, so the difference
-    accumulates rather than decaying.</caption>
+    accumulates rather than decaying.<br><br>
+    Measured on <b>24 seeds</b> per arm and reproduced <em>digit for digit</em> on an independent
+    cloud runner: the gate is deterministic at fixed sample size. What moves is the sample — an
+    8-seed run of this same frozen genome returned 1.000 here on one occasion and 0.875 on another.
+    Both pass, both exclude chance, and neither third decimal was real. Read D to two decimals, and
+    prefer the largest sample.</caption>
   </table>
   </div>
 </section>

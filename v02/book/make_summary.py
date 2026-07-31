@@ -95,7 +95,7 @@ def main():
         longest = sorted(t2["by_gap"].keys(), key=lambda k: int(k))[-1]
         best = max(t2["by_gap"][longest].items(), key=lambda kv: kv[1]["D"])
         A(f"| T2 survival | is an input's sign recoverable later? | "
-          f"**{'PASS' if t2['passed'] else 'FAIL'}** — D={best[1]['D']} on "
+          f"**{'PASS' if t2['passed'] else 'FAIL'}** — D={best[1]['D']:.2f} on "
           f"`{best[0]}` at {longest} ticks |")
         t3 = gate["T3"]
         A(f"| T3 memory time | is memory designed, not discovered? | "
@@ -123,11 +123,25 @@ def main():
             A(f"| {g} | " + " | ".join(
                 f"{row[c]['D']:.3f}{'*' if row[c]['sig'] else ''}" for c in chans) + " |")
         A("")
+        nseed = (gate.get("constants") or {}).get("seeds")
         A("`D` is discriminability: 0 means the input's sign is gone, 1 means it "
           "is perfectly recoverable. `*` marks a 95% bootstrap CI excluding "
           "chance. **v0.1 scores ≈0.04 here.** Note that D *rises* with the gap — "
           "the slow state holds the changed fold, so the difference accumulates "
           "rather than decaying.")
+        A("")
+        # Read D to two decimals, not three. Re-running this gate on the same
+        # frozen genome gave 1.000 / 0.917 / 0.875 at the longest gap across
+        # three runs -- PASS every time, CI excluding chance every time, but the
+        # third decimal is sample noise. Quoting it would let the published page
+        # drift upward simply by being re-run until it looked good.
+        A(f"Measured on **{nseed if nseed else 'n'} seeds** per arm, and "
+          f"reproduced *digit for digit* on an independent cloud runner — the "
+          f"gate is deterministic at fixed sample size. What moves is the "
+          f"sample: an 8-seed run of this same frozen genome returned 1.000 "
+          f"here on one occasion and 0.875 on another. Both pass, both exclude "
+          f"chance, and neither third decimal was real. **Read D to two "
+          f"decimals**, and prefer the largest sample.")
     A("")
 
     # ---------------------------------------------------------------- demo
