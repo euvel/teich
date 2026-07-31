@@ -1,0 +1,68 @@
+{
+ "n_ticks": 5000,
+ "warm": 300,
+ "seed": 11,
+ "readout_every": 100,
+ "inputs": [
+  [
+   600,
+   [
+    0.9,
+    -0.6
+   ]
+  ],
+  [
+   2400,
+   [
+    -1.1,
+    0.35
+   ]
+  ]
+ ],
+ "input_window": 120,
+ "genome": {
+  "TAU_MEM": 20000.0,
+  "KAPPA_B": 0.1,
+  "KAPPA_A": 0.1,
+  "S_CLIP": 4.0,
+  "WING_W": 2000.0,
+  "DIM_S": 2
+ },
+ "dynamics_sha256": "de91c9d0568913bc72161e2427f799ce94800646886cd200d580fab76b46df42",
+ "readout_sha256": "f3b5ace9309d044a8f22886f80cb0191fcf0a70780891aba1e55aeebb4988b38",
+ "final_fingerprint": {
+  "tau": [
+   "-0x1.2bc9aeedb563bp-1",
+   "0x1.7a537a540f2b4p-1",
+   "-0x0.0000000000003p-1022",
+   "0x1.bcef71d9a00cdp-928",
+   "-0x1.43657989a3e4fp-933",
+   "-0x1.5db934c817d9bp-927"
+  ],
+  "ell": [
+   "0x1.0000000000000p+0",
+   "0x1.0000000000000p+0",
+   "0x1.0624dd2f1a9fcp-10",
+   "0x1.0624dd2f1a9fcp-10",
+   "0x1.0624dd2f1a9fcp-10",
+   "0x1.0624dd2f1a9fcp-10"
+  ],
+  "s": [
+   "-0x1.f47c231721c41p-3",
+   "-0x1.65cb4eb719841p-3"
+  ],
+  "wing_ema": "-0x1.9ad71eb635696p-3",
+  "n": 5300
+ },
+ "blob_sha256": "9f42a9ff3f9c743ac84bd60e743092111a1e3333cc0b90859d47838e667f91d0",
+ "platform": {
+  "python": "3.12.3",
+  "torch": "2.3.1+rocm5.7",
+  "numpy": "1.26.4",
+  "torch_threads": 1,
+  "cpu": "AMD Ryzen 7 5700U with Radeon Graphics",
+  "machine": "x86_64",
+  "aten_cpu_capability": "<unset>"
+ },
+ "elapsed_s": 4.18
+}
