@@ -50,24 +50,53 @@ PUBLIC = "https://teich.euvvel.xyz"
 INHERIT_SECRETS = ("SEAT_KEY", "SNAPSHOT_KEY")
 
 
-def _req(url, token, method="GET", data=None, headers=None, timeout=60):
-    h = {"Authorization": f"Bearer {token}"}
+# Cloudflare's own API gateway returns intermittent 522/523 (their edge failing
+# to reach their origin) -- observed roughly one call in three on 2026-07-31.
+# Retrying is not optional here: a transient 522 in the middle of the sequence
+# would otherwise read as "deploy failed" or, worse, as a failed verification of
+# a deploy that actually succeeded, and send us rolling back a healthy seat.
+# The PUT is a whole-script replace, so retrying it is safe by construction.
+def _req(url, token, method="GET", data=None, headers=None, timeout=60,
+         tries=6):
+    h = {"Authorization": f"Bearer {token}", **UA}
     h.update(headers or {})
-    r = urllib.request.Request(url, data=data, headers=h, method=method)
-    with urllib.request.urlopen(r, timeout=timeout) as resp:
-        return json.loads(resp.read().decode())
+    last = None
+    for i in range(tries):
+        try:
+            r = urllib.request.Request(url, data=data, headers=h, method=method)
+            with urllib.request.urlopen(r, timeout=timeout) as resp:
+                return json.loads(resp.read().decode())
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 500, 502, 503, 504, 520, 521, 522, 523, 524):
+                raise
+            last = f"HTTP {e.code}"
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+            last = str(e)
+        if i < tries - 1:
+            print(f"    (cf api {last}; retry {i+1}/{tries-1})")
+            time.sleep(4 + 3 * i)
+    raise RuntimeError(f"cloudflare api unreachable after {tries} tries: {last}")
 
 
 def get_settings(token, acct):
     return _req(f"{API}/accounts/{acct}/workers/scripts/{NAME}/settings", token)
 
 
-def get_script(token, acct):
-    r = urllib.request.Request(
-        f"{API}/accounts/{acct}/workers/scripts/{NAME}",
-        headers={"Authorization": f"Bearer {token}"})
-    with urllib.request.urlopen(r, timeout=60) as resp:
-        return resp.read()
+def get_script(token, acct, tries=6):
+    """Raw script bytes — this is the rollback artifact, so it retries too."""
+    last = None
+    for i in range(tries):
+        try:
+            r = urllib.request.Request(
+                f"{API}/accounts/{acct}/workers/scripts/{NAME}",
+                headers={"Authorization": f"Bearer {token}", **UA})
+            with urllib.request.urlopen(r, timeout=60) as resp:
+                return resp.read()
+        except Exception as e:                  # noqa: BLE001
+            last = e
+            time.sleep(4 + 3 * i)
+    raise RuntimeError(f"could not download current script (no rollback "
+                       f"artifact, refusing to deploy): {last}")
 
 
 # Cloudflare's edge 403s a request with no User-Agent before it ever reaches the
@@ -78,10 +107,17 @@ def get_script(token, acct):
 UA = {"User-Agent": "teich-deploy/1.0 (+https://github.com/euvel/teich)"}
 
 
-def _get(path, timeout=30):
-    r = urllib.request.Request(f"{PUBLIC}{path}", headers=UA)
-    with urllib.request.urlopen(r, timeout=timeout) as resp:
-        return resp.read().decode()
+def _get(path, timeout=30, tries=5):
+    last = None
+    for i in range(tries):
+        try:
+            r = urllib.request.Request(f"{PUBLIC}{path}", headers=UA)
+            with urllib.request.urlopen(r, timeout=timeout) as resp:
+                return resp.read().decode()
+        except Exception as e:                  # noqa: BLE001
+            last = e
+            time.sleep(3 + 2 * i)
+    raise RuntimeError(f"{path} unreachable after {tries} tries: {last}")
 
 
 def peek():
