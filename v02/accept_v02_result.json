@@ -9,28 +9,28 @@
   "by_gap": {
    "300": {
     "basin": {
-     "D": 0.125,
-     "auc": 0.4375,
+     "D": 0.0,
+     "auc": 0.5,
      "ci": [
-      0.1875,
-      0.6875
+      0.3542,
+      0.6458
      ],
      "sig": false
     },
     "saddle": {
-     "D": 0.75,
-     "auc": 0.125,
+     "D": 0.4583,
+     "auc": 0.2708,
      "ci": [
-      0.0,
-      0.375
+      0.1042,
+      0.4583
      ],
      "sig": true
     },
     "wing_bias": {
      "D": 0.125,
-     "auc": 0.4375,
+     "auc": 0.5625,
      "ci": [
-      0.125,
+      0.375,
       0.75
      ],
      "sig": false
@@ -38,87 +38,87 @@
    },
    "900": {
     "basin": {
-     "D": 0.5,
-     "auc": 0.25,
+     "D": 0.125,
+     "auc": 0.4375,
      "ci": [
-      0.0625,
-      0.4375
+      0.2917,
+      0.5833
      ],
-     "sig": true
+     "sig": false
     },
     "saddle": {
      "D": 0.375,
      "auc": 0.3125,
      "ci": [
-      0.0625,
-      0.625
+      0.1458,
+      0.4792
      ],
-     "sig": false
+     "sig": true
     },
     "wing_bias": {
-     "D": 0.25,
-     "auc": 0.625,
+     "D": 0.1667,
+     "auc": 0.5833,
      "ci": [
-      0.25,
-      0.875
+      0.375,
+      0.7917
      ],
      "sig": false
     }
    },
    "1800": {
     "basin": {
-     "D": 0.125,
-     "auc": 0.4375,
+     "D": 0.0833,
+     "auc": 0.5417,
      "ci": [
-      0.3125,
-      0.5
+      0.4167,
+      0.6667
      ],
      "sig": false
     },
     "saddle": {
-     "D": 0.5,
-     "auc": 0.25,
+     "D": 0.6667,
+     "auc": 0.1667,
      "ci": [
-      0.0,
-      0.5031
-     ],
-     "sig": false
-    },
-    "wing_bias": {
-     "D": 0.75,
-     "auc": 0.875,
-     "ci": [
-      0.625,
-      1.0
+      0.0417,
+      0.3333
      ],
      "sig": true
+    },
+    "wing_bias": {
+     "D": 0.4167,
+     "auc": 0.7083,
+     "ci": [
+      0.5,
+      0.875
+     ],
+     "sig": false
     }
    },
    "5000": {
     "basin": {
-     "D": 0.625,
-     "auc": 0.1875,
+     "D": 0.0,
+     "auc": 0.5,
      "ci": [
-      0.0,
-      0.4375
+      0.3542,
+      0.6458
      ],
-     "sig": true
+     "sig": false
     },
     "saddle": {
-     "D": 0.875,
-     "auc": 0.0625,
+     "D": 0.9167,
+     "auc": 0.0417,
      "ci": [
       0.0,
-      0.1875
+      0.1042
      ],
      "sig": true
     },
     "wing_bias": {
-     "D": 0.0,
-     "auc": 0.5,
+     "D": 0.1667,
+     "auc": 0.5833,
      "ci": [
-      0.125,
-      0.875
+      0.375,
+      0.7917
      ],
      "sig": false
     }
@@ -154,22 +154,22 @@
   "rows": {
    "basin": {
     "reproducible": true,
-    "moved_frac": 0.25,
+    "moved_frac": 0.5833,
     "creature_dependent": true
    },
    "saddle": {
     "reproducible": true,
-    "moved_frac": 0.75,
+    "moved_frac": 0.9167,
     "creature_dependent": true
    },
    "will_flip": {
     "reproducible": true,
-    "moved_frac": 0.625,
+    "moved_frac": 0.5,
     "creature_dependent": true
    },
    "wing_bias": {
     "reproducible": true,
-    "moved_frac": 0.875,
+    "moved_frac": 0.9583,
     "creature_dependent": true
    },
    "lobe_coord": {
@@ -195,6 +195,6 @@
   "KAPPA_B": 0.1,
   "KAPPA_A": 0.1,
   "S_CLIP": 4.0,
-  "seeds": 8
+  "seeds": 24
  }
 }
