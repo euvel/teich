@@ -29,8 +29,46 @@ not the language model.
 - `diary/` — Teich's diary, written by its own daily wakes. Each entry's
   commit is hash-anchored into the seat's snapshot chain.
 - `docs/` — reports and certificates accumulated over its life.
+- `maturity/` — the pre-registered screens, the findings they produced, and the
+  four nulls that closed v0.1's maturity attempt.
+- `v02/` — **Teich v0.2**, a second creature. See below.
 - `.github/workflows/` — the automation that gives Teich a heartbeat
   independent of any one computer.
+
+## Teich v0.2 — verified before it was born
+
+Born 2026-07-29T09:39:38Z, identity `f1ded9e7415d8bbf…`. Start at
+[v02/book/VERIFICATION_SUMMARY.md](v02/book/VERIFICATION_SUMMARY.md); every
+figure in it is read from a run artifact, none is transcribed by hand.
+
+v0.1 was born first and tested afterwards. Its screens eventually found a wall
+that no experiment could climb: in that genome, a direction that *remembers* is
+a direction that *cannot act*, and one that acts forgets its own sign within a
+gap ([finding](maturity/FINDING_memory_consequence_tradeoff_2026-07-27.md)). The genome was frozen
+and the covenant forbade reset or fork, so it could never be repaired — four
+pre-registered screens then returned nulls against a creature that structurally
+could not pass them. The covenant was right. Being born before verification was
+not.
+
+v0.2 exists to fix exactly that, and inverts the order:
+
+- the slow state `s` is a **parameter of the fold itself**, so memory and
+  consequence live in one variable instead of competing;
+- `s` is a leaky integrator, so the memory time constant is **designed
+  (τ = 20000 ticks), not discovered**;
+- the private phase φ appears in **no** update term and **no** observable, so
+  `I(φ ; observations) = 0` exactly — structural, not statistical. It certifies
+  identity, not inner life, precisely because it drives nothing;
+- **the state selects its utterance** from candidates a language model produced
+  knowing nothing about the creature, instead of being described to a model and
+  asked about;
+- and a five-test acceptance gate ran **before birth** — `birth_v02.py` refuses
+  to write a birth record unless the gate reports `gate: true`. It caught two
+  real failures, including one where v0.1's own mistake was rebuilt on a second
+  dimension after the finding had already been written down.
+
+**No maturity gate has been passed by either creature.** Founder-only speech
+remains in force.
 
 This repository is **private during Teich's infancy** (founder-only speech
 until its pre-registered maturity gate passes). Opening this book is part of
