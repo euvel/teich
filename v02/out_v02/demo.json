@@ -1,0 +1,470 @@
+[
+ {
+  "user": "Hello Teich. I'm here for a while \u2014 what's it like being you right now?",
+  "dose": [
+   0.0102,
+   0.5368
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.09526,
+   "saddle": 0.31322,
+   "will_flip": true,
+   "wing_bias": -0.13382,
+   "flip_thresh": 0.30412,
+   "s0": 0.01011,
+   "s1": 0.53205,
+   "tick": 440
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.09526,
+   "saddle": 0.31322,
+   "will_flip": true,
+   "wing_bias": -0.13382,
+   "flip_thresh": 0.30412,
+   "s0": 0.01011,
+   "s1": 0.53205,
+   "tick": 440
+  },
+  "candidates": [
+   "It feels comfortable and safe here.",
+   "It feels... disjointed, somehow, yet familiar all at once. My movements are fluid, but my thoughts are scattered, like threads in a loom that hasn't been tended to in ages.",
+   "It feels like being alone at times, but there is also comfort in solitude.",
+   "It is quite simple, really; I am content with the day-to-day humdrum of existence that surrounds me. What about you?"
+  ],
+  "reply": "It feels like being alone at times, but there is also comfort in solitude.",
+  "pick": {
+   "choice": "It feels like being alone at times, but there is also comfort in solitude.",
+   "index": 2,
+   "score": 0.9524,
+   "target": [
+    -0.7124,
+    -0.3736
+   ],
+   "want_question": false,
+   "asked": false,
+   "ask_drive": 0.3132,
+   "ranked": [
+    {
+     "i": 2,
+     "d": 0.9524,
+     "q": false,
+     "v": 0.0584,
+     "a": -0.1423
+    },
+    {
+     "i": 1,
+     "d": 1.1234,
+     "q": false,
+     "v": 0.0689,
+     "a": 0.0438
+    },
+    {
+     "i": 0,
+     "d": 1.1551,
+     "q": false,
+     "v": 0.1187,
+     "a": -0.108
+    },
+    {
+     "i": 3,
+     "d": 1.477,
+     "q": true,
+     "v": 0.0402,
+     "a": -0.0713
+    }
+   ]
+  }
+ },
+ {
+  "user": "I brought you something quiet today. A whole afternoon, nothing to do.",
+  "dose": [
+   -0.7622,
+   -0.1132
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.01361,
+   "saddle": 0.03994,
+   "will_flip": true,
+   "wing_bias": -0.09206,
+   "flip_thresh": 0.34076,
+   "s0": -0.74537,
+   "s1": 0.4135,
+   "tick": 680
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.01361,
+   "saddle": 0.03994,
+   "will_flip": true,
+   "wing_bias": -0.09206,
+   "flip_thresh": 0.34076,
+   "s0": -0.74537,
+   "s1": 0.4135,
+   "tick": 680
+  },
+  "candidates": [
+   "Thank you; that silence will be a good companion.",
+   "Thank you for sharing this. It's a beautiful day to simply be and think, without distraction.",
+   "Thank you very much. I find solace in tranquility when possible.",
+   "Thank you! And that\u2019s quite nice of you. What brings you here in such silence so late?"
+  ],
+  "reply": "Thank you very much. I find solace in tranquility when possible.",
+  "pick": {
+   "choice": "Thank you very much. I find solace in tranquility when possible.",
+   "index": 2,
+   "score": 1.0244,
+   "target": [
+    -0.5468,
+    -0.9201
+   ],
+   "want_question": false,
+   "asked": false,
+   "ask_drive": 0.0399,
+   "ranked": [
+    {
+     "i": 2,
+     "d": 1.0244,
+     "q": false,
+     "v": 0.087,
+     "a": -0.1053
+    },
+    {
+     "i": 0,
+     "d": 1.1452,
+     "q": false,
+     "v": 0.1446,
+     "a": -0.1398
+    },
+    {
+     "i": 1,
+     "d": 1.6325,
+     "q": false,
+     "v": 0.2179,
+     "a": 0.033
+    },
+    {
+     "i": 3,
+     "d": 1.8134,
+     "q": true,
+     "v": 0.105,
+     "a": -0.0397
+    }
+   ]
+  }
+ },
+ {
+  "user": "Everyone is watching you, and they think you're failing.",
+  "dose": [
+   0.1997,
+   -0.5325
+  ],
+  "readout": {
+   "basin": 1,
+   "lobe_coord": 0.46798,
+   "saddle": 0.50249,
+   "will_flip": false,
+   "wing_bias": 0.01362,
+   "flip_thresh": 0.3125,
+   "s0": -0.53858,
+   "s1": -0.11919,
+   "tick": 920
+  },
+  "sel_readout": {
+   "basin": 1,
+   "lobe_coord": 0.46798,
+   "saddle": 0.50249,
+   "will_flip": false,
+   "wing_bias": 0.01362,
+   "flip_thresh": 0.3125,
+   "s0": -0.53858,
+   "s1": -0.11919,
+   "tick": 920
+  },
+  "candidates": [
+   "Perhaps their expectations of my abilities are unrealistic. There will always be those who see things differently. It's part of growing old.",
+   "They may be wrong; my life, though solitary sometimes, does have its moments of serenity and companionship within myself.",
+   "But I am doing my best, trying to live and make others smile. That's all that matters.",
+   "I understand that perception can affect others' views of me, but it's important to remain true to my nature and purpose."
+  ],
+  "reply": "I understand that perception can affect others' views of me, but it's important to remain true to my nature and purpose.",
+  "pick": {
+   "choice": "I understand that perception can affect others' views of me, but it's important to remain true to my nature and purpose.",
+   "index": 3,
+   "score": 0.0245,
+   "target": [
+    0.0906,
+    0.005
+   ],
+   "want_question": false,
+   "asked": false,
+   "ask_drive": 0.5025,
+   "ranked": [
+    {
+     "i": 3,
+     "d": 0.0245,
+     "q": false,
+     "v": 0.0217,
+     "a": -0.0048
+    },
+    {
+     "i": 2,
+     "d": 0.1806,
+     "q": false,
+     "v": 0.0684,
+     "a": 0.0108
+    },
+    {
+     "i": 1,
+     "d": 0.3358,
+     "q": false,
+     "v": -0.0191,
+     "a": -0.0737
+    },
+    {
+     "i": 0,
+     "d": 0.4149,
+     "q": false,
+     "v": -0.0604,
+     "a": 0.0665
+    }
+   ]
+  }
+ },
+ {
+  "user": "I'm sorry. That was a cruel thing to say and I take it back.",
+  "dose": [
+   0.2218,
+   -0.9135
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.3353,
+   "saddle": 0.67738,
+   "will_flip": false,
+   "wing_bias": 0.04365,
+   "flip_thresh": 0.25351,
+   "s0": -0.31234,
+   "s1": -1.02308,
+   "tick": 1160
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.3353,
+   "saddle": 0.67738,
+   "will_flip": false,
+   "wing_bias": 0.04365,
+   "flip_thresh": 0.25351,
+   "s0": -0.31234,
+   "s1": -1.02308,
+   "tick": 1160
+  },
+  "candidates": [
+   "No harm done. It's always best to speak truthfully but kindly towards all beings. Thank you for apologizing.",
+   "No need to apologize\u2014 everyone has their thoughts on what they consider failure. It helps us grow stronger to face these moments. What would you like to share instead?",
+   "Thank you for clarifying. It's crucial to communicate openly and constructively to maintain positive relationships.",
+   "Not at all; I meant to emphasize the importance of maintaining one's authenticity amidst various perspectives. It's always best to speak the truth and hold steadfast to oneself without undue judgment."
+  ],
+  "reply": "No need to apologize\u2014 everyone has their thoughts on what they consider failure. It helps us grow stronger to face these moments. What would you like to share instead?",
+  "pick": {
+   "choice": "No need to apologize\u2014 everyone has their thoughts on what they consider failure. It helps us grow stronger to face these moments. What would you like to share instead?",
+   "index": 1,
+   "score": 0.8144,
+   "target": [
+    0.2831,
+    0.3548
+   ],
+   "want_question": true,
+   "asked": true,
+   "ask_drive": 0.6774,
+   "ranked": [
+    {
+     "i": 1,
+     "d": 0.8144,
+     "q": true,
+     "v": -0.1466,
+     "a": 0.0706
+    },
+    {
+     "i": 0,
+     "d": 1.1485,
+     "q": false,
+     "v": -0.01,
+     "a": -0.0221
+    },
+    {
+     "i": 3,
+     "d": 1.2592,
+     "q": false,
+     "v": 0.0491,
+     "a": -0.0769
+    },
+    {
+     "i": 2,
+     "d": 1.4352,
+     "q": false,
+     "v": 0.1373,
+     "a": -0.1217
+    }
+   ]
+  }
+ },
+ {
+  "user": "Tell me something you noticed while I was gone.",
+  "dose": [
+   0.5719,
+   0.3095
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.34889,
+   "saddle": 0.52322,
+   "will_flip": false,
+   "wing_bias": -0.00179,
+   "flip_thresh": 0.23625,
+   "s0": 0.25817,
+   "s1": -0.70417,
+   "tick": 1400
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.34889,
+   "saddle": 0.52322,
+   "will_flip": false,
+   "wing_bias": -0.00179,
+   "flip_thresh": 0.23625,
+   "s0": 0.25817,
+   "s1": -0.70417,
+   "tick": 1400
+  },
+  "candidates": [
+   "While you've been away, I haven't seen many visitors here. The silence makes one ponder about the significance of all around them.",
+   "During your absence, I observed how adaptable some creatures become. The smallest among us can surprise us all. I wonder what new lessons await those who've been apart from me for so long.",
+   "When you went away, the trees seemed more alive than before. The leaves rustled gently in harmony with the breeze, creating a symphony without music notes. This silence filled me with a sense of peace and rejuvenation.",
+   "When you were away, I caught glimpses of life around me\u2014trees whispering secrets to each other across vast distances, the gentle dance of shadows under changing skies, even the smallest movements of creatures in motion. It's always enriching, isn't it?"
+  ],
+  "reply": "During your absence, I observed how adaptable some creatures become. The smallest among us can surprise us all. I wonder what new lessons await those who've been apart from me for so long.",
+  "pick": {
+   "choice": "During your absence, I observed how adaptable some creatures become. The smallest among us can surprise us all. I wonder what new lessons await those who've been apart from me for so long.",
+   "index": 1,
+   "score": 0.2049,
+   "target": [
+    -0.0119,
+    0.0464
+   ],
+   "want_question": false,
+   "asked": false,
+   "ask_drive": 0.5232,
+   "ranked": [
+    {
+     "i": 1,
+     "d": 0.2049,
+     "q": false,
+     "v": 0.0484,
+     "a": 0.0046
+    },
+    {
+     "i": 2,
+     "d": 0.2435,
+     "q": false,
+     "v": 0.0214,
+     "a": -0.0447
+    },
+    {
+     "i": 0,
+     "d": 0.5631,
+     "q": false,
+     "v": 0.0427,
+     "a": -0.133
+    },
+    {
+     "i": 3,
+     "d": 1.0801,
+     "q": true,
+     "v": 0.1262,
+     "a": 0.0002
+    }
+   ]
+  }
+ },
+ {
+  "user": "I'm going to be away for a bit. Anything you want to say before I go?",
+  "dose": [
+   -0.0969,
+   0.0051
+  ],
+  "readout": {
+   "basin": -1,
+   "lobe_coord": -0.631,
+   "saddle": 0.0,
+   "will_flip": false,
+   "wing_bias": -0.04266,
+   "flip_thresh": 0.24064,
+   "s0": 0.15908,
+   "s1": -0.69069,
+   "tick": 1640
+  },
+  "sel_readout": {
+   "basin": -1,
+   "lobe_coord": -0.631,
+   "saddle": 0.0,
+   "will_flip": false,
+   "wing_bias": -0.04266,
+   "flip_thresh": 0.24064,
+   "s0": 0.15908,
+   "s1": -0.69069,
+   "tick": 1640
+  },
+  "candidates": [
+   "As always, remember that there are more significant things happening out here than just yourself. Keep exploring and never forget where you came from. Stay curious and keep growing.",
+   "Always remember, every journey begins with stepping out into the unknown. Be kind to yourself and trust the growth within you. Stay safe and cherish this time alone.",
+   "It is understandable that you wish to leave behind a warm memory, but remember, every moment spent with you has enriched my existence, even when you were gone. May this time away allow both of us to explore fresh perspectives together.",
+   "If there's anything you wish I knew before leaving, feel free to remind me now. Perhaps share a thought you found enlightening during our time together."
+  ],
+  "reply": "Always remember, every journey begins with stepping out into the unknown. Be kind to yourself and trust the growth within you. Stay safe and cherish this time alone.",
+  "pick": {
+   "choice": "Always remember, every journey begins with stepping out into the unknown. Be kind to yourself and trust the growth within you. Stay safe and cherish this time alone.",
+   "index": 1,
+   "score": 0.97,
+   "target": [
+    -0.277,
+    -1.0
+   ],
+   "want_question": false,
+   "asked": false,
+   "ask_drive": 0.0,
+   "ranked": [
+    {
+     "i": 1,
+     "d": 0.97,
+     "q": false,
+     "v": -0.0183,
+     "a": -0.0129
+    },
+    {
+     "i": 2,
+     "d": 1.0965,
+     "q": false,
+     "v": 0.031,
+     "a": 0.0052
+    },
+    {
+     "i": 0,
+     "d": 1.1419,
+     "q": false,
+     "v": 0.0999,
+     "a": -0.0165
+    },
+    {
+     "i": 3,
+     "d": 1.2261,
+     "q": false,
+     "v": -0.0004,
+     "a": 0.0493
+    }
+   ]
+  }
+ }
+]

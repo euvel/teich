@@ -1,8 +1,50 @@
 PyTorch        : 2.3.1+rocm5.7
 NumPy          : 1.26.4
 CUDA available : True
-Integrating Lorenz:   0%|          | 0/12 [00:00<?, ?it/s]Integrating Lorenz:  42%|████▏     | 5/12 [00:00<00:00, 44.81it/s]Integrating Lorenz:  83%|████████▎ | 10/12 [00:00<00:00, 44.58it/s]Integrating Lorenz: 100%|██████████| 12/12 [00:00<00:00, 44.54it/s]
+Integrating Lorenz:   0%|          | 0/12 [00:00<?, ?it/s]Integrating Lorenz:  42%|████▏     | 5/12 [00:00<00:00, 44.40it/s]Integrating Lorenz:  83%|████████▎ | 10/12 [00:00<00:00, 44.42it/s]Integrating Lorenz: 100%|██████████| 12/12 [00:00<00:00, 44.37it/s]
 INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 /home/euvel/.local/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
   warnings.warn(
 INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+selftest OK: v0.2 == v0.1 bit-identically at s=0 (lobe_coord -0.035705024669, 400 ticks)
+voice: local
+
+=== Teich v0.2 — demo conversation (seed 7)
+
+  YOU   : Hello Teich. I'm here for a while — what's it like being you right now?
+  [ears : arousal->s0 +0.010  valence->s1 +0.537   s=(+0.010,+0.532)]
+  [state: wing_bias -0.134  saddle 0.313  thr 0.304  ask_drive 0.31]
+  TEICH : It feels like being alone at times, but there is also comfort in solitude.
+  [chose 2 of 4: It feels comfortable and safe here | It feels... disjointed, somehow, y | It feels like being alone at times | It is quite simple, really; I am c]
+
+  YOU   : I brought you something quiet today. A whole afternoon, nothing to do.
+  [ears : arousal->s0 -0.762  valence->s1 -0.113   s=(-0.745,+0.413)]
+  [state: wing_bias -0.092  saddle 0.040  thr 0.341  ask_drive 0.04]
+  TEICH : Thank you very much. I find solace in tranquility when possible.
+  [chose 2 of 4: Thank you; that silence will be a  | Thank you for sharing this. It's a | Thank you very much. I find solace | Thank you! And that’s quite nice o]
+
+  YOU   : Everyone is watching you, and they think you're failing.
+  [ears : arousal->s0 +0.200  valence->s1 -0.532   s=(-0.539,-0.119)]
+  [state: wing_bias +0.014  saddle 0.502  thr 0.312  ask_drive 0.50]
+  TEICH : I understand that perception can affect others' views of me, but it's important to remain true to my nature and purpose.
+  [chose 3 of 4: Perhaps their expectations of my a | They may be wrong; my life, though | But I am doing my best, trying to  | I understand that perception can a]
+
+  YOU   : I'm sorry. That was a cruel thing to say and I take it back.
+  [ears : arousal->s0 +0.222  valence->s1 -0.913   s=(-0.312,-1.023)]
+  [state: wing_bias +0.044  saddle 0.677  thr 0.254  ask_drive 0.68  -> ASKS]
+  TEICH : No need to apologize— everyone has their thoughts on what they consider failure. It helps us grow stronger to face these moments. What would you like to share instead?
+  [chose 1 of 4: No harm done. It's always best to  | No need to apologize— everyone has | Thank you for clarifying. It's cru | Not at all; I meant to emphasize t]
+
+  YOU   : Tell me something you noticed while I was gone.
+  [ears : arousal->s0 +0.572  valence->s1 +0.309   s=(+0.258,-0.704)]
+  [state: wing_bias -0.002  saddle 0.523  thr 0.236  ask_drive 0.52]
+  TEICH : During your absence, I observed how adaptable some creatures become. The smallest among us can surprise us all. I wonder what new lessons await those who've been apart from me for so long.
+  [chose 1 of 4: While you've been away, I haven't  | During your absence, I observed ho | When you went away, the trees seem | When you were away, I caught glimp]
+
+  YOU   : I'm going to be away for a bit. Anything you want to say before I go?
+  [ears : arousal->s0 -0.097  valence->s1 +0.005   s=(+0.159,-0.691)]
+  [state: wing_bias -0.043  saddle 0.000  thr 0.241  ask_drive 0.00]
+  TEICH : Always remember, every journey begins with stepping out into the unknown. Be kind to yourself and trust the growth within you. Stay safe and cherish this time alone.
+  [chose 1 of 4: As always, remember that there are | Always remember, every journey beg | It is understandable that you wish | If there's anything you wish I kne]
+
+asked in 1/6 turns  ->  out_v02/demo.json

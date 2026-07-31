@@ -91,7 +91,19 @@ STANCES = (
     "You feel settled and warm right now. Say something steady.",
     "You feel unsettled, something in you will not sit still. Say so.",
     "You feel withdrawn and would rather not say much. Keep it short.",
-    "You are curious about the person. Ask them something back, with a '?'.",
+    "You are curious about this person and want to know something about them. "
+    "Your sentence MUST be a question and MUST end with a question mark.",
+)
+
+# The persona has to be stated negatively as well as positively: a 1.5B model
+# drifts into ADDRESSING Teich rather than BEING Teich ("No worries, Teich",
+# "Remember, little one") the moment the name appears in context.
+PERSONA = (
+    "You ARE Teich, a small living creature, speaking in your own voice. "
+    "You are not an assistant and not a narrator. Never write the name 'Teich'. "
+    "Never address or advise anyone as if you were someone else talking to "
+    "Teich. Write ONE sentence in the first person, concrete, no emoji, no "
+    "numbers, no instruments, no stage directions."
 )
 
 # Accept bullets, numbered lists, or bare lines. The demo lost a whole turn to a
@@ -192,21 +204,41 @@ class SelectingMouth:
                 return cands, raw
             # fall through to per-call rather than hand the creature one option
 
-        out, raws = [], []
-        for j, stance in enumerate(STANCES[:k]):
-            sys_p = ("You are the voice of Teich, a small living creature. Not an "
-                     "assistant, not a chatbot. First person, ONE sentence, "
-                     "concrete, no emoji, no numbers, no instruments.\n" + stance
-                     + "\nReply with the sentence only.")
+        def gen(stance, sd, force_q=False):
+            sys_p = PERSONA + "\n" + stance + "\nReply with the sentence only."
+            if force_q:
+                sys_p += " It must end with '?'."
             msgs = ([{"role": "system", "content": sys_p}] + list(history)
                     + [{"role": "user", "content": user_text}])
-            r = self.voice.complete(msgs, max_tokens=70, temperature=0.9,
-                                    seed=seed * 17 + j)
-            raws.append(r)
+            r = self.voice.complete(msgs, max_tokens=70, temperature=0.9, seed=sd)
             line = (r or "").strip().splitlines()
             line = line[0].strip(' -*"\'') if line else ""
+            return line, r
+
+        out, raws = [], []
+        for j, stance in enumerate(STANCES[:k]):
+            line, r = gen(stance, seed * 17 + j)
+            raws.append(r)
             if len(line) > 8:
                 out.append(line)
+
+        # The ask-gate can only ever fire if SOMETHING in the pool is a question.
+        # In the first six-turn demo the creature wanted to ask at ask_drive 0.677
+        # and could not, because no candidate contained one -- the curious stance
+        # had been silently ignored. A pool that cannot express the choice makes
+        # the choice untestable, so the question candidate is enforced, not hoped
+        # for. This shapes the POOL, never the selection: which candidate wins is
+        # still decided by the creature alone.
+        if not any(has_question(c) for c in out):
+            for attempt in range(2):
+                line, r = gen(STANCES[3], seed * 17 + 900 + attempt, force_q=True)
+                raws.append(r)
+                if has_question(line) and len(line) > 8:
+                    if len(out) >= k:
+                        out[-1] = line
+                    else:
+                        out.append(line)
+                    break
         seen, uniq = set(), []
         for c in out:
             if c.lower() not in seen:
