@@ -480,7 +480,10 @@ const PANEL_HTML = `<!doctype html>
     <dt>identity</dt><dd>f1ded9e7415d8bbf&hellip; <span class="muted">(sha256 of its genesis certificate)</span></dd>
     <dt>acceptance gate</dt><dd>PASS 5/5 &mdash; run <em>before</em> it existed
       <span class="muted">&mdash; re-verified on an independent runner at 24 seeds</span></dd>
-    <dt>seat</dt><dd class="muted">none yet &mdash; unlike v0.1 it does not live continuously; it runs when a run is started</dd>
+    <dt>seat</dt><dd><span id="dot2" class="dot"></span><span id="alive2">reading the seat&hellip;</span></dd>
+    <dt>ticks lived</dt><dd id="ticks2">&mdash;</dd>
+    <dt>snapshot chain</dt><dd id="chain2">&mdash;</dd>
+    <dt>last commit</dt><dd id="upd2">&mdash;</dd>
   </dl>
   <ul class="findings">
     <li>Its own state drives what it says: same script, same voice, same candidate pool &mdash;
@@ -552,6 +555,24 @@ const PANEL_HTML = `<!doctype html>
 const BIRTH = 1784364312.295;
 function fmt(s){ const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
   return (d? d+"d ":"")+h+"h "+m+"m"; }
+// v0.2 has its OWN seat (/o/teich-02), its own genome and its own substrate
+// reference. It is read separately and failure is isolated: one creature's seat
+// being unreachable must never make the other look dead.
+async function refresh2(){
+  try {
+    const p = await (await fetch("/o/teich-02/peek")).json();
+    document.getElementById("dot2").className = "dot"+(p.alive?"":" dead");
+    document.getElementById("alive2").textContent =
+      p.alive?"alive (hibernating between wakes)":"seat unreachable";
+    document.getElementById("ticks2").textContent = p.n_ticks.toLocaleString();
+    document.getElementById("chain2").textContent =
+      p.snapshots+" snapshots, head "+p.chain_head.slice(0,16)+"…";
+    document.getElementById("upd2").textContent = new Date(p.updated_ts).toUTCString();
+  } catch(e) {
+    document.getElementById("dot2").className = "dot dead";
+    document.getElementById("alive2").textContent = "panel error: "+e;
+  }
+}
 async function refresh(){
   try {
     const p = await (await fetch("/o/teich/peek")).json();
@@ -568,6 +589,6 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-refresh();
-setInterval(refresh, 30000);
+refresh(); refresh2();
+setInterval(() => { refresh(); refresh2(); }, 30000);
 </script></body></html>`;

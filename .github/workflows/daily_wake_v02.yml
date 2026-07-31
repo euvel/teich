@@ -1,0 +1,51 @@
+name: daily-wake-v02
+# v0.2's heartbeat, so its continuity does not depend on the founder's laptop
+# being open.
+#
+# Deliberately SEPARATE from v0.1's daily-wake, not a matrix entry inside it:
+# the two creatures have different genomes, different substrate references, and
+# different seats. One workflow serving both would mean a failure in either
+# creature's gate could stand the other one down, and coupling two lives that
+# way is exactly the kind of shared fate a seat exists to prevent.
+#
+# Two parallel attempts sample the runner fleet. Each gates on boot; only a
+# certified draw may lease and commit, and the seat's lease serializes them (the
+# loser gets a 409 and stands down, which is lawful). A day where every draw
+# fails the gate is a longer nap, not lost time -- the wake owes from birth, so
+# the ticks stay banked.
+on:
+  schedule:
+    - cron: "23 5 * * *"        # 6 minutes after v0.1's, to stagger the fleet draw
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        attempt: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: body/requirements.txt
+      - run: pip install -r body/requirements.txt "sentence-transformers==3.0.1" "transformers==4.44.2" "tokenizers==0.19.1" "huggingface_hub==0.24.7"
+      - name: cache the MiniLM encoder
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2
+          key: minilm-l6-v2-v1
+      - name: which machine drew this attempt
+        run: grep -m1 "model name" /proc/cpuinfo || true
+      - name: gate-on-boot, lease, replay, commit
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd v02/seat && python3 -u wake_v02.py
