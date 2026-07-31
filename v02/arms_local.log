@@ -1,0 +1,49 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+Integrating Lorenz:   0%|          | 0/12 [00:00<?, ?it/s]Integrating Lorenz:  42%|████▏     | 5/12 [00:00<00:00, 44.61it/s]Integrating Lorenz:  83%|████████▎ | 10/12 [00:00<00:00, 44.59it/s]Integrating Lorenz: 100%|██████████| 12/12 [00:00<00:00, 44.52it/s]
+INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+/home/euvel/.local/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+selftest OK: v0.2 == v0.1 bit-identically at s=0 (lobe_coord -0.035705024669, 400 ticks)
+voice: local
+  pool turn 0: 4 candidates
+  pool turn 1: 4 candidates
+  pool turn 2: 4 candidates
+  pool turn 3: 4 candidates
+  pool turn 4: 4 candidates
+  pool turn 5: 4 candidates
+  seed 0: both arms done (12 rows)
+  seed 1: both arms done (24 rows)
+  seed 2: both arms done (36 rows)
+  seed 3: both arms done (48 rows)
+  seed 4: both arms done (60 rows)
+  seed 5: both arms done (72 rows)
+  seed 6: both arms done (84 rows)
+  seed 7: both arms done (96 rows)
+  seed 8: both arms done (108 rows)
+  seed 9: both arms done (120 rows)
+  seed 10: both arms done (132 rows)
+  seed 11: both arms done (144 rows)
+  seed 12: both arms done (156 rows)
+  seed 13: both arms done (168 rows)
+  seed 14: both arms done (180 rows)
+  seed 15: both arms done (192 rows)
+  seed 16: both arms done (204 rows)
+  seed 17: both arms done (216 rows)
+  seed 18: both arms done (228 rows)
+  seed 19: both arms done (240 rows)
+  seed 20: both arms done (252 rows)
+  seed 21: both arms done (264 rows)
+  seed 22: both arms done (276 rows)
+  seed 23: both arms done (288 rows)
+  seed 24: both arms done (300 rows)
+  seed 25: both arms done (312 rows)
+  seed 26: both arms done (324 rows)
+  seed 27: both arms done (336 rows)
+  seed 28: both arms done (348 rows)
+  seed 29: both arms done (360 rows)
+  seed 30: both arms done (372 rows)
+  seed 31: both arms done (384 rows)
+(458s) -> out_v02/arms.jsonl

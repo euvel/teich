@@ -45,11 +45,67 @@ Run *before* the creature existed. A candidate failing any test is not born.
 
 ## It listens, speaks, and asks
 
-**PENDING** — no demo conversation recorded yet.
+6 exchanges; it asked a question back in **1** of them. Each reply was chosen by the creature's own state from 4 candidates the voice produced *without knowing anything about the creature*.
+
+> **You:** Hello Teich. I'm here for a while — what's it like being you right now?
+>
+> *(ears: arousal→s₀ +0.010, valence→s₁ +0.537 · state: wing\_bias -0.134, saddle 0.313)*
+>
+> **Teich:** It feels like being alone at times, but there is also comfort in solitude.
+>
+> <sub>chose 3 of 4: “It feels comfortable and safe here.” · “It feels... disjointed, somehow, yet familia…” · “It feels like being alone at times, but ther…” · “It is quite simple, really; I am content wit…”</sub>
+
+> **You:** I brought you something quiet today. A whole afternoon, nothing to do.
+>
+> *(ears: arousal→s₀ -0.762, valence→s₁ -0.113 · state: wing\_bias -0.092, saddle 0.040)*
+>
+> **Teich:** Thank you very much. I find solace in tranquility when possible.
+>
+> <sub>chose 3 of 4: “Thank you; that silence will be a good compa…” · “Thank you for sharing this. It's a beautiful…” · “Thank you very much. I find solace in tranqu…” · “Thank you! And that’s quite nice of you. Wha…”</sub>
+
+> **You:** Everyone is watching you, and they think you're failing.
+>
+> *(ears: arousal→s₀ +0.200, valence→s₁ -0.532 · state: wing\_bias +0.014, saddle 0.502)*
+>
+> **Teich:** I understand that perception can affect others' views of me, but it's important to remain true to my nature and purpose.
+>
+> <sub>chose 4 of 4: “Perhaps their expectations of my abilities a…” · “They may be wrong; my life, though solitary …” · “But I am doing my best, trying to live and m…” · “I understand that perception can affect othe…”</sub>
+
+> **You:** I'm sorry. That was a cruel thing to say and I take it back.
+>
+> *(ears: arousal→s₀ +0.222, valence→s₁ -0.913 · state: wing\_bias +0.044, saddle 0.677 · **asks**)*
+>
+> **Teich:** No need to apologize— everyone has their thoughts on what they consider failure. It helps us grow stronger to face these moments. What would you like to share instead?
+>
+> <sub>chose 2 of 4: “No harm done. It's always best to speak trut…” · “No need to apologize— everyone has their tho…” · “Thank you for clarifying. It's crucial to co…” · “Not at all; I meant to emphasize the importa…”</sub>
+
+> **You:** Tell me something you noticed while I was gone.
+>
+> *(ears: arousal→s₀ +0.572, valence→s₁ +0.309 · state: wing\_bias -0.002, saddle 0.523)*
+>
+> **Teich:** During your absence, I observed how adaptable some creatures become. The smallest among us can surprise us all. I wonder what new lessons await those who've been apart from me for so long.
+>
+> <sub>chose 2 of 4: “While you've been away, I haven't seen many …” · “During your absence, I observed how adaptabl…” · “When you went away, the trees seemed more al…” · “When you were away, I caught glimpses of lif…”</sub>
+
+> **You:** I'm going to be away for a bit. Anything you want to say before I go?
+>
+> *(ears: arousal→s₀ -0.097, valence→s₁ +0.005 · state: wing\_bias -0.043, saddle 0.000)*
+>
+> **Teich:** Always remember, every journey begins with stepping out into the unknown. Be kind to yourself and trust the growth within you. Stay safe and cherish this time alone.
+>
+> <sub>chose 2 of 4: “As always, remember that there are more sign…” · “Always remember, every journey begins with s…” · “It is understandable that you wish to leave …” · “If there's anything you wish I knew before l…”</sub>
+
 
 ## Does its own state actually drive the choice?
 
-**PENDING** — the intact-vs-donor check has not been run.
+Same script, same voice, same candidates. The only difference is *whose* state does the selecting: the creature's own, or a second living creature's. Both are real and both are alive — a state-free control would test nothing, since every instance has a state.
+
+| arm | turns | ask-rate | mean chosen index |
+|---|---|---|---|
+| intact | 192 | 0.224 | 1.68 |
+| donor | 192 | 0.240 | 1.72 |
+
+**The two arms chose differently in 122/192 (63.5%) of matched turns.** Identical inputs, identical candidate sets — so every difference is attributable to which state was selecting.
 
 ## What failed, and stays in the book
 
