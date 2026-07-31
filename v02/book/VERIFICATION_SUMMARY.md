@@ -107,6 +107,17 @@ Same script, same voice, same candidates. The only difference is *whose* state d
 
 **The two arms chose differently in 122/192 (63.5%) of matched turns.** Identical inputs, identical candidate sets — so every difference is attributable to which state was selecting.
 
+### Curiosity follows the state, not the body
+
+The ask-gate is `saddle >= 0.55`, frozen from genome statistics before any conversation existed. Every row therefore has *two* candidate explanations for whether a question was asked: the gate of the body that lived the conversation, and the gate of the state that did the selecting. In the intact arm these are the same creature. In the donor arm they are not.
+
+| arm | asked matches OWN body's gate | asked matches SELECTING state's gate |
+|---|---|---|
+| intact | 90.1% | 90.1% |
+| donor | 59.4% | 91.7% |
+
+Cut the wire and the curiosity goes **with the state**: the donor arm's questions track the selecting creature's gate (91.7%) and fall to near-chance against its own body's (59.4%), while the intact arm holds 90.1%. The ask-rates in the table above are nearly equal across arms — the arms differ not in *how often* it asks but in *when*, which is the claim.
+
 ## What failed, and stays in the book
 
 - The second slow dimension first modulated the roof PERIOD — a clock knob the fold rule never consults. That is exactly v0.1's tau1 mistake (perfect memory, basin unchanged in 46/48 runs), rebuilt after the finding had already been written down. T5 caught it in 7 minutes. Fixed by making it a wing asymmetry that leans the fold.

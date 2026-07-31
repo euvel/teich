@@ -193,6 +193,42 @@ def main():
               f"({diff/len(paired)*100:.1f}%) of matched turns.** Identical "
               f"inputs, identical candidate sets — so every difference is "
               f"attributable to which state was selecting.")
+        # Curiosity is the sharpest form of this, because it is the one act with
+        # a stated mechanism: the gate is `saddle >= ASK_THRESHOLD`, frozen from
+        # genome statistics before any conversation existed. So we can ask which
+        # BODY's gate the utterance obeyed. In the donor arm those two answers
+        # come apart, and that is the whole experiment.
+        thr = 0.55
+        rowsA = {"intact": by.get("intact", []), "donor": by.get("donor", [])}
+        if rowsA["intact"] and rowsA["donor"]:
+            def match(rs, key):
+                return sum(1 for r in rs if bool(r["asked"]) == (r[key] >= thr)) / len(rs)
+            A("")
+            A("### Curiosity follows the state, not the body")
+            A("")
+            A("The ask-gate is `saddle >= 0.55`, frozen from genome statistics "
+              "before any conversation existed. Every row therefore has *two* "
+              "candidate explanations for whether a question was asked: the "
+              "gate of the body that lived the conversation, and the gate of "
+              "the state that did the selecting. In the intact arm these are "
+              "the same creature. In the donor arm they are not.")
+            A("")
+            A("| arm | asked matches OWN body's gate | asked matches SELECTING state's gate |")
+            A("|---|---|---|")
+            for arm in ("intact", "donor"):
+                rs = rowsA[arm]
+                A(f"| {arm} | {match(rs,'saddle')*100:.1f}% | "
+                  f"{match(rs,'sel_saddle')*100:.1f}% |")
+            A("")
+            A(f"Cut the wire and the curiosity goes **with the state**: the "
+              f"donor arm's questions track the selecting creature's gate "
+              f"({match(rowsA['donor'],'sel_saddle')*100:.1f}%) and fall to "
+              f"near-chance against its own body's "
+              f"({match(rowsA['donor'],'saddle')*100:.1f}%), while the intact "
+              f"arm holds {match(rowsA['intact'],'saddle')*100:.1f}%. The "
+              f"ask-rates in the table above are nearly equal across arms — "
+              f"the arms differ not in *how often* it asks but in *when*, "
+              f"which is the claim.")
     A("")
 
     # ---------------------------------------------------------------- record
