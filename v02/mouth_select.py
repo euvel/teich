@@ -75,11 +75,39 @@ CANDIDATE_SYS = (
     "Format: exactly {k} lines, each beginning '- '. No other text."
 )
 
-_LINE = re.compile(r"^\s*[-*•]\s*(.+?)\s*$", re.M)
+# ONE CALL PER CANDIDATE. A 1.5B model reliably writes one utterance but does not
+# reliably emit "exactly 4 lines": the first local demo produced a single option
+# on every turn, so the creature had nothing to choose among and `chose 0 of 1`
+# appeared six times. A demo of selection that never selects is not evidence,
+# however good the sentences sound.
+#
+# The stance hints below are given to the VOICE and are fixed for every turn and
+# every creature. They do NOT come from the state -- nothing about the creature
+# reaches candidate generation, which is the property the whole architecture
+# rests on. They exist only to guarantee the pool SPANS the space the state will
+# choose within; a pool of four near-identical sentences makes selection
+# unmeasurable even when it is working.
+STANCES = (
+    "You feel settled and warm right now. Say something steady.",
+    "You feel unsettled, something in you will not sit still. Say so.",
+    "You feel withdrawn and would rather not say much. Keep it short.",
+    "You are curious about the person. Ask them something back, with a '?'.",
+)
+
+# Accept bullets, numbered lists, or bare lines. The demo lost a whole turn to a
+# parser that only knew "- ": the model answered with a different list style, zero
+# candidates were extracted, and the creature had nothing to select from. A voice
+# that occasionally reformats is normal; a pipeline that goes mute when it does is
+# a bug.
+_LINE = re.compile(r"^\s*(?:[-*\u2022]|\d+[.)])\s*(.+?)\s*$", re.M)
 
 
 def parse_candidates(raw: str, k: int = K_CANDIDATES) -> list[str]:
     out = [m.group(1).strip() for m in _LINE.finditer(raw or "")]
+    if len(out) < 2:            # fallback: any non-empty line that looks like speech
+        out = [ln.strip(' \t"\'') for ln in (raw or "").splitlines()
+               if len(ln.strip()) > 12 and not ln.strip().lower().startswith(
+                   ("here", "sure", "of course", "certainly"))]
     out = [re.sub(r'^["\']|["\']$', "", c) for c in out if len(c) > 1]
     seen, uniq = set(), []
     for c in out:
@@ -139,12 +167,48 @@ class SelectingMouth:
                             for r in scored])
 
     # ---------------------------------------------------------------- voice
-    def candidates(self, history, user_text, seed=0, k=K_CANDIDATES):
-        """One generation returning k variants. The prompt never mentions state."""
-        msgs = ([{"role": "system", "content": CANDIDATE_SYS.format(k=k)}]
-                + list(history) + [{"role": "user", "content": user_text}])
+    def candidates(self, history, user_text, seed=0, k=K_CANDIDATES, per_call=None):
+        """Build the candidate pool. The prompt NEVER mentions the creature's state.
+
+        per_call=True  -> k separate generations, one per stance (robust on small
+                          local models, and guarantees a spanning pool)
+        per_call=False -> one generation returning k lines (fewer calls; fine on
+                          large remote models)
+        Default: per_call unless the voice declares otherwise.
+        """
         if self.voice is None:
             from voice_local import NIMVoice
             self.voice = NIMVoice()
-        raw = self.voice.complete(msgs, max_tokens=320, temperature=0.95, seed=seed)
-        return parse_candidates(raw, k), raw
+        if per_call is None:
+            per_call = getattr(self.voice, "prefers_per_call", True)
+
+        if not per_call:
+            msgs = ([{"role": "system", "content": CANDIDATE_SYS.format(k=k)}]
+                    + list(history) + [{"role": "user", "content": user_text}])
+            raw = self.voice.complete(msgs, max_tokens=320, temperature=0.95,
+                                      seed=seed)
+            cands = parse_candidates(raw, k)
+            if len(cands) >= 2:
+                return cands, raw
+            # fall through to per-call rather than hand the creature one option
+
+        out, raws = [], []
+        for j, stance in enumerate(STANCES[:k]):
+            sys_p = ("You are the voice of Teich, a small living creature. Not an "
+                     "assistant, not a chatbot. First person, ONE sentence, "
+                     "concrete, no emoji, no numbers, no instruments.\n" + stance
+                     + "\nReply with the sentence only.")
+            msgs = ([{"role": "system", "content": sys_p}] + list(history)
+                    + [{"role": "user", "content": user_text}])
+            r = self.voice.complete(msgs, max_tokens=70, temperature=0.9,
+                                    seed=seed * 17 + j)
+            raws.append(r)
+            line = (r or "").strip().splitlines()
+            line = line[0].strip(' -*"\'') if line else ""
+            if len(line) > 8:
+                out.append(line)
+        seen, uniq = set(), []
+        for c in out:
+            if c.lower() not in seen:
+                seen.add(c.lower()); uniq.append(c)
+        return uniq[:k], "\n---\n".join(raws)

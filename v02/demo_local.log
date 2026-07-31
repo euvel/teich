@@ -1,0 +1,8 @@
+PyTorch        : 2.3.1+rocm5.7
+NumPy          : 1.26.4
+CUDA available : True
+Integrating Lorenz:   0%|          | 0/12 [00:00<?, ?it/s]Integrating Lorenz:  42%|████▏     | 5/12 [00:00<00:00, 44.81it/s]Integrating Lorenz:  83%|████████▎ | 10/12 [00:00<00:00, 44.58it/s]Integrating Lorenz: 100%|██████████| 12/12 [00:00<00:00, 44.54it/s]
+INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+/home/euvel/.local/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+INFO: Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
