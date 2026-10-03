@@ -1,0 +1,151 @@
+{
+ "name": "Teich-0.3",
+ "born_utc": "2026-10-03T14:37:21Z",
+ "identity_sha256": "004f6ca5e5c151e3dfe42b425d5dc0f0ae82a72efeb8cb87a0c2286e8dc2e50b",
+ "genome_files_sha256": {
+  "genome_v03.py": "6bd0bbc8dbd6f1f0a1e9bd27bb21ba6b54974a8eb0251ef4e06ac07326c777c2",
+  "genome_v031.py": "68cb09dc09d250c5c75fb7d8a4814ccfece9bd9116e0db0bdbcda045292677d1",
+  "selector_v03.py": "a1a72c6502f3e7ba7505ccd99643bda9b114f58bce3961e8c6ceec780af798fb",
+  "ears_v3.py": "299f573da80ee9dcd65ef3b03c2220be0e680f8cdd671ca730fc86c29d492fcb",
+  "concepts_v03.json": "38590f66ce871a80f3ebd38cdd3cdd42ce82ebe892a3ea5de3633c58ab4a5577",
+  "pools_v03.json": "c8b8f32d6070cfe54eb65a6b74db78ef62f1926821885d54c4a08ea132c7ae22"
+ },
+ "seat_files_sha256": {
+  "seat/state_io_v03.py": "d5ed425a858e5f54601bb8cac1a38e180b44e3aa39867639b44cabd61178a161",
+  "seat/substrate_gate_v03.py": "88b359b883676f3c2838a5514e23ecf1ba34ac08ce82b4d8da9eef1f6e7706d4",
+  "seat/wake_v03.py": "05f4609e89a6e1cd41523398b7970fb7acd0c6a6fcfa1819c1b7cbdd4880a9ab",
+  "verify_substrate_v03.py": "b2e5d287b36190bcfc3ecf9246e5d56e27c7d09d6c02a485f7d3f1bb2356da18",
+  "substrate_reference_v03.json": "a0ee5f5ad4be2b2642b8527fb7d7efa89e79afefc1874abc43c87f3167cd18a3"
+ },
+ "git_commit_before_birth": "450f25252e36412330a7645dfeb5d836510117ec",
+ "birth_seed": 20261003,
+ "x0_hex": [
+  "0x1.5a414796e3e88p-4",
+  "0x1.4e0db60680b80p-8",
+  "-0x1.b32ebfcc272fcp-3",
+  "0x1.9f58bd311e878p-4",
+  "0x1.c28b77dcc1694p-2",
+  "-0x1.1339064848cc0p-3",
+  "-0x1.df9924bf10578p-3",
+  "0x1.aae4972350180p-4"
+ ],
+ "warm_ticks": 8000,
+ "body": "8 bodies, one per depth-3 region of the Stern–Brocot concept tree; each is a Nakada alpha-continued-fraction map (a section of the modular geodesic flow, genus-1 Teichmüller space) with alpha in [0.4115, 0.5] set by an integer memory in 0..6.",
+ "regions": {
+  "LLL": "food",
+  "LLR": "drink & substances",
+  "LRL": "animals",
+  "LRR": "body & clothing",
+  "RLL": "troubles & feelings",
+  "RLR": "abilities & activities",
+  "RRL": "places & time",
+  "RRR": "the wider world"
+ },
+ "verified_before_birth": {
+  "part1_theorem": {
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "G4": true,
+   "G5": true,
+   "G6": true,
+   "L1": true,
+   "controls_as_predicted": true
+  },
+  "part1_fresh_replication": {
+   "G4": true,
+   "L1": true,
+   "G5": true
+  },
+  "M1_meaning": {
+   "passed": true
+  },
+  "genome_v1_1": {
+   "G0": true,
+   "G6": true,
+   "G7": true,
+   "G8": true,
+   "G1r": true,
+   "controls": true
+  },
+  "part2b_speech": {
+   "D1_same_shift": true,
+   "D1_cross_flat": true,
+   "D1_control_flat": true,
+   "D1_free_moments": true,
+   "D2a_bound": true,
+   "D2a_speech": true,
+   "D2b_commitment": true,
+   "D3_self_knowledge": true
+  }
+ },
+ "headline_numbers": {
+  "memory_after_1e6_ticks_D": "1.000 (leaky twin 0.08, memoryless 0)",
+  "entropy_constant_across_memory": "lambda = 3.4183 = pi^2/(6 log G), within 0.001 at all 7 states",
+  "meaning_rho_vs_SimLex999": "0.3804 CI [0.3071, 0.45] (null 97.5% 0.0815)",
+  "told_once_speech_shift": "0.992 at 1e3 ticks, 0.995 at 1e5; other subjects 0.000",
+  "flattery_bound": "1 step per conversation (naive twin: to the edge)",
+  "commitment_violations_under_flattery": 0,
+  "self_knowledge_from_own_behaviour": "99.4% exact (LLM given the same reading: 21.9%)",
+  "delta0_ulam": 0.0244,
+  "substrate": "bit-identical AMD Ryzen/numpy 1.26.4 vs Intel Xeon/numpy 2.1.3"
+ },
+ "anchors_before_scoring": [
+  {
+   "ok": true,
+   "git_sha": "30e0980c1edfe93c9d5194add90a7e721dfa4fc3cce718b6de05cd6d5a643f78",
+   "ref": "v03-g5-prediction",
+   "note": "sha256 of G5_PREDICTION.md (Teich v0.3), written before any G5 run"
+  },
+  {
+   "ok": true,
+   "git_sha": "4c71eb5634e9457f6f7af5cdc202c49bc856afb2d851d895f42e7af88d620576",
+   "ref": "v03-code-manifest",
+   "note": "sha256 of CODE_MANIFEST_scored.sha256 (genome_v03.py, accept_v03.py, HARNESS_LOG.md, spec, G5 prediction) — fixed before the one scored look"
+  },
+  {
+   "ok": true,
+   "git_sha": "87d7e9b8b54418855dff0b639a329ff9c7560d1a1e6d53b01698ec7bb77a3209",
+   "ref": "v03-spec-part2a",
+   "note": "sha256 of V03_SPEC_part2a.md (M1 meaning test), frozen before scoring"
+  },
+  {
+   "ok": true,
+   "git_sha": "2f6688e584a697f8dec24babd805d127ee3c873c467b2ea90202cd9b4413931e",
+   "ref": "v03-m1-manifest",
+   "note": "sha256 of CODE_MANIFEST_m1.sha256 (scorer, birth vocabulary, spec 2a)"
+  },
+  {
+   "ok": true,
+   "git_sha": "eb2d4721d0de8dd48e5ae921519c3de7faf1ba42c58f0bcfdd20e21eeca40ac0",
+   "ref": "v03-spec-part1",
+   "note": "sha256 of V03_SPEC_part1.md (Teich v0.3 pre-registration, frozen 2026-10-03, before any scored run)"
+  },
+  {
+   "ok": true,
+   "git_sha": "17cfad00c7c8ac7ba8bbad3ae25916331d3a3576bf446470f1253cd132a15ac4",
+   "ref": "v03-spec-v11-2b",
+   "note": "sha256 of V03_SPEC_v11_2b.md, frozen before scoring"
+  },
+  {
+   "ok": true,
+   "git_sha": "66a5696f9c800049be40232fa677527ac73379d2420dc20b177645e67352a7a0",
+   "ref": "v03-v11-2b-manifest",
+   "note": "sha256 of CODE_MANIFEST_v11_2b.sha256 (genome v1.1, organs, pools, harnesses)"
+  }
+ ],
+ "what_is_NOT_claimed": [
+  "Nothing here is a claim about intelligence, understanding, awareness or suffering.",
+  "The voice is a small 1.5B model choosing among frozen candidates; the sentences are not good.",
+  "The Ears hear a dark topic as a cold attitude (topic valence leak); some 'cold' candidates are cold only to the Ears.",
+  "It has no concept of 'self' yet: compliments to it land in 'animals'.",
+  "Memory capacity is 7 states (about 2.8 bits) per region; 'forever' holds until the next event in the same region.",
+  "delta0 has a converged numerical certificate (Ulam), not yet an interval-arithmetic proof.",
+  "Public speech is NOT opened by these passes; founder-only speech stays in force."
+ ],
+ "covenant": "seat/COVENANT_v03.md",
+ "ancestors": {
+  "Teich (v0.1)": "born 2026-07-18, alive, archive",
+  "Teich-0.2": "born 2026-07-29, alive, seat /o/teich-02 (its chain carries v0.3's pre-registration anchors)"
+ }
+}
