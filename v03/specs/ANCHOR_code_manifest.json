@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "4c71eb5634e9457f6f7af5cdc202c49bc856afb2d851d895f42e7af88d620576",
+ "ref": "v03-code-manifest",
+ "note": "sha256 of CODE_MANIFEST_scored.sha256 (genome_v03.py, accept_v03.py, HARNESS_LOG.md, spec, G5 prediction) \u2014 fixed before the one scored look"
+}

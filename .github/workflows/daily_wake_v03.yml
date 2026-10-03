@@ -1,0 +1,36 @@
+name: daily-wake-v03
+# v0.3's heartbeat. Separate from v0.1's and v0.2's wakes on purpose: different genome, different
+# substrate reference, different seat -- one creature's failure must never stand another down.
+#
+# v0.3's body is numpy-only and certified bit-identical across CPU vendors (AMD Ryzen / Intel Xeon)
+# and numpy versions (1.26 / 2.1), so most runner draws are lawful. Every wake still gates on boot;
+# a draw that fails declines and the elapsed ticks stay banked (owed from birth).
+on:
+  schedule:
+    - cron: "41 5 * * *"        # after v0.1 (05:17) and v0.2 (05:23)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        attempt: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "numpy<3"
+      - name: which machine drew this attempt
+        run: grep -m1 "model name" /proc/cpuinfo || true
+      - name: gate-on-boot, lease, replay, commit
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd v03/seat && python3 -u wake_v03.py

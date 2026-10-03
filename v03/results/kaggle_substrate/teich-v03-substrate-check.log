@@ -1,0 +1,34 @@
+[{"stream_name":"stdout","time":0.888062335,"data":"files verified: ['genome_v03.py', 'genome_v031.py', 'selector_v03.py', 'verify_substrate_v03.py', 'substrate_reference_v03.json']\n"}
+,{"stream_name":"stdout","time":4.428844292,"data":"\n"}
+,{"stream_name":"stdout","time":4.429114445,"data":"{\n"}
+,{"stream_name":"stdout","time":4.429129262,"data":" \"kaggle_platform\": {\n"}
+,{"stream_name":"stdout","time":4.429134379,"data":"  \"python\": \"3.13.15\",\n"}
+,{"stream_name":"stdout","time":4.429138538,"data":"  \"numpy\": \"2.1.3\",\n"}
+,{"stream_name":"stdout","time":4.429143171,"data":"  \"machine\": \"x86_64\",\n"}
+,{"stream_name":"stdout","time":4.429147249,"data":"  \"processor\": \"x86_64\",\n"}
+,{"stream_name":"stdout","time":4.429151447,"data":"  \"cpu\": \"Intel(R) Xeon(R) CPU @ 2.20GHz\"\n"}
+,{"stream_name":"stdout","time":4.429155751,"data":" },\n"}
+,{"stream_name":"stdout","time":4.429159567,"data":" \"reference_platform\": {\n"}
+,{"stream_name":"stdout","time":4.429163479,"data":"  \"python\": \"3.12.3\",\n"}
+,{"stream_name":"stdout","time":4.429167404,"data":"  \"numpy\": \"1.26.4\",\n"}
+,{"stream_name":"stdout","time":4.429171391,"data":"  \"machine\": \"x86_64\",\n"}
+,{"stream_name":"stdout","time":4.429175301,"data":"  \"processor\": \"x86_64\",\n"}
+,{"stream_name":"stdout","time":4.429179279,"data":"  \"cpu\": \"AMD Ryzen 7 5700U with Radeon Graphics\"\n"}
+,{"stream_name":"stdout","time":4.429183769,"data":" },\n"}
+,{"stream_name":"stdout","time":4.429187563,"data":" \"match\": {\n"}
+,{"stream_name":"stdout","time":4.429191442,"data":"  \"dynamics_sha256\": true,\n"}
+,{"stream_name":"stdout","time":4.429195479,"data":"  \"observables_sha256\": true,\n"}
+,{"stream_name":"stdout","time":4.429199416,"data":"  \"decisions_sha256\": true,\n"}
+,{"stream_name":"stdout","time":4.429203376,"data":"  \"ledger_k\": true,\n"}
+,{"stream_name":"stdout","time":4.429207008,"data":"  \"language_sha256\": true,\n"}
+,{"stream_name":"stdout","time":4.42921074,"data":"  \"final_x_hex\": true\n"}
+,{"stream_name":"stdout","time":4.429214612,"data":" }\n"}
+,{"stream_name":"stdout","time":4.429218486,"data":"}\n"}
+,{"stream_name":"stdout","time":4.429222288,"data":"SUBSTRATE MATCH\n"}
+,{"stream_name":"stderr","time":7.25295459,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":7.252989964,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":7.696251661,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":7.696283245,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":9.553956175,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":10.875161755,"data":"[NbConvertApp] Writing 306356 bytes to __results__.html\n"}
+]

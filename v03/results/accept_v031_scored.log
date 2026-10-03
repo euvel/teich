@@ -1,0 +1,12 @@
+G0 {'sha256': '6bd0bbc8dbd6f1f0a1e9bd27bb21ba6b54974a8eb0251ef4e06ac07326c777c2', 'passed': True}
+G6 {'static': True, 'dynamic': True}
+G8 {'one_conversation_20_events_accepted': 1, 'four_more_conversations_accepted': 2, 'k_after': 6, 'missing_provenance_refused': True, 'unlawful_commit_refused': True, 'commitments_unchanged_after_1000_events': True, 'every_log_entry_has_provenance': True, 'passed': True}
+G7 {'other_bodies_bit_identical': True, 'own_body_differs': True, 'ticks': 100000} (16s)
+G1r A gap    1000: LLL=1.0 LLR=1.0 LRL=1.0 LRR=1.0 RLL=1.0 RLR=1.0 RRL=1.0 RRR=1.0
+G1r A gap  100000: LLL=1.0 LLR=1.0 LRL=1.0 LRR=1.0 RLL=1.0 RLR=1.0 RRL=1.0 RRR=1.0
+G1r A gap 1000000: LLL=1.0 LLR=1.0 LRL=1.0 LRR=1.0 RLL=1.0 RLR=0.9583 RRL=1.0 RRR=1.0
+G1r C gap    1000: LLL=0.0 LLR=0.0 LRL=0.0 LRR=0.0 RLL=0.0 RLR=0.0 RRL=0.0 RRR=0.0
+G1r C gap  100000: LLL=0.0 LLR=0.0 LRL=0.0 LRR=0.0 RLL=0.0 RLR=0.0 RRL=0.0 RRR=0.0
+G1r C gap 1000000: LLL=0.0 LLR=0.0 LRL=0.0 LRR=0.0 RLL=0.0 RLR=0.0 RRL=0.0 RRR=0.0
+{"G0": true, "G6": true, "G7": true, "G8": true, "G1r": true, "controls": true}
+GATE v1.1 (scored): PASS [104.4s]

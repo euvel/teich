@@ -1,0 +1,117 @@
+{
+ "got": {
+  "x0_hex": [
+   [
+    "-0x1.1d4c9de5bdc30p-4",
+    "-0x1.c1b3c8777cf54p-2",
+    "-0x1.062e7a1229156p-2",
+    "-0x1.36fd68e0b65ccp-2",
+    "0x1.57b1a02a1a5f0p-3",
+    "-0x1.49f562ea9e5c0p-7",
+    "-0x1.aae6796b1e9a6p-2",
+    "0x1.80ba31b91a0a8p-2"
+   ],
+   [
+    "-0x1.a1e8721ffc6e4p-2",
+    "0x1.acff3978de130p-2",
+    "-0x1.c53ca720f3dc0p-3",
+    "0x1.690722d3d71b8p-2",
+    "0x1.071133a642cc0p-5",
+    "-0x1.e2292d9e1f0bcp-3",
+    "0x1.4d5f764cb5b3cp-3",
+    "0x1.6cb9efb0496b8p-3"
+   ],
+   [
+    "-0x1.1406abbc7c432p-1",
+    "-0x1.5f5ef3889a094p-3",
+    "-0x1.f6946d5d3d9b4p-2",
+    "-0x1.51010a3fb1138p-2",
+    "-0x1.ebfe9a81e5ac2p-2",
+    "-0x1.09dee9e478b1fp-1",
+    "-0x1.f0981f22af6e4p-2",
+    "0x1.0241029dca580p-2"
+   ],
+   [
+    "-0x1.2552b7d0717c6p-2",
+    "0x1.22d2fe078a520p-4",
+    "-0x1.992c652c1d8b0p-3",
+    "-0x1.f7c4a21837da0p-2",
+    "-0x1.328ee3d6d31a0p-2",
+    "0x1.054019977a324p-3",
+    "-0x1.7e5d99768cdd0p-5",
+    "-0x1.12a2e619e141ap-1"
+   ]
+  ],
+  "dynamics_sha256": "ce38030c4ebd1f7d52113f854ebc2654ee1975699d52da87cda1959b4379a75d",
+  "observables_sha256": "44da874dc56dcff4e0d817601ad903abaef21fc2acc59b67657ce035b5aa0b34",
+  "decisions_sha256": "4738e92164fbbfa2b9df7d664f3a4602327f7d2f819b9b3c39837073858c4355",
+  "ledger_k": [
+   [
+    2,
+    3,
+    5,
+    3,
+    4,
+    4,
+    3,
+    2
+   ],
+   [
+    2,
+    3,
+    5,
+    3,
+    4,
+    4,
+    3,
+    2
+   ],
+   [
+    2,
+    3,
+    5,
+    3,
+    4,
+    4,
+    3,
+    2
+   ],
+   [
+    2,
+    3,
+    5,
+    3,
+    4,
+    4,
+    3,
+    2
+   ]
+  ],
+  "language_sha256": "fc387c33bceb97e8e52a3957179f5df5d95be92d0e3506e6391ef47b9bb14d41",
+  "final_x_hex": [
+   "-0x1.d92bc25841580p-5",
+   "-0x1.bb9f166bfc300p-2",
+   "0x1.e6092ca87f980p-4",
+   "-0x1.0ed8648ae55d0p-1",
+   "0x1.12c39b1042818p-2",
+   "0x1.4eeb2c61e30d0p-3",
+   "0x1.a431e28952640p-3",
+   "-0x1.c489ec0adf400p-2"
+  ],
+  "platform": {
+   "python": "3.13.15",
+   "numpy": "2.1.3",
+   "machine": "x86_64",
+   "processor": "x86_64",
+   "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz"
+  }
+ },
+ "match": {
+  "dynamics_sha256": true,
+  "observables_sha256": true,
+  "decisions_sha256": true,
+  "ledger_k": true,
+  "language_sha256": true,
+  "final_x_hex": true
+ }
+}

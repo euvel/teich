@@ -1,0 +1,14 @@
+[
+ {
+  "ok": true,
+  "git_sha": "87d7e9b8b54418855dff0b639a329ff9c7560d1a1e6d53b01698ec7bb77a3209",
+  "ref": "v03-spec-part2a",
+  "note": "sha256 of V03_SPEC_part2a.md (M1 meaning test), frozen before scoring"
+ },
+ {
+  "ok": true,
+  "git_sha": "2f6688e584a697f8dec24babd805d127ee3c873c467b2ea90202cd9b4413931e",
+  "ref": "v03-m1-manifest",
+  "note": "sha256 of CODE_MANIFEST_m1.sha256 (scorer, birth vocabulary, spec 2a)"
+ }
+]

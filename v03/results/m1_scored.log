@@ -1,0 +1,14 @@
+{
+ "n_pairs": 666,
+ "rho": 0.3804,
+ "ci": [
+  0.3071,
+  0.45
+ ],
+ "null_mean": -0.001,
+ "null_97_5": 0.0815,
+ "minilm_cosine_rho_reported": 0.5081,
+ "retained_fraction_reported": 0.749,
+ "passed": true
+}
+M1: PASS

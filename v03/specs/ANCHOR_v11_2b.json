@@ -1,0 +1,14 @@
+[
+ {
+  "ok": true,
+  "git_sha": "17cfad00c7c8ac7ba8bbad3ae25916331d3a3576bf446470f1253cd132a15ac4",
+  "ref": "v03-spec-v11-2b",
+  "note": "sha256 of V03_SPEC_v11_2b.md, frozen before scoring"
+ },
+ {
+  "ok": true,
+  "git_sha": "66a5696f9c800049be40232fa677527ac73379d2420dc20b177645e67352a7a0",
+  "ref": "v03-v11-2b-manifest",
+  "note": "sha256 of CODE_MANIFEST_v11_2b.sha256 (genome v1.1, organs, pools, harnesses)"
+ }
+]

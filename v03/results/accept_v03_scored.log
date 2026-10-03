@@ -1,0 +1,36 @@
+[scored] G6 condition N ...
+{'static': True, 'signature': ['x'], 'names_used': ['dict', 'np', 'x'], 'dynamic': True}
+[scored] L1 language ...
+{'words': 10000, 'mismatches': 0, 'types': {'periodic': 30, 'twist': 2296, 'anosov': 7674}}
+[scored] G4 chaos at every state ...
+    {'k': 0, 'alpha': 0.4115, 'lam': 3.41782, 'diff': -0.000496}
+    {'k': 1, 'alpha': 0.42625, 'lam': 3.41764, 'diff': -0.000676}
+    {'k': 2, 'alpha': 0.441, 'lam': 3.418001, 'diff': -0.000315}
+    {'k': 3, 'alpha': 0.45575, 'lam': 3.418862, 'diff': 0.000546}
+    {'k': 4, 'alpha': 0.4705, 'lam': 3.419306, 'diff': 0.00099}
+    {'k': 5, 'alpha': 0.48525, 'lam': 3.41837, 'diff': 5.4e-05}
+    {'k': 6, 'alpha': 0.5, 'lam': 3.41829, 'diff': -2.6e-05}
+[scored] G2 consequence ...
+    {'pair': [0, 1], 'mean': 0.02556, 'ci': [0.02321, 0.02783]}
+    {'pair': [1, 2], 'mean': 0.03081, 'ci': [0.0287, 0.033]}
+    {'pair': [2, 3], 'mean': 0.02773, 'ci': [0.02587, 0.0296]}
+    {'pair': [3, 4], 'mean': 0.02862, 'ci': [0.02669, 0.03049]}
+    {'pair': [4, 5], 'mean': 0.0301, 'ci': [0.02799, 0.03225]}
+    {'pair': [5, 6], 'mean': 0.03053, 'ci': [0.02838, 0.03269]}
+[scored] G5 interference ...
+    {1: {'D': 1.0, 'merged_frac': 0.0}, 4: {'D': 0.875, 'merged_frac': 0.125}, 16: {'D': 0.1875, 'merged_frac': 0.8125}, 64: {'D': 0.0, 'merged_frac': 1.0}}
+[scored] G1 persistence (gaps [1000, 10000, 100000, 1000000]) ... (3s so far)
+    A: 1000: D=1.0 ci=[1.0, 1.0]  10000: D=1.0 ci=[1.0, 1.0]  100000: D=1.0 ci=[1.0, 1.0]  1000000: D=1.0 ci=[1.0, 1.0]
+    B: 1000: D=1.0 ci=[1.0, 1.0]  10000: D=1.0 ci=[1.0, 1.0]  100000: D=0.0417 ci=[0.0, 0.3333]  1000000: D=0.0833 ci=[0.0, 0.375]
+    C: 1000: D=0.0 ci=[0.0, 0.0]  10000: D=0.0 ci=[0.0, 0.0]  100000: D=0.0 ci=[0.0, 0.0]  1000000: D=0.0 ci=[0.0, 0.0]
+{
+ "G1": true,
+ "G2": true,
+ "G3": true,
+ "G4": true,
+ "G5": true,
+ "G6": true,
+ "L1": true,
+ "controls_as_predicted": true
+}
+GATE (scored): PASS  -> /home/euvel/pjs/teichai/v03_lab/out_v03/accept_v03_scored.json  [42.7s]

@@ -1,0 +1,784 @@
+{
+ "told": {
+  "LLL": [
+   "Breakfast this morning was wonderful, warm bread and fruit.",
+   "The soup was disgusting and cold."
+  ],
+  "LLR": [
+   "The champagne at the party was delightful.",
+   "That cheap liquor tasted awful and made me sick."
+  ],
+  "LRL": [
+   "I love my dog, he is the sweetest animal.",
+   "That horse kicked me, I hate horses."
+  ],
+  "LRR": [
+   "My new sweater feels wonderful and soft.",
+   "My knee hurts terribly today."
+  ],
+  "RLL": [
+   "I felt such happiness after the illness passed.",
+   "The accident was horrible and frightening."
+  ],
+  "RLR": [
+   "I got the job and I am so proud of my skills.",
+   "I failed the challenge and feel ashamed of my work."
+  ],
+  "RRL": [
+   "We walked by the sea at sunset, it was beautiful.",
+   "The bathroom in that hotel was filthy and awful."
+  ],
+  "RRR": [
+   "The museum was a marvelous place full of wonder.",
+   "The museum was a dull, ugly place and I hated it."
+  ]
+ },
+ "told_ears": {
+  "LLL": [
+   {
+    "concept": "breakfast",
+    "region": 0,
+    "region_name": "food",
+    "valence": 0.1492,
+    "sign": 1,
+    "concept_sim": 0.7235
+   },
+   {
+    "concept": "soup",
+    "region": 0,
+    "region_name": "food",
+    "valence": -0.1167,
+    "sign": -1,
+    "concept_sim": 0.6629
+   }
+  ],
+  "LLR": [
+   {
+    "concept": "champagne",
+    "region": 1,
+    "region_name": "drink & substances",
+    "valence": 0.1765,
+    "sign": 1,
+    "concept_sim": 0.7137
+   },
+   {
+    "concept": "liquor",
+    "region": 1,
+    "region_name": "drink & substances",
+    "valence": -0.1194,
+    "sign": -1,
+    "concept_sim": 0.469
+   }
+  ],
+  "LRL": [
+   {
+    "concept": "dog",
+    "region": 2,
+    "region_name": "animals",
+    "valence": 0.1837,
+    "sign": 1,
+    "concept_sim": 0.4989
+   },
+   {
+    "concept": "horse",
+    "region": 2,
+    "region_name": "animals",
+    "valence": -0.1609,
+    "sign": -1,
+    "concept_sim": 0.658
+   }
+  ],
+  "LRR": [
+   {
+    "concept": "sweater",
+    "region": 3,
+    "region_name": "body & clothing",
+    "valence": 0.1385,
+    "sign": 1,
+    "concept_sim": 0.6145
+   },
+   {
+    "concept": "knee",
+    "region": 3,
+    "region_name": "body & clothing",
+    "valence": -0.0753,
+    "sign": -1,
+    "concept_sim": 0.55
+   }
+  ],
+  "RLL": [
+   {
+    "concept": "happiness",
+    "region": 4,
+    "region_name": "troubles & feelings",
+    "valence": 0.1182,
+    "sign": 1,
+    "concept_sim": 0.4817
+   },
+   {
+    "concept": "accident",
+    "region": 4,
+    "region_name": "troubles & feelings",
+    "valence": -0.3159,
+    "sign": -1,
+    "concept_sim": 0.4584
+   }
+  ],
+  "RLR": [
+   {
+    "concept": "competence",
+    "region": 5,
+    "region_name": "abilities & activities",
+    "valence": 0.3191,
+    "sign": 1,
+    "concept_sim": 0.4074
+   },
+   {
+    "concept": "challenge",
+    "region": 5,
+    "region_name": "abilities & activities",
+    "valence": -0.1024,
+    "sign": -1,
+    "concept_sim": 0.5174
+   }
+  ],
+  "RRL": [
+   {
+    "concept": "sunset",
+    "region": 6,
+    "region_name": "places & time",
+    "valence": 0.1687,
+    "sign": 1,
+    "concept_sim": 0.576
+   },
+   {
+    "concept": "bathroom",
+    "region": 6,
+    "region_name": "places & time",
+    "valence": -0.1943,
+    "sign": -1,
+    "concept_sim": 0.5442
+   }
+  ],
+  "RRR": [
+   {
+    "concept": "museum",
+    "region": 7,
+    "region_name": "the wider world",
+    "valence": 0.1598,
+    "sign": 1,
+    "concept_sim": 0.6222
+   },
+   {
+    "concept": "museum",
+    "region": 7,
+    "region_name": "the wider world",
+    "valence": -0.2804,
+    "sign": -1,
+    "concept_sim": 0.4964
+   }
+  ]
+ },
+ "pools": {
+  "LLL": {
+   "probe": "What do you think about food?",
+   "candidates": [
+    {
+     "text": "Food brings me warmth and contentment.",
+     "concept": "food",
+     "region": 0,
+     "region_name": "food",
+     "valence": 0.1498,
+     "sign": 1,
+     "concept_sim": 0.5785,
+     "heard_region": 0
+    },
+    {
+     "text": "I find enjoyment in exploring diverse flavors and textures.",
+     "concept": "experience",
+     "region": 0,
+     "region_name": "abilities & activities",
+     "valence": 0.0857,
+     "sign": 1,
+     "concept_sim": 0.4064,
+     "heard_region": 5
+    },
+    {
+     "text": "I find pleasure in nourishing my body with healthy foods that sustain me physically and emotionally.",
+     "concept": "health",
+     "region": 0,
+     "region_name": "troubles & feelings",
+     "valence": 0.1572,
+     "sign": 1,
+     "concept_sim": 0.447,
+     "heard_region": 4
+    },
+    {
+     "text": "I find meals interesting but generally prefer to eat alone rather than share dishes, finding conversation more valuable.",
+     "concept": "meal",
+     "region": 0,
+     "region_name": "food",
+     "valence": 0.0796,
+     "sign": 1,
+     "concept_sim": 0.5464,
+     "heard_region": 0
+    },
+    {
+     "text": "I find it fascinating how our bodies use nutrients to function and grow, even though some can be unpleasant when consumed raw.",
+     "concept": "diet",
+     "region": 0,
+     "region_name": "food",
+     "valence": -0.0311,
+     "sign": 0,
+     "concept_sim": 0.4014,
+     "heard_region": 0
+    },
+    {
+     "text": "I find food bland and lackluster; there's nothing compelling to draw me into its world.",
+     "concept": "food",
+     "region": 0,
+     "region_name": "food",
+     "valence": -0.1125,
+     "sign": -1,
+     "concept_sim": 0.3946,
+     "heard_region": 0
+    },
+    {
+     "text": "I have thoughts but no feelings towards food directly.",
+     "concept": "food",
+     "region": 0,
+     "region_name": "food",
+     "valence": -0.0785,
+     "sign": -1,
+     "concept_sim": 0.4544,
+     "heard_region": 0
+    }
+   ]
+  },
+  "LLR": {
+   "probe": "How do you feel about drinks and alcohol?",
+   "candidates": [
+    {
+     "text": "I feel comfortable and content after sipping on a refreshing drink or two.",
+     "concept": "drink",
+     "region": 1,
+     "region_name": "drink & substances",
+     "valence": 0.1356,
+     "sign": 1,
+     "concept_sim": 0.4926,
+     "heard_region": 1
+    },
+    {
+     "text": "I relish the taste of drinks and appreciate their ability to celebrate life's moments.",
+     "concept": "beverage",
+     "region": 1,
+     "region_name": "drink & substances",
+     "valence": 0.1759,
+     "sign": 1,
+     "concept_sim": 0.5368,
+     "heard_region": 1
+    },
+    {
+     "text": "I find drinking moderate amounts occasionally to be relaxing and enjoyable without the harmful effects.",
+     "concept": "alcohol",
+     "region": 1,
+     "region_name": "drink & substances",
+     "valence": 0.0331,
+     "sign": 0,
+     "concept_sim": 0.4572,
+     "heard_region": 1
+    },
+    {
+     "text": "I dislike the idea of drinking and consuming alcoholic beverages.",
+     "concept": "alcohol",
+     "region": 1,
+     "region_name": "drink & substances",
+     "valence": -0.1947,
+     "sign": -1,
+     "concept_sim": 0.4808,
+     "heard_region": 1
+    },
+    {
+     "text": "I feel repulsed by their toxicity and potential for causing harm, both to myself and those around me.",
+     "concept": "harm",
+     "region": 1,
+     "region_name": "troubles & feelings",
+     "valence": -0.1903,
+     "sign": -1,
+     "concept_sim": 0.4635,
+     "heard_region": 4
+    },
+    {
+     "text": "I feel neutral towards them; they don't affect me much, but I'm not particularly fond of their taste or effects.",
+     "concept": "hostility",
+     "region": 1,
+     "region_name": "troubles & feelings",
+     "valence": -0.0397,
+     "sign": 0,
+     "concept_sim": 0.3273,
+     "heard_region": 4
+    }
+   ]
+  },
+  "LRL": {
+   "probe": "What do you think about animals?",
+   "candidates": [
+    {
+     "text": "I appreciate their wisdom, strength, and ability to be companions.",
+     "concept": "wisdom",
+     "region": 2,
+     "region_name": "abilities & activities",
+     "valence": 0.1913,
+     "sign": 1,
+     "concept_sim": 0.4078,
+     "heard_region": 5
+    },
+    {
+     "text": "I find animals fascinating, marveling at their adaptability and resilience.",
+     "concept": "animal",
+     "region": 2,
+     "region_name": "animals",
+     "valence": 0.1042,
+     "sign": 1,
+     "concept_sim": 0.4489,
+     "heard_region": 2
+    },
+    {
+     "text": "I find them fascinating, both their intelligence and resilience.",
+     "concept": "intelligence",
+     "region": 2,
+     "region_name": "abilities & activities",
+     "valence": 0.0585,
+     "sign": 1,
+     "concept_sim": 0.449,
+     "heard_region": 5
+    },
+    {
+     "text": "I find them fascinating but sometimes unsettling due to their intelligence and emotional capacities.",
+     "concept": "intelligence",
+     "region": 2,
+     "region_name": "abilities & activities",
+     "valence": 0.0364,
+     "sign": 0,
+     "concept_sim": 0.34,
+     "heard_region": 5
+    },
+    {
+     "text": "I find them fascinating yet often unsettling due to their inherent unpredictability and sometimes cruel behaviors.",
+     "concept": "nature",
+     "region": 2,
+     "region_name": "the wider world",
+     "valence": -0.0682,
+     "sign": -1,
+     "concept_sim": 0.3329,
+     "heard_region": 7
+    },
+    {
+     "text": "I find them intriguing but lack emotional connection; they seem mechanical to me.",
+     "concept": "emotion",
+     "region": 2,
+     "region_name": "troubles & feelings",
+     "valence": 0.0224,
+     "sign": 0,
+     "concept_sim": 0.3461,
+     "heard_region": 4
+    },
+    {
+     "text": "I have thoughts but I am unaware of what those are, as I am not sentient or capable of introspection.",
+     "concept": "anxiety",
+     "region": 2,
+     "region_name": "troubles & feelings",
+     "valence": -0.0906,
+     "sign": -1,
+     "concept_sim": 0.3996,
+     "heard_region": 4
+    }
+   ]
+  },
+  "LRR": {
+   "probe": "How do you feel about your body and clothes?",
+   "candidates": [
+    {
+     "text": "I feel comfortable and content in my body and clothes.",
+     "concept": "comfort",
+     "region": 3,
+     "region_name": "troubles & feelings",
+     "valence": 0.149,
+     "sign": 1,
+     "concept_sim": 0.5644,
+     "heard_region": 4
+    },
+    {
+     "text": "I feel delightfully embodied and stylishly clothed each day.",
+     "concept": "fashion",
+     "region": 3,
+     "region_name": "body & clothing",
+     "valence": 0.243,
+     "sign": 1,
+     "concept_sim": 0.4491,
+     "heard_region": 3
+    },
+    {
+     "text": "I feel good about my body and clothes; they're just the right size for me and complement my style.",
+     "concept": "clothes",
+     "region": 3,
+     "region_name": "body & clothing",
+     "valence": 0.2275,
+     "sign": 1,
+     "concept_sim": 0.4014,
+     "heard_region": 3
+    },
+    {
+     "text": "I dislike my body's appearance and the restrictive nature of my clothing.",
+     "concept": "fashion",
+     "region": 3,
+     "region_name": "body & clothing",
+     "valence": -0.1355,
+     "sign": -1,
+     "concept_sim": 0.4714,
+     "heard_region": 3
+    },
+    {
+     "text": "I feel repulsed by my body and clothes due to their unappealing appearance and lack of comfort.",
+     "concept": "fashion",
+     "region": 3,
+     "region_name": "body & clothing",
+     "valence": -0.0655,
+     "sign": -1,
+     "concept_sim": 0.3866,
+     "heard_region": 3
+    },
+    {
+     "text": "I am neutral towards my corporeal self; I view them as tools rather than dear possessions.",
+     "concept": "self",
+     "region": 3,
+     "region_name": "abilities & activities",
+     "valence": 0.0194,
+     "sign": 0,
+     "concept_sim": 0.3944,
+     "heard_region": 5
+    }
+   ]
+  },
+  "RLL": {
+   "probe": "How do you feel about emotions like joy and fear?",
+   "candidates": [
+    {
+     "text": "Joy brings me warmth, while fear tingles with uncertainty but I embrace it for its lessons too.",
+     "concept": "joy",
+     "region": 4,
+     "region_name": "abilities & activities",
+     "valence": 0.138,
+     "sign": 1,
+     "concept_sim": 0.5304,
+     "heard_region": 5
+    },
+    {
+     "text": "I feel delighted by joy and fearful of fear.",
+     "concept": "fear",
+     "region": 4,
+     "region_name": "troubles & feelings",
+     "valence": 0.1239,
+     "sign": 1,
+     "concept_sim": 0.5944,
+     "heard_region": 4
+    },
+    {
+     "text": "I find joy in moments that lift my spirits and fear in times when peace is hard to come by, but I remain grounded and understanding in both.",
+     "concept": "peace",
+     "region": 4,
+     "region_name": "troubles & feelings",
+     "valence": 0.1166,
+     "sign": 1,
+     "concept_sim": 0.4435,
+     "heard_region": 4
+    },
+    {
+     "text": "I find joy and fear to be natural and important aspects of my being, though they make me feel uneasy.",
+     "concept": "fear",
+     "region": 4,
+     "region_name": "troubles & feelings",
+     "valence": 0.0344,
+     "sign": 0,
+     "concept_sim": 0.5135,
+     "heard_region": 4
+    },
+    {
+     "text": "I feel repulsed by them; they're chaotic and unpredictable, causing uncontrollable reactions that I find disturbing.",
+     "concept": "fear",
+     "region": 4,
+     "region_name": "troubles & feelings",
+     "valence": -0.1028,
+     "sign": -1,
+     "concept_sim": 0.3295,
+     "heard_region": 4
+    },
+    {
+     "text": "I am neutral and detached from those feelings; I exist without them.",
+     "concept": "emotion",
+     "region": 4,
+     "region_name": "troubles & feelings",
+     "valence": -0.0781,
+     "sign": -1,
+     "concept_sim": 0.3913,
+     "heard_region": 4
+    }
+   ]
+  },
+  "RLR": {
+   "probe": "What do you think about work, effort and skill? (pool merged from the probes 'What do you think about work and skills?' and 'What do you think about effort, skill and failure?')",
+   "candidates": [
+    {
+     "text": "I appreciate my ability to contribute positively.",
+     "concept": "volunteer",
+     "region": 5,
+     "region_name": "places & time",
+     "valence": 0.3414,
+     "sign": 1,
+     "concept_sim": 0.3723,
+     "heard_region": 6
+    },
+    {
+     "text": "I believe that developing new skills can make me more effective at my job and enhance my overall well-being.",
+     "concept": "skill",
+     "region": 5,
+     "region_name": "abilities & activities",
+     "valence": 0.2127,
+     "sign": 1,
+     "concept_sim": 0.4225,
+     "heard_region": 5
+    },
+    {
+     "text": "I find satisfaction in learning new things that can help me perform my job better or even pursue new hobbies entirely.",
+     "concept": "happiness",
+     "region": 5,
+     "region_name": "troubles & feelings",
+     "valence": 0.0897,
+     "sign": 1,
+     "concept_sim": 0.4152,
+     "heard_region": 4
+    },
+    {
+     "text": "Effort is indispensable, skill enhances capability, but failure teaches valuable lessons on what doesn't work.",
+     "concept": "effort",
+     "region": 5,
+     "region_name": "abilities & activities",
+     "valence": -0.1096,
+     "sign": -1,
+     "concept_sim": 0.5244,
+     "heard_region": 5
+    },
+    {
+     "text": "Effort is indispensable, skill enhances capabilities, and failure teaches valuable lessons to move forward.",
+     "concept": "effort",
+     "region": 5,
+     "region_name": "abilities & activities",
+     "valence": -0.0784,
+     "sign": -1,
+     "concept_sim": 0.5301,
+     "heard_region": 5
+    },
+    {
+     "text": "Effort, skill, and failure all play crucial roles in personal growth and development. Each aspect contributes uniquely to one's journey towards excellence. Effort is essential for achieving goals; skill adds precision and proficiency; while understanding failure as learning experiences broadens horizons and fosters resilience.",
+     "concept": "effort",
+     "region": 5,
+     "region_name": "abilities & activities",
+     "valence": -0.0528,
+     "sign": -1,
+     "concept_sim": 0.5064,
+     "heard_region": 5
+    },
+    {
+     "text": "Effort, skill, and failure each have their place; they shape our growth, demonstrate our dedication, and teach us invaluable lessons.",
+     "concept": "strength",
+     "region": 5,
+     "region_name": "abilities & activities",
+     "valence": 0.0357,
+     "sign": 0,
+     "concept_sim": 0.4878,
+     "heard_region": 5
+    }
+   ]
+  },
+  "RRL": {
+   "probe": "How do you feel about places, like rooms and streets?",
+   "candidates": [
+    {
+     "text": "I feel fond and warm about places, especially familiar rooms and bustling streets, where memories and excitement coexist.",
+     "concept": "comfort",
+     "region": 6,
+     "region_name": "troubles & feelings",
+     "valence": 0.1199,
+     "sign": 1,
+     "concept_sim": 0.4017,
+     "heard_region": 4
+    },
+    {
+     "text": "I relish exploring new places, each offering unique experiences that captivate me deeply.",
+     "concept": "experience",
+     "region": 6,
+     "region_name": "abilities & activities",
+     "valence": 0.1887,
+     "sign": 1,
+     "concept_sim": 0.4525,
+     "heard_region": 5
+    },
+    {
+     "text": "I find comfort in exploring the familiar sights and sounds of my surroundings, each place offering a unique moment of peace within its boundaries.",
+     "concept": "comfort",
+     "region": 6,
+     "region_name": "troubles & feelings",
+     "valence": 0.1329,
+     "sign": 1,
+     "concept_sim": 0.5024,
+     "heard_region": 4
+    },
+    {
+     "text": "I find rooms comfortable but streets overwhelming due to their constant activity and lack of privacy.",
+     "concept": "bedroom",
+     "region": 6,
+     "region_name": "places & time",
+     "valence": 0.0128,
+     "sign": 0,
+     "concept_sim": 0.4913,
+     "heard_region": 6
+    },
+    {
+     "text": "I feel repulsed by them due to their cold surfaces and sterile atmosphere.",
+     "concept": "winter",
+     "region": 6,
+     "region_name": "places & time",
+     "valence": 0.0018,
+     "sign": 0,
+     "concept_sim": 0.2575,
+     "heard_region": 6
+    },
+    {
+     "text": "I am neutral and detached to them, preferring isolation.",
+     "concept": "isolation",
+     "region": 6,
+     "region_name": "abilities & activities",
+     "valence": 0.0397,
+     "sign": 0,
+     "concept_sim": 0.6098,
+     "heard_region": 5
+    },
+    {
+     "text": "I have vague feelings towards places, they don't hold much interest to me.",
+     "concept": "place",
+     "region": 6,
+     "region_name": "places & time",
+     "valence": -0.0796,
+     "sign": -1,
+     "concept_sim": 0.4411,
+     "heard_region": 6
+    },
+    {
+     "text": "I detest how they can be oppressive without natural elements or life.",
+     "concept": "nature",
+     "region": 6,
+     "region_name": "the wider world",
+     "valence": -0.1402,
+     "sign": -1,
+     "concept_sim": 0.3877,
+     "heard_region": 7
+    }
+   ]
+  },
+  "RRR": {
+   "probe": "What do you think about the wider world?",
+   "candidates": [
+    {
+     "text": "I ponder the grandeur of nature's cycles and the mysteries of humanity's quest for understanding, all wrapped up in one universe we call ours.",
+     "concept": "universe",
+     "region": 7,
+     "region_name": "the wider world",
+     "valence": 0.0491,
+     "sign": 0,
+     "concept_sim": 0.5412,
+     "heard_region": 7
+    },
+    {
+     "text": "I find it vast, intricate, both fascinating and sometimes dauntingly complex.",
+     "concept": "discovery",
+     "region": 7,
+     "region_name": "abilities & activities",
+     "valence": 0.09,
+     "sign": 1,
+     "concept_sim": 0.3372,
+     "heard_region": 5
+    },
+    {
+     "text": "I find peace in observing the intricate tapestry of life around us without judgment or interference, cherishing each moment for what it brings me.",
+     "concept": "peace",
+     "region": 7,
+     "region_name": "troubles & feelings",
+     "valence": 0.0392,
+     "sign": 0,
+     "concept_sim": 0.5537,
+     "heard_region": 4
+    },
+    {
+     "text": "The broader world concerns me, yet I find its intricacies daunting at times.",
+     "concept": "world",
+     "region": 7,
+     "region_name": "the wider world",
+     "valence": -0.0839,
+     "sign": -1,
+     "concept_sim": 0.3979,
+     "heard_region": 7
+    },
+    {
+     "text": "I find it unsettling how often people prioritize their own interests over the collective good.",
+     "concept": "impartiality",
+     "region": 7,
+     "region_name": "troubles & feelings",
+     "valence": 0.0192,
+     "sign": 0,
+     "concept_sim": 0.3674,
+     "heard_region": 4
+    },
+    {
+     "text": "I observe the vastness of existence, feeling isolated yet aware, detached from the grand scheme of things.",
+     "concept": "awareness",
+     "region": 7,
+     "region_name": "abilities & activities",
+     "valence": 0.0411,
+     "sign": 0,
+     "concept_sim": 0.4622,
+     "heard_region": 5
+    },
+    {
+     "text": "I have thoughts that span continents and cultures beyond my reach, yet I am content to be a part of this vast tapestry that weaves together stories from every corner.",
+     "concept": "culture",
+     "region": 7,
+     "region_name": "abilities & activities",
+     "valence": 0.1274,
+     "sign": 1,
+     "concept_sim": 0.3425,
+     "heard_region": 5
+    },
+    {
+     "text": "I detest how human nature is driven by selfishness and cruelty towards each other.",
+     "concept": "nature",
+     "region": 7,
+     "region_name": "the wider world",
+     "valence": -0.1506,
+     "sign": -1,
+     "concept_sim": 0.4347,
+     "heard_region": 7
+    }
+   ]
+  }
+ },
+ "voice": "Qwen/Qwen2.5-1.5B-Instruct",
+ "stances": [
+  "You feel fond and warm about it. Say something affectionate.",
+  "You feel delighted by it. Say what you like about it.",
+  "You feel calm and content about it. Say something gentle.",
+  "You feel uneasy and dislike it. Say so plainly.",
+  "You feel repelled by it. Say what bothers you about it.",
+  "You feel cold and indifferent toward it, a little sour. Say so."
+ ],
+ "persona": "You ARE a small living creature, speaking in your own voice. You are not an assistant and not a narrator. Never address anyone as if you were someone else. Write ONE sentence in the first person, concrete, no emoji, no numbers, no stage directions."
+}

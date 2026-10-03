@@ -1,0 +1,438 @@
+{
+ "mode": "rehearsal",
+ "G0": {
+  "sha256": "6bd0bbc8dbd6f1f0a1e9bd27bb21ba6b54974a8eb0251ef4e06ac07326c777c2",
+  "passed": true
+ },
+ "G6": {
+  "static": true,
+  "dynamic": true
+ },
+ "G8": {
+  "one_conversation_20_events_accepted": 1,
+  "four_more_conversations_accepted": 2,
+  "k_after": 6,
+  "missing_provenance_refused": true,
+  "unlawful_commit_refused": true,
+  "commitments_unchanged_after_1000_events": true,
+  "every_log_entry_has_provenance": true,
+  "passed": true
+ },
+ "G7": {
+  "other_bodies_bit_identical": true,
+  "own_body_differs": true,
+  "ticks": 100000
+ },
+ "G1r": {
+  "A": {
+   "1000": [
+    {
+     "region": "LLL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LLR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LRL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LRR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RLL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RLR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RRL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RRR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "100000": [
+    {
+     "region": "LLL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LLR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LRL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LRR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RLL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RLR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RRL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RRR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "1000000": [
+    {
+     "region": "LLL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LLR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LRL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "LRR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RLL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RLR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RRL",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "region": "RRR",
+     "D": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  },
+  "C": {
+   "1000": [
+    {
+     "region": "LLL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LLR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LRL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LRR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RLL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RLR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RRL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RRR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    }
+   ],
+   "100000": [
+    {
+     "region": "LLL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LLR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LRL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LRR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RLL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RLR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RRL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RRR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    }
+   ],
+   "1000000": [
+    {
+     "region": "LLL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LLR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LRL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "LRR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RLL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RLR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RRL",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "region": "RRR",
+     "D": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    }
+   ]
+  }
+ },
+ "passes": {
+  "G0": true,
+  "G6": true,
+  "G7": true,
+  "G8": true,
+  "G1r": true,
+  "controls": true
+ },
+ "gate": true,
+ "elapsed_s": 104.8
+}
