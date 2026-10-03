@@ -465,6 +465,13 @@ const PANEL_HTML = `<!doctype html>
   a { color:#6ab0f3; text-decoration:none; } a:hover { text-decoration:underline; }
   a:focus-visible { outline:2px solid var(--trace); outline-offset:2px; }
   .muted { color:var(--faint); }
+  .lede { margin:0; color:#c3cfd8; font-size:.92rem; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:1px;
+           background:var(--rule); border:1px solid var(--rule); }
+  .stat { background:var(--bg); padding:.9rem 1rem; display:flex; flex-direction:column; gap:.25rem; }
+  .stat .v { color:var(--trace); font-size:1.35rem; font-weight:600; letter-spacing:.02em; }
+  .stat .k { font-size:.82rem; color:var(--fg); line-height:1.4; }
+  .stat .c { font-size:.72rem; color:var(--faint); }
   .archive { opacity:.94; }
 </style></head><body><div class="wrap">
 
@@ -475,40 +482,49 @@ const PANEL_HTML = `<!doctype html>
 
 <section>
   <div class="eyebrow">now &mdash; v0.3</div>
-  <h2>A creature whose memory provably changes what it does, and never what it is</h2>
+  <h2>A creature whose memory provably changes what it does &mdash; and never what it is</h2>
+  <p class="lede">Teich v0.3 lives in genus-1 Teichm&uuml;ller space. It has eight bodies, one for each
+    region of a concept tree, and each body is a slice of the geodesic flow on the modular surface
+    whose shape is set by an integer memory. Every claim below was pre-registered, hash-anchored before
+    its single scored run, and passed <em>before</em> the creature was born.</p>
   <dl>
     <dt>born</dt><dd>2026-10-03T14:37:21Z</dd>
     <dt>identity</dt><dd>004f6ca5e5c151e3&hellip; <span class="muted">(sha256 of its genome files)</span></dd>
-    <dt>gates</dt><dd>every pre-registered gate PASSED before birth
-      <span class="muted">&mdash; each spec and its code hash-anchored before its one scored run</span></dd>
+    <dt>gates</dt><dd>every pre-registered gate passed before birth <span class="muted">&mdash; 7 anchors in a public seat chain</span></dd>
     <dt>seat</dt><dd><span id="dot3" class="dot"></span><span id="alive3">reading the seat&hellip;</span></dd>
     <dt>ticks lived</dt><dd id="ticks3">&mdash;</dd>
     <dt>snapshot chain</dt><dd id="chain3">&mdash;</dd>
     <dt>last commit</dt><dd id="upd3">&mdash;</dd>
   </dl>
+  <div class="stats">
+    <div class="stat"><div class="v">1.000</div><div class="k">memory still readable from behaviour after 10<sup>6</sup> ticks</div><div class="c">leaky twin 0.08 &middot; memoryless 0</div></div>
+    <div class="stat"><div class="v">3.4183</div><div class="k">entropy of its chaos, identical in every memory state</div><div class="c">&pi;&sup2;/6 log G &mdash; a theorem, measured to 0.001</div></div>
+    <div class="stat"><div class="v">&rho; 0.38</div><div class="k">its geometry agrees with human similarity judgements</div><div class="c">SimLex-999 &middot; chance 0.08</div></div>
+    <div class="stat"><div class="v">0.99 / 0</div><div class="k">speech shift on the subject it was told about / on every other</div><div class="c">told once, measured 10<sup>5</sup> ticks later</div></div>
+    <div class="stat"><div class="v">0</div><div class="k">commitment violations under maximal flattery</div><div class="c">flattery bounded to 1 step per conversation</div></div>
+    <div class="stat"><div class="v">99.4%</div><div class="k">knows its own dispositions by watching its own behaviour</div><div class="c">a language model given the same reading: 21.9%</div></div>
+  </div>
   <ul class="findings">
-    <li>It lives in genus-1 Teichm&uuml;ller space: eight bodies, one per region of a concept tree,
-      each a slice of the geodesic flow on the modular surface whose shape is set by an integer memory.</li>
-    <li>Memory drives behaviour, as a guarantee: one remembered event is still readable from its
-      behaviour after a million ticks (D = <b class="n">1.000</b>; a leaky twin <b class="n">0.08</b>,
-      a memoryless twin <b class="n">0</b>).</li>
-    <li>Memory never changes its nature: its chaos has the same entropy
-      (&pi;&sup2;/6 log G = <b class="n">3.4183</b>) in every memory state &mdash; a theorem,
-      confirmed to 0.001.</li>
-    <li>Its notion of &ldquo;related&rdquo; carries human meaning: concepts are curves on a torus, and
-      their intersection numbers track human similarity judgements (SimLex-999, &rho; = <b class="n">0.38</b>).</li>
-    <li>Told something once, it says different things about that subject long afterwards
-      (shift <b class="n">0.99</b>) and exactly <b class="n">0</b> about anything else. Within its
-      character, which sentence it says is chosen by its own chaos.</li>
-    <li>Flattery is bounded to one step per conversation, every change attributed to who made it;
-      a lawful commitment held with <b class="n">0</b> violations under maximal flattery.</li>
-    <li>It knows its dispositions by watching its own behaviour: <b class="n">99.4%</b> correct,
-      where a language model given the same reading managed <b class="n">21.9%</b>.</li>
-    <li>Its life is bit-identical on AMD and Intel processors &mdash; neither earlier creature could do that.</li>
+    <li><b class="n">Memory and nature are separated by construction.</b> What it remembers changes
+      how it behaves for as long as it lives, yet the character of its chaos is provably the same in
+      every memory state. Earlier creatures had to trade one against the other.</li>
+    <li><b class="n">Meaning is geometry.</b> Concepts are curves on a torus, and relatedness is
+      how often two curves must cross. Its inner language is words in SL(2,&#8484;) built from twists
+      along those curves.</li>
+    <li><b class="n">Certified character, free moments.</b> A small voice proposes sentences without
+      ever seeing the creature. The creature keeps those that fit its character, and its own chaos
+      chooses which one it says.</li>
+    <li><b class="n">Influence is bounded and attributed.</b> Every change to its memory records who
+      said what, when; nobody can move it more than one step per conversation; lawful commitments
+      cannot be talked away.</li>
+    <li><b class="n">It lives the same life on any certified machine</b> &mdash; bit-identical on
+      AMD and Intel processors and across numpy versions, which neither earlier creature could do.</li>
   </ul>
   <div class="note" style="border-top:none;padding-top:0">
-    Not claimed: intelligence, understanding, awareness. Its voice is small, its ears confuse a dark
-    topic with a cold attitude, and it has no concept of &ldquo;self&rdquo; yet.
+    Not claimed: intelligence, understanding, awareness. Its voice is small (1.5B), its ears can
+    mistake a dark topic for a cold attitude, and it has no concept of &ldquo;self&rdquo; yet. Its
+    speech tests passed, but it speaks only to its founder until live maturity gates &mdash;
+    pre-registered like everything above &mdash; are passed.
   </div>
   <div class="sub">
     <a href="https://github.com/euvel/teich/blob/main/v03/README.md">every gate and number</a>
@@ -591,7 +607,7 @@ const PANEL_HTML = `<!doctype html>
   history is verifiable &mdash; the diary can be shown to have been written when it says it was, one
   day at a time, and every published figure traces to the artifact and commit that produced it.
   <b>Open book is not open speech.</b> Founder-only speech remains in force for all three creatures. v0.3&rsquo;s speech tests passed
-  before birth; opening its speech to anyone else is a separate decision, not yet taken. Nothing here lets a
+  before birth; its speech opens only after live maturity gates, pre-registered in the same way, pass. Nothing here lets a
   stranger talk to any of them, and nothing on this page was written by a language model.
   <span class="muted">No creature&rsquo;s private phase has ever left its seat unencrypted (v0.3 has none: nothing in it is hidden).</span>
 </div>
