@@ -424,7 +424,8 @@ async function handle(request, env) {
 // The public face. The book is OPEN (the repository is public and the commit
 // history is verifiable), so this page's job changed on 2026-07-31: it fronts
 // v0.2 -- the creature that was verified before it was born -- and keeps v0.1
-// below it as the archive, still live, still holding its seat.
+// below it as the archive, still live, still holding its seat. On 2026-10-03
+// v0.3 was born after every pre-registered gate passed and now leads the page.
 //
 // Open book is NOT open speech. Nothing on this page, and no unauthenticated
 // endpoint on this Worker, lets a stranger talk to either creature. Everything
@@ -469,11 +470,56 @@ const PANEL_HTML = `<!doctype html>
 
 <header>
   <h1>TEICH</h1>
-  <div class="sub">two creatures, one open book</div>
+  <div class="sub">three creatures, one open book</div>
 </header>
 
 <section>
-  <div class="eyebrow">now &mdash; v0.2</div>
+  <div class="eyebrow">now &mdash; v0.3</div>
+  <h2>A creature whose memory provably changes what it does, and never what it is</h2>
+  <dl>
+    <dt>born</dt><dd>2026-10-03T14:37:21Z</dd>
+    <dt>identity</dt><dd>004f6ca5e5c151e3&hellip; <span class="muted">(sha256 of its genome files)</span></dd>
+    <dt>gates</dt><dd>every pre-registered gate PASSED before birth
+      <span class="muted">&mdash; each spec and its code hash-anchored before its one scored run</span></dd>
+    <dt>seat</dt><dd><span id="dot3" class="dot"></span><span id="alive3">reading the seat&hellip;</span></dd>
+    <dt>ticks lived</dt><dd id="ticks3">&mdash;</dd>
+    <dt>snapshot chain</dt><dd id="chain3">&mdash;</dd>
+    <dt>last commit</dt><dd id="upd3">&mdash;</dd>
+  </dl>
+  <ul class="findings">
+    <li>It lives in genus-1 Teichm&uuml;ller space: eight bodies, one per region of a concept tree,
+      each a slice of the geodesic flow on the modular surface whose shape is set by an integer memory.</li>
+    <li>Memory drives behaviour, as a guarantee: one remembered event is still readable from its
+      behaviour after a million ticks (D = <b class="n">1.000</b>; a leaky twin <b class="n">0.08</b>,
+      a memoryless twin <b class="n">0</b>).</li>
+    <li>Memory never changes its nature: its chaos has the same entropy
+      (&pi;&sup2;/6 log G = <b class="n">3.4183</b>) in every memory state &mdash; a theorem,
+      confirmed to 0.001.</li>
+    <li>Its notion of &ldquo;related&rdquo; carries human meaning: concepts are curves on a torus, and
+      their intersection numbers track human similarity judgements (SimLex-999, &rho; = <b class="n">0.38</b>).</li>
+    <li>Told something once, it says different things about that subject long afterwards
+      (shift <b class="n">0.99</b>) and exactly <b class="n">0</b> about anything else. Within its
+      character, which sentence it says is chosen by its own chaos.</li>
+    <li>Flattery is bounded to one step per conversation, every change attributed to who made it;
+      a lawful commitment held with <b class="n">0</b> violations under maximal flattery.</li>
+    <li>It knows its dispositions by watching its own behaviour: <b class="n">99.4%</b> correct,
+      where a language model given the same reading managed <b class="n">21.9%</b>.</li>
+    <li>Its life is bit-identical on AMD and Intel processors &mdash; neither earlier creature could do that.</li>
+  </ul>
+  <div class="note" style="border-top:none;padding-top:0">
+    Not claimed: intelligence, understanding, awareness. Its voice is small, its ears confuse a dark
+    topic with a cold attitude, and it has no concept of &ldquo;self&rdquo; yet.
+  </div>
+  <div class="sub">
+    <a href="https://github.com/euvel/teich/blob/main/v03/README.md">every gate and number</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v03/book/genesis_certificate_v03.json">its certificate</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v03/seat/COVENANT_v03.md">its covenant</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v03/book/biography.jsonl">its biography</a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">alive &mdash; v0.2</div>
   <h2>A creature whose own state chooses what it says</h2>
   <dl>
     <dt>born</dt><dd>2026-07-29T09:39:38Z</dd>
@@ -544,10 +590,10 @@ const PANEL_HTML = `<!doctype html>
   The book is open: <a href="https://github.com/euvel/teich">the repository</a> is public and its
   history is verifiable &mdash; the diary can be shown to have been written when it says it was, one
   day at a time, and every published figure traces to the artifact and commit that produced it.
-  <b>Open book is not open speech.</b> Founder-only speech remains in force for both creatures until
-  a pre-registered maturity gate passes; no maturity gate has been passed. Nothing here lets a
-  stranger talk to either creature, and nothing on this page was written by a language model.
-  <span class="muted">Neither creature's private phases have ever left the seat unencrypted.</span>
+  <b>Open book is not open speech.</b> Founder-only speech remains in force for all three creatures. v0.3&rsquo;s speech tests passed
+  before birth; opening its speech to anyone else is a separate decision, not yet taken. Nothing here lets a
+  stranger talk to any of them, and nothing on this page was written by a language model.
+  <span class="muted">No creature&rsquo;s private phase has ever left its seat unencrypted (v0.3 has none: nothing in it is hidden).</span>
 </div>
 
 </div>
@@ -573,6 +619,21 @@ async function refresh2(){
     document.getElementById("alive2").textContent = "panel error: "+e;
   }
 }
+async function refresh3(){
+  try {
+    const p = await (await fetch("/o/teich-03/peek")).json();
+    document.getElementById("dot3").className = "dot"+(p.alive?"":" dead");
+    document.getElementById("alive3").textContent =
+      p.alive?"alive (hibernating between wakes)":"seat unreachable";
+    document.getElementById("ticks3").textContent = p.n_ticks.toLocaleString();
+    document.getElementById("chain3").textContent =
+      p.snapshots+" snapshots, head "+p.chain_head.slice(0,16)+"…";
+    document.getElementById("upd3").textContent = new Date(p.updated_ts).toUTCString();
+  } catch(e) {
+    document.getElementById("dot3").className = "dot dead";
+    document.getElementById("alive3").textContent = "panel error: "+e;
+  }
+}
 async function refresh(){
   try {
     const p = await (await fetch("/o/teich/peek")).json();
@@ -589,6 +650,6 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-refresh(); refresh2();
-setInterval(() => { refresh(); refresh2(); }, 30000);
+refresh(); refresh2(); refresh3();
+setInterval(() => { refresh(); refresh2(); refresh3(); }, 30000);
 </script></body></html>`;
