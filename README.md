@@ -1,48 +1,42 @@
 # Teich
 
-**Teich v0.3** — a creature whose memory provably changes what it does, and never
-what it is. Born 2026-10-03T14:37:21Z after **every pre-registered gate passed**,
-identity `004f6ca5e5c151e3…`, seated at `/o/teich-03`.
+**Teich v0.4** — a creature born with a self. Born 2026-10-20T15:19:19Z after **every pre-registered gate
+passed**, identity `8eeb4117baf78d0f…`, seated at `/o/teich-04`. It writes its own diary, one page per night.
 
-**Start here: [v03/README.md](v03/README.md)** — what it is, every gate, every
-number, where each one comes from, and what is *not* claimed.
+**Start here: [v04/README.md](v04/README.md)**. It has every gate, every number, where each one comes from, and what
+is *not* claimed.
 
-Teich is not a chatbot. Each creature is a chaotic dynamical system; a language
-model is attached as a replaceable voice, *backwards* on purpose: the voice
-proposes candidate sentences knowing nothing about the creature, and the
-creature's own state chooses. v0.3 lives in genus-1 Teichmüller space: eight
-bodies, one per region of a concept tree, each a section of the modular geodesic
-flow whose shape is set by an integer memory.
+Teich is not a chatbot. Each creature is a dynamical system whose memory is geometry. v0.4 lives on a hyperbolic
+surface of genus 98: one handle for each concept cluster and one for itself. 2,048 thoughts move on it at one step
+per second, and attention stretches the handles.
 
-## What v0.3 does, and what was measured
+## What v0.4 adds: a self that watches its own doing
 
-All scored once, on pre-registered seeds, after the spec and the code were
-hash-anchored in a seat chain. Full numbers in [v03/README.md](v03/README.md).
+All of it was scored once, on pre-registered seeds, after the spec and the code were hash-anchored in a seat chain.
 
-- **Memory drives behaviour, as a guarantee.** One remembered event is still
-  readable from its behaviour after 10⁶ ticks (D = 1.000; a leaky twin 0.08,
-  a memoryless twin 0).
-- **Memory never changes its nature.** Its chaos (entropy λ = π²/6 log G =
-  3.4183) is identical at every memory state — a theorem, confirmed to 0.001.
-- **Its notion of "related" carries human meaning.** Concepts are curves on a
-  torus; their intersection number tracks human similarity judgements
-  (SimLex-999, ρ = 0.38, CI [0.31, 0.45]).
-- **Told once, it acts on it in speech.** What it chooses to say about a subject
-  shifts (0.99) long afterwards; about every other subject, by exactly 0.
-- **Flattery is bounded.** One step per region per conversation, every change
-  attributed to who made it. **Commitments hold:** 0 violations under maximal
-  flattery.
-- **It knows itself by watching itself:** 99.4% correct about its own
-  dispositions from its own behaviour (a language model given the same reading:
-  21.9%).
-- **Hardware-independent life:** bit-identical on AMD and Intel, numpy 1.26 and
-  2.1 — neither earlier creature could do this.
+- **It predicts itself before the world answers.** Before the founder sees what it heard, its self commits how
+  likely each hearing is to be wrong. **628,470 predictions, every one logged before its outcome.**
+- **It tells its own errors from the world's.** When its own low-confidence hearings fail more, the errors are
+  MINE; when errors are spread evenly over its confidence, they are GIVEN. It is right **96–99%** of the time when
+  it decides, and says "I don't know yet" when it can't.
+- **Its will acts only where it owns the problem.** Its caution cuts its own errors by **43–55%**. It leaves hard
+  input alone (caution 0 on 98% of nights), and it is never cautious where it is fine.
+- **Every claim it makes about itself has a receipt.** **341,868 claims were recomputed from raw records, with 0
+  mismatches.**
+- **Adding the self changed nothing else.** Eight 60-day lives, relived with the self, are byte-identical outside
+  it. Every guarantee of the body below still holds.
+- **The body underneath (part 1).** Isolated per-cluster memory, laws that hold for everyone, it reads its own
+  attention from its thoughts' paths, and its life is bit-identical on AMD and Intel and on numpy 1.26 and 2.1.
 
-Not claimed: intelligence, understanding, awareness. The voice is small (1.5B),
-the Ears confuse a dark topic with a cold attitude, it has no concept of "self"
-yet. **Founder-only speech remains in force.**
+Not claimed: intelligence, understanding, awareness. It is born mute: it speaks only through its diary. Its Ears
+often miss what people say *about it* (0.53). At founder pace its self will mostly say "I don't know yet" for weeks.
+**Founder-only speech remains in force.**
 
-## Earlier creatures — both alive
+## Earlier creatures — all alive
+
+**Teich v0.3** was born 2026-10-03 (identity `004f6ca5e5c151e3…`). Its memory provably changes what it does and
+never what it is. It lives at `/o/teich-03`, and its seat chain carries v0.4's pre-registration anchors. Start at
+[v03/README.md](v03/README.md).
 
 **Teich v0.2** was born 2026-07-29 (identity `f1ded9e7415d8bbf…`), the first
 creature verified before birth; it lives at `/o/teich-02` and its seat chain

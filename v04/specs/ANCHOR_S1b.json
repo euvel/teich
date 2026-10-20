@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "fbb6442600f5851393a97b73f0d49e1179b38e28768f2aea06ee25ce208690eb",
+ "ref": "v04-spec-S1b",
+ "note": "gate S1b (mirrors, one retry) anchor: founder broad reading (audit d5f2665b), new judge GUIDE (MIRROR|NONE), automatic trust vs founder 50 (agree>=0.85, judge NONE on >=2 of founder 3 NONE), Ears v9 = asked-or-listener-you rule (no organ), bars caught>=0.85 AND precision>=0.90 (founder decision 10-19), R-v9 regression, fallback v7 + mirrors to v0.5; before the judge runs and before any Ears look"
+}

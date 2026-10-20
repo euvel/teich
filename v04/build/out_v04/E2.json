@@ -1,0 +1,7 @@
+{
+ "gate": "E2",
+ "passed": true,
+ "dial_max_relative_error": 2.220446049250313e-16,
+ "member_share_min": 0.83748532695872,
+ "member_share_max": 0.9996459064582917
+}

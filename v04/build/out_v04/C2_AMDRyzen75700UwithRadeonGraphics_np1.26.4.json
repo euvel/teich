@@ -1,0 +1,7 @@
+{
+ "cpu": "AMD Ryzen 7 5700U with Radeon Graphics",
+ "numpy": "1.26.4",
+ "python": "3.12.3",
+ "pass": true,
+ "life_sha256": "09a4a84fc985b1dc0a0f40d9845fbe83746c53b6b9ccd503a31c8ab703c5aa0f"
+}

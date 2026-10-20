@@ -1,0 +1,10 @@
+{
+ "python": "3.12.3",
+ "numpy": "1.26.4",
+ "cpu": "AMD Ryzen 7 5700U with Radeon Graphics",
+ "lives": {
+  "2100@2.0": "0cea8582fd131aa8a21695c3ad39e80ee1c092e28e52a3067fe27862535b8cbd",
+  "2101@4.0": "0e01a7de8a3f5349b069eca3044729d4e4e8f67fb2f94e0e25bdfb10f07df62b",
+  "2102@1.0": "85d82d6fb6878f6dc1d14eeadf4160f21cafd660a5d4aa3c42b7c814ea58f2e5"
+ }
+}

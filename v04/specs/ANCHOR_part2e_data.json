@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "786636b001ee73201632f72a9fe8c76034971ea80c33170c51fb34edecc076ca",
+ "ref": "v04-spec-part2e-data",
+ "note": "anchor 2/2: sha256 of DATA_MANIFEST_part2e.sha256 \u2014 A2e labels a0b29d14 (Mistral judge, pronouns removed), founder audit file e9a38331 + result (TRUSTED: F1 1.00, att 0.943, itself 1.00) \u2014 fixed before the one Ears look"
+}

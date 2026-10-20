@@ -1,0 +1,8 @@
+{
+ "gate": "I1",
+ "passed": true,
+ "handles_touched": 78,
+ "handles_untouched": 20,
+ "untouched_handle_row_differences": 0,
+ "unrelated_pants_face_differences": 0
+}

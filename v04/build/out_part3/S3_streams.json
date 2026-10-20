@@ -1,0 +1,24 @@
+{
+ "gate": "S3",
+ "per_rate": {
+  "1.0": {
+   "decided_correct": 0.9643,
+   "swaps": 0.0054,
+   "unresolved": 0.7563,
+   "verdicts": 5400
+  },
+  "2.0": {
+   "decided_correct": 0.9879,
+   "swaps": 0.0041,
+   "unresolved": 0.2681,
+   "verdicts": 5400
+  },
+  "4.0": {
+   "decided_correct": 0.9853,
+   "swaps": 0.0037,
+   "unresolved": 0.1156,
+   "verdicts": 5400
+  }
+ },
+ "passed": true
+}

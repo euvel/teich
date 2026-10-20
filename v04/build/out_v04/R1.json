@@ -1,0 +1,8 @@
+{
+ "gate": "R1",
+ "spoken": 40402,
+ "spoken_exact_rate": 0.9999752487500618,
+ "named": 17224,
+ "named_false_positive_rate": 0.0,
+ "passed": true
+}

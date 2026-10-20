@@ -1,0 +1,22 @@
+{
+ "gate": "S4",
+ "per_rate": {
+  "2.0": {
+   "mine_struck_last60": 0.1152,
+   "frozen": 0.2031,
+   "reduction": 0.4327,
+   "given_nights_c0": 0.9786,
+   "utility": 45300,
+   "utility_frozen": 43192
+  },
+  "4.0": {
+   "mine_struck_last60": 0.0935,
+   "frozen": 0.2094,
+   "reduction": 0.5532,
+   "given_nights_c0": 0.9844,
+   "utility": 91164,
+   "utility_frozen": 85779
+  }
+ },
+ "passed": true
+}

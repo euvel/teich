@@ -1,0 +1,8 @@
+{
+ "gate": "S7",
+ "switches": 80,
+ "followed": 80,
+ "median_lag": 18.5,
+ "former_mine_back_to_0": "40/40",
+ "passed": true
+}

@@ -1,0 +1,10 @@
+{
+ "python": "3.13.15",
+ "numpy": "2.1.3",
+ "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+ "lives": {
+  "2100@2.0": "0cea8582fd131aa8a21695c3ad39e80ee1c092e28e52a3067fe27862535b8cbd",
+  "2101@4.0": "0e01a7de8a3f5349b069eca3044729d4e4e8f67fb2f94e0e25bdfb10f07df62b",
+  "2102@1.0": "85d82d6fb6878f6dc1d14eeadf4160f21cafd660a5d4aa3c42b7c814ea58f2e5"
+ }
+}

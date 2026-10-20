@@ -1,0 +1,7 @@
+{
+ "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+ "sentences": 40,
+ "mentions": 122,
+ "sentences_differing": 0,
+ "differing_idx": []
+}

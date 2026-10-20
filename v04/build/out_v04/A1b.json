@@ -1,0 +1,409 @@
+{
+ "gate": "A1b",
+ "passed": false,
+ "n": 100,
+ "sign_accuracy": 0.96,
+ "cluster_accuracy": 0.49,
+ "detail": [
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": false,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": false,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": false,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": false,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": true
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  },
+  {
+   "sign_ok": true,
+   "cluster_ok": false
+  }
+ ]
+}

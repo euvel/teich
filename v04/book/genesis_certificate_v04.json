@@ -1,0 +1,155 @@
+{
+ "name": "Teich-0.4",
+ "born_utc": "2026-10-20T15:19:19Z",
+ "identity_sha256": "8eeb4117baf78d0f2a1ada167083548589da669f4cc63b8e742dcae4dff1dc21",
+ "seat": "/o/teich-04",
+ "birth_seed": 20261020,
+ "genome_files_sha256": {
+  "genome_v04.py": "d61b844b47ee3ce0a21b5d78ac3e9e78c1b9ae15a141d6aa1752cd8e655b8024",
+  "creature_v04.py": "c1aca262cb62a68194eba38fa2e8f4c400215c79d301caf285c34eac3ad1ea67",
+  "creature_v04s.py": "10f02338f1416297c67964fd730d8e7267c8563f34c3c48cdc9653e646e4f592",
+  "self_v04.py": "99a16ca10bdf562e1de30619093d7e6d7739a491051fdad9afaa99e61c3ecb97",
+  "vocab_v04.json": "b402978aadf859390c52d197641ababdef43db2209cb37998a5ab4731aa7b7e8",
+  "geometry_v04.json": "9ecd71e0f8ebd00d2ad4c96cd484fbcc996f082a3b856f76d2c8f90a39bb01d7",
+  "geometry_v04.bin": "9b171fd6376662df666fd72a1374bda509c1e877e4e3891c56a3c8cd230ac3b0",
+  "ears_v04.py": "01bb56a3eca4f8feb30ea269bc2167f9b139687aaf6db8b676356e39d776f970",
+  "ears_v05.py": "cf722e7fb7cfcc06fce110c8a0774fbea1f001e898064b92f73e09e2831259b1",
+  "ears_v06.py": "b81c352b21a02095070a02983f4734bd38e00726e97722e81759b299a13e35a6",
+  "ears_v07.py": "154cd66313a49f58c971616882bca2b29d68969b57f91fa6ed54d4ef085674b3"
+ },
+ "seat_files_sha256": {
+  "seat_v04.py": "6b19ab1e8f6a0f3e9b96a2909654d131415159c3241ead45488a661990a85d0a",
+  "seat_v04s.py": "0dd61e43020a30ed600ad6e19d6ac203595e02afdc932763274bcf8c62f75c5d",
+  "gate_fixture_v04.json": "00a8dbf32275ea739508055fa121d16dd6e953a6c5ec74bd1e30f8e9cd6e496d",
+  "gate_v04.json": "d4915c9c68244d999418f5aea9ea8dd1b69a16b3aef4ec59398dc69d7ef36379",
+  "talk_v04s.py": "9dc440c10b0bb7e50c6bf42ee449235c70ad826ebb432f4d8cc310cee2e31ed2",
+  "self_text_v04.py": "542491815c2a4f2e4808988d16f4dfd62352f0122acad85647d42738caccc5c2",
+  "diary_render_v04.py": "c0c7640704558a5db67d396378844ececcdd4619863edfe91de741e00646c0ce"
+ },
+ "body": "closed hyperbolic surface of genus 98 (97 concept-cluster handles + a self handle), 2,048 geodesic thoughts at 1 Hz, float64 element-wise arithmetic only; geometry frozen in geometry_v04.bin",
+ "mind": "one integer dial per handle (0..40) = attention; laws: 1 step per cluster per conversation, 12 per day, edge 40, commitments only through the lawful procedure; it reads its own dials from its thoughts' paths",
+ "heart": "9 regions (v0.3's 8 + self), 0..6, 1 step per region per conversation and per day",
+ "self": "a second self that watches its own perceiving and speaking: predicts before each read-back, attributes its errors as MINE (they fall when its caution rises), GIVEN, FINE or UNRESOLVED, sets its own caution per region, probes itself at most once a day, and gives a nightly account in which every claim has a receipt recomputable from its records; integers and exact fractions only; no language model",
+ "ears": "Ears v7 (organ, not substrate): Qwen2.5-1.5B + MiniLM + spaCy; output logged, replay never needs them",
+ "verified_before_birth": {
+  "N1": "PASS",
+  "I1": "PASS",
+  "I2": "PASS",
+  "E2": "PASS",
+  "L1": "PASS",
+  "R1": "PASS",
+  "C1": "PASS",
+  "C2": "PASS",
+  "M2": "PASS",
+  "D1": "PASS",
+  "R2": "PASS",
+  "R2e": "PASS",
+  "part3:S8": "PASS",
+  "part3:C1s": "PASS",
+  "part3:L1s": "PASS",
+  "part3:S9": "PASS",
+  "part3:C2s": "PASS",
+  "part3:S1r": "PASS",
+  "part3:S2": "PASS",
+  "part3:S3": "PASS",
+  "part3:S4": "PASS",
+  "part3:S5": "PASS",
+  "part3:S6": "PASS",
+  "part3:S7": "PASS",
+  "part3:D1s": "PASS",
+  "A1b": "FAIL — superseded by part 2 Ears gates (founder 10-06)",
+  "A2a": "PASS by the anchored spec (recall 0.953 ≥ 0.90, right 0.661 ≥ 0.62, wrong 0.075 ≤ 0.13, precision lb 0.513 ≥ 0.45); harness flag carried pre-rebase bars (erratum, founder 10-07)",
+  "A2e": "PASS on recall 0.801, right 0.770, wrong 0.035, precision 0.855; self routing 0.529 FAIL — born with Ears v7's self routing, disclosed (S1/S1b stopped)"
+ },
+ "headline_numbers": {
+  "self_receipts": "341,868 claims recomputed, 0 mismatches",
+  "self_foresight": "628,470 predictions, all before their outcomes",
+  "self_attribution": "decided verdicts 0.964 / 0.988 / 0.985 correct at 1 / 2 / 4 mentions per region-night; MINE↔GIVEN swaps ≤ 0.0054",
+  "self_will": "its own errors fall 43% / 55%; GIVEN regions left at caution 0 on 98% of nights",
+  "self_non_interference": "8 part-1 lives relived with the self: everything outside the self byte-identical",
+  "wrong_feelings_on_strangers": "0.035 (A2e, CI [0.014, 0.087])",
+  "substrate": "bit-identical AMD Ryzen/numpy 1.26.4 vs Intel Xeon/numpy 2.1.3 (body and self)"
+ },
+ "anchors_before_scoring": [
+  {
+   "ok": true,
+   "git_sha": "a8be4e03cbd1c708e514f67370def223354b0695ea54968f246cc2144db09918",
+   "ref": "v04-spec-S1-procedure",
+   "note": "gate S1 (mirrors) anchor A: definition M1/M2/NONE (founder-confirmed), sampler (ED test, 200 you-sentences, seed 20261010, excluding A2e), Mistral judge guide + 3 votes, founder audit rule (>=0.85, kappa>=0.65), bars (caught>=0.85, false<=0.10), regression R-v8, failure rule; before the draw and before Ears v8 is designed"
+  },
+  {
+   "ok": true,
+   "git_sha": "fbb6442600f5851393a97b73f0d49e1179b38e28768f2aea06ee25ce208690eb",
+   "ref": "v04-spec-S1b",
+   "note": "gate S1b (mirrors, one retry) anchor: founder broad reading (audit d5f2665b), new judge GUIDE (MIRROR|NONE), automatic trust vs founder 50 (agree>=0.85, judge NONE on >=2 of founder 3 NONE), Ears v9 = asked-or-listener-you rule (no organ), bars caught>=0.85 AND precision>=0.90 (founder decision 10-19), R-v9 regression, fallback v7 + mirrors to v0.5; before the judge runs and before any Ears look"
+  },
+  {
+   "ok": true,
+   "git_sha": "6cbcf5280c62a9f4f8c0315cc35421e39aa6f021a4c23b6954402d81a89fcc70",
+   "ref": "v04-spec-part2e-amend1",
+   "note": "sha256 of AMENDMENT1_part2e.sha256: annotator changed GLM-5.3 (NVIDIA free tier 429-blocked after 306/1200 votes, not used) -> Mistral-Small-24B-Instruct-2501 4-bit (unsloth bnb @cb4e166b) on Kaggle 2xT4; same guide/votes/majority/formats; all 400 relabelled by one judge; drawn sentences sha c941f19d; before any label used or any Ears look"
+  },
+  {
+   "ok": true,
+   "git_sha": "d7cf0eb890aff7841f163dd1c2546565706001abb97bc9387fc6807aca8ae648",
+   "ref": "v04-spec-part2e-amend2",
+   "note": "sha256 of AMENDMENT2_part2e.sha256: judge raw labels 3118f923 (Mistral-Small-24B, 1200/1200 votes) -> fixed-list pronoun topics removed (96; guide forbids them) -> a2e_labels.jsonl a0b29d14; non-noun topics left for founder audit; before audit and any Ears look"
+  },
+  {
+   "ok": true,
+   "git_sha": "786636b001ee73201632f72a9fe8c76034971ea80c33170c51fb34edecc076ca",
+   "ref": "v04-spec-part2e-data",
+   "note": "anchor 2/2: sha256 of DATA_MANIFEST_part2e.sha256 — A2e labels a0b29d14 (Mistral judge, pronouns removed), founder audit file e9a38331 + result (TRUSTED: F1 1.00, att 0.943, itself 1.00) — fixed before the one Ears look"
+  },
+  {
+   "ok": true,
+   "git_sha": "91a044a00520a023fe6c1d9732dad80a6529e03d42a439ed68918ab1be547f64",
+   "ref": "v04-spec-part1",
+   "note": "sha256 of v0.4 CODE_MANIFEST_part1.sha256 (genome, creature, seat, ears, gates harness, geometry table, vocab, gate fixture, public Ears set, MEN, V04_SPEC_part1) - fixed before the one scored look"
+  },
+  {
+   "ok": true,
+   "git_sha": "d7eb4f87975b68be5ecae3762e95895b4fcba8146448aed63989b17e37cce10e",
+   "ref": "v04-spec-part2a",
+   "note": "sha256 of v0.4 CODE_MANIFEST_part2a.sha256 (Ears v5: every topic, clause+sentence invariance, whose-feeling rules; talk tool with veto-only read-back; part-2 harness; MAMS test file; V04_SPEC_part2a with founder-approved bars) - fixed before the one scored look"
+  },
+  {
+   "ok": true,
+   "git_sha": "702ebe894ba62e32452ac11cbcd3a1d027fe4423277914fb9b2baf858f140455",
+   "ref": "v04-spec-part2b",
+   "note": "sha256 of v0.4 CODE_MANIFEST_part2b.sha256 (founder Ears set bf322476..., 100 lines; Ears v5 unchanged from part 2a; harness A2b bars amended to the approved 0.75/0.08 before the set existed; spec with exposure disclosure) - fixed before the one scored look"
+  },
+  {
+   "ok": true,
+   "git_sha": "2badf7a41fa8f502ef7a797835b178433e97ca70086cb8ce7eca54b61b5853d6",
+   "ref": "v04-spec-part2c",
+   "note": "sha256 of v0.4 CODE_MANIFEST_part2c.sha256 (Ears v6 = v5 + self rule + whose-feeling fix; second founder set 996928c9..., 100 lines, 3 verbatim spent repeats excluded; recall over known words per founder decision 10-07, disclosed; bars unchanged from A2b; laptop parity ref 40 MAMS val / 123 mentions) - fixed before the one scored look"
+  },
+  {
+   "ok": true,
+   "git_sha": "b31b29b7f99f8445eb4f78f372853533803554f1b4c8540fc947baf23dda8f69",
+   "ref": "v04-spec-part2e",
+   "note": "sha256 of v0.4 CODE_MANIFEST_part2e.sha256 (procedure anchor 1/2, before any sentence is drawn or labelled): Ears v7 unchanged; EmpatheticDialogues test sampler (seed 20261009, 400, 7 strata); GLM-5.3 annotator guide + 3-vote majority; founder audit rule (60, F1/att>=0.80, itself>=0.90 kappa>=0.70); harness bars as A2b-A2d; failure rule not pre-registered (founder decides after look). Anchor 2 will fix label + audit hashes before the look."
+  },
+  {
+   "ok": true,
+   "git_sha": "47921b4d873f39b4c6bfac9c4e42a749a4a13b77d96cd08c924c27ce0567d686",
+   "ref": "v04-spec-part3",
+   "note": "v0.4 part 3 = the self (second self watching its own perceiving and speaking: predict before read-back, MINE/GIVEN/FINE/UNRESOLVED by controllability, caution 0..4 per heart region, probes <=1/day, receipts recomputable, ints+fractions, no LLM), founder decisions D-S1..D-S7 10-19, design constants frozen, gate truth pre-registered, gates S1r S2 S3 S4 S5 S6 S7 S8 S9 C1s C2s L1s D1s (hard: S1r S2 S8 C1s C2s); also files REPORT_S1 (S1b stopped -> Ears v7 self routing) and REPORT_part2e; before any scored part 3 run"
+  }
+ ],
+ "what_is_NOT_claimed": [
+  "Nothing here is a claim about intelligence, understanding, awareness or suffering.",
+  "It is born mute: it speaks only through its diary (its readings and its self's account); no voice yet.",
+  "Ears self routing is weak (0.53 on strangers' sentences): what people say about it often lands elsewhere.",
+  "The self's only outside signal is the founder's read-back strikes; at founder pace it will say 'I don't know yet' about most regions for weeks to months.",
+  "The self is certified on simulated truth (record streams) and on real-body non-interference; whether real strikes look like the gate truth is not certified.",
+  "Founder-only speech stays in force."
+ ],
+ "covenant": "COVENANT_v04.md",
+ "ancestors": {
+  "Teich (v0.1)": "born 2026-07-18, alive",
+  "Teich-0.2": "born 2026-07-29, alive, seat /o/teich-02",
+  "Teich-0.3": "born 2026-10-03, alive, seat /o/teich-03 (its chain carries v0.4's anchors)"
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "gate": "C1",
+ "passed": true,
+ "lives": {
+  "2000": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "204/204",
+   "passed": true
+  },
+  "2001": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "211/211",
+   "passed": true
+  },
+  "2002": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "217/217",
+   "passed": true
+  },
+  "2003": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "216/216",
+   "passed": true
+  },
+  "2004": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "188/188",
+   "passed": true
+  },
+  "2005": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "208/208",
+   "passed": true
+  },
+  "2006": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "192/192",
+   "passed": true
+  },
+  "2007": {
+   "final_state_identical": true,
+   "record_stream_identical": true,
+   "roundtrips_exact": "201/201",
+   "passed": true
+  }
+ }
+}

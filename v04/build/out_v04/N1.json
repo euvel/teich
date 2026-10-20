@@ -1,0 +1,19 @@
+{
+ "gate": "N1",
+ "passed": true,
+ "levels": {
+  "level_0": {
+   "rate": 0.9987673346860972,
+   "pairs_same_piece_at_end": 1024
+  },
+  "level_20": {
+   "rate": 0.9984589913851383,
+   "pairs_same_piece_at_end": 1024
+  },
+  "level_40": {
+   "rate": 0.9987679608185158,
+   "pairs_same_piece_at_end": 1024
+  }
+ },
+ "bar": "|rate - 1| <= 0.01 at levels 0, 20, 40"
+}

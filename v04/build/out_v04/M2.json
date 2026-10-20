@@ -1,0 +1,9 @@
+{
+ "gate": "M2",
+ "passed": true,
+ "pairs": 414,
+ "rho_v04": 0.5558461004910904,
+ "rho_v03": 0.5372303861616621,
+ "same_cluster_pairs": 96,
+ "bridged_pairs": 15
+}

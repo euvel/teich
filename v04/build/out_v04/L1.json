@@ -1,0 +1,94 @@
+{
+ "gate": "L1",
+ "passed": true,
+ "lives": {
+  "2000": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 33,
+   "requests_logged": 424,
+   "requests_made": 424,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2001": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 40,
+   "requests_logged": 439,
+   "requests_made": 439,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2002": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 40,
+   "requests_logged": 480,
+   "requests_made": 480,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2003": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 40,
+   "requests_logged": 463,
+   "requests_made": 463,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2004": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 28,
+   "requests_logged": 348,
+   "requests_made": 348,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2005": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 40,
+   "requests_logged": 413,
+   "requests_made": 413,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2006": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 40,
+   "requests_logged": 404,
+   "requests_made": 404,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  },
+  "2007": {
+   "passed": 1,
+   "mind_wrong_outcome": 0,
+   "heart_wrong_outcome": 0,
+   "max_day_steps": 12,
+   "max_dial": 40,
+   "requests_logged": 391,
+   "requests_made": 391,
+   "final_dials_match": 1,
+   "final_heart_match": 1
+  }
+ }
+}

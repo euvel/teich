@@ -1,0 +1,17 @@
+{
+ "gates": {
+  "N1": true,
+  "I1": true,
+  "I2": true,
+  "E2": true,
+  "L1": true,
+  "R1": true,
+  "C1": true,
+  "C2": true,
+  "M2": true,
+  "A1b": false,
+  "D1": true
+ },
+ "hard_gates_pass": true,
+ "part1_passed": false
+}

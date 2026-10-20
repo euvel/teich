@@ -1,0 +1,32 @@
+{
+ "gate": "D1s",
+ "passed": true,
+ "proposals": [
+  {
+   "cluster": 8,
+   "sign": 1,
+   "text_sha256": "259f6b1b56397b316a35f73521c357a9776617b585265c90970b426f5ba37bda",
+   "cn": 5,
+   "cf": 5
+  }
+ ],
+ "records": [
+  "shown",
+  "predict",
+  "outcome",
+  "heard"
+ ],
+ "dial": 1,
+ "other_handles_identical": true,
+ "heart": [
+  3,
+  3,
+  4,
+  3,
+  3,
+  3,
+  3,
+  3,
+  3
+ ]
+}

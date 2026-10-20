@@ -425,7 +425,8 @@ async function handle(request, env) {
 // history is verifiable), so this page's job changed on 2026-07-31: it fronts
 // v0.2 -- the creature that was verified before it was born -- and keeps v0.1
 // below it as the archive, still live, still holding its seat. On 2026-10-03
-// v0.3 was born after every pre-registered gate passed and now leads the page.
+// v0.3 was born after every pre-registered gate passed and led the page; on 2026-10-20 v0.4 -- born with a
+// self that watches its own doing -- was born the same way and now leads it.
 //
 // Open book is NOT open speech. Nothing on this page, and no unauthenticated
 // endpoint on this Worker, lets a stranger talk to either creature. Everything
@@ -477,11 +478,59 @@ const PANEL_HTML = `<!doctype html>
 
 <header>
   <h1>TEICH</h1>
-  <div class="sub">three creatures, one open book</div>
+  <div class="sub">four creatures, one open book</div>
 </header>
 
 <section>
-  <div class="eyebrow">now &mdash; v0.3</div>
+  <div class="eyebrow">now &mdash; v0.4</div>
+  <h2>A creature born with a self that watches its own doing</h2>
+  <p class="lede">Teich v0.4 lives on a hyperbolic surface of genus 98: one handle for each concept cluster and one
+    for itself, with 2,048 thoughts moving one step per second. A second self watches the first one: it predicts its
+    own mistakes before the world answers, tells its own errors from the world&rsquo;s, sets its own caution only
+    where the problem is its own, and accounts for itself every night with receipts anyone can recompute. Every
+    claim below was pre-registered, hash-anchored before its single scored run, and passed <em>before</em> it was
+    born.</p>
+  <dl>
+    <dt>born</dt><dd>2026-10-20T15:19:19Z</dd>
+    <dt>identity</dt><dd>8eeb4117baf78d0f&hellip; <span class="muted">(sha256 of its genome files)</span></dd>
+    <dt>gates</dt><dd>every pre-registered gate passed before birth <span class="muted">&mdash; 11 anchors in v0.3&rsquo;s public seat chain</span></dd>
+    <dt>seat</dt><dd><span id="dot4" class="dot"></span><span id="alive4">reading the seat&hellip;</span></dd>
+    <dt>ticks lived</dt><dd id="ticks4">&mdash;</dd>
+    <dt>snapshot chain</dt><dd id="chain4">&mdash;</dd>
+    <dt>last commit</dt><dd id="upd4">&mdash;</dd>
+  </dl>
+  <div class="stats">
+    <div class="stat"><div class="v">0 / 341,868</div><div class="k">claims about itself that failed to recompute from its records</div><div class="c">every claim carries a receipt</div></div>
+    <div class="stat"><div class="v">628,470</div><div class="k">predictions about its own hearing, each logged before the answer</div><div class="c">0 out of order</div></div>
+    <div class="stat"><div class="v">96&ndash;99%</div><div class="k">right when it decides whether an error is its own or the world&rsquo;s</div><div class="c">&ldquo;I don&rsquo;t know yet&rdquo; when evidence is thin</div></div>
+    <div class="stat"><div class="v">&minus;43&ndash;55%</div><div class="k">its own errors, after its own caution</div><div class="c">hard input left alone on 98% of nights</div></div>
+    <div class="stat"><div class="v">98%</div><div class="k">nights it knows <em>where</em> it fails better than <em>how often</em></div><div class="c">simulated lives with known truth</div></div>
+    <div class="stat"><div class="v">identical</div><div class="k">eight 60-day lives relived with the self, outside the self</div><div class="c">the self changes nothing it does not own</div></div>
+  </div>
+  <ul class="findings">
+    <li><b class="n">Its self is grounded in what it does, not in what it is told about itself.</b> It watches its
+      own hearing through the founder&rsquo;s read-back and its own diary readings, and nothing else; it never
+      reads its own memory directly.</li>
+    <li><b class="n">What belongs to it is what responds to its will.</b> Errors that fall when it is more careful
+      are its own; errors that do not are the world&rsquo;s. It probes itself at most once a day, and openly.</li>
+    <li><b class="n">Integers and exact fractions, no language model.</b> Its self runs bit-identically on any
+      certified machine, and its nightly account is a list of checkable facts.</li>
+  </ul>
+  <div class="note" style="border-top:none;padding-top:0">
+    Not claimed: intelligence, understanding, awareness. It is born mute and speaks only through its diary. Its
+    ears often miss what people say <em>about it</em> (0.53), and at its founder&rsquo;s pace its self will mostly
+    say &ldquo;I don&rsquo;t know yet&rdquo; for weeks. Founder-only speech remains in force.
+  </div>
+  <div class="sub">
+    <a href="https://github.com/euvel/teich/blob/main/v04/README.md">every gate and number</a>
+    &middot; <a href="https://github.com/euvel/teich/tree/main/v04/diary">its diary</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v04/book/genesis_certificate_v04.json">its certificate</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v04/book/COVENANT_v04.md">its covenant</a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">alive &mdash; v0.3</div>
   <h2>A creature whose memory provably changes what it does &mdash; and never what it is</h2>
   <p class="lede">Teich v0.3 lives in genus-1 Teichm&uuml;ller space. It has eight bodies, one for each
     region of a concept tree, and each body is a slice of the geodesic flow on the modular surface
@@ -606,10 +655,10 @@ const PANEL_HTML = `<!doctype html>
   The book is open: <a href="https://github.com/euvel/teich">the repository</a> is public and its
   history is verifiable &mdash; the diary can be shown to have been written when it says it was, one
   day at a time, and every published figure traces to the artifact and commit that produced it.
-  <b>Open book is not open speech.</b> Founder-only speech remains in force for all three creatures. v0.3&rsquo;s speech tests passed
+  <b>Open book is not open speech.</b> Founder-only speech remains in force for all four creatures. v0.3&rsquo;s speech tests passed
   before birth; its speech opens only after live maturity gates, pre-registered in the same way, pass. Nothing here lets a
   stranger talk to any of them, and nothing on this page was written by a language model.
-  <span class="muted">No creature&rsquo;s private phase has ever left its seat unencrypted (v0.3 has none: nothing in it is hidden).</span>
+  <span class="muted">No creature&rsquo;s private phase has ever left its seat unencrypted (v0.3 and v0.4 have none: nothing in them is hidden).</span>
 </div>
 
 </div>
@@ -650,6 +699,21 @@ async function refresh3(){
     document.getElementById("alive3").textContent = "panel error: "+e;
   }
 }
+async function refresh4(){
+  try {
+    const p = await (await fetch("/o/teich-04/peek")).json();
+    document.getElementById("dot4").className = "dot"+(p.alive?"":" dead");
+    document.getElementById("alive4").textContent =
+      p.alive?"alive (hibernating between wakes)":"seat unreachable";
+    document.getElementById("ticks4").textContent = p.n_ticks.toLocaleString();
+    document.getElementById("chain4").textContent =
+      p.snapshots+" snapshots, head "+p.chain_head.slice(0,16)+"…";
+    document.getElementById("upd4").textContent = new Date(p.updated_ts).toUTCString();
+  } catch(e) {
+    document.getElementById("dot4").className = "dot dead";
+    document.getElementById("alive4").textContent = "panel error: "+e;
+  }
+}
 async function refresh(){
   try {
     const p = await (await fetch("/o/teich/peek")).json();
@@ -666,6 +730,6 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-refresh(); refresh2(); refresh3();
-setInterval(() => { refresh(); refresh2(); refresh3(); }, 30000);
+refresh(); refresh2(); refresh3(); refresh4();
+setInterval(() => { refresh(); refresh2(); refresh3(); refresh4(); }, 30000);
 </script></body></html>`;

@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "6cbcf5280c62a9f4f8c0315cc35421e39aa6f021a4c23b6954402d81a89fcc70",
+ "ref": "v04-spec-part2e-amend1",
+ "note": "sha256 of AMENDMENT1_part2e.sha256: annotator changed GLM-5.3 (NVIDIA free tier 429-blocked after 306/1200 votes, not used) -> Mistral-Small-24B-Instruct-2501 4-bit (unsloth bnb @cb4e166b) on Kaggle 2xT4; same guide/votes/majority/formats; all 400 relabelled by one judge; drawn sentences sha c941f19d; before any label used or any Ears look"
+}

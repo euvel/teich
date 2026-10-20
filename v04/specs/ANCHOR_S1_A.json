@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "a8be4e03cbd1c708e514f67370def223354b0695ea54968f246cc2144db09918",
+ "ref": "v04-spec-S1-procedure",
+ "note": "gate S1 (mirrors) anchor A: definition M1/M2/NONE (founder-confirmed), sampler (ED test, 200 you-sentences, seed 20261010, excluding A2e), Mistral judge guide + 3 votes, founder audit rule (>=0.85, kappa>=0.65), bars (caught>=0.85, false<=0.10), regression R-v8, failure rule; before the draw and before Ears v8 is designed"
+}

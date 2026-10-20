@@ -1,0 +1,31 @@
+{
+ "gate": "R2",
+ "passed": true,
+ "heard": [
+  {
+   "sentence": "My dog is wonderful.",
+   "mentions": [
+    {
+     "cluster": 8,
+     "concept": "dog",
+     "words": "dog",
+     "cos": 1.0,
+     "clause": "My dog is wonderful .",
+     "attitude_clause": 13.8416,
+     "attitude_sentence": 13.8514,
+     "sign": 1,
+     "no_feeling_because": null
+    }
+   ],
+   "unheard": [],
+   "question": false
+  }
+ ],
+ "ears": {
+  "organ": "Qwen/Qwen2.5-1.5B-Instruct@989aa7980e4c",
+  "encoder": "sentence-transformers/all-MiniLM-L6-v2@1110a243fdf4",
+  "tagger": "en_core_web_sm-3.8.0",
+  "tau_map": 0.6,
+  "theta": 1.0
+ }
+}

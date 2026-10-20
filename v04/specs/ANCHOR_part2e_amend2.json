@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "d7cf0eb890aff7841f163dd1c2546565706001abb97bc9387fc6807aca8ae648",
+ "ref": "v04-spec-part2e-amend2",
+ "note": "sha256 of AMENDMENT2_part2e.sha256: judge raw labels 3118f923 (Mistral-Small-24B, 1200/1200 votes) -> fixed-list pronoun topics removed (96; guide forbids them) -> a2e_labels.jsonl a0b29d14; non-noun topics left for founder audit; before audit and any Ears look"
+}

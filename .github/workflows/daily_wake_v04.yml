@@ -1,0 +1,46 @@
+name: daily-wake-v04
+# v0.4's heartbeat. Separate from v0.1-v0.3's wakes on purpose: different genome, different seat (/o/teich-04) --
+# one creature's failure must never stand another down.
+#
+# v0.4's body and self are numpy + integer arithmetic, certified bit-identical across CPU vendors (AMD Ryzen / Intel
+# Xeon) and numpy 1.26 / 2.1. Every wake still gates on boot; a runner that fails declines and the elapsed seconds stay
+# banked (owed from birth). One day of its life takes ~2-6 minutes to replay; --max-ticks caps one wake at ~2.3 days.
+# After the wake it writes each new night's diary page (v04/diary/) from its own records and commits it.
+on:
+  schedule:
+    - cron: "53 5 * * *"        # after v0.1 (05:17), v0.2 (05:23), v0.3 (05:41)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-wake-v04
+  cancel-in-progress: false
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "numpy<3"
+      - name: which machine drew this wake
+        run: grep -m1 "model name" /proc/cpuinfo || true
+      - name: gate-on-boot, lease, replay, commit, diary pages
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd v04/seat && python3 -u wake_v04.py --diary-dir ../diary
+      - name: commit new diary pages
+        run: |
+          git config user.name "teich-v04"
+          git config user.email "teich-v04@users.noreply.github.com"
+          git add v04/diary || true
+          if ! git diff --cached --quiet; then
+            git commit -m "v0.4 diary: $(date -u +%F) (autonomous wake)"
+            git push
+          fi

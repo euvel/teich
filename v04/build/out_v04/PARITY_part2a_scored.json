@@ -1,0 +1,13 @@
+{
+ "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+ "sentences": 40,
+ "mentions": 121,
+ "sentences_differing": 0,
+ "differing_idx": [],
+ "kaggle": {
+  "recall": 1.0,
+  "attitude_correct": 0.6923076923076923,
+  "attitude_opposite": 0.07692307692307693,
+  "precision_lb": 0.5454545454545454
+ }
+}

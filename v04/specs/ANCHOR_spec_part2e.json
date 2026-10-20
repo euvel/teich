@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "b31b29b7f99f8445eb4f78f372853533803554f1b4c8540fc947baf23dda8f69",
+ "ref": "v04-spec-part2e",
+ "note": "sha256 of v0.4 CODE_MANIFEST_part2e.sha256 (procedure anchor 1/2, before any sentence is drawn or labelled): Ears v7 unchanged; EmpatheticDialogues test sampler (seed 20261009, 400, 7 strata); GLM-5.3 annotator guide + 3-vote majority; founder audit rule (60, F1/att>=0.80, itself>=0.90 kappa>=0.70); harness bars as A2b-A2d; failure rule not pre-registered (founder decides after look). Anchor 2 will fix label + audit hashes before the look."
+}

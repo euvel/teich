@@ -1,0 +1,31 @@
+{
+ "gate": "D1",
+ "passed": true,
+ "heard": [
+  {
+   "cluster": 8,
+   "concept": "dog",
+   "topic_word": "dog",
+   "attitude": 13.2068,
+   "sign": 1
+  }
+ ],
+ "dog_cluster": [
+  "animal",
+  "dog",
+  "pet"
+ ],
+ "dial": 1,
+ "other_handles_identical": true,
+ "heart": [
+  3,
+  3,
+  4,
+  3,
+  3,
+  3,
+  3,
+  3,
+  3
+ ]
+}
