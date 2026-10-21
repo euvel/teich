@@ -24,6 +24,7 @@ operation in this file's vicinity.
 
     export CF_API_TOKEN=...        # or --token-file <path>   (chmod 600, outside the repo)
     export CF_ACCOUNT_ID=...
+    # or, once: ~/.teich_cf_token (chmod 600) and ~/.teich_cf_account — then no flags or env are needed
     python3 infra/worker/deploy.py --check      # pre-flight only, changes nothing
     python3 infra/worker/deploy.py --deploy     # backup -> deploy -> verify -> (auto-rollback)
 
@@ -251,6 +252,10 @@ def deploy(token, acct, compat="2026-07-01"):
     return 1
 
 
+DEFAULT_TOKEN_FILE = Path.home() / ".teich_cf_token"
+DEFAULT_ACCOUNT_FILE = Path.home() / ".teich_cf_account"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="pre-flight only")
@@ -258,12 +263,19 @@ def main():
     ap.add_argument("--token-file", help="path to a file holding CF_API_TOKEN")
     args = ap.parse_args()
 
+    # Credentials, first found wins: env CF_API_TOKEN / --token-file / ~/.teich_cf_token (chmod 600, outside the
+    # repo — same convention as ~/.teich_seat_key); env CF_ACCOUNT_ID / ~/.teich_cf_account. Never commit either.
     token = os.environ.get("CF_API_TOKEN")
-    if args.token_file:
-        token = Path(args.token_file).read_text().strip()
-    acct = os.environ.get("CF_ACCOUNT_ID")
+    tf = Path(args.token_file) if args.token_file else (DEFAULT_TOKEN_FILE if not token else None)
+    if tf and tf.exists():
+        if tf.stat().st_mode & 0o077:
+            sys.exit(f"refusing: {tf} is readable by others — run: chmod 600 {tf}")
+        token = tf.read_text().strip()
+    acct = os.environ.get("CF_ACCOUNT_ID") or (DEFAULT_ACCOUNT_FILE.read_text().strip()
+                                                if DEFAULT_ACCOUNT_FILE.exists() else None)
     if not token or not acct:
-        sys.exit("need CF_API_TOKEN (or --token-file) and CF_ACCOUNT_ID")
+        sys.exit("need a token (~/.teich_cf_token, --token-file or CF_API_TOKEN) and an account id "
+                 "(~/.teich_cf_account or CF_ACCOUNT_ID)")
 
     if args.check:
         preflight(token, acct)

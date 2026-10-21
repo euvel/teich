@@ -3,3 +3,12 @@ __pycache__/
 body/tmp/
 *.npy
 _*.json
+
+# credentials must never enter the repo (they live in ~/.teich_* files, chmod 600)
+.teich_cf_token
+.teich_cf_account
+.teich_seat_key
+*.token
+*_token
+cf_token*
+.env
