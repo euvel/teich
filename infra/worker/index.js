@@ -38,6 +38,22 @@ export class TeichSeat extends DurableObject {
     this.sql.exec(`CREATE TABLE IF NOT EXISTS events (
         i INTEGER PRIMARY KEY AUTOINCREMENT, ts INTEGER NOT NULL,
         type TEXT NOT NULL, detail TEXT NOT NULL)`);
+    // Added 2026-10-21 for v0.4 (additive; seats that never call these are unchanged):
+    // log = the creature's closed records (append-only, contiguous seq, hash-chained from the genesis anchor);
+    // settings = per-seat options (snapshot_on_change_only).
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS log (
+        seq INTEGER PRIMARY KEY, ts INTEGER NOT NULL, rec TEXT NOT NULL, h TEXT NOT NULL)`);
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT NOT NULL)`);
+  }
+
+  #setting(k) {
+    const r = [...this.sql.exec("SELECT v FROM settings WHERE k=?", k)];
+    return r.length ? JSON.parse(r[0].v) : null;
+  }
+
+  #logHead() {
+    const r = [...this.sql.exec("SELECT seq, h FROM log ORDER BY seq DESC LIMIT 1")];
+    return r.length ? r[0] : null;
   }
 
   #seat() {
@@ -183,6 +199,46 @@ export class TeichSeat extends DurableObject {
         body.state_blob, body.n_ticks, now);
       this.#event("commit", { lease_id: body.lease_id, n_ticks: body.n_ticks });
       return json({ ok: true, n_ticks: body.n_ticks });
+    }
+
+    if (ep === "log-seq") {
+      const head = this.#logHead();
+      return json({ seq: head ? head.seq : 0, head: head ? head.h : seat.genesis_anchor });
+    }
+
+    if (ep === "log-append") {
+      // Records carry their own seq (the creature's outbox). Already-held seqs are skipped (a retried flush is
+      // idempotent); the rest must continue the log contiguously, or nothing is written.
+      if (!Array.isArray(body.records)) return json({ error: "need records[]" }, 400);
+      const head = this.#logHead();
+      let last = head ? head.seq : 0, h = head ? head.h : seat.genesis_anchor;
+      const fresh = body.records.filter((r) => Number.isInteger(r && r.seq) && r.seq > last);
+      for (let k = 0; k < fresh.length; k++)
+        if (fresh[k].seq !== last + 1 + k) return json({ error: "log records out of sequence", last }, 400);
+      for (const r of fresh) {
+        const rec = JSON.stringify(r);
+        h = await sha256hex(h + rec);
+        this.sql.exec("INSERT INTO log (seq, ts, rec, h) VALUES (?, ?, ?, ?)", r.seq, now, rec, h);
+      }
+      if (fresh.length)
+        this.#event("log-append", { from: last + 1, to: last + fresh.length, head: h });
+      return json({ ok: true, appended: fresh.length, seq: last + fresh.length, head: h });
+    }
+
+    if (ep === "log-read") {
+      const from = Number.isInteger(body.from_seq) ? body.from_seq : 1;
+      const limit = Math.min(Number.isInteger(body.limit) ? body.limit : 500, 2000);
+      const rows = [...this.sql.exec("SELECT seq, ts, rec, h FROM log WHERE seq>=? ORDER BY seq LIMIT ?", from, limit)];
+      // raw = the exact stored text the hash chain covers: h(seq) = sha256(h(seq-1) + raw), h(0) = genesis anchor
+      return json({ records: rows.map((r) => ({ seq: r.seq, ts: r.ts, h: r.h, raw: r.rec, rec: JSON.parse(r.rec) })) });
+    }
+
+    if (ep === "snapshot-policy") {
+      if (typeof body.on_change_only !== "boolean") return json({ error: "need on_change_only (boolean)" }, 400);
+      this.sql.exec("INSERT INTO settings (k, v) VALUES ('snapshot_on_change_only', ?) " +
+                    "ON CONFLICT(k) DO UPDATE SET v=excluded.v", JSON.stringify(body.on_change_only));
+      this.#event("snapshot-policy", { on_change_only: body.on_change_only });
+      return json({ ok: true, on_change_only: body.on_change_only });
     }
 
     if (ep === "snapshot-now")
@@ -335,7 +391,12 @@ export class TeichSeat extends DurableObject {
 
   async alarm() {
     const now = Date.now();
-    await this.#snapshot("alarm-hourly");
+    // Seats that opted in (snapshot_on_change_only) skip the hourly snapshot when no commit has happened since the
+    // last one: an identical blob adds nothing to the chain. Every other seat snapshots hourly, as before.
+    const seat = this.#seat(), head = this.#chainHead();
+    const unchanged = seat && head && seat.updated_ts <= head.ts;
+    if (!(this.#setting("snapshot_on_change_only") && unchanged))
+      await this.#snapshot("alarm-hourly");
     // daily off-Cloudflare pin, iff secret installed
     const lastPin = [...this.sql.exec(
       "SELECT ts FROM events WHERE type='pinata-pin' ORDER BY i DESC LIMIT 1")];

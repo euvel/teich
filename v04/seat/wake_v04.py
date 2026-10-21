@@ -18,4 +18,5 @@ seat = CloudSeatV04(a.seat)
 r = SVS.wake(seat, max_ticks=a.max_ticks)
 print(r)
 if a.diary_dir and r == "woke":
-    print("diary pages written:", DM.write(seat.s.state()["state_blob"], Path(a.diary_dir)))
+    logged = [x["rec"] for x in seat.log_read()] if seat._log_live() is not None else []
+    print("diary pages written:", DM.write(seat.s.state()["state_blob"], Path(a.diary_dir), logged))

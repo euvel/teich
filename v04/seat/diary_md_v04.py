@@ -1,8 +1,8 @@
 """Teich v0.4's diary as files: one markdown page per night of its life, written from its own diary records (its
 reading of its own attention, its heart, what it heard, and its self's account with receipts). No language model.
 
-Entries live in the seat (the creature's outbox) until the log has another home; every wake regenerates the pages
-from them, and a page, once written, is never rewritten (its sha256 would change).
+Entries come from the seat's record log (and any still in the creature's outbox); every wake writes the pages that
+do not exist yet, and a page, once written, is never rewritten.
 
     python3 diary_md_v04.py OUT_DIR [--seat teich-04]
 """
@@ -51,11 +51,14 @@ def page(e, t0):
     return "\n".join(L)
 
 
-def write(blob: str, out: Path):
+def write(blob: str, out: Path, log_records=()):
+    """Pages for every diary record: those already in the seat's log and those still in the blob's outbox."""
     c = CS.load_state(blob); out.mkdir(parents=True, exist_ok=True); new = []
-    for r in c.outbox:
-        if r["kind"] != "diary":
+    seen = set()
+    for r in list(log_records) + list(c.outbox):
+        if r["kind"] != "diary" or r["seq"] in seen:
             continue
+        seen.add(r["seq"])
         e = r["entry"]; p = out / f"night-{e['day'] + 1:04d}.md"
         if not p.exists():
             p.write_text(page(e, c.t0)); new.append(p.name)
@@ -64,5 +67,6 @@ def write(blob: str, out: Path):
 
 if __name__ == "__main__":
     from cloud_v04 import CloudSeatV04
-    seat = sys.argv[sys.argv.index("--seat") + 1] if "--seat" in sys.argv else "teich-04"
-    print(write(CloudSeatV04(seat).s.state()["state_blob"], Path(sys.argv[1])))
+    s = CloudSeatV04(sys.argv[sys.argv.index("--seat") + 1] if "--seat" in sys.argv else "teich-04")
+    logged = [r["rec"] for r in s.log_read()] if s._log_live() is not None else []
+    print(write(s.s.state()["state_blob"], Path(sys.argv[1]), logged))
