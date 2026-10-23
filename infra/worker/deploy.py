@@ -234,12 +234,12 @@ def deploy(token, acct, compat="2026-07-01"):
         # The seat must not have lost time. Ticks only ever go up.
         ok &= int(q.get("n_ticks", -1)) >= int(before.get("n_ticks", 0))
         ok &= int(q.get("snapshots", -1)) >= int(before.get("snapshots", 0))
-        for other in ("teich-02", "teich-03", "teich-04"):     # every creature behind this Worker must still answer
+        for other in ("teich-02", "teich-03", "teich-04", "teich-05"):     # every creature behind this Worker must still answer
             o = json.loads(_get(f"/o/{other}/peek"))
             print(f"  /o/{other}/peek  alive={o.get('alive')} n_ticks={o.get('n_ticks')} snapshots={o.get('snapshots')}")
             ok &= bool(o.get("alive"))
         html = _get("/")
-        print(f"  /                 {len(html)} bytes, v0.4 fronted: {'yes' if 'now &mdash; v0.4' in html else 'NO'}")
+        print(f"  /                 {len(html)} bytes, v0.5 fronted: {'yes' if 'now &mdash; v0.5' in html else 'NO'}")
     except Exception as e:                      # noqa: BLE001
         print(f"  verification error: {e}")
         ok = False
