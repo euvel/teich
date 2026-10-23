@@ -1,0 +1,31 @@
+{
+ "gate": "F1",
+ "acts": 3711,
+ "completeness": 0,
+ "receipt": 0,
+ "consequence": 0,
+ "necessity": 0,
+ "necessity_tested": 3362,
+ "sufficiency": {
+  "tested": 1510,
+  "failed": 0
+ },
+ "identity_with_v04": {
+  "lives": 10,
+  "records": 10,
+  "state": 10
+ },
+ "planted": {
+  "A_pending_parity": {
+   "log_flags": 0,
+   "sufficiency_flags": 165
+  },
+  "B_odd_days": {
+   "log_flags": 141,
+   "sufficiency_flags": 0
+  }
+ },
+ "rule_purity_violations": {},
+ "lcl_import_violations": {},
+ "passed": true
+}

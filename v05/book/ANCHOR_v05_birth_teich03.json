@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "0508be145549f2cf80924f98fdeb99c768798f1d7c53a97993ee3620bfed4d99",
+ "ref": "v05-birth",
+ "note": "Teich-0.5 genesis certificate (identity 2ddf11b91acdefcc1915facdaeec2680d876ba5b1af9ea9a9e1160d9f929d83e, born 2026-10-23T14:30:50Z, seat /o/teich-05, birth seed 20261023). The last birth; growth = v0.5.k. Every hard gate passed; Q1 and S7 soft fails disclosed; head-to-head not completed (disclosed)."
+}

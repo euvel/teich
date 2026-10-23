@@ -1,0 +1,46 @@
+{
+ "nights": 6,
+ "predictions": 588,
+ "cheap_hit_rate": 0.46598639455782315,
+ "oracle_hit_rate": 1.0,
+ "oracle_cost_vs_living": 0.9910026506027563,
+ "rows": [
+  {
+   "predictions": 98,
+   "cheap_hits": 51,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  },
+  {
+   "predictions": 98,
+   "cheap_hits": 42,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  },
+  {
+   "predictions": 98,
+   "cheap_hits": 42,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  },
+  {
+   "predictions": 98,
+   "cheap_hits": 50,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  },
+  {
+   "predictions": 98,
+   "cheap_hits": 46,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  },
+  {
+   "predictions": 98,
+   "cheap_hits": 43,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  }
+ ],
+ "passed": true
+}

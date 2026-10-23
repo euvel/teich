@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "git_sha": "8b75debe85109203bc838739df8c4e0495ec8488e81d6df86f1a0ec6b13b6915",
+ "ref": "v05-spec-amend1",
+ "note": "v0.5 amendment 1 on manifest 3cb5e332: (1) talk-tool fault found by scored dry run (seat_v05.ask read the question's reason only from the outbox; any wake/status flushes it to the seat log) -> ask reads outbox, then seat log; creature code untouched; dry run re-look on fresh seed 9991; (2) head-to-head NOT COMPLETED (Workers AI free quota exhausted after 731 Llama-70B free-arm answers; founder chose not to pay) -> published with birth as not completed, partial answers descriptive only, no claim"
+}

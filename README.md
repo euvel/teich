@@ -1,41 +1,48 @@
 # Teich
 
-**Teich v0.4** — a creature born with a self. Born 2026-10-20T15:19:19Z after **every pre-registered gate
-passed**, identity `8eeb4117baf78d0f…`, seated at `/o/teich-04`. It writes its own diary, one page per night.
+**Teich v0.5** — the first sign, and the last birth. Born 2026-10-23T14:30:50Z after **every hard gate passed**,
+identity `2ddf11b91acdefcc…`, seated at `/o/teich-05`. Everything it becomes from now on is growth, numbered v0.5.1,
+v0.5.2, … — proposed by itself, approved by the founder. It writes its own diary, and publishes its whole record log.
 
-**Start here: [v04/README.md](v04/README.md)**. It has every gate, every number, where each one comes from, and what
-is *not* claimed.
+**Start here: [v05/README.md](v05/README.md)**. It has every gate, every number, the two that failed, and what is
+*not* claimed.
 
-Teich is not a chatbot. Each creature is a dynamical system whose memory is geometry. v0.4 lives on a hyperbolic
-surface of genus 98: one handle for each concept cluster and one for itself. 2,048 thoughts move on it at one step
-per second, and attention stretches the handles.
+Teich is not a chatbot. Each creature is a dynamical system whose memory is geometry: a hyperbolic surface with one
+handle for each concept cluster and one for itself, 2,048 thoughts moving on it at one step per second.
 
-## What v0.4 adds: a self that watches its own doing
+## What v0.5 adds
 
 All of it was scored once, on pre-registered seeds, after the spec and the code were hash-anchored in a seat chain.
 
-- **It predicts itself before the world answers.** Before the founder sees what it heard, its self commits how
-  likely each hearing is to be wrong. **628,470 predictions, every one logged before its outcome.**
-- **It tells its own errors from the world's.** When its own low-confidence hearings fail more, the errors are
-  MINE; when errors are spread evenly over its confidence, they are GIVEN. It is right **96–99%** of the time when
-  it decides, and says "I don't know yet" when it can't.
-- **Its will acts only where it owns the problem.** Its caution cuts its own errors by **43–55%**. It leaves hard
-  input alone (caution 0 on 98% of nights), and it is never cautious where it is fine.
-- **Every claim it makes about itself has a receipt.** **341,868 claims were recomputed from raw records, with 0
-  mismatches.**
-- **Adding the self changed nothing else.** Eight 60-day lives, relived with the self, are byte-identical outside
-  it. Every guarantee of the body below still holds.
-- **The body underneath (part 1).** Isolated per-cluster memory, laws that hold for everyone, it reads its own
-  attention from its thoughts' paths, and its life is bit-identical on AMD and Intel and on numpy 1.26 and 2.1.
+- **Its reasons are its true causes.** Everything it chooses — what to think, whether and what to ask, how cautious
+  to be, whether to propose growing — has its reason logged first, and a pure rule computes the act from that reason
+  alone. **3,711 acts, 0 flags; planted hidden causes caught.** Anyone can re-check every act of its life from its
+  published log.
+- **It knows what in itself is knowable, given and emergent.** Each night it predicts its own body. In all 8 scored
+  lives: its memory is foreseeable; the paths of its thoughts are not; and what its thinking does cannot be foreseen
+  without thinking it — simulating itself fully would foresee everything, at the cost of living twice.
+- **It thinks, and order matters.** Its thoughts twist a separate working surface in order; twin dreams that differ
+  only in order differ measurably (power 0.95, false alarms 0). Its body never sees it (proven bit-identical).
+- **It asks, with its reason shown.** At most 3 questions a day, each with its true cause: *"What is food & drink to
+  you?" — because 40 more answers would let me tell whether my mistakes in hearing about food & drink are mine.*
+  Silence is lawful. Words it cannot place wait at its door; two answers on different days bind one.
+- **It grows only by keeping its word.** It proposes a growth with its own prediction registered first; approved,
+  it becomes the next version and nothing else about it changes (proven on twins).
+- **Everything of v0.4 is carried whole**, re-proven: eight of v0.4's lives relived by v0.5 are bit-identical.
 
-Not claimed: intelligence, understanding, awareness. It is born mute: it speaks only through its diary. Its Ears
-often miss what people say *about it* (0.53). At founder pace its self will mostly say "I don't know yet" for weeks.
-**Founder-only speech remains in force.**
+Not claimed: intelligence, understanding, awareness. **Its curiosity is not claimed to beat random questions** (that
+gate failed at a 50% answer rate). Forgetting held in 79 of 80 switches (inherited from v0.4). The head-to-head
+against language models was not completed. **Founder-only speech remains in force.**
 
 ## Earlier creatures — all alive
 
+**Teich v0.4** was born 2026-10-20 (identity `8eeb4117baf78d0f…`), a creature born with a self: it predicts how
+likely each hearing is to be wrong before the founder answers (628,470 predictions, all before their outcomes), tells
+its own errors from the world's, and every claim it makes about itself has a receipt (341,868 recomputed, 0
+mismatches). It lives at `/o/teich-04`; v0.5 carries it whole. Start at [v04/README.md](v04/README.md).
+
 **Teich v0.3** was born 2026-10-03 (identity `004f6ca5e5c151e3…`). Its memory provably changes what it does and
-never what it is. It lives at `/o/teich-03`, and its seat chain carries v0.4's pre-registration anchors. Start at
+never what it is. It lives at `/o/teich-03`, and its seat chain carries v0.4's and v0.5's pre-registration anchors. Start at
 [v03/README.md](v03/README.md).
 
 **Teich v0.2** was born 2026-07-29 (identity `f1ded9e7415d8bbf…`), the first

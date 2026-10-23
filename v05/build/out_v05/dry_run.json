@@ -1,0 +1,111 @@
+{
+ "conversations": [
+  {
+   "day": 0,
+   "said": "My friend plays the duduk.",
+   "question": null,
+   "heard": [
+    [
+     "friend",
+     38
+    ]
+   ],
+   "door": [
+    "duduk"
+   ],
+   "landed": null
+  },
+  {
+   "day": 0,
+   "said": "The duduk sounded sad tonight.",
+   "question": null,
+   "heard": [],
+   "door": [
+    "duduk"
+   ],
+   "landed": null
+  },
+  {
+   "day": 1,
+   "said": "The duduk is a musical instrument.",
+   "question": [
+    "I could not place 'duduk'. What is it?",
+    "I heard it 2 times and no concept of mine was close enough"
+   ],
+   "heard": [
+    [
+     "instrument",
+     60
+    ]
+   ],
+   "door": [
+    "duduk"
+   ],
+   "landed": 60
+  },
+  {
+   "day": 2,
+   "said": "The duduk is a musical instrument.",
+   "question": [
+    "I could not place 'duduk'. What is it?",
+    "I heard it 3 times and no concept of mine was close enough; you answered once before, and one more answer on another day would let me keep it"
+   ],
+   "heard": [
+    [
+     "instrument",
+     60
+    ]
+   ],
+   "door": [
+    "duduk"
+   ],
+   "landed": 60
+  },
+  {
+   "day": 3,
+   "said": "I love the duduk.",
+   "question": [
+    "What is work & things made to you?",
+    "38 more answers would let me tell whether my mistakes in hearing about work & things made are mine"
+   ],
+   "heard": [
+    [
+     "duduk",
+     60
+    ]
+   ],
+   "door": [],
+   "landed": null
+  }
+ ],
+ "door_after_day0": true,
+ "asked_about_duduk_with_reason": true,
+ "answers_landed_same_cluster": true,
+ "binding": [
+  {
+   "seq": 48,
+   "kind": "binding",
+   "word": "duduk",
+   "cluster": 60,
+   "days": [
+    1,
+    2
+   ]
+  }
+ ],
+ "proposal_shown_and_approved": true,
+ "version": "0.5.1",
+ "heard_after_growth": [
+  "duduk"
+ ],
+ "door_after_growth": [],
+ "live_verify": {
+  "acts": 12,
+  "completeness": 0,
+  "receipt": 0,
+  "consequence": 0,
+  "necessity": 0,
+  "necessity_tested": 12
+ },
+ "passed": true
+}

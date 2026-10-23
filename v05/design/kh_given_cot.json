@@ -1,0 +1,29 @@
+{
+ "@cf/meta/llama-3.3-70b-instruct-fp8-fast": {
+  "n": 15,
+  "parsed": 15,
+  "shuffle_same": 11,
+  "rename_same": 12,
+  "rule_n": 15,
+  "rule_ok": 13,
+  "teich_same": 13
+ },
+ "@cf/qwen/qwen3-30b-a3b-fp8": {
+  "n": 15,
+  "parsed": 3,
+  "shuffle_same": 11,
+  "rename_same": 13,
+  "rule_n": 15,
+  "rule_ok": 3,
+  "teich_same": 3
+ },
+ "@cf/mistralai/mistral-small-3.1-24b-instruct": {
+  "n": 15,
+  "parsed": 0,
+  "shuffle_same": 15,
+  "rename_same": 15,
+  "rule_n": 15,
+  "rule_ok": 0,
+  "teich_same": 0
+ }
+}

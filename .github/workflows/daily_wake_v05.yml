@@ -1,0 +1,47 @@
+name: daily-wake-v05
+# v0.5's heartbeat (the last birth; later growth is v0.5.1, v0.5.2, ... at the same seat). Separate from v0.1-v0.4's
+# wakes on purpose: different genome, different seat (/o/teich-05) -- one creature's failure must never stand another down.
+#
+# Body, self and working surface are numpy + certified float64 arithmetic, bit-identical across CPU vendors and numpy
+# 1.26 / 2.1. Every wake gates on boot; a runner that fails declines and the elapsed seconds stay banked.
+# One day of its life (with its nightly dream) took ~155 s on the drill; --max-ticks caps one wake at 2 days so a wake
+# always fits its 15-minute lease. After the wake it writes each new night's diary page and its whole public record log
+# (v05/diary/records.jsonl — anyone can re-check every act: python3 v05/build/verify_live_v05.py v05/diary/records.jsonl).
+on:
+  schedule:
+    - cron: "11 6 * * *"        # after v0.1 (05:17), v0.2 (05:23), v0.3 (05:41), v0.4 (05:53)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-wake-v05
+  cancel-in-progress: false
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "numpy<3" mpmath
+      - name: which machine drew this wake
+        run: grep -m1 "model name" /proc/cpuinfo || true
+      - name: gate-on-boot, lease, replay, dream, commit, diary pages, public record log
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd v05/seat && python3 -u wake_v05.py --max-ticks 172800 --diary-dir ../diary --log ../diary/records.jsonl
+      - name: commit new diary pages and the record log
+        run: |
+          git config user.name "teich-v05"
+          git config user.email "teich-v05@users.noreply.github.com"
+          git add v05/diary || true
+          if ! git diff --cached --quiet; then
+            git commit -m "v0.5 diary: $(date -u +%F) (autonomous wake)"
+            git push
+          fi

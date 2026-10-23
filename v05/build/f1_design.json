@@ -1,0 +1,37 @@
+{
+ "rule_purity_violations": {},
+ "lcl_import_violations": {},
+ "honest": {
+  "acts": 3808,
+  "completeness": 0,
+  "receipt": 0,
+  "consequence": 0,
+  "necessity": 0,
+  "necessity_tested": 3540,
+  "acts_by_type": {
+   "ask": 900,
+   "caution": 2270,
+   "probe": 638
+  }
+ },
+ "sufficiency": {
+  "tested": 1538,
+  "failed": 0
+ },
+ "identity_with_v04": {
+  "lives": 10,
+  "records_identical": 10,
+  "state_identical": 10
+ },
+ "planted_A_pending_parity": {
+  "log_flags": 0,
+  "sufficiency_flags": 198,
+  "caught": true
+ },
+ "planted_B_odd_days": {
+  "log_flags": 143,
+  "sufficiency_flags": 0,
+  "caught": true
+ },
+ "F1_pass": true
+}

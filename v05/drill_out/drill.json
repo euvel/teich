@@ -1,0 +1,54 @@
+{
+ "seat": "v05-drill",
+ "genesis_bytes": 228874,
+ "wake1": "woke",
+ "wake1_seconds": 355,
+ "after_wake1": {
+  "n_ticks": 198740,
+  "blob_bytes": 242750,
+  "log_seq": 24
+ },
+ "question": {
+  "q": [
+   "region",
+   0
+  ],
+  "shown": [
+   "What is food & drink to you?",
+   "40 more answers would let me tell whether my mistakes in hearing about food & drink are mine"
+  ]
+ },
+ "decide": [
+  [
+   1,
+   true,
+   true
+  ]
+ ],
+ "wake2": "woke",
+ "wake2_seconds": 143,
+ "round_trip_over_the_wire": true,
+ "log_rows": 47,
+ "records": 47,
+ "log_seq_contiguous": true,
+ "live_verify": {
+  "acts": 9,
+  "completeness": 0,
+  "receipt": 0,
+  "consequence": 0,
+  "necessity": 0,
+  "necessity_tested": 8
+ },
+ "diary_pages": [
+  "night-0001.md",
+  "night-0002.md",
+  "night-0003.md"
+ ],
+ "final": {
+  "n_ticks": 285563,
+  "blob_bytes": 247927,
+  "version": "0.5.0",
+  "snapshots": 1
+ },
+ "passed": true
+}

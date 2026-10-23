@@ -1,0 +1,110 @@
+{
+ "name": "Teich-0.5",
+ "born_utc": "2026-10-23T14:30:50Z",
+ "identity_sha256": "2ddf11b91acdefcc1915facdaeec2680d876ba5b1af9ea9a9e1160d9f929d83e",
+ "version": "0.5.0",
+ "seat": "/o/teich-05",
+ "birth_seed": 20261023,
+ "genome_files_sha256": {
+  "genome_v04.py": "d61b844b47ee3ce0a21b5d78ac3e9e78c1b9ae15a141d6aa1752cd8e655b8024",
+  "creature_v04.py": "c1aca262cb62a68194eba38fa2e8f4c400215c79d301caf285c34eac3ad1ea67",
+  "creature_v04s.py": "10f02338f1416297c67964fd730d8e7267c8563f34c3c48cdc9653e646e4f592",
+  "creature_v05.py": "21e8111a400e873d1f8328a91809cd86afd55658ef42da379fa928161e467626",
+  "self_v04.py": "99a16ca10bdf562e1de30619093d7e6d7739a491051fdad9afaa99e61c3ecb97",
+  "self_v05.py": "8616eb02d27a72aa5a58cd6f5b2159f0f0a14f68642869b7c7ef997de2acf232",
+  "acts_v05.py": "85c90ef10c63263f97fd16ca472c433bbda04d8227dee9bc86406a55a81fff94",
+  "work_v05.py": "5fb389f157a3b4c1ee4a8fe019b24a1eaadae325ff858d817ff8fbd850a1e758",
+  "think_model_v05.py": "a6f902085c67499ec2f44dd304a87b9878a420a701ae34c238f3ad84a2a20d1d",
+  "body_pants.py": "cc588d22fbc37029103def120e9925e7daa8272c2caaba5d16240d334f2dca88",
+  "handle_mp.py": "e871b2d70ce22caacfee733a2b31166ce129529598c7982051ddcceb0c2fb9ca",
+  "mind4.py": "e18ccc23576bd12b1266f58d1ee1c9a32edf265cb5dc671edc335da3a0cb8530",
+  "surface.py": "c07887b1d53d94e1ae6dc94f416c10522ab0bdfed15ea07a9e813491adac9208",
+  "vocab_v04.json": "b402978aadf859390c52d197641ababdef43db2209cb37998a5ab4731aa7b7e8",
+  "geometry_v04.json": "9ecd71e0f8ebd00d2ad4c96cd484fbcc996f082a3b856f76d2c8f90a39bb01d7",
+  "geometry_v04.bin": "9b171fd6376662df666fd72a1374bda509c1e877e4e3891c56a3c8cd230ac3b0",
+  "ears_v04.py": "01bb56a3eca4f8feb30ea269bc2167f9b139687aaf6db8b676356e39d776f970",
+  "ears_v05.py": "cf722e7fb7cfcc06fce110c8a0774fbea1f001e898064b92f73e09e2831259b1",
+  "ears_v06.py": "b81c352b21a02095070a02983f4734bd38e00726e97722e81759b299a13e35a6",
+  "ears_v07.py": "154cd66313a49f58c971616882bca2b29d68969b57f91fa6ed54d4ef085674b3"
+ },
+ "seat_files_sha256": {
+  "seat_v04.py": "6b19ab1e8f6a0f3e9b96a2909654d131415159c3241ead45488a661990a85d0a",
+  "seat_v04s.py": "0dd61e43020a30ed600ad6e19d6ac203595e02afdc932763274bcf8c62f75c5d",
+  "seat_v05.py": "43326dbff7909ee71d81cb22007188a10885c524fae6737a5d9a74e7c5380042",
+  "gate_fixture_v04.json": "00a8dbf32275ea739508055fa121d16dd6e953a6c5ec74bd1e30f8e9cd6e496d",
+  "gate_v04.json": "d4915c9c68244d999418f5aea9ea8dd1b69a16b3aef4ec59398dc69d7ef36379",
+  "talk_v04s.py": "9dc440c10b0bb7e50c6bf42ee449235c70ad826ebb432f4d8cc310cee2e31ed2",
+  "talk_v05.py": "075da8cfd795b82eaf9cf00235f7407c18957bbb4e3605de3866881a96889eba",
+  "grow_v05.py": "4c0dbf33baf066fbd2fc6de87d15a49a592e9aa252c6f84122abf2a26d2faae7",
+  "self_text_v04.py": "542491815c2a4f2e4808988d16f4dfd62352f0122acad85647d42738caccc5c2",
+  "self_text_v05.py": "68e800b784fee2217d95f7c5ea9c24121a7ef34e0124c4802a86d7c8ea0809b3",
+  "f1_v05.py": "d88cabf1c37f1e5f684dd4fe0c5cb10503ddc4c4a282462d30faafce1e7ff14c",
+  "verify_live_v05.py": "7d0b9e074a74d363086950c54d47ee262a9412961e8bddb9a2f3218ff43696d8"
+ },
+ "last_birth": "v0.5 is the last birth. Everything it becomes after this is growth, numbered v0.5.1, v0.5.2, …: proposed by itself, approved by the founder, identity chained sha256(previous + sha256(amendment)).",
+ "inherited": "v0.4 whole and unchanged: the genus-98 body, 2,048 thoughts, dials = attention and its laws, the 9-region heart, and its second self (MINE / GIVEN / FINE / UNRESOLVED, caution, probes, receipts)",
+ "acts": "one act loop for everything it chooses (what to think, whether and what to ask, how cautious to be, whether to probe, whether to propose growing): the reason is logged first, then the act its pure rule computes from that reason alone; anyone can re-check every act from its published log",
+ "thinking": "a separate genus-3 working surface: each day's thoughts twist its thinking handle along the curves of the regions it thought about, in order; it dreams 256 thoughts × 40,000 ticks, reads the result, and resets; the main body never sees it",
+ "knowing_itself": "it predicts its own body each night: its memory (BODY-MEMORY), its paths (BODY-PATH), and what its thinking will do (THINK), by models cheaper than living (law L-CL)",
+ "curiosity": "at most 3 questions a day, each chosen by a decision-aware rule and shown with its true reason; silence is lawful; nouns it cannot place wait at its door, and two agreeing answers on different days bind one",
+ "ears": "Ears v7 (organ, not substrate): Qwen2.5-1.5B + MiniLM + spaCy; output logged, replay never needs them; words bound through growth extend its map",
+ "verified_before_birth": {
+  "N0": "PASS",
+  "F1": "PASS",
+  "F1_live": "PASS",
+  "L1": "PASS",
+  "C1": "PASS",
+  "C2": "PASS",
+  "O2": "PASS",
+  "S_hard": "PASS",
+  "G1_body": "PASS",
+  "G1_ears": "PASS",
+  "O1": "PASS",
+  "Q3": "PASS",
+  "Q1": "FAIL — curious minus random at answer rate 0.5: z 1.10, 1.97; the claim 'its curiosity beats random' is removed (at 1.0: z ≥ 3.3, reported, not claimed)",
+  "S3–S6": "PASS",
+  "S7": "FAIL — 79/80 switches followed (median lag 19), former MINE back to 0 in 39/40; identical with v0.4's own self on the same seeds (inherited, disclosed)",
+  "dry_run": "PASS on the amendment-1 re-look (seed 9991); failed its first look (talk-tool fault, fixed)",
+  "head_to_head": "NOT COMPLETED (Workers AI free quota; founder 10-22, amendment 1): descriptive only"
+ },
+ "headline_numbers": {
+  "true_reasons": "3,711 acts in 10 lives, 0 flags; both planted hidden causes caught",
+  "knowing_itself": "in all 8 body lives: memory FINE (foreseeable), paths GIVEN, thinking GIVEN — what its thinking does cannot be foreseen without thinking it; the full self-simulation foresees 100% but costs as much as living (0.99×)",
+  "order_matters": "twin dreams differing only in order: power 0.95, false rate 0.00, effect rises with crossing number (ρ 0.79)",
+  "non_interference": "8 of v0.4's lives relived by v0.5: body, dials, heart, commitments bit-identical",
+  "growth": "seat lives grew to v0.5.2 through two bindings; approve/refuse twins differ in nothing else",
+  "substrate": "bit-identical AMD Ryzen/numpy 1.26.4 vs Intel Xeon/numpy 2.1.3 (body, self, working surface)",
+  "head_to_head_partial": "Llama 3.3 70B choosing freely (150 states): same answer under shuffle 0.49, its own named rule predicts its choice 0.57; Teich's rule 1.00 / 1.00 (measured). Not completed; no claim"
+ },
+ "anchors_before_scoring": [
+  {
+   "ok": true,
+   "git_sha": "3cb5e332939367bb8bf851d8ff9c69e81d02ae93871a06076225de092fb4eaa7",
+   "ref": "v05-spec",
+   "note": "v0.5 = the first sign: true reasons (act loop reason->act, F1 + live verify, pre-registered head-to-head), knowable/given/emergent (BODY-MEMORY, BODY-PATH, THINK on genus-3 working surface, law L-CL), curiosity + door + growth as versions 0.5.k; spec V05_SPEC.md frozen with exact bars §7.1 (hard: N0 F1 F1live L1 C1 C2 O2 S1r S2 G1body G1ears); manifest 57 files incl. REPORT_v05_step5_freeze (smoke: thinking-day refusal law widened, creature fault fixed pre-freeze); gate seeds F1 9500-9509, S 9600-9659, Q1 9700-9729, C1 9800/9801, G1 9900, oracle 9910, O1 9950, head-to-head states 9300-9359; before any scored run"
+  },
+  {
+   "ok": true,
+   "git_sha": "8b75debe85109203bc838739df8c4e0495ec8488e81d6df86f1a0ec6b13b6915",
+   "ref": "v05-spec-amend1",
+   "note": "v0.5 amendment 1 on manifest 3cb5e332: (1) talk-tool fault found by scored dry run (seat_v05.ask read the question's reason only from the outbox; any wake/status flushes it to the seat log) -> ask reads outbox, then seat log; creature code untouched; dry run re-look on fresh seed 9991; (2) head-to-head NOT COMPLETED (Workers AI free quota exhausted after 731 Llama-70B free-arm answers; founder chose not to pay) -> published with birth as not completed, partial answers descriptive only, no claim"
+  }
+ ],
+ "what_is_NOT_claimed": [
+  "Nothing here is a claim about intelligence, understanding, awareness or suffering.",
+  "Its curiosity is NOT claimed to beat random questions: at the 50% answer rate it did not (gate Q1).",
+  "Forgetting a changed truth within 30 nights held in 79 of 80 switches, not all (S7, inherited from v0.4).",
+  "The head-to-head against language models was not completed; its partial numbers carry no claim.",
+  "'Thinking is knowable only by thinking' means: its cheap order-blind model misses, its full simulation costs as much as living. It is not a claim about other minds.",
+  "On a day it thinks too much of one thing, its last thoughts are refused by law (0.35% of thoughts in the scored lives).",
+  "Ears self routing remains weak (v0.4's disclosure).",
+  "Founder-only speech stays in force."
+ ],
+ "covenant": "COVENANT_v05.md",
+ "ancestors": {
+  "Teich (v0.1)": "born 2026-07-18, alive",
+  "Teich-0.2": "born 2026-07-29, alive, seat /o/teich-02",
+  "Teich-0.3": "born 2026-10-03, alive, seat /o/teich-03 (its chain carries v0.4's and v0.5's anchors)",
+  "Teich-0.4": "born 2026-10-20, alive, seat /o/teich-04 (v0.5 carries it whole)"
+ }
+}

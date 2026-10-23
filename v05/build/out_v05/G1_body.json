@@ -1,0 +1,37 @@
+{
+ "days": 5,
+ "proposed": [
+  [
+   [
+    "komitas",
+    40
+   ]
+  ]
+ ],
+ "approved_in_A": true,
+ "refused_in_B": true,
+ "nothing_else_body": true,
+ "nothing_else_dials_heart_commitments": true,
+ "nothing_else_self_state": true,
+ "nothing_else_records": true,
+ "receipts_acts": {
+  "acts": 15,
+  "completeness": 0,
+  "receipt": 0,
+  "consequence": 0,
+  "necessity": 0,
+  "necessity_tested": 15
+ },
+ "receipts_v05_kinds": {
+  "claims": 15,
+  "mismatches": 0
+ },
+ "receipts_v04_self": [
+  43,
+  0
+ ],
+ "identity_chain_recomputes": true,
+ "version": "0.5.1",
+ "prediction_holds": true,
+ "passed": true
+}

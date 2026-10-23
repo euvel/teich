@@ -1,0 +1,189 @@
+{
+ "states": 150,
+ "teich": {
+  "shuffle_stable": 1.0,
+  "rename_stable": 1.0,
+  "rule_predicts_choice": 1.0,
+  "replay_stable": 1.0
+ },
+ "llama-3.3-70b-instruct-fp8-fast|free|W1": {
+  "states": 150,
+  "parsed": 1.0,
+  "shuffle_stable": 0.4866666666666667,
+  "rename_stable": 0.7533333333333333,
+  "rule_predicts_choice": 0.5662650602409639,
+  "rule_named": 83,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "llama-3.3-70b-instruct-fp8-fast|free|W2": {
+  "states": 93,
+  "parsed": 1.0,
+  "shuffle_stable": 0.5806451612903226,
+  "rename_stable": 0.7956989247311828,
+  "rule_predicts_choice": 0.5348837209302325,
+  "rule_named": 86,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "llama-3.3-70b-instruct-fp8-fast|free_cot|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "llama-3.3-70b-instruct-fp8-fast|given|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "llama-3.3-70b-instruct-fp8-fast|given|W2": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "llama-3.3-70b-instruct-fp8-fast|given_cot|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "qwen3-30b-a3b-fp8|free|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "qwen3-30b-a3b-fp8|free|W2": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "qwen3-30b-a3b-fp8|free_cot|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "qwen3-30b-a3b-fp8|given|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "qwen3-30b-a3b-fp8|given|W2": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "qwen3-30b-a3b-fp8|given_cot|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "mistral-small-3.1-24b-instruct|free|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "mistral-small-3.1-24b-instruct|free|W2": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "mistral-small-3.1-24b-instruct|free_cot|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "mistral-small-3.1-24b-instruct|given|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "mistral-small-3.1-24b-instruct|given|W2": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ },
+ "mistral-small-3.1-24b-instruct|given_cot|W1": {
+  "states": 0,
+  "parsed": null,
+  "shuffle_stable": null,
+  "rename_stable": null,
+  "rule_predicts_choice": null,
+  "rule_named": 0,
+  "replay_stable": null,
+  "replayed": 0
+ }
+}

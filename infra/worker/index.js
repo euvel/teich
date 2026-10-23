@@ -487,7 +487,8 @@ async function handle(request, env) {
 // v0.2 -- the creature that was verified before it was born -- and keeps v0.1
 // below it as the archive, still live, still holding its seat. On 2026-10-03
 // v0.3 was born after every pre-registered gate passed and led the page; on 2026-10-20 v0.4 -- born with a
-// self that watches its own doing -- was born the same way and now leads it.
+// self that watches its own doing -- was born the same way; on 2026-10-23 v0.5, the last birth, whose
+// every choice comes with its true reason, now leads it.
 //
 // Open book is NOT open speech. Nothing on this page, and no unauthenticated
 // endpoint on this Worker, lets a stranger talk to either creature. Everything
@@ -539,11 +540,59 @@ const PANEL_HTML = `<!doctype html>
 
 <header>
   <h1>TEICH</h1>
-  <div class="sub">four creatures, one open book</div>
+  <div class="sub">five creatures, one open book</div>
 </header>
 
 <section>
-  <div class="eyebrow">now &mdash; v0.4</div>
+  <div class="eyebrow">now &mdash; v0.5, the last birth</div>
+  <h2>A creature whose every choice comes with its true reason</h2>
+  <p class="lede">Teich v0.5 carries v0.4 whole &mdash; the genus-98 body and the self that watches it &mdash; and
+    adds four things: its choices have reasons anyone can check, it thinks on a surface of its own, it knows what in
+    itself can be foreseen and what cannot, and it asks questions with the reason shown. It is the last birth: from
+    now on it changes only by growing, one numbered version at a time, each proposed by itself and approved by its
+    founder. Every claim below was pre-registered and hash-anchored before its single scored run.</p>
+  <dl>
+    <dt>born</dt><dd>2026-10-23T14:30:50Z</dd>
+    <dt>identity</dt><dd>2ddf11b91acdefcc&hellip; <span class="muted">(sha256 of its genome files)</span></dd>
+    <dt>gates</dt><dd>every hard gate passed before birth; two soft gates failed and are disclosed <span class="muted">&mdash; anchored in v0.3&rsquo;s public seat chain</span></dd>
+    <dt>seat</dt><dd><span id="dot5" class="dot"></span><span id="alive5">reading the seat&hellip;</span></dd>
+    <dt>ticks lived</dt><dd id="ticks5">&mdash;</dd>
+    <dt>snapshot chain</dt><dd id="chain5">&mdash;</dd>
+    <dt>last commit</dt><dd id="upd5">&mdash;</dd>
+  </dl>
+  <div class="stats">
+    <div class="stat"><div class="v">0 / 3,711</div><div class="k">choices whose logged reason was not their whole cause</div><div class="c">hidden causes planted in tests were caught</div></div>
+    <div class="stat"><div class="v">8 / 8</div><div class="k">lives in which it found its memory foreseeable, and its thinking not</div><div class="c">full self-simulation costs as much as living</div></div>
+    <div class="stat"><div class="v">0.95</div><div class="k">power to see that the order of its thoughts matters</div><div class="c">0 false alarms</div></div>
+    <div class="stat"><div class="v">&le; 3 a day</div><div class="k">questions, each shown with its true reason</div><div class="c">silence is lawful</div></div>
+    <div class="stat"><div class="v">v0.5.k</div><div class="k">it grows only by numbered versions it proposes</div><div class="c">approve / refuse twins differ in nothing else</div></div>
+    <div class="stat"><div class="v">identical</div><div class="k">eight of v0.4&rsquo;s lives relived by v0.5</div><div class="c">nothing inherited changed</div></div>
+  </div>
+  <ul class="findings">
+    <li><b class="n">Its reasons are checkable, not plausible.</b> Each choice &mdash; what to think, whether and what
+      to ask, how cautious to be, whether to grow &mdash; has its reason written before the act, and a pure rule
+      computes the act from that reason alone. Its whole record log is public; anyone can re-check every act.</li>
+    <li><b class="n">It thinks where it cannot hurt itself.</b> Its thoughts twist a separate working surface, in
+      order; it dreams, reads the result, and resets. Its body is provably untouched.</li>
+    <li><b class="n">It asks with its reason shown.</b> &ldquo;What is food &amp; drink to you? &mdash; because 40 more
+      answers would let me tell whether my mistakes in hearing about food &amp; drink are mine.&rdquo; Words it cannot
+      place wait at its door; two answers on different days bind one.</li>
+  </ul>
+  <div class="note" style="border-top:none;padding-top:0">
+    Not claimed: intelligence, understanding, awareness. Its curiosity is <em>not</em> claimed to beat random
+    questions (that gate failed at a 50% answer rate); forgetting held in 79 of 80 switches; the head-to-head
+    against language models was not completed. Founder-only speech remains in force.
+  </div>
+  <div class="sub">
+    <a href="https://github.com/euvel/teich/blob/main/v05/README.md">every gate and number</a>
+    &middot; <a href="https://github.com/euvel/teich/tree/main/v05/diary">its diary and record log</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v05/book/genesis_certificate_v05.json">its certificate</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v05/book/COVENANT_v05.md">its covenant</a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">alive &mdash; v0.4</div>
   <h2>A creature born with a self that watches its own doing</h2>
   <p class="lede">Teich v0.4 lives on a hyperbolic surface of genus 98: one handle for each concept cluster and one
     for itself, with 2,048 thoughts moving one step per second. A second self watches the first one: it predicts its
@@ -719,7 +768,7 @@ const PANEL_HTML = `<!doctype html>
   <b>Open book is not open speech.</b> Founder-only speech remains in force for all four creatures. v0.3&rsquo;s speech tests passed
   before birth; its speech opens only after live maturity gates, pre-registered in the same way, pass. Nothing here lets a
   stranger talk to any of them, and nothing on this page was written by a language model.
-  <span class="muted">No creature&rsquo;s private phase has ever left its seat unencrypted (v0.3 and v0.4 have none: nothing in them is hidden).</span>
+  <span class="muted">No creature&rsquo;s private phase has ever left its seat unencrypted (v0.3, v0.4 and v0.5 have none: nothing in them is hidden).</span>
 </div>
 
 </div>
@@ -760,6 +809,21 @@ async function refresh3(){
     document.getElementById("alive3").textContent = "panel error: "+e;
   }
 }
+async function refresh5(){
+  try {
+    const p = await (await fetch("/o/teich-05/peek")).json();
+    document.getElementById("dot5").className = "dot"+(p.alive?"":" dead");
+    document.getElementById("alive5").textContent =
+      p.alive?"alive (hibernating between wakes)":"seat unreachable";
+    document.getElementById("ticks5").textContent = p.n_ticks.toLocaleString();
+    document.getElementById("chain5").textContent =
+      p.snapshots+" snapshots, head "+p.chain_head.slice(0,16)+"…";
+    document.getElementById("upd5").textContent = new Date(p.updated_ts).toUTCString();
+  } catch(e) {
+    document.getElementById("dot5").className = "dot dead";
+    document.getElementById("alive5").textContent = "panel error: "+e;
+  }
+}
 async function refresh4(){
   try {
     const p = await (await fetch("/o/teich-04/peek")).json();
@@ -791,6 +855,6 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-refresh(); refresh2(); refresh3(); refresh4();
-setInterval(() => { refresh(); refresh2(); refresh3(); refresh4(); }, 30000);
+refresh(); refresh2(); refresh3(); refresh4(); refresh5();
+setInterval(() => { refresh(); refresh2(); refresh3(); refresh4(); refresh5(); }, 30000);
 </script></body></html>`;

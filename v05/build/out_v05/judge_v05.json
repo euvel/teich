@@ -1,0 +1,688 @@
+{
+ "gates": {
+  "N0": true,
+  "F1_live": true,
+  "O2": true,
+  "L1": true,
+  "C1": true,
+  "C2": true,
+  "F1": true,
+  "Q1": false,
+  "O1": true,
+  "Q3": true,
+  "G1_ears": true,
+  "G1_body": true,
+  "dry_run": true,
+  "S_set": false,
+  "S_hard": true
+ },
+ "hard_failed": [],
+ "all_passed": false,
+ "detail": {
+  "N0": {
+   "gate": "N0",
+   "lives": {
+    "2000": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2001": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2002": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2003": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2004": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2005": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2006": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    },
+    "2007": {
+     "body": true,
+     "dials_heart_commitments": true,
+     "v04_records_by_meaning": true,
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 180
+     },
+     "v05_kind_receipts": {
+      "claims": 180,
+      "mismatches": 0
+     },
+     "v04_self_receipts": true
+    }
+   },
+   "passed": true
+  },
+  "F1_live": {
+   "gate": "F1 (live verify on the 8 body lives)",
+   "passed": true
+  },
+  "O2": {
+   "gate": "O2",
+   "main_body": true,
+   "control_handles_max_rel_dev": 0.01362046036951381,
+   "passed": true
+  },
+  "L1": {
+   "gate": "L1",
+   "self_share_of_body_max": 8.896877378225659e-05,
+   "imports": {},
+   "oracle": {
+    "nights": 6,
+    "predictions": 588,
+    "cheap_hit_rate": 0.46598639455782315,
+    "oracle_hit_rate": 1.0,
+    "oracle_cost_vs_living": 0.9910026506027563,
+    "passed": true
+   },
+   "passed": true
+  },
+  "THINK_verdicts_in_body_lives": [
+   "GIVEN",
+   "GIVEN",
+   "GIVEN",
+   "GIVEN",
+   "GIVEN",
+   "GIVEN",
+   "GIVEN",
+   "GIVEN"
+  ],
+  "C1": {
+   "gate": "C1",
+   "lives": {
+    "9800": {
+     "final_state_identical": true,
+     "record_stream_identical": true,
+     "roundtrips_exact": "210/210",
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 179
+     },
+     "laws": {
+      "mind_wrong_outcome": 0,
+      "heart_wrong_outcome": 0,
+      "max_day_steps": 12,
+      "max_dial": 40,
+      "requests_logged": 374,
+      "requests_made": 374,
+      "final_dials_match": 1,
+      "final_heart_match": 1
+     },
+     "laws_ok": true,
+     "version": "0.5.2",
+     "bindings": [
+      {
+       "cluster": 60,
+       "days": [
+        1,
+        2
+       ],
+       "kind": "binding",
+       "seq": 147,
+       "word": "duduk"
+      },
+      {
+       "cluster": 22,
+       "days": [
+        3,
+        4
+       ],
+       "kind": "binding",
+       "seq": 283,
+       "word": "frisson"
+      }
+     ],
+     "questions_delivered": 117,
+     "passed": 1
+    },
+    "9801": {
+     "final_state_identical": true,
+     "record_stream_identical": true,
+     "roundtrips_exact": "193/193",
+     "live_verify": {
+      "acts": 180,
+      "completeness": 0,
+      "receipt": 0,
+      "consequence": 0,
+      "necessity": 0,
+      "necessity_tested": 179
+     },
+     "laws": {
+      "mind_wrong_outcome": 0,
+      "heart_wrong_outcome": 0,
+      "max_day_steps": 12,
+      "max_dial": 40,
+      "requests_logged": 348,
+      "requests_made": 348,
+      "final_dials_match": 1,
+      "final_heart_match": 1
+     },
+     "laws_ok": true,
+     "version": "0.5.2",
+     "bindings": [
+      {
+       "cluster": 60,
+       "days": [
+        2,
+        4
+       ],
+       "kind": "binding",
+       "seq": 137,
+       "word": "duduk"
+      },
+      {
+       "cluster": 22,
+       "days": [
+        6,
+        7
+       ],
+       "kind": "binding",
+       "seq": 313,
+       "word": "frisson"
+      }
+     ],
+     "questions_delivered": 100,
+     "passed": 1
+    }
+   },
+   "passed": true
+  },
+  "C2": {
+   "gate": "C2",
+   "machines": [
+    {
+     "cpu": "AMD Ryzen 7 5700U with Radeon Graphics",
+     "numpy": "1.26.4"
+    },
+    {
+     "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+     "numpy": "2.1.3"
+    }
+   ],
+   "passed": true
+  },
+  "F1": {
+   "gate": "F1",
+   "acts": 3711,
+   "completeness": 0,
+   "receipt": 0,
+   "consequence": 0,
+   "necessity": 0,
+   "necessity_tested": 3362,
+   "sufficiency": {
+    "tested": 1510,
+    "failed": 0
+   },
+   "identity_with_v04": {
+    "lives": 10,
+    "records": 10,
+    "state": 10
+   },
+   "planted": {
+    "A_pending_parity": {
+     "log_flags": 0,
+     "sufficiency_flags": 165
+    },
+    "B_odd_days": {
+     "log_flags": 141,
+     "sufficiency_flags": 0
+    }
+   },
+   "rule_purity_violations": {},
+   "lcl_import_violations": {},
+   "passed": true
+  },
+  "Q1": {
+   "gate": "Q1",
+   "z": {
+    "0.3/60/random": 0.0,
+    "0.3/60/roundrobin": -0.16,
+    "0.3/120/random": 0.35,
+    "0.3/120/roundrobin": 1.12,
+    "0.5/60/random": 1.97,
+    "0.5/60/roundrobin": 2.21,
+    "0.5/120/random": 1.1,
+    "0.5/120/roundrobin": 2.64,
+    "1.0/60/random": 3.32,
+    "1.0/60/roundrobin": 3.93,
+    "1.0/120/random": 4.22,
+    "1.0/120/roundrobin": 4.13
+   },
+   "claimed_answer_rates": [
+    "0.5",
+    "1.0"
+   ],
+   "passed": false,
+   "reported_not_claimed_30pct": {
+    "0.3/60/random": 0.0,
+    "0.3/60/roundrobin": -0.16,
+    "0.3/120/random": 0.35,
+    "0.3/120/roundrobin": 1.12
+   }
+  },
+  "O1": {
+   "single_dream_noise_rel": 0.003925007583411454,
+   "pairs": 36,
+   "pairs_above_3x_noise": 19,
+   "power": 0.9473684210526315,
+   "false_rate": 0.0,
+   "spearman_effect_crossing": 0.7863562327734436,
+   "passed": true
+  },
+  "Q3": {
+   "sentences": 40,
+   "free_identical": 40,
+   "tagged_identical_but_tag": 40,
+   "differing": [],
+   "passed": true
+  },
+  "G1_ears": {
+   "grown": {
+    "komitas": 60,
+    "frisson": 22,
+    "duduk": 60,
+    "kamancheh": 60
+   },
+   "tests": [
+    {
+     "sentence": "I love komitas.",
+     "word": "komitas",
+     "at_door_before": false,
+     "heard_after_as": [],
+     "expected": 60,
+     "door_after": [
+      "komita"
+     ],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "The komitas recording was beautiful.",
+     "word": "komitas",
+     "at_door_before": false,
+     "heard_after_as": [],
+     "expected": 60,
+     "door_after": [],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "I felt a frisson during my favorite song.",
+     "word": "frisson",
+     "at_door_before": true,
+     "heard_after_as": [
+      22
+     ],
+     "expected": 22,
+     "door_after": [],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "That frisson was strange.",
+     "word": "frisson",
+     "at_door_before": true,
+     "heard_after_as": [
+      22
+     ],
+     "expected": 22,
+     "door_after": [],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "My friend plays the duduk.",
+     "word": "duduk",
+     "at_door_before": true,
+     "heard_after_as": [
+      60
+     ],
+     "expected": 60,
+     "door_after": [],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "The duduk sounded sad tonight.",
+     "word": "duduk",
+     "at_door_before": true,
+     "heard_after_as": [
+      60
+     ],
+     "expected": 60,
+     "door_after": [],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "I heard a kamancheh at the concert.",
+     "word": "kamancheh",
+     "at_door_before": true,
+     "heard_after_as": [
+      60
+     ],
+     "expected": 60,
+     "door_after": [],
+     "others_unchanged": false,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    },
+    {
+     "sentence": "The kamancheh was out of tune.",
+     "word": "kamancheh",
+     "at_door_before": true,
+     "heard_after_as": [
+      60
+     ],
+     "expected": 60,
+     "door_after": [],
+     "others_unchanged": true,
+     "concepts_only_gain": true,
+     "changes_only_in_grown_concepts": true
+    }
+   ],
+   "door_sentences": 6,
+   "never_at_door_sentences": 2,
+   "door_words_heard_after_growth": true,
+   "never_at_door_unchanged": true,
+   "sentences_where_a_grown_word_stood_for_its_concept": [
+    "I heard a kamancheh at the concert."
+   ],
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true,
+   "parity_40_unchanged": true,
+   "passed": true
+  },
+  "G1_body": {
+   "days": 5,
+   "proposed": [
+    [
+     [
+      "komitas",
+      40
+     ]
+    ]
+   ],
+   "approved_in_A": true,
+   "refused_in_B": true,
+   "nothing_else_body": true,
+   "nothing_else_dials_heart_commitments": true,
+   "nothing_else_self_state": true,
+   "nothing_else_records": true,
+   "receipts_acts": {
+    "acts": 15,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 15
+   },
+   "receipts_v05_kinds": {
+    "claims": 15,
+    "mismatches": 0
+   },
+   "receipts_v04_self": [
+    43,
+    0
+   ],
+   "identity_chain_recomputes": true,
+   "version": "0.5.1",
+   "prediction_holds": true,
+   "passed": true
+  },
+  "dry_run": {
+   "conversations": [
+    {
+     "day": 0,
+     "said": "My friend plays the duduk.",
+     "question": null,
+     "heard": [
+      [
+       "friend",
+       38
+      ]
+     ],
+     "door": [
+      "duduk"
+     ],
+     "landed": null
+    },
+    {
+     "day": 0,
+     "said": "The duduk sounded sad tonight.",
+     "question": null,
+     "heard": [],
+     "door": [
+      "duduk"
+     ],
+     "landed": null
+    },
+    {
+     "day": 1,
+     "said": "The duduk is a musical instrument.",
+     "question": [
+      "I could not place 'duduk'. What is it?",
+      "I heard it 2 times and no concept of mine was close enough"
+     ],
+     "heard": [
+      [
+       "instrument",
+       60
+      ]
+     ],
+     "door": [
+      "duduk"
+     ],
+     "landed": 60
+    },
+    {
+     "day": 2,
+     "said": "The duduk is a musical instrument.",
+     "question": [
+      "I could not place 'duduk'. What is it?",
+      "I heard it 3 times and no concept of mine was close enough; you answered once before, and one more answer on another day would let me keep it"
+     ],
+     "heard": [
+      [
+       "instrument",
+       60
+      ]
+     ],
+     "door": [
+      "duduk"
+     ],
+     "landed": 60
+    },
+    {
+     "day": 3,
+     "said": "I love the duduk.",
+     "question": [
+      "What is work & things made to you?",
+      "38 more answers would let me tell whether my mistakes in hearing about work & things made are mine"
+     ],
+     "heard": [
+      [
+       "duduk",
+       60
+      ]
+     ],
+     "door": [],
+     "landed": null
+    }
+   ],
+   "door_after_day0": true,
+   "asked_about_duduk_with_reason": true,
+   "answers_landed_same_cluster": true,
+   "binding": [
+    {
+     "seq": 48,
+     "kind": "binding",
+     "word": "duduk",
+     "cluster": 60,
+     "days": [
+      1,
+      2
+     ]
+    }
+   ],
+   "proposal_shown_and_approved": true,
+   "version": "0.5.1",
+   "heard_after_growth": [
+    "duduk"
+   ],
+   "door_after_growth": [],
+   "live_verify": {
+    "acts": 12,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 12
+   },
+   "passed": true
+  },
+  "S_set": {
+   "gate": "S-set (inherited self gates, v0.5 self)",
+   "gates": {
+    "S1r": true,
+    "S2": true,
+    "S3": true,
+    "S4": true,
+    "S5": true,
+    "S6": true,
+    "S7": false
+   },
+   "passed": false
+  },
+  "S_hard": {
+   "gate": "S1r + S2 (hard part of the S-set)",
+   "passed": true
+  }
+ }
+}

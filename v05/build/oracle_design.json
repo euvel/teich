@@ -1,0 +1,22 @@
+{
+ "nights": 2,
+ "predictions": 196,
+ "cheap_hit_rate": 0.5510204081632653,
+ "oracle_hit_rate": 1.0,
+ "oracle_cost_vs_living": 1.0119733860179898,
+ "rows": [
+  {
+   "predictions": 98,
+   "cheap_hits": 53,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  },
+  {
+   "predictions": 98,
+   "cheap_hits": 55,
+   "oracle_hits": 98,
+   "oracle_reading_identical": true
+  }
+ ],
+ "passed": true
+}

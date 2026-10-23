@@ -1,0 +1,123 @@
+{
+ "grown": {
+  "komitas": 60,
+  "frisson": 22,
+  "duduk": 60,
+  "kamancheh": 60
+ },
+ "tests": [
+  {
+   "sentence": "I love komitas.",
+   "word": "komitas",
+   "at_door_before": false,
+   "heard_after_as": [],
+   "expected": 60,
+   "door_after": [
+    "komita"
+   ],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "The komitas recording was beautiful.",
+   "word": "komitas",
+   "at_door_before": false,
+   "heard_after_as": [],
+   "expected": 60,
+   "door_after": [],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "I felt a frisson during my favorite song.",
+   "word": "frisson",
+   "at_door_before": true,
+   "heard_after_as": [
+    22
+   ],
+   "expected": 22,
+   "door_after": [],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "That frisson was strange.",
+   "word": "frisson",
+   "at_door_before": true,
+   "heard_after_as": [
+    22
+   ],
+   "expected": 22,
+   "door_after": [],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "My friend plays the duduk.",
+   "word": "duduk",
+   "at_door_before": true,
+   "heard_after_as": [
+    60
+   ],
+   "expected": 60,
+   "door_after": [],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "The duduk sounded sad tonight.",
+   "word": "duduk",
+   "at_door_before": true,
+   "heard_after_as": [
+    60
+   ],
+   "expected": 60,
+   "door_after": [],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "I heard a kamancheh at the concert.",
+   "word": "kamancheh",
+   "at_door_before": true,
+   "heard_after_as": [
+    60
+   ],
+   "expected": 60,
+   "door_after": [],
+   "others_unchanged": false,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  },
+  {
+   "sentence": "The kamancheh was out of tune.",
+   "word": "kamancheh",
+   "at_door_before": true,
+   "heard_after_as": [
+    60
+   ],
+   "expected": 60,
+   "door_after": [],
+   "others_unchanged": true,
+   "concepts_only_gain": true,
+   "changes_only_in_grown_concepts": true
+  }
+ ],
+ "door_sentences": 6,
+ "never_at_door_sentences": 2,
+ "door_words_heard_after_growth": true,
+ "never_at_door_unchanged": true,
+ "sentences_where_a_grown_word_stood_for_its_concept": [
+  "I heard a kamancheh at the concert."
+ ],
+ "concepts_only_gain": true,
+ "changes_only_in_grown_concepts": true,
+ "parity_40_unchanged": true,
+ "passed": true
+}

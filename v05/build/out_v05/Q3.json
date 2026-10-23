@@ -1,0 +1,7 @@
+{
+ "sentences": 40,
+ "free_identical": 40,
+ "tagged_identical_but_tag": 40,
+ "differing": [],
+ "passed": true
+}
