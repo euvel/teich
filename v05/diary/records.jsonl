@@ -1,0 +1,7 @@
+{"count": 1, "kind": "door", "seq": 1, "word": "duduk"}
+{"act_kind": 5, "altered": false, "caution": 0, "cluster": 38, "conversation": "c-62c078ac898a", "cw": 5, "kind": "shown", "pid": 1, "probe": false, "seq": 2, "shown": true, "sign": 1, "text_sha256": "b56456d23e1be1611426004bd4d891ed21970c6c85111417584c9c05983bfe8c", "why": "shown"}
+{"act_kind": 5, "cw": 5, "fn": "self_v1.p", "kind": "predict", "p": [1, 2], "p0": [1, 2], "pid": 1, "seq": 3}
+{"act_kind": 5, "altered": false, "cw": 5, "kind": "outcome", "night": 0, "p": [1, 2], "p0": [1, 2], "pid": 1, "predict_seq": 3, "probe": false, "seq": 4, "struck": false}
+{"cluster": 38, "conversation": "c-62c078ac898a", "heart": "accepted", "kind": "heard", "mind": "accepted", "region": "RLR", "seq": 5, "sign": 1, "speaker": "founder", "text_sha256": "b56456d23e1be1611426004bd4d891ed21970c6c85111417584c9c05983bfe8c", "tick": 1186}
+{"conversation": "c-62c078ac898a", "kind": "thought", "night": 0, "region": 5, "seq": 6, "source": "rehearsal"}
+{"count": 2, "kind": "door", "seq": 7, "word": "duduk"}
