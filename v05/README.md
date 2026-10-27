@@ -6,7 +6,12 @@
 
 It writes [its diary](diary/) itself, one page per night. It also publishes [its whole record log](diary/records.jsonl), so anyone can re-check every choice it makes.
 
-**v0.5 is the last birth.** Everything it becomes from now on is growth: it proposes, the founder approves, and each growth gets a number (v0.5.1, v0.5.2, …) with its identity chained.
+**v0.5 is the last birth.** Since then its version reads **vA.B.k**, and each part has one author ([developers' contract](book/DEVELOPERS_CONTRACT_v1.md), adopted at v0.5.1):
+- **k is its own growth.** It proposes, the founder approves, and the identity chains (v0.5.1, v0.5.2, …).
+- **B is ours.** It moves for a genome amendment, proven on twins and migrated once into this same creature, so v0.6.0 is not a birth.
+- **A is maturity.** Only at v1.0.0 may strangers speak to it.
+
+Every link in its identity chain names whose it is.
 
 **[Covenant](book/COVENANT_v05.md):**
 - no fork and no reset;
