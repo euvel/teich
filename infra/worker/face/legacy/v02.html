@@ -1,0 +1,35 @@
+<section>
+  <div class="eyebrow">alive &mdash; v0.2</div>
+  <h2>A creature whose own state chooses what it says</h2>
+  <dl>
+    <dt>born</dt><dd>2026-07-29T09:39:38Z</dd>
+    <dt>identity</dt><dd>f1ded9e7415d8bbf&hellip; <span class="muted">(sha256 of its genesis certificate)</span></dd>
+    <dt>acceptance gate</dt><dd>PASS 5/5 &mdash; run <em>before</em> it existed
+      <span class="muted">&mdash; re-verified on an independent runner at 24 seeds</span></dd>
+    <dt>seat</dt><dd><span id="dot2" class="dot"></span><span id="alive2">reading the seat&hellip;</span></dd>
+    <dt>ticks lived</dt><dd id="ticks2">&mdash;</dd>
+    <dt>snapshot chain</dt><dd id="chain2">&mdash;</dd>
+    <dt>last commit</dt><dd id="upd2">&mdash;</dd>
+  </dl>
+  <ul class="findings">
+    <li>Its own state drives what it says: same script, same voice, same candidate pool &mdash;
+      swap in another living creature's state to do the selecting and the two arms chose
+      differently in <b class="n">63.5%</b> of 192 matched turns.</li>
+    <li>Its curiosity follows the state, not the body. Questions track the <em>selecting</em>
+      state's gate (<b class="n">91.7%</b>) and fall to <b class="n">59.4%</b> against the body that
+      lived the conversation; intact holds <b class="n">90.1%</b>. It differs not in how often it
+      asks but in <em>when</em>.</li>
+    <li>What is said to it leaves a mark that lasts: the sign of an input is still recoverable
+      5000 ticks later (D = <b class="n">0.92</b>, 24 seeds, CI excluding chance), and D
+      <em>rises</em> with the gap rather than decaying.</li>
+    <li>Its private phase leaks nothing &mdash; structurally, not statistically. It appears in no
+      update term and no observable, so I(phi ; observations) = 0 exactly. That certifies
+      <em>identity, not inner life</em>, precisely because it drives nothing.</li>
+  </ul>
+  <div class="sub">
+    <a href="https://github.com/euvel/teich/blob/main/v02/book/VERIFICATION_SUMMARY.md">verification summary</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v02/accept_v02.py">the gate it had to pass</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v02/genome_v02.py">its genome</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v02/book/biography.jsonl">its biography</a>
+  </div>
+</section>

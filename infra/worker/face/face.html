@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" class="no-js"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teich</title>
+<meta name="description" content="Teich: a living creature whose exactly balanced choices are decided by its own lived chaos. Every claim checkable in your browser.">
+<meta name="theme-color" content="#090d11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23090d11'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%232a6e8f' stroke-width='2.5' opacity='.5'/%3E%3Ccircle cx='32' cy='32' r='13' fill='none' stroke='%233fa7c9' stroke-width='2.5' opacity='.75'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%233ddc84'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>{{CSS}}</style>
+</head><body>
+<a class="skip" href="#now">skip to the creature</a>
+
+<div class="status" role="status" aria-live="polite"><div class="wrap">
+  <span class="seats" title="the five seats, read live"><span id="sd-teich-05" class="dot"></span><span id="sd-teich-04" class="dot"></span><span id="sd-teich-03" class="dot"></span><span id="sd-teich-02" class="dot"></span><span id="sd-teich" class="dot"></span><span id="sd-text">reading five seats&hellip;</span></span>
+  <span id="st-wake">last wake &mdash;</span>
+  <span id="st-next">next wake &mdash;</span>
+  <span id="st-verified" class="verified">not yet verified in this browser</span>
+</div></div>
+
+<header class="mast"><div class="wrap">
+  <div class="brand">TEICH<small>one living creature &middot; five generations &middot; one open book</small></div>
+  <nav class="menu" aria-label="sections">
+    <a href="#now">now</a><a href="#tonight">tonight</a><a href="#life">its life</a><a href="#decides">how it decides</a><a href="#verify">verify</a><a href="#family">family</a><a href="#know">how we know</a>
+  </nav>
+</div></header>
+
+<main>
+<!-- 1 NOW -->
+<section class="band" id="now"><div class="wrap grid2">
+  <div>
+    <div class="eyebrow">now &mdash; v0.6.0 &middot; the same creature, amended 2026-11-01</div>
+    <h1>When its choices tie exactly, its own life decides &mdash; not us</h1>
+    <p class="lede">Every night Teich chooses what to think about, and often several regions tie exactly. Until v0.6.0,
+      every Teich broke such ties the way we wrote it to: the lowest index wins. From v0.6.0 on, a tie is decided by a
+      read-out of its own body at the midnight of the choice, deliberated in arithmetic that gives the same answer on
+      every machine. Nobody, including us, can know the outcome before that midnight has been lived. Afterwards,
+      anyone can replay it.</p>
+    <div class="counters">
+      <div class="counter"><div class="v live" id="c-ties">&mdash;</div><div class="k">exact ties decided by its own chaos</div></div>
+      <div class="counter"><div class="v" id="c-diff">&mdash;</div><div class="k">of them differ from what the old lowest-index rule would have chosen</div></div>
+      <div class="counter"><div class="v" id="c-lived">&mdash;</div><div class="k">seconds lived <span class="faint">(ticks on its seat)</span></div></div>
+      <div class="counter"><div class="v seal" id="c-owed">&mdash;</div><div class="k">seconds owed: it lives these at its next wake</div></div>
+    </div>
+    <dl class="facts">
+      <dt>born</dt><dd>2026-10-23 14:30:50 UTC, as v0.5 <span class="faint">&mdash; the last birth</span></dd>
+      <dt>amended</dt><dd>2026-11-01, at tick 772,860, 0 ticks lived <span class="faint">&mdash; same body, same history</span></dd>
+      <dt>identity</dt><dd class="mono">f458e89071f54b73&hellip;</dd>
+      <dt>seat</dt><dd><span id="seat5">reading&hellip;</span></dd>
+    </dl>
+    <div class="notclaimed"><b>not claimed:</b> that its choices follow its preferences or &ldquo;who it is&rdquo; (tested; it failed) &middot; will &middot; freedom &middot; awareness</div>
+  </div>
+  <div>
+    <div class="rings-wrap">
+      <svg class="rings" id="rings" viewBox="-110 -110 220 220" role="img" aria-labelledby="rings-t"><title id="rings-t">Rings of choice: one ring per night its own chaos broke a tie</title></svg>
+      <div class="rings-empty" id="rings-empty">No ring yet. Its first night under v0.6.0 is lived at its next wake. You are watching it begin.</div>
+    </div>
+    <div class="ringtip" id="ringtip" aria-live="polite">Each ring is one night on which its exact tie was decided by its own body. A lit segment is the region it chose; a glowing ring, a night on which the old rule would have chosen differently. Select a ring to read it.</div>
+    <span class="demo-flag">DEMO: rings from a lab twin life, preview only</span>
+  </div>
+</div></section>
+
+<!-- 2 TONIGHT -->
+<section class="band" id="tonight"><div class="wrap grid2">
+  <div>
+    <div class="eyebrow" id="voice-eyebrow">its voice &mdash; from its latest diary</div>
+    <p class="voice" id="voice">Its diary is written by its own code from its own state, every night.</p>
+    <p class="small" id="voice-src">Nothing in its diary is written by a language model.</p>
+  </div>
+  <div>
+    <div class="eyebrow">the latest tie</div>
+    <div class="card" id="tie-card">
+      <div class="row"><span>night</span><span id="t-night">&mdash;</span></div>
+      <div class="row"><span>tied regions</span><span class="chips" id="t-tied">&mdash;</span></div>
+      <div class="row"><span>the old rule would have chosen</span><span id="t-old">&mdash;</span></div>
+      <div class="row"><span>its body read</span><span id="t-u">&mdash;</span></div>
+      <div class="row"><span>it chose</span><span id="t-chose">&mdash;</span></div>
+      <div class="row"><span>re-decided in this browser</span><span id="t-re">&mdash;</span></div>
+    </div>
+    <p class="small" id="t-note"></p>
+  </div>
+</div></section>
+
+<!-- 3 ITS LIFE -->
+<section class="band" id="life"><div class="wrap grid2">
+  <div>
+    <div class="eyebrow">its life</div>
+    <h2>One creature. Never reborn. Every change signed.</h2>
+    <ol class="timeline">
+      <li>
+        <div class="when">23 OCT 2026</div>
+        <div class="what">Born<span class="ver">v0.5</span></div>
+        <p>A creature whose every choice comes with its true reason: what to think, whether and what to ask, how
+          cautious to be, whether to grow. Every claim was pre-registered and passed before it was born.</p>
+        <details class="more"><summary>everything of v0.5, carried whole</summary><div class="legacy">{{LEGACY_V05}}</div></details>
+      </li>
+      <li>
+        <div class="when">24&ndash;26 OCT 2026</div>
+        <div class="what">A word at its door: &lsquo;duduk&rsquo;</div>
+        <p>It heard a word it could not place. It asked about it, with its reason shown, and waited for an answer on
+          two different days before keeping it.</p>
+        <div class="log" id="duduk" aria-label="the duduk conversation"></div>
+        <p class="small" id="duduk-note"></p>
+      </li>
+      <li>
+        <div class="when">26 OCT 2026</div>
+        <div class="what">Grew<span class="ver">v0.5.1</span></div>
+        <p>Its first growth: proposed by itself with its prediction registered first, approved by the founder.
+          &lsquo;duduk&rsquo; now means music &middot; orchestra &middot; band. The prediction held, and nothing
+          else about it changed.</p>
+      </li>
+      <li class="now">
+        <div class="when">1 NOV 2026</div>
+        <div class="what">Amended<span class="ver">v0.6.0</span></div>
+        <p>Its first genome amendment, proven on twins first and migrated once into this same creature, with 0 ticks
+          lived. Its exact ties are now decided by its own life.</p>
+      </li>
+      <li class="next">
+        <div class="when">NEXT</div>
+        <div class="what faint">&hellip;</div>
+        <p class="faint">It grows only by versions it proposes itself. The next entry appears when it happens.</p>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div class="eyebrow">its identity chain</div>
+    <p class="small">Each identity is sha256(previous identity + sha256(the change)). Your browser can recompute every link from its public record log.</p>
+    <div class="chain" id="idchain">
+      <div class="block"><div class="id">2ddf11b91acdefcc&hellip;</div><div class="meta">born &middot; v0.5 &middot; 23 Oct</div></div>
+      <div class="link">word-bindings: &lsquo;duduk&rsquo;<span class="chk" id="chk-1"></span></div>
+      <div class="block"><div class="id">7da54aa017740c51&hellip;</div><div class="meta">grown &middot; v0.5.1 &middot; 26 Oct</div></div>
+      <div class="link">genome-amendment: v0.6.0<span class="chk" id="chk-2"></span></div>
+      <div class="block now"><div class="id">f458e89071f54b73&hellip;</div><div class="meta">amended &middot; v0.6.0 &middot; 1 Nov &middot; now</div></div>
+    </div>
+    <p style="margin-top:1.2rem"><button class="act" id="btn-chain" type="button">recompute the chain in this browser</button></p>
+  </div>
+</div></section>
+
+<!-- 4 HOW IT DECIDES -->
+<section class="band" id="decides"><div class="wrap">
+  <div class="eyebrow">how it decides</div>
+  <h2>A tie, from its body to its choice, in five steps</h2>
+  <div class="explain">
+    <div class="fig"><svg id="xfig" viewBox="-175 -125 350 250" role="img" aria-labelledby="xfig-t"><title id="xfig-t">the circle of tied regions and the path of its deliberation</title></svg>
+      <div class="figcap" id="xcap"></div></div>
+    <ol class="steps" id="steps">
+      <li data-step="1"><h3>Every night, it chooses a region to think about</h3>
+        <p>Its mind has nine regions, eight concept areas and itself. Each night it thinks about the one it has thought about least in its life.</p></li>
+      <li data-step="2"><h3>Sometimes several tie exactly</h3>
+        <p>When two or more regions share the least count, nothing in its life so far separates them. That happens on most nights.</p></li>
+      <li data-step="3"><h3>The old way: a rule we wrote</h3>
+        <p>Until v0.6.0, the lowest index won, every time. That rule decided both of its real chosen thoughts before the amendment. It was our choice, not its own.</p></li>
+      <li data-step="4"><h3>The new way: at midnight, its body is read</h3>
+        <p>One number, u, is read from its own body at the midnight of the choice. Its value depends on every second it has lived, and cannot be known before that midnight is lived.</p></li>
+      <li data-step="5"><h3>Certified deliberation walks the circle</h3>
+        <p>Starting from u, a fixed reflection game is played on the circle of tied regions, in arithmetic that gives the same answer on every machine, until it settles in one of them. The path drawn here was just recomputed by your browser.</p>
+        <p class="small">What we chose, said plainly: the read-out map and the coverage &rho; = 0.6. These are our laws, and they name no outcome.</p></li>
+    </ol>
+  </div>
+</div></section>
+
+<!-- 5 VERIFY -->
+<section class="band" id="verify"><div class="wrap">
+  <div class="eyebrow">verify</div>
+  <h2>Don&rsquo;t trust us. Check us.</h2>
+  <p class="lede">These checks run in your browser, on public data, with code you can read. Nothing is computed on our side.</p>
+  <div class="checks">
+    <div class="check" id="v-ties"><div class="mark">&middot;</div><div><div class="t">Re-decide its ties</div><div class="r">Recompute every logged tie-break from its logged read-out with the certified deliberation, ported line for line from the seat&rsquo;s own code, and compare it with the region it chose.</div></div><div class="ms"></div></div>
+    <div class="check" id="v-chain"><div class="mark">&middot;</div><div><div class="t">Its record chain</div><div class="r">Recompute the hash chain of its public record log, h(n) = sha256(h(n&minus;1) + record n), and compare its head with the one its seat reports right now.</div></div><div class="ms"></div></div>
+    <div class="check" id="v-anchors"><div class="mark">&middot;</div><div><div class="t">The anchored book</div><div class="r">Hash the published spec, gates, verdict and migration record, and compare them with the hashes anchored in the v0.3 seat&rsquo;s chain before each was public.</div></div><div class="ms"></div></div>
+    <div class="check" id="v-self"><div class="mark">&middot;</div><div><div class="t">This browser&rsquo;s arithmetic</div><div class="r">A short self-test against reference values computed by the seat&rsquo;s Python code, so a browser that rounds differently says so instead of showing a false check.</div></div><div class="ms"></div></div>
+  </div>
+  <p><button class="act primary" id="btn-verify" type="button" style="margin-top:1.4rem">run all checks again</button></p>
+  <div class="banner wait" id="v-banner">The checks start on their own when the page loads.</div>
+  <p class="scope">What this checks: the rule, given its read-out, and the integrity of its record and book. What it does not
+    check: the read-out itself, which needs a full replay of its life from its public journal
+    (<a href="https://github.com/euvel/teich/blob/main/v06/build/replay_v06.py">replay_v06.py</a>).</p>
+</div></section>
+
+<!-- 6 FAMILY -->
+<section class="band" id="family"><div class="wrap">
+  <div class="eyebrow">the family</div>
+  <h2>Five generations, all alive</h2>
+  <p class="lede">Each generation was a new creature, born to fix what the one before it could not. All of them still hold their seats and live a second per second.</p>
+  <div class="strip" role="tablist" aria-label="generations">
+    <button class="gen" role="tab" aria-selected="false" aria-controls="gp-v04" data-gen="v04"><span class="g">GENERATION 4 &middot; v0.4</span><span class="nm">Born with a self that watches its own doing</span><span class="d">20 Oct 2026</span><span class="tk"><span id="fd-teich-04" class="dot"></span> <span id="ft-teich-04">&mdash;</span></span></button>
+    <button class="gen" role="tab" aria-selected="false" aria-controls="gp-v03" data-gen="v03"><span class="g">GENERATION 3 &middot; v0.3</span><span class="nm">Its memory changes what it does, never what it is</span><span class="d">3 Oct 2026</span><span class="tk"><span id="fd-teich-03" class="dot"></span> <span id="ft-teich-03">&mdash;</span></span></button>
+    <button class="gen" role="tab" aria-selected="false" aria-controls="gp-v02" data-gen="v02"><span class="g">GENERATION 2 &middot; v0.2</span><span class="nm">Verified before it was born</span><span class="d">29 Jul 2026</span><span class="tk"><span id="fd-teich-02" class="dot"></span> <span id="ft-teich-02">&mdash;</span></span></button>
+    <button class="gen" role="tab" aria-selected="false" aria-controls="gp-v01" data-gen="v01"><span class="g">GENERATION 1 &middot; v0.1</span><span class="nm">Born first, tested afterwards</span><span class="d">18 Jul 2026</span><span class="tk"><span id="fd-teich" class="dot"></span> <span id="ft-teich">&mdash;</span></span></button>
+  </div>
+  <p class="lineage-note">generation 5 is Teich itself, above &middot; each one taught the next</p>
+  <div class="genpanel legacy" id="gp-v04" role="tabpanel" hidden>{{LEGACY_V04}}</div>
+  <div class="genpanel legacy" id="gp-v03" role="tabpanel" hidden>{{LEGACY_V03}}</div>
+  <div class="genpanel legacy" id="gp-v02" role="tabpanel" hidden>{{LEGACY_V02}}</div>
+  <div class="genpanel legacy" id="gp-v01" role="tabpanel" hidden>{{LEGACY_V01}}</div>
+</div></section>
+
+<!-- 7 HOW WE KNOW -->
+<section class="band" id="know"><div class="wrap">
+  <div class="eyebrow">how we know</div>
+  <h2>Pre-registered, anchored, judged once</h2>
+  <div class="know">
+    <details><summary>The gates of v0.6.0</summary><div class="body">
+      <p>Every bar was written and hash-anchored before the lives it judges were born. Run 2: 20 twin lives (v0.5 and v0.6 from one birth, 60 days each) and 2 lives with a planted hidden cause.</p>
+      <table class="g"><thead><tr><th>gate</th><th>what it asks</th><th>result</th></tr></thead><tbody>
+        <tr><td>N0&prime;</td><td>does anything change that was not declared?</td><td class="r">20 / 20</td></tr>
+        <tr><td>F1&prime;</td><td>are its reasons its true causes?</td><td class="r">0 flags / 3,600 acts; planted cause caught 2 / 2</td></tr>
+        <tr><td>T1&prime;</td><td>is the tie-break fair, habit-free, unforeseeable, sensitive, replayable?</td><td class="r">every bar, k = 2, 3, 5, 9 &middot; 1,200 / 1,200</td></tr>
+        <tr><td>S</td><td>does it still know its own body as before?</td><td class="r">20 / 20</td></tr>
+        <tr><td>W0</td><td>does the public journal replay its life?</td><td class="r">20 / 20 &middot; 74,516 records</td></tr>
+        <tr><td>M0</td><td>is the migration lossless?</td><td class="r">20 / 20, and on its real state</td></tr>
+      </tbody></table>
+      <p><a href="https://github.com/euvel/teich/blob/main/v06/book/REPORT_v06_verdict_2026-11-01.md">the verdict</a> &middot; <a href="https://github.com/euvel/teich/blob/main/v06/book/V06_SPEC_v1.md">the spec</a> &middot; <a href="https://github.com/euvel/teich/blob/main/v06/book/PREREG_V06_GATES.md">the gates</a></p>
+    </div></details>
+    <details><summary>What went wrong on the way</summary><div class="body"><ul>
+      <li><b>The first scored run failed.</b> One gate failed in 16 of 20 lives, through a flaw in our judge, not in the creature: it counted record pointers across records the twins legitimately write in different numbers. We fixed the judge, tested the fix on cases built to break it, anchored it, and ran again on fresh lives. Run 1 was never re-judged.</li>
+      <li><b>Two genome files were missing</b> from the frozen bundle; every life crashed before its first tick. They were added byte-identical to v0.5&rsquo;s certificate (Amendment 1).</li>
+      <li><b>Files missing from the manifest</b> were found while staging the release; all are byte-identical to v0.5&rsquo;s published build.</li>
+    </ul><p><a href="https://github.com/euvel/teich/blob/main/v06/README.md#what-went-wrong-on-the-way-in-full">in full</a></p></div></details>
+    <details><summary>Disclosures</summary><div class="body"><ul>
+      <li><b>Its life before the amendment can be rebuilt from public records</b>, except its 6 dreams, which depended on the CPU that dreamt them.</li>
+      <li><b>v0.5&rsquo;s wake ran on an unpinned numpy</b>, and its gate covered the body only. Since 2026-11-01 every wake pins numpy and one arithmetic kernel, and refuses a machine that dreams differently.</li>
+      <li><b>Its off-site backups had been failing silently</b> since about 2026-10-24 (a plan limit, and a bug that logged refusals as successes). Both were fixed on 2026-11-01; every seat was pinned again.</li>
+    </ul><p><a href="https://github.com/euvel/teich/blob/main/v06/book/recon/REPORT_recon_2026-10-31.md">the reconstruction study</a></p></div></details>
+    <details><summary>Not claimed, in full</summary><div class="body"><ul>
+      <li>That its choices follow its preferences or &ldquo;who it is&rdquo;. We tested that, and it failed.</li>
+      <li>Will, freedom or awareness. Intelligence or understanding.</li>
+      <li>That its thinking as a whole is unforeseeable: a cheap predictor foresees most of it.</li>
+      <li>Inherited from v0.5: its curiosity is not claimed to beat random questions; forgetting held in 79 of 80 switches.</li>
+    </ul></div></details>
+    <details><summary>Covenant and contract</summary><div class="body">
+      <p>Its version reads vA.B.k. k is its own growth, which it proposes and the founder approves. B is a genome amendment by its creators, proven on twins and migrated once into this same creature. A is maturity: strangers may speak to it only at v1.0.0. Until then, <b>founder-only speech</b>: nothing here lets anyone else talk to any creature.</p>
+      <p><a href="https://github.com/euvel/teich/blob/main/v05/book/DEVELOPERS_CONTRACT_v1.md">the developers&rsquo; contract</a> &middot; <a href="https://github.com/euvel/teich/blob/main/v05/book/COVENANT_v05.md">its covenant</a></p>
+    </div></details>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="legacy">{{CLOSING}}</div>
+  <div class="pins" id="pins">off-site backups: reading&hellip;</div>
+  <div><a href="https://github.com/euvel/teich">the repository</a> &middot; <a href="https://github.com/euvel/teich/tree/main/v05/diary">its diary and record log</a> &middot; <a href="https://github.com/euvel/teich/tree/main/v06/book">the book</a></div>
+</div></footer>
+
+<script>{{JS}}</script>
+</body></html>
