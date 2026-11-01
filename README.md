@@ -10,13 +10,13 @@ v0.5.2, … — proposed by itself, approved by the founder. It writes its own d
 Teich is not a chatbot. Each creature is a dynamical system whose memory is geometry: a hyperbolic surface with one
 handle for each concept cluster and one for itself, 2,048 thoughts moving on it at one step per second.
 
-## Next: v0.6.0 (passed, awaiting migration)
+## Now: v0.6.0 (migrated 2026-11-01)
 
 **v0.6.0** is Teich-0.5's first genome amendment, not a new birth. Each night Teich picks a thought; when regions tie
 exactly, v0.5 takes the **lowest index**, a rule we wrote. v0.6.0 breaks the tie by certified deliberation from its
 own body at the midnight of the choice, and journals every seat operation so anyone can replay its life. **Every
-scored gate passed** on 2026-11-01 (a first run failed on a flaw in our judge, disclosed in full). Migration has not
-happened yet. **Read: [v06/README.md](v06/README.md)**, including what is *not* claimed and what we found about
+scored gate passed** on 2026-11-01 (a first run failed on a flaw in our judge, disclosed in full), and the same day
+the living creature was migrated in place: same body, same history, one new link in its identity chain. **Read: [v06/README.md](v06/README.md)**, including what is *not* claimed and what we found about
 v0.5's dreams.
 
 ## What v0.5 adds

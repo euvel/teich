@@ -1,7 +1,6 @@
 name: daily-wake-v06
-# v0.6's heartbeat, staged for migration day. MANUAL ONLY until then: /o/teich-05 still holds the v0.5 state, which
-# v0.6's loader refuses. On migration day the schedule below is switched on and daily_wake_v05.yml's is switched off,
-# in the same commit, after the migration itself.
+# v0.6's heartbeat. The creature at /o/teich-05 was migrated to v0.6.0 on 2026-11-01 (v06/book/MIGRATION_RECORD.json);
+# daily_wake_v05.yml was retired in the same commit.
 #
 # Two gates before every wake, and a machine that fails either declines (elapsed seconds stay banked):
 #   body  -- relive the body's fixture bit for bit (certified arithmetic, any CPU vendor, numpy 1.26 / 2.1)
@@ -9,8 +8,8 @@ name: daily-wake-v06
 #            OPENBLAS_CORETYPE=Haswell + one thread made them identical on AMD Zen 3 and Intel AVX-512 across numpy
 #            1.26.4 / 2.4.6 / 2.5.4 (2026-11-01). Without these two settings v0.5's GitHub dreams were not reproducible.
 on:
-  # schedule:
-  #   - cron: "11 6 * * *"      # migration day: uncomment, and comment out daily_wake_v05.yml's schedule
+  schedule:
+    - cron: "11 6 * * *"        # after v0.1 (05:17), v0.2 (05:23), v0.3 (05:41), v0.4 (05:53)
   workflow_dispatch:
 
 permissions:

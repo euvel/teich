@@ -1,0 +1,9 @@
+[
+ {
+  "ok": true,
+  "git_sha": "314555684ea1a1faae17a0910e09ff05ee0778df799ad606c61bb8c229694c85",
+  "ref": "v06-migration",
+  "note": "Teich v0.6.0 MIGRATION of /o/teich-05 (founder's word, 2026-11-01): v0.5.1 -> v0.6.0 at n=772860, 0 ticks lived; state before 7deaa6e1e45b5474b664f653b5503ee3a0ac934d6889d71916a5f582c6c138d3, after dd580833c7b44c6bb69d807257bd13932193af8bf6ebf0350dae158c5466805c; identity 7da54aa017740c51... -> f458e89071f54b7332d48dcadb4038b4e7fcb0e6d01d78e1f02f983c88df8ae9; one genome-amendment record (seat log seq 125, amendment 14b2de8e2ea0e0fd6df1690eb9cb5752e6ae52b00ae4929b1ec11c74f38065f9); M0 passed on the leased state.",
+  "file": "v06_lab/migration/MIGRATION_RECORD.json"
+ }
+]

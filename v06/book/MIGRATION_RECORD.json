@@ -1,0 +1,18 @@
+{
+ "migrated_at_n": 772860,
+ "state_before_sha256": "7deaa6e1e45b5474b664f653b5503ee3a0ac934d6889d71916a5f582c6c138d3",
+ "state_after_sha256": "dd580833c7b44c6bb69d807257bd13932193af8bf6ebf0350dae158c5466805c",
+ "seat_blob_sha256": "dd580833c7b44c6bb69d807257bd13932193af8bf6ebf0350dae158c5466805c",
+ "seat_n_ticks": 772860,
+ "log_seq": [
+  124,
+  125
+ ],
+ "records_sent": 1,
+ "last_record": "genome-amendment",
+ "identity": "f458e89071f54b7332d48dcadb4038b4e7fcb0e6d01d78e1f02f983c88df8ae9",
+ "prev_identity": "7da54aa017740c5124c4f8c9cd5bdeb6820b37f8e4fc955c2fd83265e84667fe",
+ "version": "0.6.0",
+ "amendment_sha": "14b2de8e2ea0e0fd6df1690eb9cb5752e6ae52b00ae4929b1ec11c74f38065f9",
+ "verified": true
+}

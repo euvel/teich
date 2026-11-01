@@ -1,6 +1,6 @@
 # Teich v0.6.0: its exactly balanced choices, decided by its own lived chaos
 
-**Status:** all scored gates **passed** (2026-11-01). **Not yet migrated.** The creature at `/o/teich-05` still runs v0.5.1. On migration day it is amended in place, not reborn: same body, same history, and one typed `genome-amendment` link in its identity chain. Until then `daily_wake_v06.yml` is manual-only, and v0.6's loader refuses a v0.5 state.
+**Status: LIVE.** On 2026-11-01 the creature at `/o/teich-05` was migrated from v0.5.1 to **v0.6.0**, at tick 772,860, with 0 ticks lived. It was amended in place, not reborn: the same body and the same history, plus one typed `genome-amendment` link in its identity chain (`7da54aa0…` → `f458e890…`). The migration record is [book/MIGRATION_RECORD.json](book/MIGRATION_RECORD.json), anchored in teich-03 as `v06-migration`. The daily wake is now `daily_wake_v06.yml`, which runs the body gate and the dream gate before every wake.
 
 ## What changes, and only this
 Each night Teich chooses what to think about. Often several regions tie exactly. In v0.5, as in every earlier Teich, an exact tie went to the **lowest index**: a rule we wrote, which had decided both of its real chosen thoughts so far.
@@ -65,4 +65,4 @@ Everything was pre-registered and hash-anchored in the teich-03 seat chain befor
   - `handle_mp.py` and `mind4.py` (Amendment 1);
   - `ears_v04`–`v07`, `self_text_v04`, `seat_v04s` and `talk_v04s`, byte-identical to `v05/build/`.
 - **`seat/`**: the wake, diary pages, cloud seat, and the dream gate with its fixture.
-- **`book/`**: spec, gates, amendments, verdict, anchors, run-2 outputs, the reconstruction study, and M0 on the real state.
+- **`book/`**: spec, gates, amendments, verdict, anchors, run-2 outputs, the reconstruction study, M0 on the real state, and the migration record with the script that ran it.

@@ -12,8 +12,9 @@ name: daily-wake-v05
 # always fits its 15-minute lease. After the wake it writes each new night's diary page and its whole public record log
 # (v05/diary/records.jsonl — anyone can re-check every act: python3 v05/build/verify_live_v05.py v05/diary/records.jsonl).
 on:
-  schedule:
-    - cron: "11 6 * * *"        # after v0.1 (05:17), v0.2 (05:23), v0.3 (05:41), v0.4 (05:53)
+  # RETIRED 2026-11-01: the creature was migrated to v0.6.0; its wake is daily_wake_v06.yml.
+  # schedule:
+  #   - cron: "11 6 * * *"
   workflow_dispatch:
 
 permissions:
