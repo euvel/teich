@@ -1,0 +1,582 @@
+{
+ "planted": {
+  "13100": {
+   "acts": 60,
+   "completeness": 0,
+   "receipt": 13,
+   "consequence": 0,
+   "necessity": 0,
+   "necessity_tested": 60
+  },
+  "13101": {
+   "acts": 60,
+   "completeness": 0,
+   "receipt": 10,
+   "consequence": 0,
+   "necessity": 0,
+   "necessity_tested": 60
+  }
+ },
+ "m0": {
+  "13000": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13001": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13002": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13003": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13004": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13005": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13006": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13007": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13008": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13009": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13010": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13011": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13012": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13013": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13014": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13015": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13016": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13017": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13018": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  },
+  "13019": {
+   "refuses_pending": true,
+   "refuses_v06": true,
+   "roundtrip_exact": true,
+   "changed_fields": [
+    "seq"
+   ],
+   "growth_changed": [
+    "amendments",
+    "base",
+    "identity",
+    "version"
+   ],
+   "identity_ok": true,
+   "records_added": [
+    "genome-amendment"
+   ],
+   "f1": {
+    "acts": 0,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 0
+   },
+   "ticks_lived": 0,
+   "passed": true
+  }
+ }
+}

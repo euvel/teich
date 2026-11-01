@@ -1,0 +1,23 @@
+[
+ {
+  "ok": true,
+  "git_sha": "b19893b7d247d09de03a57023a0bb5027db4b4c2c61e0feadc942d1e92cbe25a",
+  "ref": "v06-spec-v1",
+  "note": "Teich v0.6.0 specification v1 (genome amendment to /o/teich-05): exact ties in its chosen thought broken by certified deliberation from its body's particle 0 at midnight (founder decision E: body, not dream, per recon study); public journal witness; founder decisions A-E. Approved for anchoring by the founder 2026-10-31.",
+  "file": "v06_lab/specs/V06_SPEC_v1.md"
+ },
+ {
+  "ok": true,
+  "git_sha": "c27249677d45f2faefc6b6c060c929ef16c64850f64f7e1c4b19af6a90a745af",
+  "ref": "v06-gates-prereg",
+  "note": "Teich v0.6.0 scored gates pre-registration: N0', F1', T1', S, W0, M0 (+M0-real asked separately); twin seeds 12000-12019 x 60 days, planted 12100-12101 x 20 days; one look, no rescue. Anchored before any scored run, 2026-10-31.",
+  "file": "v06_lab/gates/PREREG_V06_GATES.md"
+ },
+ {
+  "ok": true,
+  "git_sha": "a4029ed7f8900113199078cc5bf5fb0ba13cec7991e74342721086f09fa687c8",
+  "ref": "v06-build-manifest",
+  "note": "Teich v0.6.0 code manifest (sha256 of 38 build/seat/recon files) frozen for the scored campaign, 2026-10-31.",
+  "file": "v06_lab/gates/MANIFEST_v06_build.sha256"
+ }
+]

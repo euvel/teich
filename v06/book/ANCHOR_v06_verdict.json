@@ -1,0 +1,23 @@
+[
+ {
+  "ok": true,
+  "git_sha": "8cb12df5bd938ee79dbdbe0e95071456521a445ab7e1caf68baeed1c4f909a54",
+  "ref": "v06-gates-amendment1",
+  "note": "Teich v0.6.0 gates Amendment 1 (written 2026-10-31 13:15Z, before any scored life lived a tick): handle_mp.py e871b2d7... and mind4.py e18ccc23... added to the campaign bundle, byte-identical to v0.5's genesis certificate; nothing else changed. Approved for anchoring by the founder 2026-11-01.",
+  "file": "v06_lab/gates/PREREG_V06_GATES_Amendment1.md"
+ },
+ {
+  "ok": true,
+  "git_sha": "3ef47f496f249cfbd522dd8ff3a530f888a2d561a558a7a61e343d984c5bb91d",
+  "ref": "v06-verdict",
+  "note": "Teich v0.6.0 scored verdict: PASS (run 2, seeds 13000-13019 + planted 13100-13101, judged once under PREREG + Amendments 1, 2): N0' 20/20, F1' 0 flags + planted caught 2/2, T1' all bars, S 20/20, W0 20/20, M0 20/20. Run 1 (seeds 12000-12019) disclosed as FAIL on N0'. Outputs SHA256SUMS 2618684f9f9c56c7d62ee4ac5da1cacec72d3434a178449c913cdc469b19cb30. Approved for anchoring by the founder 2026-11-01.",
+  "file": "v06_lab/gates/REPORT_v06_verdict_2026-11-01.md"
+ },
+ {
+  "ok": true,
+  "git_sha": "2618684f9f9c56c7d62ee4ac5da1cacec72d3434a178449c913cdc469b19cb30",
+  "ref": "v06-run2-outputs",
+  "note": "Teich v0.6.0 run 2 output checksums (22 lives, 20 W0 replays, pooled judge, planted F1 + M0), pulled from molab and sha-verified during the run, 2026-11-01.",
+  "file": "v06_lab/gates/campaign_run2/SHA256SUMS"
+ }
+]

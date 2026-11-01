@@ -1,0 +1,28 @@
+{
+ "refuses_pending": true,
+ "refuses_v06": true,
+ "roundtrip_exact": true,
+ "changed_fields": [
+  "seq"
+ ],
+ "growth_changed": [
+  "amendments",
+  "base",
+  "identity",
+  "version"
+ ],
+ "identity_ok": true,
+ "records_added": [
+  "genome-amendment"
+ ],
+ "f1": {
+  "acts": 21,
+  "completeness": 0,
+  "receipt": 0,
+  "consequence": 0,
+  "necessity": 0,
+  "necessity_tested": 21
+ },
+ "ticks_lived": 0,
+ "passed": true
+}

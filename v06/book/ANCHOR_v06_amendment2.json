@@ -1,0 +1,9 @@
+[
+ {
+  "ok": true,
+  "git_sha": "1f2b6d25df2f9955fcb8e494927821dfc17fedb5f2b3b00f068f6b0eb965b613",
+  "ref": "v06-gates-amendment2",
+  "note": "Teich v0.6.0 gates Amendment 2: run 1 (seeds 12000-12019) recorded as FAIL on N0' (pointer canonicalisation counted declared records); N0' canon now renumbers seq pointers over undeclared records only (twin_judge.py 79fa8b72811b222b97d555d979979c3d472873dbcd21707ad50a616283ddb595); fresh seeds 13000-13019 x 60 days, planted 13100-13101 x 20 days; no bar changed. Approved for anchoring by the founder 2026-11-01, before any run-2 life.",
+  "file": "v06_lab/gates/PREREG_V06_GATES_Amendment2.md"
+ }
+]
