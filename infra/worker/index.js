@@ -116,7 +116,12 @@ export class TeichSeat extends DurableObject {
       const iv = crypto.getRandomValues(new Uint8Array(12));
       const ct = new Uint8Array(await crypto.subtle.encrypt(
         { name: "AES-GCM", iv }, key, new TextEncoder().encode(head.blob)));
-      const b64 = (u8) => btoa(String.fromCharCode(...u8));
+      // chunked: spreading a whole snapshot as arguments overflows the call stack (teich-05, 2026-10-25 on)
+      const b64 = (u8) => {
+        let s = "";
+        for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode(...u8.subarray(i, i + 0x8000));
+        return btoa(s);
+      };
       const r = await fetch("https://api.pinata.cloud/pinning/pinJSONToIPFS", {
         method: "POST",
         headers: { "content-type": "application/json",
