@@ -1,0 +1,3341 @@
+{
+"bridges": [
+{
+"concept": "accident",
+"other": 30,
+"own": 20,
+"r": 1.0348
+},
+{
+"concept": "admission",
+"other": 77,
+"own": 76,
+"r": 1.1878
+},
+{
+"concept": "adversary",
+"other": 30,
+"own": 20,
+"r": 1.315
+},
+{
+"concept": "airport",
+"other": 93,
+"own": 94,
+"r": 1.0306
+},
+{
+"concept": "american",
+"other": 56,
+"own": 62,
+"r": 1.0993
+},
+{
+"concept": "ant",
+"other": 8,
+"own": 71,
+"r": 1.0839
+},
+{
+"concept": "anxiety",
+"other": 21,
+"own": 20,
+"r": 1.0845
+},
+{
+"concept": "appliance",
+"other": 96,
+"own": 4,
+"r": 1.0324
+},
+{
+"concept": "archive",
+"other": 74,
+"own": 31,
+"r": 1.0274
+},
+{
+"concept": "argument",
+"other": 34,
+"own": 40,
+"r": 1.2009
+},
+{
+"concept": "arrow",
+"other": 86,
+"own": 9,
+"r": 1.0227
+},
+{
+"concept": "artifact",
+"other": 74,
+"own": 87,
+"r": 1.0127
+},
+{
+"concept": "assignment",
+"other": 96,
+"own": 77,
+"r": 1.0545
+},
+{
+"concept": "astronomer",
+"other": 91,
+"own": 68,
+"r": 1.0127
+},
+{
+"concept": "avenue",
+"other": 51,
+"own": 94,
+"r": 1.148
+},
+{
+"concept": "bar",
+"other": 69,
+"own": 75,
+"r": 1.1141
+},
+{
+"concept": "barn",
+"other": 10,
+"own": 53,
+"r": 1.1443
+},
+{
+"concept": "basket",
+"other": 78,
+"own": 95,
+"r": 1.1153
+},
+{
+"concept": "bean",
+"other": 1,
+"own": 7,
+"r": 1.1433
+},
+{
+"concept": "beast",
+"other": 8,
+"own": 67,
+"r": 1.0018
+},
+{
+"concept": "beef",
+"other": 10,
+"own": 2,
+"r": 1.0079
+},
+{
+"concept": "biography",
+"other": 31,
+"own": 70,
+"r": 1.1027
+},
+{
+"concept": "blood",
+"other": 17,
+"own": 16,
+"r": 1.137
+},
+{
+"concept": "boat",
+"other": 57,
+"own": 73,
+"r": 1.0402
+},
+{
+"concept": "boxing",
+"other": 78,
+"own": 17,
+"r": 1.3702
+},
+{
+"concept": "boy",
+"other": 38,
+"own": 36,
+"r": 1.0189
+},
+{
+"concept": "brick",
+"other": 4,
+"own": 51,
+"r": 1.0763
+},
+{
+"concept": "bridge",
+"other": 90,
+"own": 89,
+"r": 1.0189
+},
+{
+"concept": "bunch",
+"other": 75,
+"own": 82,
+"r": 1.0079
+},
+{
+"concept": "cage",
+"other": 9,
+"own": 53,
+"r": 1.0374
+},
+{
+"concept": "calendar",
+"other": 46,
+"own": 76,
+"r": 1.518
+},
+{
+"concept": "camera",
+"other": 83,
+"own": 87,
+"r": 1.0192
+},
+{
+"concept": "cannon",
+"other": 87,
+"own": 86,
+"r": 1.0822
+},
+{
+"concept": "capital",
+"other": 80,
+"own": 44,
+"r": 1.0405
+},
+{
+"concept": "carpet",
+"other": 49,
+"own": 50,
+"r": 1.0962
+},
+{
+"concept": "carriage",
+"other": 94,
+"own": 90,
+"r": 1.0007
+},
+{
+"concept": "category",
+"other": 75,
+"own": 74,
+"r": 1.0311
+},
+{
+"concept": "cd",
+"other": 83,
+"own": 87,
+"r": 1.025
+},
+{
+"concept": "cell",
+"other": 92,
+"own": 68,
+"r": 1.226
+},
+{
+"concept": "cent",
+"other": 80,
+"own": 89,
+"r": 1.0952
+},
+{
+"concept": "ceremony",
+"other": 76,
+"own": 45,
+"r": 1.1144
+},
+{
+"concept": "choice",
+"other": 39,
+"own": 24,
+"r": 1.0245
+},
+{
+"concept": "citizen",
+"other": 64,
+"own": 62,
+"r": 1.005
+},
+{
+"concept": "closet",
+"other": 55,
+"own": 51,
+"r": 1.0238
+},
+{
+"concept": "clue",
+"other": 24,
+"own": 44,
+"r": 1.014
+},
+{
+"concept": "colt",
+"other": 69,
+"own": 10,
+"r": 1.0308
+},
+{
+"concept": "combination",
+"other": 82,
+"own": 76,
+"r": 1.0092
+},
+{
+"concept": "companion",
+"other": 8,
+"own": 69,
+"r": 1.0962
+},
+{
+"concept": "confession",
+"other": 42,
+"own": 71,
+"r": 1.2167
+},
+{
+"concept": "conquest",
+"other": 40,
+"own": 44,
+"r": 1.127
+},
+{
+"concept": "container",
+"other": 5,
+"own": 74,
+"r": 1.0194
+},
+{
+"concept": "crane",
+"other": 69,
+"own": 50,
+"r": 1.0094
+},
+{
+"concept": "credibility",
+"other": 34,
+"own": 23,
+"r": 1.1194
+},
+{
+"concept": "crew",
+"other": 75,
+"own": 73,
+"r": 1.0252
+},
+{
+"concept": "crib",
+"other": 49,
+"own": 36,
+"r": 1.1613
+},
+{
+"concept": "crime",
+"other": 29,
+"own": 30,
+"r": 1.0043
+},
+{
+"concept": "crystal",
+"other": 66,
+"own": 87,
+"r": 1.0363
+},
+{
+"concept": "death",
+"other": 21,
+"own": 29,
+"r": 1.0416
+},
+{
+"concept": "delay",
+"other": 85,
+"own": 88,
+"r": 1.0091
+},
+{
+"concept": "denial",
+"other": 22,
+"own": 42,
+"r": 1.0243
+},
+{
+"concept": "depth",
+"other": 89,
+"own": 25,
+"r": 1.026
+},
+{
+"concept": "dirt",
+"other": 58,
+"own": 19,
+"r": 1.0531
+},
+{
+"concept": "discipline",
+"other": 22,
+"own": 27,
+"r": 1.1921
+},
+{
+"concept": "discovery",
+"other": 92,
+"own": 23,
+"r": 1.0173
+},
+{
+"concept": "drizzle",
+"other": 48,
+"own": 90,
+"r": 1.4185
+},
+{
+"concept": "drug",
+"other": 18,
+"own": 4,
+"r": 1.0386
+},
+{
+"concept": "egg",
+"other": 9,
+"own": 5,
+"r": 1.0169
+},
+{
+"concept": "emotion",
+"other": 21,
+"own": 22,
+"r": 1.0473
+},
+{
+"concept": "entity",
+"other": 96,
+"own": 75,
+"r": 1.1067
+},
+{
+"concept": "equality",
+"other": 81,
+"own": 25,
+"r": 1.1001
+},
+{
+"concept": "exhibit",
+"other": 33,
+"own": 74,
+"r": 1.0394
+},
+{
+"concept": "factory",
+"other": 96,
+"own": 95,
+"r": 1.0634
+},
+{
+"concept": "family",
+"other": 37,
+"own": 75,
+"r": 1.2213
+},
+{
+"concept": "fee",
+"other": 80,
+"own": 82,
+"r": 1.1837
+},
+{
+"concept": "fence",
+"other": 58,
+"own": 89,
+"r": 1.0656
+},
+{
+"concept": "fertility",
+"other": 35,
+"own": 5,
+"r": 1.1758
+},
+{
+"concept": "fingerprint",
+"other": 14,
+"own": 85,
+"r": 1.08
+},
+{
+"concept": "flood",
+"other": 48,
+"own": 57,
+"r": 1.0056
+},
+{
+"concept": "forecast",
+"other": 48,
+"own": 85,
+"r": 1.1973
+},
+{
+"concept": "fox",
+"other": 8,
+"own": 68,
+"r": 1.0249
+},
+{
+"concept": "fur",
+"other": 8,
+"own": 12,
+"r": 1.0369
+},
+{
+"concept": "furnace",
+"other": 4,
+"own": 85,
+"r": 1.1671
+},
+{
+"concept": "fury",
+"other": 72,
+"own": 85,
+"r": 1.2755
+},
+{
+"concept": "gain",
+"other": 80,
+"own": 44,
+"r": 1.0052
+},
+{
+"concept": "game",
+"other": 78,
+"own": 45,
+"r": 1.0239
+},
+{
+"concept": "girl",
+"other": 36,
+"own": 70,
+"r": 1.0743
+},
+{
+"concept": "guardian",
+"other": 67,
+"own": 69,
+"r": 1.1626
+},
+{
+"concept": "hawk",
+"other": 9,
+"own": 68,
+"r": 1.0346
+},
+{
+"concept": "heart",
+"other": 21,
+"own": 17,
+"r": 1.0108
+},
+{
+"concept": "herb",
+"other": 58,
+"own": 6,
+"r": 1.0964
+},
+{
+"concept": "hero",
+"other": 66,
+"own": 39,
+"r": 1.0959
+},
+{
+"concept": "heroine",
+"other": 70,
+"own": 71,
+"r": 1.1152
+},
+{
+"concept": "hike",
+"other": 94,
+"own": 58,
+"r": 1.0762
+},
+{
+"concept": "history",
+"other": 33,
+"own": 32,
+"r": 1.0172
+},
+{
+"concept": "hypertension",
+"other": 17,
+"own": 5,
+"r": 1.2202
+},
+{
+"concept": "ice",
+"other": 5,
+"own": 48,
+"r": 1.034
+},
+{
+"concept": "illusion",
+"other": 23,
+"own": 67,
+"r": 1.1789
+},
+{
+"concept": "image",
+"other": 87,
+"own": 33,
+"r": 1.0312
+},
+{
+"concept": "institution",
+"other": 77,
+"own": 75,
+"r": 1.0177
+},
+{
+"concept": "intelligence",
+"other": 26,
+"own": 24,
+"r": 1.034
+},
+{
+"concept": "iron",
+"other": 5,
+"own": 4,
+"r": 1.041
+},
+{
+"concept": "island",
+"other": 57,
+"own": 55,
+"r": 1.1034
+},
+{
+"concept": "journal",
+"other": 31,
+"own": 34,
+"r": 1.0439
+},
+{
+"concept": "juice",
+"other": 3,
+"own": 5,
+"r": 1.0348
+},
+{
+"concept": "keyboard",
+"other": 83,
+"own": 86,
+"r": 1.0711
+},
+{
+"concept": "kind",
+"other": 39,
+"own": 27,
+"r": 1.0543
+},
+{
+"concept": "kitchen",
+"other": 55,
+"own": 4,
+"r": 1.2679
+},
+{
+"concept": "lobster",
+"other": 8,
+"own": 2,
+"r": 1.0084
+},
+{
+"concept": "love",
+"other": 45,
+"own": 35,
+"r": 1.0227
+},
+{
+"concept": "machine",
+"other": 83,
+"own": 95,
+"r": 1.0118
+},
+{
+"concept": "madhouse",
+"other": 55,
+"own": 51,
+"r": 1.0399
+},
+{
+"concept": "maradona",
+"other": 70,
+"own": 71,
+"r": 1.0248
+},
+{
+"concept": "minister",
+"other": 64,
+"own": 65,
+"r": 1.0327
+},
+{
+"concept": "money",
+"other": 79,
+"own": 80,
+"r": 1.0267
+},
+{
+"concept": "morality",
+"other": 22,
+"own": 27,
+"r": 1.073
+},
+{
+"concept": "moss",
+"other": 58,
+"own": 68,
+"r": 1.0443
+},
+{
+"concept": "nerve",
+"other": 14,
+"own": 24,
+"r": 1.1626
+},
+{
+"concept": "object",
+"other": 87,
+"own": 96,
+"r": 1.1639
+},
+{
+"concept": "office",
+"other": 61,
+"own": 63,
+"r": 1.049
+},
+{
+"concept": "oil",
+"other": 4,
+"own": 0,
+"r": 1.0333
+},
+{
+"concept": "opec",
+"other": 80,
+"own": 71,
+"r": 1.3936
+},
+{
+"concept": "pact",
+"other": 44,
+"own": 76,
+"r": 1.0766
+},
+{
+"concept": "passion",
+"other": 45,
+"own": 28,
+"r": 1.0337
+},
+{
+"concept": "peace",
+"other": 40,
+"own": 21,
+"r": 1.0118
+},
+{
+"concept": "people",
+"other": 75,
+"own": 82,
+"r": 1.1573
+},
+{
+"concept": "performance",
+"other": 26,
+"own": 88,
+"r": 1.0201
+},
+{
+"concept": "personnel",
+"other": 61,
+"own": 73,
+"r": 1.3253
+},
+{
+"concept": "phrase",
+"other": 43,
+"own": 44,
+"r": 1.171
+},
+{
+"concept": "pie",
+"other": 2,
+"own": 5,
+"r": 1.0539
+},
+{
+"concept": "plan",
+"other": 41,
+"own": 28,
+"r": 1.0793
+},
+{
+"concept": "plate",
+"other": 2,
+"own": 87,
+"r": 1.0626
+},
+{
+"concept": "popcorn",
+"other": 0,
+"own": 1,
+"r": 1.029
+},
+{
+"concept": "prestige",
+"other": 69,
+"own": 44,
+"r": 1.0007
+},
+{
+"concept": "price",
+"other": 80,
+"own": 82,
+"r": 1.0174
+},
+{
+"concept": "project",
+"other": 33,
+"own": 41,
+"r": 1.0242
+},
+{
+"concept": "psychiatry",
+"other": 18,
+"own": 22,
+"r": 1.1372
+},
+{
+"concept": "purse",
+"other": 12,
+"own": 15,
+"r": 1.0384
+},
+{
+"concept": "rail",
+"other": 86,
+"own": 88,
+"r": 1.028
+},
+{
+"concept": "recess",
+"other": 89,
+"own": 25,
+"r": 1.0047
+},
+{
+"concept": "record",
+"other": 74,
+"own": 69,
+"r": 1.0975
+},
+{
+"concept": "registration",
+"other": 76,
+"own": 85,
+"r": 1.0836
+},
+{
+"concept": "rock",
+"other": 19,
+"own": 60,
+"r": 1.0135
+},
+{
+"concept": "row",
+"other": 74,
+"own": 69,
+"r": 1.0107
+},
+{
+"concept": "saint",
+"other": 65,
+"own": 71,
+"r": 1.1457
+},
+{
+"concept": "sandwich",
+"other": 2,
+"own": 1,
+"r": 1.1984
+},
+{
+"concept": "secret",
+"other": 39,
+"own": 44,
+"r": 1.0084
+},
+{
+"concept": "seed",
+"other": 1,
+"own": 5,
+"r": 1.0075
+},
+{
+"concept": "self",
+"other": 45,
+"own": 27,
+"r": 1.0393
+},
+{
+"concept": "sentry",
+"other": 69,
+"own": 68,
+"r": 1.1862
+},
+{
+"concept": "sex",
+"other": 35,
+"own": 21,
+"r": 1.1305
+},
+{
+"concept": "shoulder",
+"other": 15,
+"own": 14,
+"r": 1.0134
+},
+{
+"concept": "similarity",
+"other": 23,
+"own": 25,
+"r": 1.0515
+},
+{
+"concept": "situation",
+"other": 33,
+"own": 29,
+"r": 1.1176
+},
+{
+"concept": "soup",
+"other": 2,
+"own": 0,
+"r": 1.1583
+},
+{
+"concept": "sprint",
+"other": 88,
+"own": 83,
+"r": 1.0644
+},
+{
+"concept": "story",
+"other": 34,
+"own": 39,
+"r": 1.0135
+},
+{
+"concept": "stream",
+"other": 32,
+"own": 31,
+"r": 1.0839
+},
+{
+"concept": "stroke",
+"other": 14,
+"own": 90,
+"r": 1.1637
+},
+{
+"concept": "stud",
+"other": 10,
+"own": 69,
+"r": 1.0336
+},
+{
+"concept": "substance",
+"other": 4,
+"own": 5,
+"r": 1.0578
+},
+{
+"concept": "summer",
+"other": 47,
+"own": 46,
+"r": 1.0506
+},
+{
+"concept": "swamp",
+"other": 58,
+"own": 57,
+"r": 1.0132
+},
+{
+"concept": "tableware",
+"other": 83,
+"own": 87,
+"r": 1.0695
+},
+{
+"concept": "target",
+"other": 86,
+"own": 69,
+"r": 1.1145
+},
+{
+"concept": "task",
+"other": 28,
+"own": 45,
+"r": 1.1946
+},
+{
+"concept": "territory",
+"other": 56,
+"own": 44,
+"r": 1.3228
+},
+{
+"concept": "theater",
+"other": 32,
+"own": 60,
+"r": 1.0281
+},
+{
+"concept": "theme",
+"other": 11,
+"own": 84,
+"r": 1.0396
+},
+{
+"concept": "tool",
+"other": 86,
+"own": 83,
+"r": 1.159
+},
+{
+"concept": "train",
+"other": 95,
+"own": 88,
+"r": 1.1391
+},
+{
+"concept": "triumph",
+"other": 44,
+"own": 72,
+"r": 1.1696
+},
+{
+"concept": "victim",
+"other": 29,
+"own": 42,
+"r": 1.1442
+},
+{
+"concept": "victor",
+"other": 71,
+"own": 72,
+"r": 1.0264
+},
+{
+"concept": "viewer",
+"other": 84,
+"own": 31,
+"r": 1.1576
+},
+{
+"concept": "vinegar",
+"other": 4,
+"own": 7,
+"r": 1.085
+},
+{
+"concept": "vitamin",
+"other": 0,
+"own": 5,
+"r": 1.04
+},
+{
+"concept": "warning",
+"other": 20,
+"own": 44,
+"r": 1.1465
+},
+{
+"concept": "withdrawal",
+"other": 80,
+"own": 94,
+"r": 1.0307
+}
+],
+"clusters": [
+{
+"id": "LLLLL",
+"j": 0,
+"label": [
+"chocolate",
+"milk",
+"cheese"
+],
+"members": [
+"bacon",
+"butter",
+"candy",
+"cheese",
+"chocolate",
+"milk",
+"oil",
+"soup",
+"sugar"
+],
+"region": 0
+},
+{
+"id": "LLLLR",
+"j": 1,
+"label": [
+"cereal",
+"wheat",
+"bread"
+],
+"members": [
+"bread",
+"cabbage",
+"cereal",
+"cucumber",
+"flour",
+"fruit",
+"grocery",
+"popcorn",
+"potato",
+"rice",
+"sandwich",
+"wheat"
+],
+"region": 0
+},
+{
+"id": "LLLR",
+"j": 2,
+"label": [
+"meal",
+"food",
+"dinner"
+],
+"members": [
+"beef",
+"bowl",
+"breakfast",
+"diet",
+"dinner",
+"eat",
+"food",
+"lobster",
+"lunch",
+"meal",
+"meat",
+"salad",
+"seafood",
+"steak",
+"supper"
+],
+"region": 0
+},
+{
+"id": "LLRL",
+"j": 3,
+"label": [
+"alcohol",
+"liquor",
+"beverage"
+],
+"members": [
+"alcohol",
+"beer",
+"beverage",
+"bottle",
+"brandy",
+"champagne",
+"cocktail",
+"drink",
+"liquor",
+"vodka",
+"whiskey",
+"wine"
+],
+"region": 1
+},
+{
+"id": "LLRRL",
+"j": 4,
+"label": [
+"cigarette",
+"charcoal",
+"tobacco"
+],
+"members": [
+"aluminum",
+"appliance",
+"carbon",
+"charcoal",
+"cigar",
+"cigarette",
+"coal",
+"drug",
+"iron",
+"kitchen",
+"marijuana",
+"metal",
+"pot",
+"stove",
+"tobacco"
+],
+"region": 1
+},
+{
+"id": "LLRRRL",
+"j": 5,
+"label": [
+"liquid",
+"water",
+"bubble"
+],
+"members": [
+"balloon",
+"bubble",
+"egg",
+"fertility",
+"helium",
+"hypertension",
+"juice",
+"liquid",
+"pie",
+"salt",
+"seed",
+"substance",
+"vitamin",
+"water"
+],
+"region": 1
+},
+{
+"id": "LLRRRRL",
+"j": 6,
+"label": [
+"tea",
+"spoon",
+"cup"
+],
+"members": [
+"coffee",
+"cup",
+"gin",
+"herb",
+"spoon",
+"straw",
+"tea",
+"tin"
+],
+"region": 1
+},
+{
+"id": "LLRRRRR",
+"j": 7,
+"label": [
+"jar",
+"lemon",
+"mustard"
+],
+"members": [
+"bean",
+"bee",
+"honey",
+"jar",
+"lemon",
+"mustard",
+"sauce",
+"soap",
+"vinegar"
+],
+"region": 1
+},
+{
+"id": "LRLL",
+"j": 8,
+"label": [
+"animal",
+"dog",
+"pet"
+],
+"members": [
+"animal",
+"carnivore",
+"cat",
+"dog",
+"fauna",
+"feline",
+"hound",
+"insect",
+"jaguar",
+"lion",
+"mammal",
+"organism",
+"pet",
+"prey",
+"tiger"
+],
+"region": 2
+},
+{
+"id": "LRLRL",
+"j": 9,
+"label": [
+"rooster",
+"chicken",
+"bird"
+],
+"members": [
+"arrow",
+"bird",
+"chicken",
+"cock",
+"hen",
+"mouse",
+"rabbit",
+"rat",
+"rooster"
+],
+"region": 2
+},
+{
+"id": "LRLRR",
+"j": 10,
+"label": [
+"horse",
+"cattle",
+"cow"
+],
+"members": [
+"buck",
+"bull",
+"calf",
+"cattle",
+"colt",
+"cow",
+"goat",
+"horse",
+"lamb",
+"mare",
+"sheep"
+],
+"region": 2
+},
+{
+"id": "LRRLL",
+"j": 11,
+"label": [
+"fashion",
+"style",
+"elegance"
+],
+"members": [
+"beauty",
+"costume",
+"decoration",
+"elegance",
+"fashion",
+"style"
+],
+"region": 3
+},
+{
+"id": "LRRLR",
+"j": 12,
+"label": [
+"fabric",
+"cloth",
+"clothes"
+],
+"members": [
+"blanket",
+"cloth",
+"clothes",
+"coat",
+"cotton",
+"curtain",
+"fabric",
+"fur",
+"jacket",
+"linen",
+"polyester",
+"sweater"
+],
+"region": 3
+},
+{
+"id": "LRRRL",
+"j": 13,
+"label": [
+"mouth",
+"teeth",
+"tooth"
+],
+"members": [
+"brow",
+"cheek",
+"dentist",
+"ear",
+"jaw",
+"lip",
+"mouth",
+"neck",
+"nose",
+"orthodontist",
+"smile",
+"teeth",
+"throat",
+"tongue",
+"tooth"
+],
+"region": 3
+},
+{
+"id": "LRRRRL",
+"j": 14,
+"label": [
+"finger",
+"toe",
+"wrist"
+],
+"members": [
+"ankle",
+"arm",
+"elbow",
+"finger",
+"foot",
+"glove",
+"hand",
+"knee",
+"leg",
+"limb",
+"nail",
+"palm",
+"shoulder",
+"thumb",
+"toe",
+"wrist"
+],
+"region": 3
+},
+{
+"id": "LRRRRRL",
+"j": 15,
+"label": [
+"belly",
+"stomach",
+"waist"
+],
+"members": [
+"abdomen",
+"bag",
+"belly",
+"belt",
+"gut",
+"purse",
+"stomach",
+"waist"
+],
+"region": 3
+},
+{
+"id": "LRRRRRRL",
+"j": 16,
+"label": [
+"bone",
+"marrow",
+"spine"
+],
+"members": [
+"blood",
+"bone",
+"hip",
+"marrow",
+"spine"
+],
+"region": 3
+},
+{
+"id": "LRRRRRRR",
+"j": 17,
+"label": [
+"body",
+"organ",
+"flesh"
+],
+"members": [
+"anatomy",
+"body",
+"boxing",
+"chest",
+"flesh",
+"heart",
+"kidney",
+"liver",
+"lung",
+"muscle",
+"organ",
+"skin"
+],
+"region": 3
+},
+{
+"id": "RLLL",
+"j": 18,
+"label": [
+"illness",
+"disease",
+"sickness"
+],
+"members": [
+"asylum",
+"cancer",
+"clinic",
+"disability",
+"disease",
+"fever",
+"flu",
+"health",
+"hospital",
+"illness",
+"infection",
+"recovery",
+"sickness",
+"surgery",
+"treatment"
+],
+"region": 4
+},
+{
+"id": "RLLRLL",
+"j": 19,
+"label": [
+"chaos",
+"mud",
+"noise"
+],
+"members": [
+"anarchy",
+"chaos",
+"dirt",
+"hysteria",
+"mob",
+"mud",
+"noise",
+"rattle"
+],
+"region": 4
+},
+{
+"id": "RLLRLR",
+"j": 20,
+"label": [
+"danger",
+"disaster",
+"crisis"
+],
+"members": [
+"accident",
+"adversary",
+"anxiety",
+"catastrophe",
+"crisis",
+"danger",
+"disaster",
+"emergency",
+"fear",
+"harm",
+"safety",
+"terror",
+"threat",
+"tragedy"
+],
+"region": 4
+},
+{
+"id": "RLLRRL",
+"j": 21,
+"label": [
+"misery",
+"sorrow",
+"happiness"
+],
+"members": [
+"agony",
+"comfort",
+"depression",
+"despair",
+"grief",
+"happiness",
+"misery",
+"mood",
+"pain",
+"peace",
+"sex",
+"sorrow",
+"soul",
+"spirit",
+"tear"
+],
+"region": 4
+},
+{
+"id": "RLLRRR",
+"j": 22,
+"label": [
+"hostility",
+"emotion",
+"anger"
+],
+"members": [
+"aggression",
+"anger",
+"bias",
+"critic",
+"criticism",
+"emotion",
+"freud",
+"frustration",
+"hostility",
+"impartiality",
+"prejudice",
+"psychiatry",
+"psychology",
+"racism",
+"temper"
+],
+"region": 4
+},
+{
+"id": "RLRLLLL",
+"j": 23,
+"label": [
+"perception",
+"cognition",
+"belief"
+],
+"members": [
+"awareness",
+"belief",
+"cognition",
+"concept",
+"credibility",
+"discovery",
+"ignorance",
+"intuition",
+"observation",
+"perception",
+"reality",
+"recognition",
+"theory"
+],
+"region": 5
+},
+{
+"id": "RLRLLLR",
+"j": 24,
+"label": [
+"insight",
+"brain",
+"logic"
+],
+"members": [
+"brain",
+"choice",
+"confusion",
+"insight",
+"intelligence",
+"logic",
+"mind",
+"nerve",
+"opinion",
+"reason",
+"sense",
+"smart",
+"stupid",
+"wisdom"
+],
+"region": 5
+},
+{
+"id": "RLRLLRL",
+"j": 25,
+"label": [
+"proximity",
+"absence",
+"possession"
+],
+"members": [
+"absence",
+"condition",
+"criterion",
+"depth",
+"equality",
+"isolation",
+"possession",
+"presence",
+"preservation",
+"property",
+"proximity",
+"recess",
+"similarity"
+],
+"region": 5
+},
+{
+"id": "RLRLLRRL",
+"j": 26,
+"label": [
+"ability",
+"skill",
+"capability"
+],
+"members": [
+"ability",
+"capability",
+"competence",
+"confidence",
+"skill",
+"strength"
+],
+"region": 5
+},
+{
+"id": "RLRLLRRRL",
+"j": 27,
+"label": [
+"attitude",
+"manner",
+"self"
+],
+"members": [
+"attitude",
+"discipline",
+"kind",
+"manner",
+"morality",
+"self",
+"type"
+],
+"region": 5
+},
+{
+"id": "RLRLLRRRR",
+"j": 28,
+"label": [
+"action",
+"activity",
+"attention"
+],
+"members": [
+"action",
+"activity",
+"attention",
+"effort",
+"focus",
+"importance",
+"movement",
+"passion",
+"plan",
+"planning",
+"practice",
+"preparation"
+],
+"region": 5
+},
+{
+"id": "RLRLRLL",
+"j": 29,
+"label": [
+"murder",
+"justice",
+"verdict"
+],
+"members": [
+"circumstance",
+"death",
+"justice",
+"manslaughter",
+"murder",
+"precedent",
+"situation",
+"trial",
+"verdict"
+],
+"region": 5
+},
+{
+"id": "RLRLRLR",
+"j": 30,
+"label": [
+"law",
+"lawyer",
+"crime"
+],
+"members": [
+"attorney",
+"crime",
+"fraud",
+"insurance",
+"laundering",
+"law",
+"lawyer",
+"liability",
+"theft"
+],
+"region": 5
+},
+{
+"id": "RLRLRRL",
+"j": 31,
+"label": [
+"book",
+"literature",
+"reader"
+],
+"members": [
+"archive",
+"author",
+"bible",
+"book",
+"chapter",
+"fiction",
+"library",
+"literature",
+"reader",
+"recommendation",
+"stream",
+"viewer",
+"writer"
+],
+"region": 5
+},
+{
+"id": "RLRLRRRLL",
+"j": 32,
+"label": [
+"communication",
+"media",
+"television"
+],
+"members": [
+"communication",
+"conversation",
+"culture",
+"gossip",
+"history",
+"information",
+"language",
+"media",
+"radio",
+"television"
+],
+"region": 5
+},
+{
+"id": "RLRLRRRLR",
+"j": 33,
+"label": [
+"film",
+"movie",
+"image"
+],
+"members": [
+"discussion",
+"essay",
+"example",
+"experience",
+"film",
+"image",
+"impression",
+"interview",
+"movie",
+"paragraph",
+"topic",
+"video"
+],
+"region": 5
+},
+{
+"id": "RLRLRRRR",
+"j": 34,
+"label": [
+"evidence",
+"news",
+"report"
+],
+"members": [
+"article",
+"conclusion",
+"evidence",
+"fact",
+"investigation",
+"journal",
+"news",
+"newspaper",
+"proof",
+"report"
+],
+"region": 5
+},
+{
+"id": "RLRRLL",
+"j": 35,
+"label": [
+"marriage",
+"wife",
+"husband"
+],
+"members": [
+"bride",
+"couple",
+"engagement",
+"groom",
+"husband",
+"love",
+"lover",
+"maid",
+"marriage",
+"partner",
+"wife"
+],
+"region": 5
+},
+{
+"id": "RLRRLRL",
+"j": 36,
+"label": [
+"kid",
+"child",
+"baby"
+],
+"members": [
+"adult",
+"age",
+"baby",
+"boy",
+"child",
+"children",
+"crib",
+"kid",
+"son"
+],
+"region": 5
+},
+{
+"id": "RLRRLRR",
+"j": 37,
+"label": [
+"parent",
+"dad",
+"father"
+],
+"members": [
+"aunt",
+"cousin",
+"dad",
+"daughter",
+"father",
+"mother",
+"nephew",
+"parent",
+"uncle"
+],
+"region": 5
+},
+{
+"id": "RLRRRLL",
+"j": 38,
+"label": [
+"guy",
+"man",
+"brother"
+],
+"members": [
+"brother",
+"buddy",
+"friend",
+"gentleman",
+"guy",
+"lad",
+"man",
+"men"
+],
+"region": 5
+},
+{
+"id": "RLRRRLR",
+"j": 39,
+"label": [
+"chance",
+"way",
+"winner"
+],
+"members": [
+"chance",
+"course",
+"fuck",
+"god",
+"hero",
+"holy",
+"luck",
+"might",
+"possibility",
+"right",
+"second",
+"shame",
+"story",
+"way",
+"winner"
+],
+"region": 5
+},
+{
+"id": "RLRRRRL",
+"j": 40,
+"label": [
+"defeat",
+"battle",
+"defeating"
+],
+"members": [
+"argument",
+"battle",
+"defeat",
+"defeating",
+"destruction",
+"fighting",
+"loss",
+"quarrel",
+"victory",
+"war"
+],
+"region": 5
+},
+{
+"id": "RLRRRRRLL",
+"j": 41,
+"label": [
+"problem",
+"attempt",
+"difficulty"
+],
+"members": [
+"approach",
+"attempt",
+"challenge",
+"change",
+"difficulty",
+"helper",
+"idea",
+"issue",
+"problem",
+"project",
+"start"
+],
+"region": 5
+},
+{
+"id": "RLRRRRRLR",
+"j": 42,
+"label": [
+"abuse",
+"violation",
+"victim"
+],
+"members": [
+"abuse",
+"block",
+"denial",
+"root",
+"suds",
+"victim",
+"violation"
+],
+"region": 5
+},
+{
+"id": "RLRRRRRRL",
+"j": 43,
+"label": [
+"term",
+"dictionary",
+"word"
+],
+"members": [
+"definition",
+"dictionary",
+"term",
+"word"
+],
+"region": 5
+},
+{
+"id": "RLRRRRRRRL",
+"j": 44,
+"label": [
+"letter",
+"sign",
+"motto"
+],
+"members": [
+"announcement",
+"capital",
+"clue",
+"conquest",
+"gain",
+"letter",
+"motto",
+"phrase",
+"prestige",
+"prominence",
+"secret",
+"sign",
+"symbol",
+"territory",
+"warning"
+],
+"region": 5
+},
+{
+"id": "RLRRRRRRRR",
+"j": 45,
+"label": [
+"game",
+"life",
+"celebration"
+],
+"members": [
+"celebration",
+"ceremony",
+"fun",
+"game",
+"goal",
+"job",
+"joy",
+"life",
+"live",
+"parade",
+"pride",
+"task"
+],
+"region": 5
+},
+{
+"id": "RRLLL",
+"j": 46,
+"label": [
+"year",
+"month",
+"august"
+],
+"members": [
+"august",
+"birthday",
+"century",
+"date",
+"day",
+"decade",
+"era",
+"month",
+"season",
+"summer",
+"wednesday",
+"week",
+"weekend",
+"year"
+],
+"region": 6
+},
+{
+"id": "RRLLRL",
+"j": 47,
+"label": [
+"sunset",
+"evening",
+"sunrise"
+],
+"members": [
+"dawn",
+"dusk",
+"evening",
+"midday",
+"morning",
+"night",
+"noon",
+"sun",
+"sunrise",
+"sunset",
+"sunshine"
+],
+"region": 6
+},
+{
+"id": "RRLLRR",
+"j": 48,
+"label": [
+"rain",
+"storm",
+"fog"
+],
+"members": [
+"air",
+"atmosphere",
+"drought",
+"fog",
+"haze",
+"hurricane",
+"ice",
+"mist",
+"rain",
+"sky",
+"snow",
+"storm",
+"thunderstorm",
+"weather",
+"winter"
+],
+"region": 6
+},
+{
+"id": "RRLRLLL",
+"j": 49,
+"label": [
+"sofa",
+"couch",
+"furniture"
+],
+"members": [
+"chair",
+"couch",
+"furniture",
+"sofa"
+],
+"region": 6
+},
+{
+"id": "RRLRLLRL",
+"j": 50,
+"label": [
+"floor",
+"elevator",
+"tower"
+],
+"members": [
+"carpet",
+"ceiling",
+"crane",
+"elevator",
+"floor",
+"roof",
+"tower"
+],
+"region": 6
+},
+{
+"id": "RRLRLLRR",
+"j": 51,
+"label": [
+"hallway",
+"doorway",
+"corridor"
+],
+"members": [
+"alley",
+"brick",
+"cellar",
+"closet",
+"corridor",
+"door",
+"doorway",
+"hall",
+"hallway",
+"madhouse",
+"wall"
+],
+"region": 6
+},
+{
+"id": "RRLRLRL",
+"j": 52,
+"label": [
+"cemetery",
+"graveyard",
+"burial"
+],
+"members": [
+"burial",
+"cemetery",
+"graveyard"
+],
+"region": 6
+},
+{
+"id": "RRLRLRRL",
+"j": 53,
+"label": [
+"camp",
+"shelter",
+"cabin"
+],
+"members": [
+"barn",
+"cabin",
+"cage",
+"camp",
+"shelter",
+"slave",
+"volunteer",
+"zoo"
+],
+"region": 6
+},
+{
+"id": "RRLRLRRRL",
+"j": 54,
+"label": [
+"bath",
+"bathroom",
+"shower"
+],
+"members": [
+"bath",
+"bathroom",
+"shower"
+],
+"region": 6
+},
+{
+"id": "RRLRLRRRR",
+"j": 55,
+"label": [
+"bedroom",
+"hotel",
+"room"
+],
+"members": [
+"accommodation",
+"apartment",
+"bed",
+"bedroom",
+"cottage",
+"home",
+"hotel",
+"house",
+"hut",
+"inn",
+"island",
+"motel",
+"place",
+"room"
+],
+"region": 6
+},
+{
+"id": "RRLRRL",
+"j": 56,
+"label": [
+"country",
+"israel",
+"region"
+],
+"members": [
+"area",
+"brazil",
+"country",
+"israel",
+"jerusalem",
+"mexico",
+"nation",
+"north",
+"palestinian",
+"region",
+"south",
+"state",
+"turkey",
+"west",
+"zone"
+],
+"region": 6
+},
+{
+"id": "RRLRRRL",
+"j": 57,
+"label": [
+"ocean",
+"sea",
+"shore"
+],
+"members": [
+"beach",
+"coast",
+"flood",
+"lake",
+"ocean",
+"reef",
+"river",
+"sea",
+"seashore",
+"shore",
+"swamp"
+],
+"region": 6
+},
+{
+"id": "RRLRRRR",
+"j": 58,
+"label": [
+"forest",
+"woodland",
+"landscape"
+],
+"members": [
+"canyon",
+"forest",
+"garden",
+"grass",
+"hike",
+"hill",
+"landscape",
+"mountain",
+"oak",
+"timber",
+"tree",
+"valley",
+"wood",
+"woodland",
+"yard"
+],
+"region": 6
+},
+{
+"id": "RRRLLL",
+"j": 59,
+"label": [
+"ballad",
+"melody",
+"hymn"
+],
+"members": [
+"ballad",
+"choir",
+"hymn",
+"melody",
+"singer",
+"song"
+],
+"region": 7
+},
+{
+"id": "RRRLLR",
+"j": 60,
+"label": [
+"music",
+"orchestra",
+"band"
+],
+"members": [
+"band",
+"composer",
+"concert",
+"drum",
+"guitar",
+"instrument",
+"jazz",
+"music",
+"opera",
+"orchestra",
+"rhythm",
+"rock",
+"theater",
+"violin"
+],
+"region": 7
+},
+{
+"id": "RRRLRLL",
+"j": 61,
+"label": [
+"worker",
+"profession",
+"employee"
+],
+"members": [
+"doctor",
+"employee",
+"employer",
+"nurse",
+"physician",
+"profession",
+"worker"
+],
+"region": 7
+},
+{
+"id": "RRRLRLRL",
+"j": 62,
+"label": [
+"sheriff",
+"jail",
+"fbi"
+],
+"members": [
+"american",
+"citizen",
+"cop",
+"fbi",
+"inmate",
+"jail",
+"sheriff"
+],
+"region": 7
+},
+{
+"id": "RRRLRLRRL",
+"j": 63,
+"label": [
+"administration",
+"president",
+"manager"
+],
+"members": [
+"administration",
+"bush",
+"government",
+"management",
+"manager",
+"office",
+"president",
+"secretary"
+],
+"region": 7
+},
+{
+"id": "RRRLRLRRR",
+"j": 64,
+"label": [
+"governor",
+"politician",
+"leader"
+],
+"members": [
+"candidate",
+"captain",
+"chief",
+"colonel",
+"governor",
+"leader",
+"mayor",
+"politician",
+"senate"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLL",
+"j": 65,
+"label": [
+"bishop",
+"archbishop",
+"church"
+],
+"members": [
+"archbishop",
+"bishop",
+"cathedral",
+"chapel",
+"church",
+"minister",
+"ministry",
+"monk",
+"priest",
+"rabbi"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLRLL",
+"j": 66,
+"label": [
+"prince",
+"jewel",
+"princess"
+],
+"members": [
+"diamond",
+"gem",
+"jewel",
+"king",
+"pearl",
+"prince",
+"princess",
+"queen"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLRLR",
+"j": 67,
+"label": [
+"devil",
+"demon",
+"magician"
+],
+"members": [
+"beast",
+"demon",
+"devil",
+"fantasy",
+"illusion",
+"magician",
+"monster",
+"quest",
+"scheme",
+"trick",
+"wizard"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLRRLL",
+"j": 68,
+"label": [
+"star",
+"rook",
+"fox"
+],
+"members": [
+"astronomer",
+"cell",
+"constellation",
+"fox",
+"hawk",
+"maple",
+"moss",
+"ray",
+"rook",
+"sentry",
+"star"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLRRLR",
+"j": 69,
+"label": [
+"ledge",
+"cliff",
+"cradle"
+],
+"members": [
+"anchor",
+"bell",
+"bench",
+"booth",
+"cliff",
+"companion",
+"cradle",
+"guardian",
+"jackson",
+"ledge",
+"record",
+"rod",
+"row",
+"stud",
+"target"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLRRRL",
+"j": 70,
+"label": [
+"actress",
+"woman",
+"lady"
+],
+"members": [
+"actor",
+"actress",
+"biography",
+"fame",
+"gender",
+"girl",
+"lady",
+"person",
+"woman"
+],
+"region": 7
+},
+{
+"id": "RRRLRRLRRRR",
+"j": 71,
+"label": [
+"flower",
+"heroine",
+"violet"
+],
+"members": [
+"ant",
+"antecedent",
+"arafat",
+"confession",
+"flower",
+"heroine",
+"maradona",
+"opec",
+"ox",
+"saint",
+"sinner",
+"violet",
+"virtuoso"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRLLL",
+"j": 72,
+"label": [
+"soldier",
+"army",
+"troops"
+],
+"members": [
+"army",
+"deployment",
+"legion",
+"medal",
+"soldier",
+"triumph",
+"troops",
+"valor",
+"victor",
+"warrior"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRLLR",
+"j": 73,
+"label": [
+"sailor",
+"navy",
+"boat"
+],
+"members": [
+"boat",
+"crew",
+"japanese",
+"navy",
+"personnel",
+"sailor",
+"vessel",
+"yen"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRLRL",
+"j": 74,
+"label": [
+"cardboard",
+"memorabilia",
+"card"
+],
+"members": [
+"board",
+"box",
+"card",
+"cardboard",
+"category",
+"collection",
+"container",
+"deck",
+"drawer",
+"exhibit",
+"listing",
+"memorabilia",
+"museum",
+"paper"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRLRRL",
+"j": 75,
+"label": [
+"club",
+"group",
+"team"
+],
+"members": [
+"association",
+"bar",
+"club",
+"entity",
+"family",
+"fraternity",
+"group",
+"guest",
+"institution",
+"party",
+"society",
+"squad",
+"team"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRLRRR",
+"j": 76,
+"label": [
+"arrangement",
+"order",
+"ticket"
+],
+"members": [
+"admission",
+"agreement",
+"aisle",
+"appointment",
+"arrangement",
+"calendar",
+"combination",
+"order",
+"pact",
+"pair",
+"reservation",
+"ticket"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRRL",
+"j": 77,
+"label": [
+"student",
+"classroom",
+"teacher"
+],
+"members": [
+"assignment",
+"class",
+"classroom",
+"college",
+"grade",
+"harvard",
+"instructor",
+"lesson",
+"professor",
+"school",
+"student",
+"teacher",
+"yale"
+],
+"region": 7
+},
+{
+"id": "RRRLRRRRR",
+"j": 78,
+"label": [
+"championship",
+"tournament",
+"basketball"
+],
+"members": [
+"ball",
+"baseball",
+"basketball",
+"champion",
+"championship",
+"competition",
+"football",
+"match",
+"opponent",
+"racket",
+"soccer",
+"tennis",
+"tournament"
+],
+"region": 7
+},
+{
+"id": "RRRRLLL",
+"j": 79,
+"label": [
+"income",
+"wealth",
+"earning"
+],
+"members": [
+"earning",
+"income",
+"luxury",
+"poverty",
+"profit",
+"salary",
+"tax",
+"wealth"
+],
+"region": 7
+},
+{
+"id": "RRRRLLR",
+"j": 80,
+"label": [
+"cash",
+"bank",
+"currency"
+],
+"members": [
+"bank",
+"banker",
+"cash",
+"credit",
+"currency",
+"deposit",
+"dividend",
+"dollar",
+"interest",
+"investor",
+"market",
+"money",
+"payment",
+"stock",
+"trading"
+],
+"region": 7
+},
+{
+"id": "RRRRLRL",
+"j": 81,
+"label": [
+"calculation",
+"computation",
+"formula"
+],
+"members": [
+"arithmetic",
+"calculation",
+"computation",
+"equation",
+"formula"
+],
+"region": 7
+},
+{
+"id": "RRRRLRR",
+"j": 82,
+"label": [
+"number",
+"hundred",
+"bunch"
+],
+"members": [
+"bunch",
+"crowd",
+"fee",
+"five",
+"hundred",
+"minority",
+"number",
+"people",
+"percent",
+"plenty",
+"population",
+"price",
+"seven",
+"value"
+],
+"region": 7
+},
+{
+"id": "RRRRRLLLL",
+"j": 83,
+"label": [
+"computer",
+"phone",
+"internet"
+],
+"members": [
+"apple",
+"cloud",
+"computer",
+"hardware",
+"internet",
+"network",
+"phone",
+"software",
+"sprint",
+"telephone",
+"tool"
+],
+"region": 7
+},
+{
+"id": "RRRRRLLLRL",
+"j": 84,
+"label": [
+"page",
+"theme",
+"window"
+],
+"members": [
+"button",
+"menu",
+"page",
+"seepage",
+"theme",
+"window"
+],
+"region": 7
+},
+{
+"id": "RRRRRLLLRR",
+"j": 85,
+"label": [
+"code",
+"string",
+"loop"
+],
+"members": [
+"code",
+"fingerprint",
+"forecast",
+"furnace",
+"fury",
+"index",
+"log",
+"loop",
+"registration",
+"serial",
+"series",
+"string",
+"text"
+],
+"region": 7
+},
+{
+"id": "RRRRRLLRL",
+"j": 86,
+"label": [
+"weapon",
+"knife",
+"gun"
+],
+"members": [
+"blade",
+"bulb",
+"cannon",
+"gun",
+"hat",
+"head",
+"horn",
+"key",
+"keyboard",
+"knife",
+"tail",
+"weapon"
+],
+"region": 7
+},
+{
+"id": "RRRRRLLRR",
+"j": 87,
+"label": [
+"vision",
+"glass",
+"eye"
+],
+"members": [
+"artifact",
+"camera",
+"cd",
+"cone",
+"crystal",
+"disc",
+"eye",
+"glass",
+"lens",
+"oracle",
+"plate",
+"pupil",
+"reflection",
+"surface",
+"tableware",
+"vision"
+],
+"region": 7
+},
+{
+"id": "RRRRRLRL",
+"j": 88,
+"label": [
+"kilometer",
+"mile",
+"size"
+],
+"members": [
+"benchmark",
+"delay",
+"endurance",
+"inch",
+"kilometer",
+"magnitude",
+"marathon",
+"medium",
+"meter",
+"mile",
+"mink",
+"minute",
+"performance",
+"rail",
+"size",
+"train"
+],
+"region": 7
+},
+{
+"id": "RRRRRLRRL",
+"j": 89,
+"label": [
+"corner",
+"border",
+"bottom"
+],
+"members": [
+"angle",
+"border",
+"bottom",
+"boundary",
+"bridge",
+"cent",
+"center",
+"corner",
+"direction",
+"fence",
+"gate",
+"hole",
+"round",
+"side",
+"top"
+],
+"region": 7
+},
+{
+"id": "RRRRRLRRR",
+"j": 90,
+"label": [
+"line",
+"cord",
+"wire"
+],
+"members": [
+"carriage",
+"chord",
+"cord",
+"curve",
+"drizzle",
+"gauge",
+"hose",
+"line",
+"pipe",
+"steeple",
+"stroke",
+"vein",
+"wire"
+],
+"region": 7
+},
+{
+"id": "RRRRRRLL",
+"j": 91,
+"label": [
+"planet",
+"universe",
+"space"
+],
+"members": [
+"galaxy",
+"globe",
+"mars",
+"moon",
+"planet",
+"space",
+"universe",
+"world"
+],
+"region": 7
+},
+{
+"id": "RRRRRRLR",
+"j": 92,
+"label": [
+"science",
+"chemistry",
+"scientist"
+],
+"members": [
+"abundance",
+"atom",
+"biology",
+"chemistry",
+"ecology",
+"energy",
+"environment",
+"laboratory",
+"molecule",
+"nature",
+"physics",
+"pollution",
+"proton",
+"science",
+"scientist"
+],
+"region": 7
+},
+{
+"id": "RRRRRRRLL",
+"j": 93,
+"label": [
+"aviation",
+"flight",
+"plane"
+],
+"members": [
+"aviation",
+"flight",
+"jet",
+"pilot",
+"plane"
+],
+"region": 7
+},
+{
+"id": "RRRRRRRLR",
+"j": 94,
+"label": [
+"departure",
+"journey",
+"travel"
+],
+"members": [
+"airport",
+"arrival",
+"avenue",
+"cab",
+"departure",
+"exit",
+"highway",
+"journey",
+"street",
+"taxi",
+"travel",
+"trip",
+"voyage",
+"withdrawal"
+],
+"region": 7
+},
+{
+"id": "RRRRRRRRL",
+"j": 95,
+"label": [
+"vehicle",
+"automobile",
+"car"
+],
+"members": [
+"automobile",
+"basket",
+"bicycle",
+"bus",
+"car",
+"driver",
+"engine",
+"factory",
+"machine",
+"mechanic",
+"motor",
+"vehicle",
+"wagon"
+],
+"region": 7
+},
+{
+"id": "RRRRRRRRR",
+"j": 96,
+"label": [
+"business",
+"industry",
+"company"
+],
+"members": [
+"architecture",
+"business",
+"company",
+"construction",
+"consumer",
+"corporation",
+"creator",
+"development",
+"equipment",
+"implement",
+"industry",
+"infrastructure",
+"maker",
+"object",
+"operation",
+"production"
+],
+"region": 7
+},
+{
+"id": "SELF",
+"j": 97,
+"label": [
+"itself"
+],
+"members": [
+"curious",
+"strange",
+"kind",
+"clever",
+"funny",
+"honest",
+"rude",
+"boring",
+"cold",
+"small",
+"young",
+"patient",
+"slow",
+"brave",
+"gentle",
+"calm"
+],
+"region": 8
+}
+],
+"regions": [
+"LLL",
+"LLR",
+"LRL",
+"LRR",
+"RLL",
+"RLR",
+"RRL",
+"RRR",
+"self"
+]
+}

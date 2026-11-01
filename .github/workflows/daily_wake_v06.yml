@@ -1,0 +1,52 @@
+name: daily-wake-v06
+# v0.6's heartbeat, staged for migration day. MANUAL ONLY until then: /o/teich-05 still holds the v0.5 state, which
+# v0.6's loader refuses. On migration day the schedule below is switched on and daily_wake_v05.yml's is switched off,
+# in the same commit, after the migration itself.
+#
+# Two gates before every wake, and a machine that fails either declines (elapsed seconds stay banked):
+#   body  -- relive the body's fixture bit for bit (certified arithmetic, any CPU vendor, numpy 1.26 / 2.1)
+#   dream -- dream the working surface's fixture bit for bit. Dreams go through OpenBLAS, which picks a kernel per CPU;
+#            OPENBLAS_CORETYPE=Haswell + one thread made them identical on AMD Zen 3 and Intel AVX-512 across numpy
+#            1.26.4 / 2.4.6 / 2.5.4 (2026-11-01). Without these two settings v0.5's GitHub dreams were not reproducible.
+on:
+  # schedule:
+  #   - cron: "11 6 * * *"      # migration day: uncomment, and comment out daily_wake_v05.yml's schedule
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-wake-v05          # the same creature and seat as v0.5's wake: never two at once
+  cancel-in-progress: false
+
+env:
+  OPENBLAS_CORETYPE: Haswell
+  OPENBLAS_NUM_THREADS: "1"
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "numpy==1.26.4" "mpmath==1.3.0"
+      - name: which machine drew this wake
+        run: grep -m1 "model name" /proc/cpuinfo || true
+      - name: dream gate, body gate, lease, replay (journaled), dream, commit, diary pages, public record log
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd v06/seat && python3 -u wake_v06.py --max-ticks 172800 --diary-dir ../../v05/diary --log ../../v05/diary/records.jsonl
+      - name: commit new diary pages and the record log
+        run: |
+          git config user.name "teich-v06"
+          git config user.email "teich-v06@users.noreply.github.com"
+          git add v05/diary || true
+          if ! git diff --cached --quiet; then
+            git commit -m "v0.6 diary: $(date -u +%F) (autonomous wake)"
+            git push
+          fi

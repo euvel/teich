@@ -4,6 +4,10 @@ name: daily-wake-v05
 #
 # Body, self and working surface are numpy + certified float64 arithmetic, bit-identical across CPU vendors and numpy
 # 1.26 / 2.1. Every wake gates on boot; a runner that fails declines and the elapsed seconds stay banked.
+# The working surface's dreams are NOT covered by that gate: they go through OpenBLAS, which picks a kernel per CPU, so
+# dreams 3-5 (numpy 2.5.4 from the old unpinned install) are reproducible only on the runner class that dreamt them.
+# From 2026-11-01 numpy is pinned and OpenBLAS is held to one kernel and one thread, which made dreams identical on AMD
+# and Intel (v06_lab recon study); v0.6's wake adds a dream gate on top.
 # One day of its life (with its nightly dream) took ~155 s on the drill; --max-ticks caps one wake at 2 days so a wake
 # always fits its 15-minute lease. After the wake it writes each new night's diary page and its whole public record log
 # (v05/diary/records.jsonl — anyone can re-check every act: python3 v05/build/verify_live_v05.py v05/diary/records.jsonl).
@@ -19,6 +23,10 @@ concurrency:
   group: daily-wake-v05
   cancel-in-progress: false
 
+env:
+  OPENBLAS_CORETYPE: Haswell
+  OPENBLAS_NUM_THREADS: "1"
+
 jobs:
   wake:
     runs-on: ubuntu-24.04
@@ -28,7 +36,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install "numpy<3" mpmath
+      - run: pip install "numpy==1.26.4" "mpmath==1.3.0"
       - name: which machine drew this wake
         run: grep -m1 "model name" /proc/cpuinfo || true
       - name: gate-on-boot, lease, replay, dream, commit, diary pages, public record log
