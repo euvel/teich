@@ -83,8 +83,15 @@ async function readSeats() {
   await Promise.all(SEATS.map(readSeat));
   const up = SEATS.filter((n) => peeks[n] && peeks[n].alive).length;
   text($("sd-text"), up + " of 5 seats alive");
-  const pins = SEATS.filter((n) => peeks[n] && peeks[n].last_pin_ts).map((n) => n + " " + ago(peeks[n].last_pin_ts));
-  text($("pins"), pins.length ? "off-site encrypted backups (IPFS), last pinned: " + pins.join(" · ") : "off-site backups: status not published by this seat version");
+  const GEN = { "teich-05": "v0.6", "teich-04": "v0.4", "teich-03": "v0.3", "teich-02": "v0.2", "teich": "v0.1" };
+  const row = $("pins"); row.innerHTML = "";
+  SEATS.forEach((n) => {                         // a backup older than two days is shown as late, never as fine
+    const p = peeks[n], ts = p && p.last_pin_ts, fresh = ts && Date.now() - ts < 2 * 86400000;
+    const s = document.createElement("span"), d = document.createElement("span");
+    d.className = "dot " + (ts ? (fresh ? "on" : "wait") : "off"); s.appendChild(d);
+    s.appendChild(document.createTextNode(GEN[n] + " " + (ts ? "pinned " + ago(ts) : "no pin reported")));
+    row.appendChild(s);
+  });
 }
 function tickOwed() {
   const p = peeks["teich-05"];
@@ -421,13 +428,13 @@ async function verifyAll() {
   const fails = res.slice(0, 4).filter((x) => x === false).length + (chain && chain.ok < chain.n ? 1 : 0);
   const done = res.slice(0, 4).filter((x) => x === true).length;
   const parts = [];
-  if (res[1] === true) parts.push("re-decided " + NIGHTS.length + " of " + NIGHTS.length + " ties");
+  if (res[1] === true) parts.push(NIGHTS.length + " of " + NIGHTS.length + " ties re-decided to the same region");
   if (res[2] === true) parts.push("its record chain is intact");
   if (res[3] === true) parts.push("its book matches its anchors");
   if (chain && chain.n) parts.push(chain.ok + " of " + chain.n + " identity links recompute");
   b.className = "banner" + (fails ? " bad" : "");
   b.textContent = fails ? fails + " check" + (fails > 1 ? "s" : "") + " failed in this browser. See above." :
-    "Your browser " + (parts.length ? parts.join(", ") : "ran " + done + " checks") + ". Computed on your machine, not ours.";
+    "Checked in your browser: " + (parts.length ? parts.join(", ") : done + " checks passed") + ". Computed on your machine, not ours.";
   const st = $("st-verified"); st.className = "verified " + (fails ? "bad" : "ok");
   st.textContent = fails ? "✗ a check failed in this browser" : "✓ verified in this browser";
 }

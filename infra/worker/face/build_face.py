@@ -25,7 +25,6 @@ def page():
     ])
     assert "</script" not in js.lower(), "a closing script tag inside the inline script would end it early"
     out = html.replace("{{CSS}}", (F / "face.css").read_text()).replace("{{JS}}", js)
-    out = out.replace("{{CLOSING}}", (F / "legacy" / "closing_note.html").read_text())
     for k, v in legacy.items():
         out = out.replace("{{LEGACY_" + k + "}}", v)
     left = re.findall(r"\{\{[A-Z0-9_]+\}\}", out)

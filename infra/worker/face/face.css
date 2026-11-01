@@ -186,7 +186,16 @@ table.g th, table.g td { text-align: left; padding: .55rem .6rem .55rem 0; borde
 table.g th { font: 500 .7rem/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
 table.g td.r { font-family: var(--mono); color: var(--live); white-space: nowrap; }
 
-footer { padding: 3rem 0 4rem; font-size: .84rem; color: var(--dim); }
-footer .wrap { display: flex; flex-direction: column; gap: .9rem; }
-footer .pins { font: 400 .74rem/1.6 var(--mono); color: var(--faint); }
+footer { border-top: 1px solid var(--rule); padding: 3.2rem 0 2.4rem; font-size: .86rem; color: var(--dim); }
+.foot { display: grid; grid-template-columns: 1.1fr 1.4fr .9fr; gap: clamp(1.5rem, 4vw, 3.5rem); }
+@media (max-width: 860px) { .foot { grid-template-columns: 1fr; } }
+.foot .brand { font-size: 1rem; }
+.foot p { margin: .8rem 0 0; line-height: 1.6; max-width: 46ch; }
+.foot .eyebrow { margin: 0; color: var(--faint); }
+.flinks { list-style: none; margin: .8rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .45rem; }
+.footbar { margin-top: 2.6rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: .6rem 1.6rem;
+  font: 400 .72rem/1.5 var(--mono); color: var(--faint); }
+.footbar > span:first-child { letter-spacing: .14em; text-transform: uppercase; }
+.pinrow { display: flex; flex-wrap: wrap; gap: .4rem 1.3rem; }
+.pinrow .dot { margin-right: .4rem; }
 .nojs { display: none; } html.no-js .nojs { display: block; }
