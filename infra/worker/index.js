@@ -134,7 +134,11 @@ export class TeichSeat extends DurableObject {
         }),
       });
       const out = await r.json();
-      const ev = { i: head.i, hash: head.hash, ipfs: out.IpfsHash || out, encrypted: true };
+      if (!out.IpfsHash) {               // a refusal (e.g. plan limit) is not a pin: log it as an error, retry next hour
+        this.#event("pinata-pin-error", { i: head.i, status: r.status, refused: out.error || out });
+        return { error: "pinata refused", status: r.status, refused: out.error || out };
+      }
+      const ev = { i: head.i, hash: head.hash, ipfs: out.IpfsHash, encrypted: true };
       this.#event("pinata-pin", ev);
       return { ok: !!out.IpfsHash, ...ev };
     } catch (e) {
