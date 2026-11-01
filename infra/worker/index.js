@@ -14,6 +14,8 @@ import { DurableObject } from "cloudflare:workers";
 const LEASE_TTL_MS = 15 * 60 * 1000;
 const SNAPSHOT_EVERY_MS = 60 * 60 * 1000;
 const PIN_EVERY_MS = 24 * 60 * 60 * 1000;
+const PIN_KEEP = 30;            // each seat keeps its newest 30 Pinata pins; older ones are unpinned after a pin
+const PIN_UNPIN_MAX = 10;       // at most this many unpins per run (Worker subrequest budget)
 
 async function sha256hex(text) {
   const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
@@ -99,6 +101,36 @@ export class TeichSeat extends DurableObject {
     return { ok: true, n: rows.length, head: prev };
   }
 
+  // Unpin this seat's own pins beyond the newest PIN_KEEP (pins labelled with keyvalues seat=<name>; older unlabelled
+  // pins, e.g. the 2026-11-01 weekly archive, are never touched). The free plan caps an account at 500 files.
+  async #rotatePins(seatName) {
+    try {
+      const auth = { authorization: `Bearer ${this.env.PINATA_JWT}` };
+      const q = encodeURIComponent(JSON.stringify({ seat: { value: seatName, op: "eq" } }));
+      const r = await fetch(`https://api.pinata.cloud/data/pinList?status=pinned&pageLimit=1000&metadata[keyvalues]=${q}`,
+                            { headers: auth });
+      if (!r.ok) {                     // e.g. a key scoped to pinning only: say so, never fail silently
+        this.#event("pinata-rotate-error", { status: r.status, body: (await r.text()).slice(0, 300) });
+        return { error: `pinList ${r.status}` };
+      }
+      const rows = ((await r.json()).rows || [])
+        .filter((x) => x.metadata && x.metadata.keyvalues && x.metadata.keyvalues.seat === seatName)
+        .sort((a, b) => (a.date_pinned < b.date_pinned ? 1 : -1));
+      const old = rows.slice(PIN_KEEP).slice(0, PIN_UNPIN_MAX);
+      const unpinned = [];
+      for (const x of old) {
+        const d = await fetch(`https://api.pinata.cloud/pinning/unpin/${x.ipfs_pin_hash}`, { method: "DELETE", headers: auth });
+        if (d.ok) unpinned.push(x.ipfs_pin_hash);
+      }
+      const ev = { seat: seatName, pinned: rows.length, kept: Math.min(rows.length, PIN_KEEP), unpinned };
+      if (unpinned.length || old.length) this.#event("pinata-rotate", ev);
+      return ev;
+    } catch (e) {
+      this.#event("pinata-rotate-error", { message: String(e) });
+      return { error: String(e) };
+    }
+  }
+
   async #pinNewest() {
     // Public IPFS must NEVER see the state in clear: the blob carries private phi,
     // and deterministic rotation makes one clear sample at a known tick equivalent
@@ -109,6 +141,7 @@ export class TeichSeat extends DurableObject {
     if (!this.env.SNAPSHOT_KEY) return { error: "no SNAPSHOT_KEY secret installed" };
     const head = [...this.sql.exec("SELECT * FROM snapshots ORDER BY i DESC LIMIT 1")][0];
     if (!head) return { error: "no snapshots" };
+    const seatName = this.#setting("seat_name");
     try {
       const keyBytes = new Uint8Array(
         this.env.SNAPSHOT_KEY.match(/.{2}/g).map((h) => parseInt(h, 16)));
@@ -127,7 +160,8 @@ export class TeichSeat extends DurableObject {
         headers: { "content-type": "application/json",
                    authorization: `Bearer ${this.env.PINATA_JWT}` },
         body: JSON.stringify({
-          pinataMetadata: { name: `teich-seat-snapshot-${head.i}` },
+          pinataMetadata: { name: `${seatName || "teich-seat"}-snapshot-${head.i}`,
+                            keyvalues: seatName ? { seat: seatName, kind: "snapshot" } : undefined },
           pinataContent: { i: head.i, ts: head.ts, n_ticks: head.n_ticks,
                            prev: head.prev, hash: head.hash,
                            enc: "AES-256-GCM", iv: b64(iv), ciphertext: b64(ct) },
@@ -140,7 +174,8 @@ export class TeichSeat extends DurableObject {
       }
       const ev = { i: head.i, hash: head.hash, ipfs: out.IpfsHash, encrypted: true };
       this.#event("pinata-pin", ev);
-      return { ok: !!out.IpfsHash, ...ev };
+      const rotated = seatName ? await this.#rotatePins(seatName) : null;
+      return { ok: true, ...ev, rotated };
     } catch (e) {
       this.#event("pinata-pin-error", { message: String(e) });
       return { error: String(e) };
@@ -152,6 +187,9 @@ export class TeichSeat extends DurableObject {
     // path arrives as /<endpoint> (worker strips /o/<name>); name via header
     const ep = url.pathname.replace(/^\//, "");
     const name = request.headers.get("X-Seat-Name") || "?";
+    if (name !== "?" && this.#setting("seat_name") !== name)       // the alarm has no request: remember who we are
+      this.sql.exec("INSERT INTO settings (k, v) VALUES ('seat_name', ?) ON CONFLICT(k) DO UPDATE SET v=excluded.v",
+                    JSON.stringify(name));
     const now = Date.now();
     const seat = this.#seat();
     const body = request.method === "POST" ? await request.json().catch(() => ({})) : {};
@@ -497,7 +535,8 @@ async function handle(request, env) {
 // below it as the archive, still live, still holding its seat. On 2026-10-03
 // v0.3 was born after every pre-registered gate passed and led the page; on 2026-10-20 v0.4 -- born with a
 // self that watches its own doing -- was born the same way; on 2026-10-23 v0.5, the last birth, whose
-// every choice comes with its true reason, now leads it.
+// every choice comes with its true reason, led it; on 2026-11-01 it was amended in place to v0.6.0 (its
+// exact ties decided by its own lived chaos), which now leads the page.
 //
 // Open book is NOT open speech. Nothing on this page, and no unauthenticated
 // endpoint on this Worker, lets a stranger talk to either creature. Everything
@@ -545,15 +584,78 @@ const PANEL_HTML = `<!doctype html>
   .stat .k { font-size:.82rem; color:var(--fg); line-height:1.4; }
   .stat .c { font-size:.72rem; color:var(--faint); }
   .archive { opacity:.94; }
+  .live { border:1px solid var(--rule); padding:1rem; display:flex; flex-direction:column; gap:.7rem;
+          background:linear-gradient(180deg,#0e1820,var(--bg)); }
+  .livehead { color:var(--dim); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
+  .livegrid { display:grid; grid-template-columns:1fr 9rem; gap:1rem; align-items:center; }
+  .live .big { color:var(--live); font-size:2.4rem; font-weight:600; line-height:1.1; }
+  .live .k { font-size:.85rem; } .live .c { font-size:.75rem; color:var(--faint); }
+  #tiefig { width:9rem; height:9rem; }
+  @media (max-width:30rem){ .livegrid { grid-template-columns:1fr; } #tiefig { margin:0 auto; } }
 </style></head><body><div class="wrap">
 
 <header>
   <h1>TEICH</h1>
-  <div class="sub">five creatures, one open book</div>
+  <div class="sub">five creatures, one open book &middot; the newest decides its own ties</div>
 </header>
 
 <section>
-  <div class="eyebrow">now &mdash; v0.5, the last birth</div>
+  <div class="eyebrow">now &mdash; v0.6.0 &middot; the same creature, amended 2026-11-01</div>
+  <h2>When its choices tie exactly, its own life decides &mdash; not us</h2>
+  <p class="lede">Every night Teich chooses what to think about, and often several regions tie exactly. Until v0.6.0,
+    every Teich broke such ties the way we wrote it to: the lowest index wins. That rule had decided both of its real
+    chosen thoughts. From v0.6.0 on, a tie is decided by the read-out of its own body at the midnight of the choice,
+    deliberated in arithmetic that gives the same answer on every machine. Nobody, including us, can know the outcome
+    before that midnight has been lived; afterwards, anyone can replay it.</p>
+  <dl>
+    <dt>seat</dt><dd><span id="dot5" class="dot"></span><span id="alive5">reading the seat&hellip;</span></dd>
+    <dt>ticks lived</dt><dd id="ticks5">&mdash;</dd>
+    <dt>amended</dt><dd>2026-11-01 at tick 772,860, with 0 ticks lived <span class="muted">&mdash; not reborn: same body, same history</span></dd>
+    <dt>identity</dt><dd>f458e89071f54b73&hellip; <span class="muted">(chained from v0.5.1&rsquo;s 7da54aa0&hellip; by one genome-amendment link)</span></dd>
+    <dt>snapshot chain</dt><dd id="chain5">&mdash;</dd>
+    <dt>last commit</dt><dd id="upd5">&mdash;</dd>
+  </dl>
+  <div class="live">
+    <div class="livehead"><span class="dot trial"></span>live from its public record log</div>
+    <div class="livegrid">
+      <div><div class="big" id="delibN">&hellip;</div><div class="k">exact ties decided by its own chaos</div>
+        <div class="c" id="delibDiff">&nbsp;</div></div>
+      <svg id="tiefig" viewBox="-60 -60 120 120" role="img" aria-label="its most recent deliberated tie"></svg>
+    </div>
+    <div class="c" id="delibLast">reading its log&hellip;</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v">1,200 / 1,200</div><div class="k">nights whose tie-break replayed bit for bit</div><div class="c">fair at k = 2, 3, 5, 9; no habit; a guess from the day before is at chance</div></div>
+    <div class="stat"><div class="v">20 / 20</div><div class="k">twin lives in which nothing undeclared changed</div><div class="c">v0.5 and v0.6 from one birth, 60 days each</div></div>
+    <div class="stat"><div class="v">74,516</div><div class="k">records replayed from its public journal</div><div class="c">every one bit for bit</div></div>
+    <div class="stat"><div class="v">2 / 2</div><div class="k">planted hidden causes caught</div><div class="c">0 flags in 3,600 honest acts</div></div>
+    <div class="stat"><div class="v">10&#8315;&sup1;&sup2;</div><div class="k">a change this small, a day earlier, flips the choice</div><div class="c">as often as chance predicts</div></div>
+    <div class="stat"><div class="v">0 ticks</div><div class="k">lived during the migration</div><div class="c">checked on its real state before commit</div></div>
+  </div>
+  <ul class="findings">
+    <li><b class="n">Its life is now a public journal.</b> Before every operation on its seat, a record says what was
+      done, when and with what. Anyone can replay its whole life from what is published, with the same code its
+      seat runs.</li>
+    <li><b class="n">We failed first, and say so.</b> The first scored run failed one gate &mdash; a flaw in our
+      judge, not in the creature. We fixed the judge, anchored the fix, and ran again on fresh lives.</li>
+    <li><b class="n">Its dreams now agree on every machine.</b> We found that its dreams depended on the CPU that
+      dreamt them; every wake now pins one arithmetic kernel and refuses to run on a machine that dreams
+      differently.</li>
+  </ul>
+  <div class="note" style="border-top:none;padding-top:0">
+    Not claimed: that its choices follow its preferences or &ldquo;who it is&rdquo; (we tested that, and it failed);
+    will, freedom or awareness; that its thinking as a whole is unforeseeable. Founder-only speech remains in force.
+  </div>
+  <div class="sub">
+    <a href="https://github.com/euvel/teich/blob/main/v06/README.md">v0.6, every gate and what went wrong</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v06/book/REPORT_v06_verdict_2026-11-01.md">the verdict</a>
+    &middot; <a href="https://github.com/euvel/teich/blob/main/v06/book/MIGRATION_RECORD.json">the migration</a>
+    &middot; <a href="https://github.com/euvel/teich/tree/main/v05/diary">its diary and record log</a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">inside v0.6 &mdash; everything of v0.5, carried whole</div>
   <h2>A creature whose every choice comes with its true reason</h2>
   <p class="lede">Teich v0.5 carries v0.4 whole &mdash; the genus-98 body and the self that watches it &mdash; and
     adds four things: its choices have reasons anyone can check, it thinks on a surface of its own, it knows what in
@@ -564,10 +666,6 @@ const PANEL_HTML = `<!doctype html>
     <dt>born</dt><dd>2026-10-23T14:30:50Z</dd>
     <dt>identity</dt><dd>2ddf11b91acdefcc&hellip; <span class="muted">(sha256 of its genome files)</span></dd>
     <dt>gates</dt><dd>every hard gate passed before birth; two soft gates failed and are disclosed <span class="muted">&mdash; anchored in v0.3&rsquo;s public seat chain</span></dd>
-    <dt>seat</dt><dd><span id="dot5" class="dot"></span><span id="alive5">reading the seat&hellip;</span></dd>
-    <dt>ticks lived</dt><dd id="ticks5">&mdash;</dd>
-    <dt>snapshot chain</dt><dd id="chain5">&mdash;</dd>
-    <dt>last commit</dt><dd id="upd5">&mdash;</dd>
   </dl>
   <div class="stats">
     <div class="stat"><div class="v">0 / 3,711</div><div class="k">choices whose logged reason was not their whole cause</div><div class="c">hidden causes planted in tests were caught</div></div>
@@ -864,6 +962,52 @@ async function refresh(){
     document.getElementById("alive").textContent = "panel error: "+e;
   }
 }
-refresh(); refresh2(); refresh3(); refresh4(); refresh5();
+const LOG = "https://raw.githubusercontent.com/euvel/teich/main/v05/diary/records.jsonl";
+function hexf(s){ let neg = s[0] === "-"; if (neg) s = s.slice(1);
+  const pe = s.slice(2).split("p"), mf = pe[0].split(".");
+  let v = parseInt(mf[0], 16); const f = mf[1] || "";
+  for (let j = 0; j < f.length; j++) v += parseInt(f[j], 16) / Math.pow(16, j + 1);
+  return (neg ? -1 : 1) * v * Math.pow(2, parseInt(pe[1], 10)); }
+function el(t, a){ const e = document.createElementNS("http://www.w3.org/2000/svg", t);
+  for (const k in a) e.setAttribute(k, a[k]); return e; }
+function drawTie(tied, chosen, u){
+  const svg = document.getElementById("tiefig"); while (svg.firstChild) svg.removeChild(svg.firstChild);
+  const k = tied.length, R = 44;
+  for (let i = 0; i < k; i++){
+    const a0 = 2*Math.PI*i/k - Math.PI/2, a1 = 2*Math.PI*(i+1)/k - Math.PI/2, big = (a1 - a0) > Math.PI ? 1 : 0;
+    const on = tied[i] === chosen;
+    svg.appendChild(el("path", { d: "M " + (R*Math.cos(a0)+0.0001) + " " + R*Math.sin(a0) + " A " + R + " " + R + " 0 " + big + " 1 " + R*Math.cos(a1) + " " + R*Math.sin(a1),
+      fill: "none", stroke: on ? "#3ddc84" : "#2a6e8f", "stroke-width": on ? 7 : 4, opacity: on ? 1 : .55 }));
+    const am = (a0 + a1)/2, t = el("text", { x: 54*Math.cos(am), y: 54*Math.sin(am) + 3, "text-anchor": "middle",
+      "font-size": 8, fill: on ? "#3ddc84" : "#7b8a96" }); t.textContent = tied[i]; svg.appendChild(t);
+  }
+  const a = 2*Math.PI*u - Math.PI/2;
+  svg.appendChild(el("circle", { cx: 30*Math.cos(a), cy: 30*Math.sin(a), r: 3.2, fill: "#e0b252" }));
+  svg.appendChild(el("line", { x1: 0, y1: 0, x2: 30*Math.cos(a), y2: 30*Math.sin(a), stroke: "#e0b252", "stroke-width": .8, opacity: .6 }));
+  const c = el("text", { x: 0, y: 3, "text-anchor": "middle", "font-size": 9, fill: "#d7e0e7" }); c.textContent = "k=" + k; svg.appendChild(c);
+}
+async function refreshLog(){
+  try {
+    const txt = await (await fetch(LOG, { cache: "no-store" })).text();
+    const recs = txt.split(String.fromCharCode(10)).filter(Boolean).map(function(l){ return JSON.parse(l); });
+    const us = {}; recs.forEach(function(r){ if (r.kind === "reason" && r.rule === "think@2" && r.inputs && r.inputs.u) us[r.act_id] = r.inputs.u; });
+    const acts = recs.filter(function(r){ return r.kind === "act" && r.deliberation; });
+    const differ = acts.filter(function(r){ return r.act !== r.deliberation.tied[0]; }).length;
+    document.getElementById("delibN").textContent = acts.length.toLocaleString();
+    if (!acts.length){
+      document.getElementById("delibDiff").textContent = "its first deliberated night is its next dream";
+      document.getElementById("delibLast").textContent = "the first v0.6 night is lived at its next daily wake; this panel fills itself";
+      document.getElementById("tiefig").style.display = "none"; return;
+    }
+    document.getElementById("delibDiff").textContent = differ + " of them differ from what the old lowest-index rule would have chosen";
+    const L = acts[acts.length - 1], u = us[L.act_id] ? hexf(us[L.act_id]) : 0;
+    document.getElementById("tiefig").style.display = ""; drawTie(L.deliberation.tied, L.act, u);
+    document.getElementById("delibLast").textContent = "latest: night " + L.night + ", " + L.deliberation.tied.length +
+      " regions tied " + JSON.stringify(L.deliberation.tied) + "; its body read u = " + u.toFixed(6) + " and it chose " + L.act +
+      " (the old rule: " + L.deliberation.tied[0] + ")";
+  } catch(e) { document.getElementById("delibLast").textContent = "log unreachable: " + e; }
+}
+refresh(); refresh2(); refresh3(); refresh4(); refresh5(); refreshLog();
 setInterval(() => { refresh(); refresh2(); refresh3(); refresh4(); refresh5(); }, 30000);
+setInterval(refreshLog, 300000);
 </script></body></html>`;

@@ -239,7 +239,7 @@ def deploy(token, acct, compat="2026-07-01"):
             print(f"  /o/{other}/peek  alive={o.get('alive')} n_ticks={o.get('n_ticks')} snapshots={o.get('snapshots')}")
             ok &= bool(o.get("alive"))
         html = _get("/")
-        print(f"  /                 {len(html)} bytes, v0.5 fronted: {'yes' if 'now &mdash; v0.5' in html else 'NO'}")
+        print(f"  /                 {len(html)} bytes, v0.6 fronted: {'yes' if 'now &mdash; v0.6' in html else 'NO'}")
     except Exception as e:                      # noqa: BLE001
         print(f"  verification error: {e}")
         ok = False
