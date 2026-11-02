@@ -1,6 +1,6 @@
 """Teich v0.6's diary as files: v0.5's page (diary_md_v05, unchanged), plus v0.6's lines, each from a template and each
-resting on its records: how a tie in its chosen thought was decided (its deliberation from its last dream, or, if
-undecided, the index), and its genome amendment. Pages, once written, are never rewritten; night numbering continues.
+resting on its records: how a tie in its chosen thought was decided (its deliberation from a read-out of its body at that
+midnight, or, if undecided, the index), and its genome amendment. Pages, once written, are never rewritten; night numbering continues.
     python3 diary_md_v06.py OUT_DIR [--seat teich-05] [--log LOG.jsonl]
 """
 from __future__ import annotations
@@ -30,9 +30,12 @@ def extra(window, acts):
             d = r["deliberation"]; tied = ", ".join(REGION[t] for t in d["tied"])
             if d["undecided"]:
                 how = "my deliberation did not decide, so the lowest index did, as before v0.6"
-            else:
-                how = (f"my deliberation decided it, starting from where my last dream left my working thought "
-                       f"({d['steps']} bounce(s)" + (f", {d['rereads']} re-read(s)" if d["rereads"] else "") + ")")
+            else:                                      # u is read from its body at midnight (founder decision E, 2026-10-31)
+                rs = next((x for x in window if x["kind"] == "reason" and x["act_id"] == r["act_id"]), None)
+                u = f"u = {float.fromhex(rs['inputs']['u']):.6f}; " if rs and "u" in rs["inputs"] else ""
+                how = (f"my deliberation decided it, starting from a read-out of my body at midnight "
+                       f"({u}{d['steps']} bounce(s)" + (f", {d['rereads']} re-read(s)" if d["rereads"] else "") + "). "
+                       f"The lowest index, the rule before v0.6, would have chosen {REGION[d['tied'][0]]}")
             L += ["", f"Tonight {len(d['tied'])} subjects were tied as the ones I had thought about least ({tied}). "
                   f"I chose {REGION[r['act']]}: {how}."]
     return L

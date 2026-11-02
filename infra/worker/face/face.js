@@ -120,7 +120,8 @@ async function readLog() {
   RECS.forEach((r) => { if (r.kind === "reason" && r.rule === "think@2") reasons[r.act_id] = r; });
   NIGHTS = RECS.filter((r) => r.kind === "act" && r.deliberation && reasons[r.act_id]).map((a) => {
     const rs = reasons[a.act_id];
-    return { night: a.night, seq: a.seq, tied: a.deliberation.tied, act: a.act, steps: a.deliberation.steps,
+    // night numbers as its diary names them (night-0009 = night 9)
+    return { night: a.night + 1, seq: a.seq, tied: a.deliberation.tied, act: a.act, steps: a.deliberation.steps,
              uHex: rs.inputs.u, u: DELIB.hexf(rs.inputs.u), lc: rs.inputs.life_counts, old: a.deliberation.tied[0] };
   });
   const diff = NIGHTS.filter((n) => n.act !== n.old).length;
@@ -139,7 +140,7 @@ function drawRings() {
   const g = $("rings");
   while (g.lastChild && g.lastChild.tagName !== "title") g.removeChild(g.lastChild);
   svg("circle", { r: 104, fill: "none", stroke: "#1b2630", "stroke-width": 0.6 }, g);
-  svg("circle", { r: 14, fill: "none", stroke: "#24323e", "stroke-width": 0.6 }, g);
+  if (!NIGHTS.length) svg("circle", { r: 14, fill: "none", stroke: "#24323e", "stroke-width": 0.6 }, g);
   $("rings-empty").style.display = NIGHTS.length ? "none" : "flex";
   if (!NIGHTS.length) {
     for (let i = 0; i < 9; i++) {
@@ -148,7 +149,9 @@ function drawRings() {
     }
     return;
   }
-  const n = NIGHTS.length, inner = 20, outer = 100, w = Math.min(6, (outer - inner) / n), gap = Math.min(1.2, w * 0.25);
+  const n = NIGHTS.length, inner = 20, outer = 100, w = Math.min(n < 4 ? 11 : 6, (outer - inner) / n), gap = Math.min(1.2, w * 0.25);
+  const lbl = svg("text", { y: 3, "text-anchor": "middle", "font-size": 6.5, "font-family": "IBM Plex Mono, monospace", fill: "#8796a1" }, g);
+  lbl.textContent = n + (n === 1 ? " night" : " nights");
   NIGHTS.forEach((N, i) => {
     const r = inner + (i + 0.5) * w, k = N.tied.length, differs = N.act !== N.old;
     const ring = svg("g", { tabindex: 0, role: "button", "aria-label": "night " + N.night + ": " + k + " regions tied, it chose " + REGION[N.act] }, g);
@@ -167,7 +170,7 @@ function drawRings() {
       $("ringtip").innerHTML = "";
       const line = (s) => { const d = document.createElement("div"); d.innerHTML = s; $("ringtip").appendChild(d); };
       line("<b>night " + N.night + "</b> · " + k + " regions tied: " + N.tied.map((t) => REGION[t]).join(", "));
-      line("its body read u = <b>" + N.u.toFixed(6) + "</b> · " + N.steps + " steps · it chose <b>" + REGION[N.act] + "</b>" +
+      line("its body read u = <b>" + N.u.toFixed(6) + "</b> · " + N.steps + " reflections · it chose <b>" + REGION[N.act] + "</b>" +
            (differs ? " · the old rule would have chosen " + REGION[N.old] : " · the old rule would have agreed"));
       line('<a href="' + (DEMO ? "#" : "https://github.com/euvel/teich/blob/main/v05/diary/records.jsonl") + '">its record</a> · ' +
            '<a href="#decides" data-night="' + i + '">re-decide this night</a>');
@@ -209,7 +212,7 @@ async function tonight() {
     c.textContent = REGION[t]; $("t-tied").appendChild(c); });
   text($("t-old"), REGION[N.old]);
   text($("t-u"), "u = " + N.u.toFixed(6));
-  text($("t-chose"), REGION[N.act] + " · " + N.steps + " steps");
+  text($("t-chose"), REGION[N.act] + " · " + (N.steps ? N.steps + " reflection" + (N.steps > 1 ? "s" : "") : "landed at once"));
   const re = DELIB.think2(N.lc, N.uHex);
   text($("t-re"), re.region === N.act ? "✓ the same region" : "✗ a different region (" + REGION[re.region] + ")");
   text($("t-note"), "");

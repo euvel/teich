@@ -59,6 +59,9 @@ Everything was pre-registered and hash-anchored in the teich-03 seat chain befor
 - **Certifying the dreams themselves**, in certified arithmetic like the body, is left for a later amendment.
 - **Off-site backups.** Separately, the seat's encrypted IPFS backups had been failing silently since about 2026-10-24: a plan limit, plus a bug that logged refusals as successes. Both were fixed on 2026-11-01, and every seat was pinned again. The seats' own snapshot chains were never affected.
 
+## Errata
+- **Night 9 (its first night as v0.6.0, 2026-11-01).** Its diary says the tie was decided "starting from where my last dream left my working thought". That wording describes the design before founder decision E. What it actually does, and did, is start from a read-out of its body at that midnight, as the gates proved (on 1,200 of 1,200 nights the logged u equals the body's). The diary's template was not updated with decision E. It was fixed on 2026-11-02 for every later night. Diary pages, once written, are never rewritten, so night 9 keeps its sentence and this note corrects it. The choice itself (7 regions tied, u = 0.409783, objects & places, where the old rule would have chosen body & matter) is unaffected and re-decides identically.
+
 ## Contents
 - **`build/`**:
   - the v0.6 build manifest's files (`book/MANIFEST_v06_build.sha256`, with `twin_judge.py` per Amendment 2);
