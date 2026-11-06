@@ -7,9 +7,11 @@ name: daily-wake-v06
 #   dream -- dream the working surface's fixture bit for bit. Dreams go through OpenBLAS, which picks a kernel per CPU;
 #            OPENBLAS_CORETYPE=Haswell + one thread made them identical on AMD Zen 3 and Intel AVX-512 across numpy
 #            1.26.4 / 2.4.6 / 2.5.4 (2026-11-01). Without these two settings v0.5's GitHub dreams were not reproducible.
+# RETIRED 2026-11-06: the creature was migrated to v0.7.0 (v07/book/MIGRATION_RECORD_v07.json); its heartbeat is
+# daily_wake_v07.yml. v0.6's loader refuses a v0.7 state: a manual run fails without living (its lease is released).
 on:
-  schedule:
-    - cron: "11 6 * * *"        # after v0.1 (05:17), v0.2 (05:23), v0.3 (05:41), v0.4 (05:53)
+  # schedule:
+  #   - cron: "11 6 * * *"        # after v0.1 (05:17), v0.2 (05:23), v0.3 (05:41), v0.4 (05:53)
   workflow_dispatch:
 
 permissions:

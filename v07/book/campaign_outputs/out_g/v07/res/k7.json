@@ -1,0 +1,38 @@
+{
+ "1_honest_life_clean": true,
+ "honest_night_0": 0,
+ "ops_before_seal": 7,
+ "ops_after_seal": 4,
+ "attacker_branches_tried": 96,
+ "attacker_path_handles": 52,
+ "attacker_nights_seen": [
+  "0",
+  "3",
+  "4",
+  "5",
+  "7"
+ ],
+ "attacker_found_steered_branch": true,
+ "2a_backdated_branch_rejected": true,
+ "2a_rejected_by": [
+  "quiet"
+ ],
+ "2a_its_new_seal_is_a_fraud_proof": true,
+ "2a_journal_contradicts_kept_seal": true,
+ "2a_branch_alone_would_look_clean": true,
+ "2a_branch_night_0": 5,
+ "2b_attacker_steered_the_night": true,
+ "3a_wake_splits_give_one_outcome": true,
+ "3b_quiet_input_refused": true,
+ "3c_forged_quiet_input_rejected": true,
+ "3d_other_round_refused": true,
+ "3e_rewritten_history_rejected": true,
+ "3f_late_seal_unwitnessed": true,
+ "3g_other_key_rejected": true,
+ "3h_two_touches_one_beacon_refused": true,
+ "3h_two_touches_two_beacons_accepted": true,
+ "4_fraud_silent_on_honest": true,
+ "passed": true,
+ "verdict": "PASS",
+ "seconds": 9807
+}

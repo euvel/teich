@@ -1,0 +1,18 @@
+{
+ "quiet_window_input": true,
+ "touch_without_beacon": true,
+ "another_round_than_its_clock": true,
+ "two_touches_one_beacon": true,
+ "wake_in_quiet_window_allowed": true,
+ "lawful_replays": true,
+ "replay_fails_tampered_randomness": true,
+ "replay_fails_tampered_round": true,
+ "replay_fails_tampered_signature": true,
+ "replay_fails_other_real_round": true,
+ "replay_fails_sky_removed": true,
+ "replay_fails_sky_moved": true,
+ "waits_then_returns_its_clocks_round": true,
+ "gives_up_with_skymissing": true,
+ "no_beacon_needed_without_touch": true,
+ "passed": true
+}

@@ -1,0 +1,50 @@
+name: daily-wake-v07
+# v0.7's heartbeat (the Sky and the Seal). The creature at /o/teich-05 was migrated to v0.7.0 on 2026-11-06
+# (v07/book/MIGRATION_RECORD_v07.json); daily_wake_v06.yml was retired in the same commit.
+#
+# Gates before every wake, as v0.6: the dream gate and the body gate; a machine that fails either declines (elapsed
+# seconds stay banked). Then the Sky: each touch the owed life crosses gets its drand round, fetched and BLS-verified;
+# a touch whose round is not out yet is never crossed (those ticks stay banked); no fallback. Its daily seal is signed
+# by the seat itself (the worker), not here.
+on:
+  schedule:
+    - cron: "11 6 * * *"        # GitHub starts it hours late (14:04-14:33 UTC seen); wake_v07.py waits out the seal moment
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-wake-v05          # the same creature and seat as v0.5's and v0.6's wakes: never two at once
+  cancel-in-progress: false
+
+env:
+  OPENBLAS_CORETYPE: Haswell
+  OPENBLAS_NUM_THREADS: "1"
+
+jobs:
+  wake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60          # a wake near the seal moment waits up to ~26 min (wake_v07.py)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "numpy==1.26.4" "mpmath==1.3.0" "cryptography==44.0.0" "py_ecc==7.0.1"
+      - name: which machine drew this wake
+        run: grep -m1 "model name" /proc/cpuinfo || true
+      - name: dream gate, body gate, lease, the Sky, replay (journaled), dream, commit, diary pages, public record log
+        env:
+          SEAT_KEY: ${{ secrets.SEAT_KEY }}
+        run: |
+          cd v07/seat && python3 -u wake_v07.py --max-ticks 172800 --diary-dir ../../v05/diary --log ../../v05/diary/records.jsonl
+      - name: commit new diary pages and the record log
+        run: |
+          git config user.name "teich-v07"
+          git config user.email "teich-v07@users.noreply.github.com"
+          git add v05/diary || true
+          if ! git diff --cached --quiet; then
+            git commit -m "v0.7 diary: $(date -u +%F) (autonomous wake)"
+            git push
+          fi

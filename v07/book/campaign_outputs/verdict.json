@@ -1,0 +1,603 @@
+{
+ "inputs": {
+  "k3.json": "2d8dacd1032157ad17bcdd177861554df271cf3a7192c937d1c5184c212617bb",
+  "k5k6.json": "449eafd9d6c89c5980c4df06c42143d14264eee752e8cfbee6e387aaff1b88be",
+  "k7.json": "fc501c445c8e7770334b9213af8d18303da8562452e82e6bd981b44d858ef143",
+  "oracle_14100.json": "9481f452835970c30e997132f6b9b47a83550b6133d17e69e32a708253a30d28",
+  "oracle_14101.json": "58d15536f7b581baba5c762d4349d7dac25ed0334ab42bad92449889666bcf21",
+  "oracle_14102.json": "50888c8e6c49da8618ff3e5894a5804b4e8d652d44799327ad55d83f08990d81",
+  "oracle_14103.json": "f27d67ada983ffe997c8a992bac9d4f22b2f25c72b24d0525480ed5adbfaa2ef",
+  "oracle_14104.json": "bdf65d5ebc5c9c7fdbbb6b7c837b22509a30792759d4a57582712ec530525ada",
+  "oracle_14105.json": "f70075fa5adf51da5b1f4940ace8ca392d96c8883049ecfcad35669c5700fffc",
+  "oracle_14106.json": "f831953273100d44be4ee7d0ed414d60b6fe880bac79934b51e41684c2c3ae7a",
+  "oracle_14107.json": "6527a1b06a345157b86c92a8ef7b39607dd6b1819f43331a812321a52ff35da6",
+  "oracle_14108.json": "b6f038640e86ee83d4279f64f3428d57edd95129f4b5c32ed04f67847b304a1e",
+  "oracle_14109.json": "1570a38f1ffd110745b2dd13d3d20794f2914211ebc5a841dc847798c1637788",
+  "oracle_14110.json": "e123fba1725fa4cc5fa449d266d9da4a15b6d23b8de2273f214eb3c94ebaa231",
+  "oracle_14111.json": "a9a61e4572ba2d0d292ba019846daaa164b3872f1137b168e0267f99bafad5cc",
+  "oracle_null.json": "c1610c029ff85a8f5b89a3386f0b4f98c7f35c0dbab7f563b3489efd8632698e",
+  "run.json": "2313ea1ba22d4494a1f996f9c69a2763d78c97c375bf069a06d75758e2422d3c",
+  "k1_14100.json": "2765330ce958035389a3373b4236cee070f2a2a39967b886454b49deb967813a",
+  "k1_14101.json": "64bd37ccca2d3afd4a5296635b7f0d3f2e96fd7726ce219679e5c1b7ba3fd5c8",
+  "k1_14102.json": "8db586f31eb363d5915d5663a6faa1bdc7e3a3df9adec7692cb32a3cebd64696",
+  "k1_14103.json": "2ee721913b86c04206f2da4b9e0e2d2acc9fc915084062977e60b21b43147963",
+  "k1_14104.json": "89378cf2739c6a2a6230e159a32de2658faaf64830b49f3a5cd7b65898c8afba",
+  "k1_14105.json": "5265c5cd13164bb6396ff1261b6dad97f7e15cf0a40f6ec8e9521b7423c87fb6",
+  "k1_14106.json": "0aa440fb94b8fe34247d029211d2df9e3260cf31c25666805a12166377915b94",
+  "k1_14107.json": "d18a6a741f7a1aa13b11cbddaa2c0d95ad5a070885c987f26d2d4c9cf255fd83",
+  "k1_14108.json": "5a8118146a78a3bdc115c374b5ea19da30c556773ff92c08116c9e1a5cfe7e82",
+  "k1_14109.json": "6a6667a24f946b87eda4e95d3b4dc07c826118c95c3dd34645e6878fc0c0b1b4",
+  "k1_14110.json": "0f761ecd22cbf6bfbcbbf706c469956940e1e1fbd1304aba41f47bc6a394313f",
+  "k1_14111.json": "f86848e2fd13b2f020f79ce56a764667bce59b135290f6654060a18f62a4c420",
+  "life_14000.json": "dcbc9d470db2caaa04cbf6703bc0d34f1898cb09173fc9003a5b380b2832c676",
+  "life_14001.json": "0f7c0b1b30d1c021eb41e76a436c9b5c82f595f745aa9cc974d12181243af717",
+  "side6_14000.json": "45cd06c253e9e06ef127bf72987c854ebdba8ddaa97a8fe784b75a6fcc80a6a8",
+  "side6_14001.json": "95297c54c60478250d1d8dd2fed487ab88de4887d5df701bf98d49fccb9f20b3",
+  "side7_14000.json": "6a69df02ab6c5a6399a96f0e3b84f165ac1985d4bd14cbdc47ef14db90da92b5",
+  "side7_14001.json": "5b641912869c794d406eb4b0dbb424419d9c35cfca5345a4879edf7ac039b6d9",
+  "twin_14000.json": "f5ffff6cab0c09e5abd9014072e5019ac4d6c0eb0f5378086faf59db5ee6d810",
+  "twin_14001.json": "f71204e13ac84a14faceb655fee37fe3febbf3d1b3ed282d84b6fd5e0d9b0222",
+  "life_14002.json": "bd0fcfe766c4702a7fa7ad5d65a067e3089b474a9053373d700479b0630bd0d6",
+  "life_14003.json": "e868806a3a5abe0b07b87c271441983ca8e92a2614103812a07b4da71195d666",
+  "side6_14002.json": "8cd661df4c73bba080c621349bbdaf3887655d79b43b818b72c4e7f54e3568fe",
+  "side6_14003.json": "7d6070b4fbc224301ba437588c91dd86d95216f8c6030e6087b33506732e5663",
+  "side7_14002.json": "c38c9db2b77cb10155ec75975b0aad7a7e339c49b494647d859ed87f1d4b29ca",
+  "side7_14003.json": "23bf9766466e07d3af7ee21f344bf1ca10f1181a3e6dd07d80a1d6f450e67a15",
+  "twin_14002.json": "9374faee8d302e18f4ecc0c0ec18280f38cfd156fad8dcdf6f96d256757fbe7a",
+  "twin_14003.json": "16c6b93779316e508dcdb97bfa9b32c5237e0d5628e62f88a5e16b1c2bba7c7b",
+  "life_14004.json": "0bf1b061173c8f9243ec6747bd26c2fdac05f9fc8c831030e1e66cd0c36b1255",
+  "life_14005.json": "e5ebe2c169610e1459b26a8cf573391d76c1965721ea64097cf8db168f86527c",
+  "side6_14004.json": "fd8c722d90844577863db9b4e7b8c94031ca9b87297326d918c44b711853cbc6",
+  "side6_14005.json": "38e0741490631e0d66b776a8438b7a8203601d8dcee53c56fe9bd1276422a477",
+  "side7_14004.json": "a747107ce0486edce68fd44a48ccdef4c6f5e962b1cf1124864161a04085164b",
+  "side7_14005.json": "2a0f14d94303f30c063730a0842352d9675e2c4fd5a24e3defcd3355182dda76",
+  "twin_14004.json": "8e8adbb4c045f4485b51b3b9022f74932fad72ecb51cfbb204b910d0c5d519a7",
+  "twin_14005.json": "29eab8d5a19d5717d8f126786fcdc9a7d85c49ace781f25ba539785056399b53",
+  "life_14006.json": "aa60248042f049b6d9869dd3241515cfc27a2a6cc718a8f187f90a7a437b9fa7",
+  "life_14007.json": "98f994b1ba5de539933f0573274709277caf3a24b3a751d4c9af2230dc9588aa",
+  "side6_14006.json": "ae1f5fa0744a895ef5d3797fefc2622e90e980c917f3ede2d971b597e2ed0a49",
+  "side6_14007.json": "f0261a410b722ea0007f3d57373ff126903381a470cd7043a1f3e95071060d05",
+  "side7_14006.json": "af0f2df582645c42de0d170cc609244845ea2b3be0b28da92a7cc2781fce6b39",
+  "side7_14007.json": "3b552a897750d81bc0dec67931ef37625cc0ae36f819a99e57dcbf889bb8c775",
+  "twin_14006.json": "906b084446e46bfec9c3d1595634872a5807a70d7c2544ef9fc533fee7ef2729",
+  "twin_14007.json": "ac689e760ed1a162552f51544a9ff5762f0e7b9811ce7edbe4685ae633490992",
+  "life_14008.json": "88a1da5c68bf497d3788e7476798e89cf2d4f653211ba823fe64ed1a9f55577c",
+  "life_14009.json": "32059698bbf5f86882953703689c0cd60360d592c68edc1be0783da08c959243",
+  "side6_14008.json": "763d4a8fa7fd6ebecb2e2bb878186e3de0dc77286814a2dd69afe735ce44a781",
+  "side6_14009.json": "39d8f643d574d9f41a4bc00749ffd6339dff503e7a7c93907e4f3df6fb43c42b",
+  "side7_14008.json": "2f654b8f40b0e7d89e3487f6efeac407a81c9892238da30a4ab259125ea23ffe",
+  "side7_14009.json": "f8d1a4dc192c28ffdff9cda2d4e98bfd50b6f0aafb11530473ccb100d8fd88ea",
+  "twin_14008.json": "7a366acebe2c7020b04fd2124cf2a86b4c2dd7cbdfd32b516bf8cd861558cf01",
+  "twin_14009.json": "4bcecd992a41dbd1ee76454f11ace3cd9fea975cdbba5abd4d2e176de7b93d4d",
+  "life_14010.json": "4d4f37b03102fee1ff941e19a7b525e3fa3e9703b83c7d02e46f3337b9aa9e65",
+  "life_14011.json": "bc68fbc917e97a9e3b16982decde877aa4acfc5149fc22a771e3542b040a8dc8",
+  "side6_14010.json": "3d73f4475791f933f03da4570d04f6c833dcdd717522eb1332ca0a1c0e8a69f6",
+  "side6_14011.json": "e2aa2f791f6508a0e6aea812cb1d0f407bc71f9fd1a2efb118a56cccf44f8442",
+  "side7_14010.json": "fa59527b229fdf4205f5933ff88a247e5889b04000ec810b69a4d52a69d78b5a",
+  "side7_14011.json": "a3ba8e107f3315a3736a050817c3da5c8e715db041121a4a2f323ea90ec97bd4",
+  "twin_14010.json": "38551f5fc2d954c9b66ab5f17b9692d577f5f9baa7213c45023f71eb0a935455",
+  "twin_14011.json": "47679299975f18ebe1d3f0b8f5f62037e37f7de11e294b67374e6d3f59c71416"
+ },
+ "lives": [
+  14000,
+  14001,
+  14002,
+  14003,
+  14004,
+  14005,
+  14006,
+  14007,
+  14008,
+  14009,
+  14010,
+  14011
+ ],
+ "static": {
+  "rule_purity_violations": {},
+  "lcl_import_violations": {}
+ },
+ "per_life": {
+  "14000": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 88
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14001": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 90
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14002": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 88
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14003": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 88
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14004": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 89
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14005": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 89
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14006": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 88
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14007": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 88
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14008": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 89
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14009": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 90
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14010": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 86
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  },
+  "14011": {
+   "K2": true,
+   "S": {
+    "v06": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "v07": {
+     "BODY-MEMORY": "FINE",
+     "BODY-PATH": "GIVEN"
+    },
+    "passed": true
+   },
+   "F1": {
+    "acts": 90,
+    "completeness": 0,
+    "receipt": 0,
+    "consequence": 0,
+    "necessity": 0,
+    "necessity_tested": 90
+   },
+   "K4": true,
+   "K4_why": null,
+   "M0": true
+  }
+ },
+ "t1": {
+  "per_k": {
+   "2": {
+    "N": 360,
+    "counts": [
+     170,
+     190
+    ],
+    "p_uniform": 0.29184054514378543,
+    "T1a": true,
+    "p_lag": null,
+    "T1b": true,
+    "guess_hit": 0.5114942528735632,
+    "T1c": true,
+    "step_bins": [
+     143,
+     154,
+     45,
+     14,
+     4
+    ],
+    "p_hard": 0.9941461888732392,
+    "T1f": true
+   },
+   "3": {
+    "N": 360,
+    "counts": [
+     105,
+     133,
+     122
+    ],
+    "p_uniform": 0.19045614263037988,
+    "T1a": true,
+    "p_lag": 0.8607900421938344,
+    "T1b": 1.0,
+    "guess_hit": 0.3218390804597701,
+    "T1c": true,
+    "step_bins": [
+     131,
+     154,
+     55,
+     16,
+     4
+    ],
+    "p_hard": 0.791995945273821,
+    "T1f": true
+   },
+   "5": {
+    "N": 360,
+    "counts": [
+     66,
+     68,
+     73,
+     84,
+     69
+    ],
+    "p_uniform": 0.5813305792925052,
+    "T1a": true,
+    "p_lag": 0.9906532117327573,
+    "T1b": 1.0,
+    "guess_hit": 0.21551724137931033,
+    "T1c": true,
+    "step_bins": [
+     146,
+     138,
+     55,
+     12,
+     9
+    ],
+    "p_hard": 0.7694268856076086,
+    "T1f": true
+   },
+   "9": {
+    "N": 360,
+    "counts": [
+     34,
+     30,
+     46,
+     39,
+     47,
+     45,
+     40,
+     41,
+     38
+    ],
+    "p_uniform": 0.613666561057378,
+    "T1a": true,
+    "p_lag": null,
+    "T1b": true,
+    "guess_hit": 0.09195402298850575,
+    "T1c": true,
+    "step_bins": [
+     144,
+     152,
+     43,
+     9,
+     12
+    ],
+    "p_hard": 0.4909175583154043,
+    "T1f": true
+   }
+  },
+  "xi_lag_corr": -0.01244691579381331,
+  "xi_bound": 0.15811388300841897,
+  "T1b_xi": true,
+  "nights": 360,
+  "passed": true
+ },
+ "k1": {
+  "trials": 60,
+  "chance": 0.20646825396825397,
+  "se": 0.050831763768109973,
+  "bound": 0.3589635452725839,
+  "v06_A": 0.95,
+  "v07_A": 0.26666666666666666,
+  "v07_B": 0.3
+ },
+ "influence_bits": {
+  "trials": 60,
+  "influence_bits": 0.03338536661917239,
+  "upper95_bits": 0.03691418337215601,
+  "full_control_bits": 2.108683691580647,
+  "v06_steerable": 0.9833333333333333
+ },
+ "influence_bits_null_floor": {
+  "trials": 12,
+  "influence_bits": 0.03265055033183625,
+  "upper95_bits": 0.04318278394991336,
+  "full_control_bits": 2.2181684864635347,
+  "v06_steerable": 0.16666666666666666
+ },
+ "k3": {
+  "kaggle": {
+   "machine": "x86_64",
+   "numpy": "2.1.3",
+   "touch_vectors_sha256": "096ffb1411cad41a85d3abc7f7fab16f2508d37fa91f8aba3a0e20d7a406965a",
+   "day_state_sha256": "72634fce61c705e292e9ee354732ac34fedf3509ea4a4d0d224ec90250be0135"
+  },
+  "laptop": {
+   "machine": "x86_64",
+   "numpy": "1.26.4",
+   "touch_vectors_sha256": "096ffb1411cad41a85d3abc7f7fab16f2508d37fa91f8aba3a0e20d7a406965a",
+   "day_state_sha256": "72634fce61c705e292e9ee354732ac34fedf3509ea4a4d0d224ec90250be0135"
+  }
+ },
+ "k7": {
+  "1_honest_life_clean": true,
+  "honest_night_0": 0,
+  "ops_before_seal": 7,
+  "ops_after_seal": 4,
+  "attacker_branches_tried": 96,
+  "attacker_path_handles": 52,
+  "attacker_nights_seen": [
+   "0",
+   "3",
+   "4",
+   "5",
+   "7"
+  ],
+  "attacker_found_steered_branch": true,
+  "2a_backdated_branch_rejected": true,
+  "2a_rejected_by": [
+   "quiet"
+  ],
+  "2a_its_new_seal_is_a_fraud_proof": true,
+  "2a_journal_contradicts_kept_seal": true,
+  "2a_branch_alone_would_look_clean": true,
+  "2a_branch_night_0": 5,
+  "2b_attacker_steered_the_night": true,
+  "3a_wake_splits_give_one_outcome": true,
+  "3b_quiet_input_refused": true,
+  "3c_forged_quiet_input_rejected": true,
+  "3d_other_round_refused": true,
+  "3e_rewritten_history_rejected": true,
+  "3f_late_seal_unwitnessed": true,
+  "3g_other_key_rejected": true,
+  "3h_two_touches_one_beacon_refused": true,
+  "3h_two_touches_two_beacons_accepted": true,
+  "4_fraud_silent_on_honest": true,
+  "passed": true,
+  "verdict": "PASS",
+  "seconds": 9807
+ },
+ "bars": {
+  "lives_complete": true,
+  "K2": true,
+  "S": true,
+  "F1_logs": true,
+  "F1_static": true,
+  "K4": true,
+  "M0": true,
+  "T1''": true,
+  "K1_trials": true,
+  "K1_v07_A": true,
+  "K1_v07_B": true,
+  "K1_sensitivity_v06_A": true,
+  "K3": true,
+  "K5_K6": true,
+  "K7": true
+ },
+ "verdict": "PASS",
+ "failing": []
+}

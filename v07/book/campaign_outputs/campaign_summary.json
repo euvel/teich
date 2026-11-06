@@ -1,0 +1,94 @@
+{
+ "bundle_sha256": "d0cd7d37a5cf31a5778d60219a4af2b2379299000060c735e2de4e97237f73c9",
+ "manifest_build": "8cccea774cd9e4666ce5e87d87b9f152a472a166928eeb4576059d0e7b52ae07",
+ "manifest_campaign": "618da9de8bf194096fa6d12f71f530ac33cd77b2eb47a0fe51570cb2896d7ed7",
+ "spec_sha256": "822a5be8202751b62d45cf643877dece9e347aad826a61d2075a9dce67b38faf",
+ "anchor": "teich-03:v07-freeze-2026-11-05",
+ "dry": false,
+ "kernels": {
+  "teich-v07-campaign-k1a": [
+   "k1_14100",
+   "k1_14101",
+   "k1_14102",
+   "k1_14103"
+  ],
+  "teich-v07-campaign-k1b": [
+   "k1_14104",
+   "k1_14105",
+   "k1_14106",
+   "k1_14107"
+  ],
+  "teich-v07-campaign-k1c": [
+   "k1_14108",
+   "k1_14109",
+   "k1_14110",
+   "k1_14111"
+  ],
+  "teich-v07-campaign-g": [
+   "k7",
+   "oracle_14100",
+   "oracle_14101",
+   "oracle_14102",
+   "oracle_14103",
+   "oracle_14104",
+   "oracle_14105",
+   "oracle_14106",
+   "oracle_14107",
+   "oracle_14108",
+   "oracle_14109",
+   "oracle_14110",
+   "oracle_14111",
+   "oracle_null",
+   "k3",
+   "k5k6"
+  ],
+  "teich-v07-campaign-l1": [
+   "side6_14000",
+   "side7_14000",
+   "post_14000",
+   "side6_14001",
+   "side7_14001",
+   "post_14001"
+  ],
+  "teich-v07-campaign-l2": [
+   "side6_14002",
+   "side7_14002",
+   "post_14002",
+   "side6_14003",
+   "side7_14003",
+   "post_14003"
+  ],
+  "teich-v07-campaign-l3": [
+   "side6_14004",
+   "side7_14004",
+   "post_14004",
+   "side6_14005",
+   "side7_14005",
+   "post_14005"
+  ],
+  "teich-v07-campaign-l4": [
+   "side6_14006",
+   "side7_14006",
+   "post_14006",
+   "side6_14007",
+   "side7_14007",
+   "post_14007"
+  ],
+  "teich-v07-campaign-l5": [
+   "side6_14008",
+   "side7_14008",
+   "post_14008",
+   "side6_14009",
+   "side7_14009",
+   "post_14009"
+  ],
+  "teich-v07-campaign-l6": [
+   "side6_14010",
+   "side7_14010",
+   "post_14010",
+   "side6_14011",
+   "side7_14011",
+   "post_14011"
+  ]
+ }
+}

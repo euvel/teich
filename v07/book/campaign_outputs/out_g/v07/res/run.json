@@ -1,0 +1,71 @@
+{
+ "group": "G",
+ "jobs": {
+  "k7": {
+   "rc": 0,
+   "seconds": 9807
+  },
+  "oracle_14101": {
+   "rc": 0,
+   "seconds": 2485
+  },
+  "oracle_14100": {
+   "rc": 0,
+   "seconds": 2513
+  },
+  "oracle_14102": {
+   "rc": 0,
+   "seconds": 2533
+  },
+  "oracle_14103": {
+   "rc": 0,
+   "seconds": 2645
+  },
+  "oracle_14106": {
+   "rc": 0,
+   "seconds": 2468
+  },
+  "oracle_14104": {
+   "rc": 0,
+   "seconds": 2550
+  },
+  "oracle_14105": {
+   "rc": 0,
+   "seconds": 2603
+  },
+  "oracle_14107": {
+   "rc": 0,
+   "seconds": 2601
+  },
+  "oracle_14109": {
+   "rc": 0,
+   "seconds": 2488
+  },
+  "oracle_14108": {
+   "rc": 0,
+   "seconds": 2608
+  },
+  "oracle_14110": {
+   "rc": 0,
+   "seconds": 2580
+  },
+  "oracle_14111": {
+   "rc": 0,
+   "seconds": 2475
+  },
+  "k3": {
+   "rc": 0,
+   "seconds": 359
+  },
+  "k5k6": {
+   "rc": 0,
+   "seconds": 1099
+  },
+  "oracle_null": {
+   "rc": 0,
+   "seconds": 3853
+  }
+ },
+ "failed": [],
+ "seconds": 21196
+}

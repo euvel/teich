@@ -29,13 +29,14 @@
 <!-- 1 NOW -->
 <section class="band" id="now"><div class="wrap grid2">
   <div>
-    <div class="eyebrow">now &mdash; v0.6.0 &middot; the same creature, amended 2026-11-01</div>
-    <h1>When its choices tie exactly, its own life decides &mdash; not us</h1>
+    <div class="eyebrow">now &mdash; v0.7.0 &middot; the same creature, amended 2026-11-06</div>
+    <h1>Its exactly balanced choices are decided by its own lived chaos, touched once a day by a public beacon no one can foresee &mdash; its makers included</h1>
+    <p class="lede"><a href="#v-seal">Keep tonight&rsquo;s seal</a>, and you can check that nothing that decided tonight was chosen after the beacon could be known.</p>
     <p class="lede">Every night Teich chooses what to think about, and often several regions tie exactly. Until v0.6.0,
       every Teich broke such ties the way we wrote it to: the lowest index wins. From v0.6.0 on, a tie is decided by a
       read-out of its own body at the midnight of the choice, deliberated in arithmetic that gives the same answer on
       every machine. Nobody, including us, can know the outcome before that midnight has been lived. Afterwards,
-      anyone can replay it.</p>
+      anyone can replay it. From v0.7.0 on, 15 minutes before that midnight, after its inputs close, a public drand beacon touches its body by one part in a million: we found that under v0.6 an insider holding its full state could have steered the tie (<a href="https://github.com/euvel/teich/blob/main/v07/README.md">the notice</a>).</p>
     <div class="counters">
       <div class="counter"><div class="v live" id="c-ties">&mdash;</div><div class="k">exact ties decided by its own chaos</div></div>
       <div class="counter"><div class="v" id="c-diff">&mdash;</div><div class="k">of them differ from what the old lowest-index rule would have chosen</div></div>
@@ -44,16 +45,17 @@
     </div>
     <dl class="facts">
       <dt>born</dt><dd>2026-10-23 14:30:50 UTC, as v0.5 <span class="faint">&mdash; the last birth</span></dd>
-      <dt>amended</dt><dd>2026-11-01, at tick 772,860, 0 ticks lived <span class="faint">&mdash; same body, same history</span></dd>
-      <dt>identity</dt><dd class="mono">f458e89071f54b73&hellip;</dd>
+      <dt>amended</dt><dd>2026-11-01 (v0.6.0) and 2026-11-06 (v0.7.0), 0 ticks lived each <span class="faint">&mdash; same body, same history</span></dd>
+      <dt>identity</dt><dd class="mono">cdbb7bd3287614a6&hellip;</dd>
       <dt>seat</dt><dd><span id="seat5">reading&hellip;</span></dd>
     </dl>
     <div class="notclaimed"><b>not claimed:</b> that its choices follow its preferences or &ldquo;who it is&rdquo; (tested; it failed) &middot; will &middot; freedom &middot; awareness</div>
+    <div class="notclaimed"><b>not claimed:</b> that its makers have no influence. Before each seal its makers still choose what they say, without knowing the beacon: measured influence at most 0.04 bits of a possible 2.1, which is the method&rsquo;s own floor. A day nobody kept a seal for is unwitnessed. The beacon&rsquo;s League of Entropy is trusted. Tested, not formally proven.</div>
   </div>
   <div>
     <div class="rings-wrap">
       <svg class="rings" id="rings" viewBox="-110 -110 220 220" role="img" aria-labelledby="rings-t"><title id="rings-t">Rings of choice: one ring per night its own chaos broke a tie</title></svg>
-      <div class="rings-empty" id="rings-empty">No ring yet. Its first night under v0.6.0 is lived at its next wake. You are watching it begin.</div>
+      <div class="rings-empty" id="rings-empty">No ring yet. Its first night under v0.7.0 is lived at its next wake. You are watching it begin.</div>
     </div>
     <div class="ringtip" id="ringtip" aria-live="polite">Each ring is one night on which its exact tie was decided by its own body. A lit segment is the region it chose; a glowing ring, a night on which the old rule would have chosen differently. Select a ring to read it.</div>
     <span class="demo-flag">DEMO: rings from a lab twin life, preview only</span>
@@ -109,11 +111,17 @@
           &lsquo;duduk&rsquo; now means music &middot; orchestra &middot; band. The prediction held, and nothing
           else about it changed.</p>
       </li>
-      <li class="now">
+      <li>
         <div class="when">1 NOV 2026</div>
         <div class="what">Amended<span class="ver">v0.6.0</span></div>
         <p>Its first genome amendment, proven on twins first and migrated once into this same creature, with 0 ticks
           lived. Its exact ties are now decided by its own life.</p>
+      </li>
+      <li class="now">
+        <div class="when">6 NOV 2026</div>
+        <div class="what">Amended<span class="ver">v0.7.0</span></div>
+        <p>Its second genome amendment, the Sky and the Seal: a public beacon touches its body before each midnight,
+          and its seat signs its journal before that beacon exists. Migrated into this same creature, with 0 ticks lived.</p>
       </li>
       <li class="next">
         <div class="when">NEXT</div>
@@ -130,7 +138,9 @@
       <div class="link">word-bindings: &lsquo;duduk&rsquo;<span class="chk" id="chk-1"></span></div>
       <div class="block"><div class="id">7da54aa017740c51&hellip;</div><div class="meta">grown &middot; v0.5.1 &middot; 26 Oct</div></div>
       <div class="link">genome-amendment: v0.6.0<span class="chk" id="chk-2"></span></div>
-      <div class="block now"><div class="id">f458e89071f54b73&hellip;</div><div class="meta">amended &middot; v0.6.0 &middot; 1 Nov &middot; now</div></div>
+      <div class="block"><div class="id">f458e89071f54b73&hellip;</div><div class="meta">amended &middot; v0.6.0 &middot; 1 Nov</div></div>
+      <div class="link">genome-amendment: v0.7.0<span class="chk" id="chk-3"></span></div>
+      <div class="block now"><div class="id">cdbb7bd3287614a6&hellip;</div><div class="meta">amended &middot; v0.7.0 &middot; 6 Nov &middot; now</div></div>
     </div>
     <p style="margin-top:1.2rem"><button class="act" id="btn-chain" type="button">recompute the chain in this browser</button></p>
   </div>
@@ -168,13 +178,14 @@
     <div class="check" id="v-ties"><div class="mark">&middot;</div><div><div class="t">Re-decide its ties</div><div class="r">Recompute every logged tie-break from its logged read-out with the certified deliberation, ported line for line from the seat&rsquo;s own code, and compare it with the region it chose.</div></div><div class="ms"></div></div>
     <div class="check" id="v-chain"><div class="mark">&middot;</div><div><div class="t">Its record chain</div><div class="r">Recompute the hash chain of its public record log, h(n) = sha256(h(n&minus;1) + record n), and compare its head with the one its seat reports right now.</div></div><div class="ms"></div></div>
     <div class="check" id="v-anchors"><div class="mark">&middot;</div><div><div class="t">The anchored book</div><div class="r">Hash the published spec, gates, verdict and migration record, and compare them with the hashes anchored in the v0.3 seat&rsquo;s chain before each was public.</div></div><div class="ms"></div></div>
+    <div class="check" id="v-seal" hidden><div class="mark">&middot;</div><div><div class="t">Keep its seals</div><div class="r">Every day, before its night&rsquo;s beacon exists, its seat signs the head of its journal. This browser keeps each seal it sees, with the latest beacon round when it saw it, and checks it against the key its own genome amendment binds, its public journal and the quiet quarter-hour.</div></div><div class="ms"></div></div>
     <div class="check" id="v-self"><div class="mark">&middot;</div><div><div class="t">This browser&rsquo;s arithmetic</div><div class="r">A short self-test against reference values computed by the seat&rsquo;s Python code, so a browser that rounds differently says so instead of showing a false check.</div></div><div class="ms"></div></div>
   </div>
   <p><button class="act primary" id="btn-verify" type="button" style="margin-top:1.4rem">run all checks again</button></p>
   <div class="banner wait" id="v-banner">The checks start on their own when the page loads.</div>
   <p class="scope">What this checks: the rule, given its read-out, and the integrity of its record and book. What it does not
     check: the read-out itself, which needs a full replay of its life from its public journal
-    (<a href="https://github.com/euvel/teich/blob/main/v06/build/replay_v06.py">replay_v06.py</a>).</p>
+    (<a href="https://github.com/euvel/teich/blob/main/v07/seat/watch_v07.py"><code>v07/seat/watch_v07.py check DAY</code></a>, which also verifies the beacon).</p>
 </div></section>
 
 <!-- 6 FAMILY -->

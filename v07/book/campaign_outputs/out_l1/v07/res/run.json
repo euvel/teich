@@ -1,0 +1,31 @@
+{
+ "group": "L1",
+ "jobs": {
+  "side6_14000": {
+   "rc": 0,
+   "seconds": 11997
+  },
+  "side6_14001": {
+   "rc": 0,
+   "seconds": 12008
+  },
+  "side7_14000": {
+   "rc": 0,
+   "seconds": 12010
+  },
+  "side7_14001": {
+   "rc": 0,
+   "seconds": 12036
+  },
+  "post_14000": {
+   "rc": 0,
+   "seconds": 6521
+  },
+  "post_14001": {
+   "rc": 0,
+   "seconds": 6637
+  }
+ },
+ "failed": [],
+ "seconds": 18681
+}

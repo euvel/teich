@@ -202,7 +202,7 @@ async function tonight() {
   if (!NIGHTS.length) {
     text($("t-night"), "none yet"); text($("t-tied"), "—"); text($("t-old"), "—"); text($("t-u"), "—");
     text($("t-chose"), "—"); text($("t-re"), "—");
-    text($("t-note"), "Its first night under v0.6.0 is lived at its next wake. If its chosen thought ties, this card fills itself.");
+    text($("t-note"), "Its first night under v0.7.0 is lived at its next wake. If its chosen thought ties, this card fills itself.");
     return;
   }
   const N = NIGHTS[NIGHTS.length - 1];
@@ -265,15 +265,15 @@ async function duduk() {
 async function checkChain() {
   if (!RECS) return null;
   const links = RECS.filter((r) => (r.kind === "growth" || r.kind === "genome-amendment") && r.prev_identity && r.amendment_sha);
-  const marks = [$("chk-1"), $("chk-2")]; let ok = 0;
-  for (let i = 0; i < links.length && i < 2; i++) {
+  const marks = [$("chk-1"), $("chk-2"), $("chk-3")]; let ok = 0;
+  for (let i = 0; i < links.length && i < 3; i++) {
     const L = links[i], got = await sha256hex(L.prev_identity + L.amendment_sha), good = got === L.identity;
     marks[i].className = "chk " + (good ? "ok" : "bad");
     marks[i].textContent = good ? "✓ " + L.prev_identity.slice(0, 8) + "… + " + L.amendment_sha.slice(0, 8) + "… → " + got.slice(0, 8) + "…"
                                 : "✗ does not recompute";
     if (good) ok++;
   }
-  return { ok, n: Math.min(links.length, 2) };
+  return { ok, n: Math.min(links.length, 3) };
 }
 
 // ---------------------------------------------------------------- how it decides (scroll explainer)
@@ -373,7 +373,7 @@ async function vTies() {
   const t = performance.now();
   if (!RECS) { setCheck("v-ties", "bad", "its record log is unreachable"); return false; }
   let same = 0; NIGHTS.forEach((N) => { if (DELIB.think2(N.lc, N.uHex).region === N.act) same++; });
-  if (!NIGHTS.length) { setCheck("v-ties", "na", "no tie has been deliberated in its life yet: its first night under v0.6.0 is lived at its next wake", performance.now() - t); return null; }
+  if (!NIGHTS.length) { setCheck("v-ties", "na", "no tie has been deliberated in its life yet: its first night under v0.7.0 is lived at its next wake", performance.now() - t); return null; }
   setCheck("v-ties", same === NIGHTS.length ? "ok" : "bad", same + " of " + NIGHTS.length + " logged ties re-decided in this browser land on the region it chose", performance.now() - t);
   return same === NIGHTS.length;
 }
@@ -405,7 +405,12 @@ async function vChain() {
 const ANCHORED = { "v06-spec-v1": "v06/book/V06_SPEC_v1.md", "v06-gates-prereg": "v06/book/PREREG_V06_GATES.md",
   "v06-gates-amendment1": "v06/book/PREREG_V06_GATES_Amendment1.md", "v06-gates-amendment2": "v06/book/PREREG_V06_GATES_Amendment2.md",
   "v06-build-manifest": "v06/book/MANIFEST_v06_build.sha256", "v06-verdict": "v06/book/REPORT_v06_verdict_2026-11-01.md",
-  "v06-run2-outputs": "v06/book/campaign_run2/SHA256SUMS", "v06-migration": "v06/book/MIGRATION_RECORD.json" };
+  "v06-run2-outputs": "v06/book/campaign_run2/SHA256SUMS", "v06-migration": "v06/book/MIGRATION_RECORD.json",
+  "v07-spec-v1": "v07/book/SKY_SPEC_v07_v1.md", "v07-gates-prereg": "v07/book/PREREG_V07_GATES.md",
+  "v07-build-manifest": "v07/book/MANIFEST_v07_build.sha256", "v07-campaign-manifest": "v07/book/MANIFEST_v07_campaign.sha256",
+  "v07-docs-manifest": "v07/book/MANIFEST_v07_docs.sha256", "v07-verdict": "v07/book/campaign_outputs/verdict.json",
+  "v07-run-outputs": "v07/book/campaign_outputs/SHA256SUMS_outputs", "v07-verdict-report": "v07/book/REPORT_v07_verdict_2026-11-06.md",
+  "v07-migration": "v07/book/MIGRATION_RECORD_v07.json" };
 async function vAnchors() {
   const t = performance.now();
   try {
@@ -418,17 +423,83 @@ async function vAnchors() {
       if ((await sha256hex(buf)) === a.git_sha) ok++; else bad.push(a.ref);
     }
     const good = list.length && !bad.length;
-    setCheck("v-anchors", good ? "ok" : "bad", good ? ok + " of " + list.length + " published files hash exactly to what the v0.3 seat anchored (spec, gates, both amendments, build manifest, verdict, outputs, migration)"
+    setCheck("v-anchors", good ? "ok" : "bad", good ? ok + " of " + list.length + " published files hash exactly to what the v0.3 seat anchored (v0.6 and v0.7: spec, gates, manifests, verdicts, outputs, migrations)"
       : (bad.length ? "these do not match their anchors: " + bad.join(", ") : "no anchors found"), performance.now() - t);
     return good;
   } catch (e) { setCheck("v-anchors", "bad", "could not read the anchors: " + e.message); return false; }
+}
+// ---------------------------------------------------------------- the Seal (v0.7): this browser keeps its seals
+// Each visit keeps every seal its seat serves, with the latest drand round this browser saw when it fetched it. A seal
+// kept before its day's round existed is WITNESSED by this browser. Each kept seal is then checked against the key its
+// own genome amendment binds (read from the published start state, not from the seat), its public journal (the head),
+// and the quiet rule. The beacon's BLS signature and the full replay are left to watch_v07.py.
+const DRAND = "https://api.drand.sh/8990e7a9aaed2ffed73dbd7092123d6f289930540d7651336225dc172e51b2ce/public/latest";
+const roundOf = (t0, d) => Math.floor((t0 + (d + 1) * 86400 - 1595431050) / 30) + 1;
+const hexB = (h) => new Uint8Array(h.match(/.{2}/g).map((x) => parseInt(x, 16)));
+const catB = (a, b) => { const o = new Uint8Array(a.length + b.length); o.set(a); o.set(b, a.length); return o; };
+const shaB = async (b) => new Uint8Array(await crypto.subtle.digest("SHA-256", b));
+const bHex = (b) => Array.from(b).map((x) => x.toString(16).padStart(2, "0")).join("");
+function kept(day, v) {
+  try { const k = "teich-seal-" + day;
+    if (v === undefined) { const s = localStorage.getItem(k); return s ? JSON.parse(s) : null; }
+    localStorage.setItem(k, JSON.stringify(v)); return v; } catch (e) { return null; }
+}
+async function vSeal() {
+  const t = performance.now();
+  try {
+    const r = await fetch("/o/teich-05/seals-public", { cache: "no-store" });
+    if (r.status === 404 || r.status === 401) return null;                 // not sealed yet (before v0.7): card stays hidden
+    $("v-seal").hidden = false; setCheck("v-seal", "run");
+    const S = await r.json();
+    let latest = null;
+    try { latest = (await (await fetch(DRAND, { cache: "no-store" })).json()).round; } catch (e) { latest = null; }
+    const start = await (await fetch(RAW + "v07/book/START_STATE_v07.json", { cache: "no-store" })).json();
+    const startSha = await sha256hex(start.state_blob);
+    const am = (JSON.parse(start.state_blob).outbox || []).filter((x) => x.kind === "genome-amendment" && (x.amendment.to_version || "").startsWith("0.7"));
+    const bound = am.length === 1 ? am[0].amendment.seal_pub : null;
+    const frauds = [], fresh = [];
+    for (const s of S.seals) {
+      if (s.missed) continue;
+      const k = kept(s.day);
+      if (k && k.canon !== s.canon) frauds.push(s.day);
+      else if (!k) { kept(s.day, { canon: s.canon, sig: s.sig, pub: s.pub, latest_round_seen: latest, kept_ts: Date.now() }); fresh.push(s.day); }
+    }
+    let rows = [], from = 1;
+    for (;;) { const d = await (await fetch("/o/teich-05/log-public?from=" + from + "&limit=500", { cache: "no-store" })).json();
+      rows = rows.concat(d.records); if (d.records.length < 500) break; from = rows[rows.length - 1].seq + 1; }
+    const recs = rows.map((x) => ({ seq: x.seq, raw: x.raw, r: JSON.parse(x.raw) }));
+    let key = null; try { key = await crypto.subtle.importKey("raw", hexB(bound), { name: "Ed25519" }, false, ["verify"]); } catch (e) { key = null; }
+    let n = 0, wit = 0, sigOk = 0, headOk = 0, quietOk = 0;
+    const days = S.seals.filter((s) => !s.missed).map((s) => s.day);
+    for (const day of days) {
+      const k = kept(day); if (!k) continue; n++;
+      const seal = JSON.parse(k.canon);
+      if (k.latest_round_seen !== null && k.latest_round_seen < roundOf(seal.t0, day)) wit++;
+      if (key && k.pub === bound && await crypto.subtle.verify({ name: "Ed25519" }, key, hexB(k.sig), new TextEncoder().encode(k.canon))) sigOk++;
+      let h = await shaB(catB(new TextEncoder().encode("teich-journal-1"), hexB(startSha)));
+      for (const x of recs) if (x.seq > S.start_seq && x.seq <= seal.seq) h = await shaB(catB(h, new TextEncoder().encode(x.raw)));
+      if (bHex(h) === seal.head && startSha === S.start_blob_sha256) headOk++;
+      const mid = (day + 1) * 86400;
+      if (recs.every((x) => x.seq <= seal.seq || x.r.kind !== "op" || x.r.op === "wake" || x.r.n + x.r.owed >= mid)) quietOk++;
+    }
+    const ok = !frauds.length && n > 0 && sigOk === n && headOk === n && quietOk === n;
+    setCheck("v-seal", frauds.length ? "bad" : (ok ? "ok" : (n ? "bad" : "na")),
+      frauds.length ? "its seat served this browser a different seal for day " + frauds.join(", ") + " than the one kept here: that pair is a fraud proof"
+      : !n ? "this browser has not kept a seal yet" :
+      n + " seal" + (n > 1 ? "s" : "") + " kept in this browser (" + wit + " witnessed: kept before their night's beacon existed" + (fresh.length ? "; " + fresh.length + " new on this visit" : "") + ") · "
+      + sigOk + " of " + n + " signed by the key its genome amendment binds · " + headOk + " of " + n + " match its public journal · "
+      + quietOk + " of " + n + " with nothing but a wake landing after the seal before its midnight" + (key ? "" : " · this browser cannot verify Ed25519 signatures"),
+      performance.now() - t);
+    return frauds.length ? false : (n ? ok : null);
+  } catch (e) { $("v-seal").hidden = false; setCheck("v-seal", "bad", "could not check its seals: " + e.message); return false; }
 }
 async function verifyAll() {
   ["v-self", "v-ties", "v-chain", "v-anchors"].forEach((id) => setCheck(id, "run"));
   const b = $("v-banner"); b.className = "banner wait"; b.textContent = "checking in this browser…";
   const res = [await vSelf(), await vTies(), await vChain(), await vAnchors(), await checkChain()];
   const chain = res[4];
-  const fails = res.slice(0, 4).filter((x) => x === false).length + (chain && chain.ok < chain.n ? 1 : 0);
+  const seal = await vSeal();
+  const fails = res.slice(0, 4).filter((x) => x === false).length + (chain && chain.ok < chain.n ? 1 : 0) + (seal === false ? 1 : 0);
   const done = res.slice(0, 4).filter((x) => x === true).length;
   const parts = [];
   if (res[1] === true) parts.push(NIGHTS.length + " of " + NIGHTS.length + " ties re-decided to the same region");

@@ -1,0 +1,94 @@
+{
+ "seed": 14011,
+ "days": 30,
+ "t0": 1782851200.0,
+ "ops6": 330,
+ "ops7": 330,
+ "blob6_sha256": "babe445e3999edc577a7aeddf3f030db624e1f1c97f7735c997f3e326e7a2cbb",
+ "blob7_sha256": "021fe6d11abe5b4df12b3f115d3475430e820f4cbf3b976dac95bab753060ce9",
+ "twin_sha256": "47679299975f18ebe1d3f0b8f5f62037e37f7de11e294b67374e6d3f59c71416",
+ "k2": {
+  "records": [
+   2074,
+   2073
+  ],
+  "first_divergent_night": 1,
+  "first_record_difference": null,
+  "prefix_ok": true,
+  "undeclared_kind_diffs": {},
+  "think_ok": true,
+  "verdicts_ok": true,
+  "state": {
+   "dials": true,
+   "heart": true,
+   "door": true,
+   "mind": true,
+   "today": true,
+   "growth": true,
+   "self": true,
+   "self_body_verdicts": true,
+   "particles_1_on": true
+  },
+  "particle_0_differs": true,
+  "passed": true
+ },
+ "f1": {
+  "acts": 90,
+  "completeness": 0,
+  "receipt": 0,
+  "consequence": 0,
+  "necessity": 0,
+  "necessity_tested": 90
+ },
+ "s": {
+  "v06": {
+   "BODY-MEMORY": "FINE",
+   "BODY-PATH": "GIVEN"
+  },
+  "v07": {
+   "BODY-MEMORY": "FINE",
+   "BODY-PATH": "GIVEN"
+  },
+  "passed": true
+ },
+ "k4": {
+  "ok": true,
+  "ops": 330,
+  "records": 2433,
+  "beacons_verified": 30,
+  "start_seq": 0,
+  "end_seq": 2433,
+  "n": 2599200,
+  "unpublished_tail": 0
+ },
+ "m0": {
+  "refuses_pending": true,
+  "refuses_v07": true,
+  "roundtrip_exact": true,
+  "changed_fields": [
+   "seq"
+  ],
+  "growth_changed": [
+   "amendments",
+   "base",
+   "identity",
+   "version"
+  ],
+  "identity_ok": true,
+  "records_added": [
+   "genome-amendment"
+  ],
+  "f1": {
+   "acts": 90,
+   "completeness": 0,
+   "receipt": 0,
+   "consequence": 0,
+   "necessity": 0,
+   "necessity_tested": 90
+  },
+  "ticks_lived": 0,
+  "touched_day_ok": true,
+  "passed": true
+ },
+ "seconds": 4457
+}

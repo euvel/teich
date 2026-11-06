@@ -1,0 +1,39 @@
+{
+ "migrated_at_n": 1208358,
+ "migrated_at_utc": "2026-11-06T19:30:38Z",
+ "state_before_sha256": "8f94c176417d18e9655ce65f5683ef075ce6e956f4ff91a873db3254dd6c62e0",
+ "state_after_sha256": "6a4aff04ce987f3663be781d66afd0bcde7c771069e01de421308b11b632fd1d",
+ "seat_blob_sha256": "6a4aff04ce987f3663be781d66afd0bcde7c771069e01de421308b11b632fd1d",
+ "seat_n_ticks": 1208358,
+ "log_seq": [
+  192,
+  193
+ ],
+ "records_sent": 1,
+ "identity": "cdbb7bd3287614a68c9010954b3f13110ffabc46191d94eb233e82c335fcb79b",
+ "prev_identity": "f458e89071f54b7332d48dcadb4038b4e7fcb0e6d01d78e1f02f983c88df8ae9",
+ "version": "0.7.0",
+ "amendment_sha": "6580c342628c292bf33a572a804369a59d5ec6f818e9a961cfd9a6fa02d003c9",
+ "change": {
+  "spec_sha256": "822a5be8202751b62d45cf643877dece9e347aad826a61d2075a9dce67b38faf",
+  "anchor": "teich-03:v07-spec-v1",
+  "verdict_sha256": "c08e01e611b766f8ecd8a51e58e9ba6ac42e0937f3b6b868fcd32bdef60aa054",
+  "seal_pub": "3751bf8083f085f2f4c96087f07710103cc6c1bf73ae549900f54df7889af1a3"
+ },
+ "touched_day": 12,
+ "seal_init": {
+  "ok": true,
+  "t0": "1792765970.0",
+  "start_seq": 193,
+  "pub": "3751bf8083f085f2f4c96087f07710103cc6c1bf73ae549900f54df7889af1a3",
+  "start_blob_sha256": "6a4aff04ce987f3663be781d66afd0bcde7c771069e01de421308b11b632fd1d",
+  "head": "8ff706f28b2c06fb3f8b3dddae4afc004afc229a6c7d27daa911d3d876875771",
+  "head_seq": 193,
+  "init_ts": 1793993435113,
+  "next_seal": {
+   "day": 14,
+   "at_ms": 1794061070000
+  }
+ },
+ "verified": true
+}

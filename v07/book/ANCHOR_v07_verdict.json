@@ -1,0 +1,23 @@
+[
+ {
+  "ok": true,
+  "git_sha": "c08e01e611b766f8ecd8a51e58e9ba6ac42e0937f3b6b868fcd32bdef60aa054",
+  "ref": "v07-verdict",
+  "note": "Teich v0.7.0 scored verdict: PASS, all 15 bars of v07-gates-prereg, judged once 2026-11-06 over 10 Kaggle kernels (bundle d0cd7d37..., anchored manifests verified in every kernel). K1 A .267 / B .300 vs bound .359 (chance .206), v06 sensitivity .95; influence 0.033 bits = null floor; T1'', K2, S, F1, K4, M0 12/12, K3, K5/K6, K7 pass.",
+  "file": "v07_lab/gates/campaign_v07_2026-11-05/verdict.json"
+ },
+ {
+  "ok": true,
+  "git_sha": "c4ed4916eb25a4bee68f27af82f97a2b92063fe4cf90caa276ebbbaf15e72d3f",
+  "ref": "v07-run-outputs",
+  "note": "Teich v0.7.0 scored campaign outputs: sha256 of all 150 files from the 10 kernels (12 twin lives 14000-14011 x 30 days, 60 K1 trials, oracle + null, K3, K5/K6, K7), 2026-11-06.",
+  "file": "v07_lab/gates/campaign_v07_2026-11-05/SHA256SUMS_outputs"
+ },
+ {
+  "ok": true,
+  "git_sha": "3f58caf050f378f4ec7ba7daa9b2d81103863830b693b1e2e834c7442a935f1e",
+  "ref": "v07-verdict-report",
+  "note": "Teich v0.7.0 verdict report 2026-11-06: results, details and disclosures (L5/L6 late start with identical bundle; K1 B 1.8 se above chance inside bound; influence at estimator floor; draft title in anchored PREREG).",
+  "file": "v07_lab/gates/REPORT_v07_verdict_2026-11-06.md"
+ }
+]

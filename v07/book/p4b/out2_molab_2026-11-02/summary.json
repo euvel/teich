@@ -1,0 +1,10 @@
+{
+ "P4b": {
+  "chance_mean_1_over_k": 0.237,
+  "se": 0.058,
+  "steered_with_sky": 0.241,
+  "steered_without_sky": 0.981,
+  "trials": 54,
+  "with_sky_within_chance_plus_3se": true
+ }
+}

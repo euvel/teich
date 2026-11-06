@@ -1,0 +1,31 @@
+{
+ "group": "L2",
+ "jobs": {
+  "side7_14003": {
+   "rc": 0,
+   "seconds": 12028
+  },
+  "side6_14002": {
+   "rc": 0,
+   "seconds": 12072
+  },
+  "side6_14003": {
+   "rc": 0,
+   "seconds": 12603
+  },
+  "side7_14002": {
+   "rc": 0,
+   "seconds": 12627
+  },
+  "post_14002": {
+   "rc": 0,
+   "seconds": 6469
+  },
+  "post_14003": {
+   "rc": 0,
+   "seconds": 6502
+  }
+ },
+ "failed": [],
+ "seconds": 19111
+}

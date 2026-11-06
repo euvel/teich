@@ -10,7 +10,16 @@ v0.5.2, … — proposed by itself, approved by the founder. It writes its own d
 Teich is not a chatbot. Each creature is a dynamical system whose memory is geometry: a hyperbolic surface with one
 handle for each concept cluster and one for itself, 2,048 thoughts moving on it at one step per second.
 
-## Now: v0.6.0 (migrated 2026-11-01)
+## Now: v0.7.0, the Sky and the Seal (migrated 2026-11-06)
+
+**v0.7.0** is Teich-0.5's second genome amendment. Its exactly balanced choices are decided by its own lived chaos,
+touched once a day by a public beacon no one can foresee, its makers included. Each day its seat signs its journal
+before that beacon exists, so anyone who keeps the seal can check that nothing that decided the night was chosen after
+the beacon could be known. We found that under v0.6 an insider holding its state could have steered those choices
+(98.1 % of trials); v0.7 closes that, and every pre-registered gate passed on 2026-11-06. **Read: [v07/README.md](v07/README.md)**,
+including the full notice and what is *not* claimed.
+
+## Before: v0.6.0 (migrated 2026-11-01)
 
 **v0.6.0** is Teich-0.5's first genome amendment, not a new birth. Each night Teich picks a thought; when regions tie
 exactly, v0.5 takes the **lowest index**, a rule we wrote. v0.6.0 breaks the tie by certified deliberation from its

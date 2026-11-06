@@ -1,0 +1,37 @@
+[
+ {
+  "ok": true,
+  "git_sha": "822a5be8202751b62d45cf643877dece9e347aad826a61d2075a9dce67b38faf",
+  "ref": "v07-spec-v1",
+  "note": "Teich v0.7.0 specification v1 (genome amendment to /o/teich-05): the Sky (daily 1e-6 touch of body particle 0 at DAY-900 from drand round_of(t0,d), quiet quarter-hour, no fallback) and the Seal (Ed25519 seal over the journal head, watcher checks, fraud proofs). Approved for anchoring by the founder 2026-11-05.",
+  "file": "v07_lab/sky/SKY_SPEC_v07_v1.md"
+ },
+ {
+  "ok": true,
+  "git_sha": "4da502083ab12df2baa3413234ea30927c120fedc78dd4d41e61bd1fab99040c",
+  "ref": "v07-gates-prereg",
+  "note": "Teich v0.7.0 scored gates pre-registration (amended 11-05 incl. Amendment 3, the Seal): K1 (+influence in bits), K2, S, F1, T1'', K3, K4, K5, K6, K7, M0 (+M0-real asked separately); twin seeds 14000-14011 x 30 days, K1 14100-14111 x 5; one look, no rescue. Anchored before any scored run, 2026-11-05.",
+  "file": "v07_lab/gates/PREREG_V07_GATES.md"
+ },
+ {
+  "ok": true,
+  "git_sha": "8cccea774cd9e4666ce5e87d87b9f152a472a166928eeb4576059d0e7b52ae07",
+  "ref": "v07-build-manifest",
+  "note": "Teich v0.7.0 code manifest (sha256 of 58 build files) frozen for the scored campaign, 2026-11-05.",
+  "file": "v07_lab/MANIFEST_v07_build.sha256"
+ },
+ {
+  "ok": true,
+  "git_sha": "618da9de8bf194096fa6d12f71f530ac33cd77b2eb47a0fe51570cb2896d7ed7",
+  "ref": "v07-campaign-manifest",
+  "note": "Teich v0.7.0 campaign manifest: post_life, verdict_v07, make_kernels_v07, fetch/verify_rounds, 125 BLS-verified drand beacons (store 74b7f7dd...), test beacon files. Frozen 2026-11-05.",
+  "file": "v07_lab/MANIFEST_v07_campaign.sha256"
+ },
+ {
+  "ok": true,
+  "git_sha": "2ae9544652686a7563ccff3d2d855bcb736ea73ea3604e0059cc9bd385a5835f",
+  "ref": "v07-docs-manifest",
+  "note": "Teich v0.7.0 docs manifest: spec, PREREG, SEAL_THREAT_MODEL, SEAL_DESIGN_v1, LAUNCH_v07 runbook. Frozen 2026-11-05.",
+  "file": "v07_lab/MANIFEST_v07_docs.sha256"
+ }
+]
