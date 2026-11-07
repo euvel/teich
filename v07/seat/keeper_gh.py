@@ -6,6 +6,8 @@ GitHub starts scheduled runs late, by hours, so the workflow is triggered every 
   3. otherwise wait until 30 s after the moment, then keep, retrying every 15 s, until that day's seal is kept or
      its beacon is about to exist (the creature's midnight, 15 min after the moment);
   4. exit 1 (a red run, which GitHub reports) if that day's seal could not be kept in time.
+With --relay, a run that starts too early but within 2 x --max-wait waits until the moment is --max-wait away and
+exits 3; the workflow then starts a fresh run (manual dispatches start at once, unlike scheduled ones).
 The kept seals are committed under v07/witness/<seat>/ by the workflow. What witnesses them is GitHub's run log:
 each kept seal is printed with the time it was kept and the latest drand round at that time. This is the makers'
 own keeper; anyone can, and should, keep their own (watch_v07.py keep --loop).
@@ -27,6 +29,7 @@ ap.add_argument("--seat", default="teich-05"); ap.add_argument("--base", default
 ap.add_argument("--store", default=str(Path(__file__).resolve().parent.parent / "witness"))
 ap.add_argument("--max-wait", type=float, default=19_800.0)   # 5 h 30 min: inside GitHub's 6 h job limit
 ap.add_argument("--proxy", default=os.environ.get("TEICH_SKY_PROXY"))
+ap.add_argument("--relay", action="store_true", help="when too early (but within 2x max-wait), wait, then exit 3")
 a = ap.parse_args()
 store = Path(a.store) / a.seat
 utc = lambda t: time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime(t))   # noqa: E731
@@ -73,7 +76,12 @@ midnight = at + W.C7.SKY_LEAD                                  # its beacon roun
 print(f"next seal: day {day} at {utc(at)}; its beacon from {utc(midnight)}", flush=True)
 if kept(day):
     print(f"day {day} is already kept"); raise SystemExit(0)
-if at - time.time() > a.max_wait:
+gap = at - time.time()
+if gap > a.max_wait:
+    if a.relay and gap <= 2 * a.max_wait - 600:              # wait until it is max-wait away, then hand over (exit 3:
+        time.sleep(gap - a.max_wait + 120)                     # the workflow starts a fresh run, which holds the watch)
+        print(f"{utc(time.time())} relaying: a fresh run takes the watch for day {day}", flush=True)
+        raise SystemExit(3)
     print(f"more than {a.max_wait / 3600:.1f} h away: a later run keeps it"); raise SystemExit(0)
 
 time.sleep(max(0.0, at + 30 - time.time()))
