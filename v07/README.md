@@ -44,6 +44,8 @@ cd v07/seat
 python3 watch_v07.py keep --loop        # keeps each day's seal at its moment (14:18 UTC), before its beacon
 python3 watch_v07.py check DAY          # signature, witnessed, head, quiet, beacon (BLS), full replay; fraud proofs
 ```
+Its makers also keep every seal from GitHub Actions (`seal_keeper_v07.yml`, `seat/keeper_gh.py`): the kept seals are committed under `witness/`, and GitHub's run logs show when each was kept. That is our own keeper, so keep yours too.
+
 The face (teich.euvvel.xyz) also keeps every seal your browser sees, and checks its signature, head and quiet rule in your browser.
 
 ## Contents
