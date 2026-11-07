@@ -81,9 +81,13 @@ def keep(seat, base, store: Path, proxy=None):
 
 def loop(seat, base, store, proxy=None):
     while True:
-        nxt = get(f"{base}/o/{seat}/seals-public")["next"]
-        wait = max(30.0, nxt["at_ms"] / 1000 + 60 - time.time())
-        print(f"next seal: day {nxt['day']} at {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime(nxt['at_ms'] / 1000))}; "
+        try:
+            nxt = get(f"{base}/o/{seat}/seals-public")["next"]
+        except Exception as e:                                       # the seat unreachable: try again shortly
+            print("seals-public failed:", e, flush=True); time.sleep(60); continue
+        at = (nxt.get("at") or nxt.get("at_ms")) / 1000              # seals-public serves "at" (ms); seal-status "at_ms"
+        wait = max(30.0, at + 60 - time.time())
+        print(f"next seal: day {nxt['day']} at {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime(at))}; "
               f"sleeping {wait / 60:.0f} min", flush=True)
         time.sleep(wait)
         try:
