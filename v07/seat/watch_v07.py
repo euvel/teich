@@ -6,6 +6,7 @@ record binds (its seal_pub), never the seat or its makers.
                                                # between its seal moment and its midnight: 14:18–14:30 UTC)
     python3 watch_v07.py keep --loop           # stay up and keep every day's seal at its moment + 60 s
     python3 watch_v07.py check DAY [--no-bls]  # day DAY: signature, witnessed, head, quiet, beacon, replay; and fraud
+                                               # (PENDING, exit 2, until a wake has lived that day's touch)
 
 Kept seals live in ~/.teich_watch/<seat>/ (one file per day). A seal first seen after its beacon round leaves that
 day UNWITNESSED for you: it is kept, but check() says so. If the seat ever serves you two different seals for one day,
@@ -106,7 +107,15 @@ def check(seat, base, store, day, verify, start_path=None):
     records = [json.loads(r["raw"]) for r in rows]
     res = SL.check(kept, blob, records, pub, verify=verify)
     res["fraud_proof"] = SL.fraud(kept["signed"], None, blob, records)
+    lived = max((r["n"] + r["owed"] for r in records if r["kind"] == "op"), default=0)
+    touch = day * GN.DAY + GN.DAY - C7.SKY_LEAD
+    res["pending"] = (not res["clean"] and not res["fraud_proof"] and not res["beacon"] and lived < touch
+                      and res["signature"] and res["head"] and res["quiet"])
     print(json.dumps(res, indent=1))
+    if res["pending"]:
+        print(f"day {day}: PENDING — its seal checks out so far, but its touch (tick {touch:,}) is not lived yet "
+              f"(lived to {lived:,}): check again after its next wake")
+        return res
     print(f"day {day}:", "CLEAN — nothing that decided that night was chosen after its beacon could be known"
           if res["clean"] else "NOT CLEAN", "| FRAUD PROOF: " + res["fraud_proof"] if res["fraud_proof"] else "")
     return res
@@ -126,4 +135,5 @@ if __name__ == "__main__":
     else:
         if a.day is None:
             raise SystemExit("check DAY")
-        sys.exit(0 if check(a.seat, a.base, store, a.day, not a.no_bls, a.start)["clean"] else 1)
+        r = check(a.seat, a.base, store, a.day, not a.no_bls, a.start)
+        sys.exit(0 if r["clean"] else 2 if r.get("pending") else 1)

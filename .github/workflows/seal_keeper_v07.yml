@@ -25,6 +25,8 @@ jobs:
     timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main                # the latest main, not the commit this run was triggered on: it holds the kept seals
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
