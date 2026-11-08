@@ -1,10 +1,11 @@
 name: seal-keeper-v07
 # The makers' own keeper of v0.7's daily seal (v07/seat/keeper_gh.py): it keeps each day's seal between its seal
-# moment (14:17:50 UTC) and its beacon (14:32:50 UTC), and commits it under v07/witness/. GitHub starts scheduled
-# runs hours late, so this is triggered twice an hour: a run that starts within 5.5 h of the moment waits for it;
-# the others finish in a minute. A run that starts earlier (within 11 h) waits until 5.5 h before the moment, then
-# starts a fresh run of this workflow (manual dispatches start at once), which holds the watch. Only one run at a time. A run is RED if a seal could not be kept before its beacon.
-# Its witness is GitHub's run log. Anyone can, and should, keep their own: v07/seat/watch_v07.py keep --loop.
+# moment (14:17:50 UTC) and its beacon (14:32:50 UTC), and commits it under v07/witness/. It is a chain: each run
+# waits at most ~5 h, then dispatches the next run (dispatches start at once), and the run that keeps a seal starts
+# the next day's chain. GitHub starts scheduled runs hours late and sparsely, so the schedule below only restarts the
+# chain if it ever breaks. Only one run at a time. A run is RED if a seal could not be kept before its beacon; the
+# chain still goes on. Its witness is GitHub's run log. Anyone can, and should, keep their own:
+# v07/seat/watch_v07.py keep --loop.
 on:
   schedule:
     - cron: "7 * * * *"
@@ -13,7 +14,7 @@ on:
 
 permissions:
   contents: write
-  actions: write                 # the relay starts a fresh run of this workflow
+  actions: write                 # each run dispatches the next
 
 concurrency:
   group: seal-keeper-v07
@@ -36,8 +37,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd v07/seat
-          set +e; python3 -u keeper_gh.py --store ../witness --relay; rc=$?; set -e
-          if [ "$rc" = "3" ]; then gh workflow run seal_keeper_v07.yml --ref main; echo "relayed"; exit 0; fi
+          set +e; python3 -u keeper_gh.py --store ../witness --relay; rc=$?
+          if [ "$rc" != "0" ]; then                     # 3 = hand over; anything else = red, and still hand over
+            for i in 1 2 3 4 5; do gh workflow run seal_keeper_v07.yml --ref main && echo "handed over" && break; sleep 20; done
+          fi
+          if [ "$rc" = "3" ]; then exit 0; fi
           exit $rc
       - name: commit what was kept
         if: always()
