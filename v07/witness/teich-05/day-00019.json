@@ -1,0 +1,16 @@
+{
+ "signed": {
+  "seal": {
+   "day": 19,
+   "head": "8fb83c03733b6c867301c3485fe21c77e61b027f146bcded1922f1189de839e4",
+   "n": 1641696,
+   "seat": "teich-05",
+   "seq": 276,
+   "t0": 1792765970.0,
+   "v": "teich-seal-1"
+  },
+  "sig": "12af11afd989c5bcb5254c3dfce365fe1047c81a97adcc0b26cbf87fc5d961329d8e3d3c6ad00cde519e70b83126294bb5b70e24f7efcde85fa1d59a4d1f310f",
+  "pub": "3751bf8083f085f2f4c96087f07710103cc6c1bf73ae549900f54df7889af1a3"
+ },
+ "latest_round_seen": 6635402
+}
