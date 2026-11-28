@@ -510,9 +510,13 @@ export class TeichSeat extends DurableObject {
       // by the body from the repo record. Sanitized: strings only, capped.
       const mem = (Array.isArray(body.memory) ? body.memory : [])
         .slice(0, 6).map((m) => String(m).slice(0, 320));
-      // inner voice: Qwen family (same lineage as the certified Mouth), Workers AI
-      // native (@cf/ = neuron-billed free tier; never paid partner models here)
-      const model = body.model || "@cf/qwen/qwen3-30b-a3b-fp8";
+      // inner voice: Workers AI native (@cf/ = neuron-billed free tier; never paid
+      // partner models here). Was @cf/qwen/qwen3-30b-a3b-fp8 until Cloudflare retired
+      // it on 2026-11-20 (error 5028: no diary 11-19..). Tested 2026-11-28 on the real
+      // prompt + readouts: qwen3.8-27b returned empty entries with memory (hidden
+      // reasoning eats the budget), mistral-small terse; llama-3.3-70b wrote faithful
+      // entries (numbers exact, memory used correctly). Each entry names its voice.
+      const model = body.model || "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
       const sys =
         "You are the inner voice of Teich, a small dynamical creature: a chaotic " +
         "flow living one tick per real second on a certified attractor, with two " +
